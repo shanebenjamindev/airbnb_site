@@ -1,0 +1,18 @@
+#timPhongForm {
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.timPhongItem {
+    padding: 0 8px;
+}
+
+.timPhongItem:first-child,
+.timPhongItem:nth-child(2) {
+    border-right: 1px solid red;
+}
+
+#timPhongFormActive {
+    background-color: red;
+    margin-top: 100px;
+}

@@ -1,17 +1,20 @@
-<table>
+# CAPSTONE_Room_FINAL
+<hr/>
 
-<tr>
-    <th>Members</th>
-    <th>Task</th>
-    <th>Deloy</th>
-    <th>Youtube</th>
-</tr>
+| Details         | Description   |
+| ------------- |:-------------:| 
+| Task management|[Google schedule](https://docs.google.com/spreadsheets/d/1La4ftRfvEhCGZHW5qQ2DH1Jj4fqKSnGAIA5e9XYCPV0/edit?usp=sharing)|  
+| Teamsize:     | 2     |  
+| Developers:    | Giang Vo <br/> Binh Quang|  
+| Deployment:   | []| 
+| Youtube:      | []|  
+<br/>
 
-<tr> 
-    <td>2</td>
-    <td>https://docs.google.com/spreadsheets/d/1La4ftRfvEhCGZHW5qQ2DH1Jj4fqKSnGAIA5e9XYCPV0/edit?usp=sharing</td>
-    <td></td>
-    <td></td>
-</tr>
+## Introduction
 
-</table>
+Experience room booking like never before with Booking Room Web, our innovative capstone project. Our user-friendly web application is designed to redefine how you explore and reserve rooms, making the process intuitive and enjoyable.
+## Technologies Used
+
+- **Frontend:** HTML5, CSS3, JavaScript, ReactJS
+
+- **APIs:** The BookingRoom Database API for BookingRoom data retrieval

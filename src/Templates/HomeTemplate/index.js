@@ -5,10 +5,12 @@ import Footer from '../../components/Footer'
 
 export default function HomeTemplate() {
   return (
-    <div className='w-75 m-auto'>
+    <div className=''>
       <Navbar />
-      <Outlet />
-      <Footer />
+      <div className='w-75 m-auto'>
+        <Outlet />
+        <Footer />
+      </div>
     </div>
   )
 }

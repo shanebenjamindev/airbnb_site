@@ -1,6 +1,14 @@
-#timPhongForm {
-    align-items: center;
-    justify-content: space-evenly;
+header {
+    transition: all 0.5s ease;
+}
+
+.navbar {
+    z-index: 11;
+}
+
+.timPhongForm {
+    top: 3.4%;
+    position: absolute;
 }
 
 .timPhongItem {
@@ -9,10 +17,58 @@
 
 .timPhongItem:first-child,
 .timPhongItem:nth-child(2) {
-    border-right: 1px solid red;
+    border-right: 1px solid grey;
 }
 
-#timPhongFormActive {
-    background-color: red;
-    margin-top: 100px;
+.timPhongForm-Hide {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 0.25s ease;
+}
+
+.timPhong-Show-btn {
+    z-index: 12;
+    border-radius: 50px;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.formTimPhong {
+    border-radius: 50px;
+    border: 1px solid rgb(213, 213, 213);
+
+}
+
+.timPhongForm-Show {
+    z-index: 12;
+    transition: all 0.5s ease;
+    opacity: 1;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 10px 0px;
+}
+
+.user-avatar {
+    background-color: whitesmoke;
+    border-radius: 50px;
+    border: 1px solid rgb(213, 213, 213);
+    gap: 10px;
+    align-items: center;
+}
+
+.user-avatar:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+.rounded-50 {
+    border-radius: 50px;
+}
+
+.timPhongItemSearch {
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.form-controlCustom {
+    height: 100%;
 }

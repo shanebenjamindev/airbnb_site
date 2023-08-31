@@ -1,7 +1,7 @@
 import * as actions from './constants'
 import api from '../../ApiUtils'
 
-export const listCityAct = () => {
+export const actListCity = () => {
     return (dispatch) => {
         dispatch(actlistCityRequest)
 
@@ -19,18 +19,16 @@ const actlistCityRequest = () => ({ type: actions.LIST_CITY_REQUEST })
 const actlistCitySucess = (data) => ({ type: actions.LIST_CITY_SUCCESS, payload: data })
 const actlistCityFail = (error) => ({ type: actions.LIST_CITY_FAIL, payload: error })
 
-export const getRoomByCityAct = (id, navigate) => {
+export const actGetRoomByCity = (id) => {
     return (dispatch) => {
         dispatch(actGetRoomByCityRequest)
         api.get(`/phong-thue/lay-phong-theo-vi-tri?maViTri=${id}`)
             .then((result) => {
-                // dispatch(actGetRoomByCitySucess(result.data.content))
-                const {data} = result
-                navigate(`/details/${data}`, { replace: true });
+                dispatch(actGetRoomByCitySucess(result.data.content))
             })
             .catch((error) => {
-                console.log(error);
-                // dispatch(actGetRoomByCityFail(error))
+                // console.log(error);
+                dispatch(actGetRoomByCityFail(error))
             })
     }
 }
@@ -38,3 +36,23 @@ export const getRoomByCityAct = (id, navigate) => {
 const actGetRoomByCityRequest = () => ({ type: actions.GET_ROOM_BY_CITY_REQUEST })
 const actGetRoomByCitySucess = (data) => ({ type: actions.GET_ROOM_BY_CITY_SUCCESS, payload: data })
 const actGetRoomByCityFail = (error) => ({ type: actions.GET_ROOM_BY_CITY_FAIL, payload: error })
+
+export const actRoomDetail = (id) => {
+    return (dispatch) => {
+        dispatch(actRoomDetailRequest)
+        api.get(`/phong-thue/${id}`)
+            .then((result) => {
+                console.log(result.data.content);
+                dispatch(actRoomDetialSucess(result.data.content))
+            })
+            .catch((error) => {
+                // console.log(error);
+                dispatch(actRoomDetialFail(error))
+            })
+    }
+}
+
+const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
+const actRoomDetialSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
+const actRoomDetialFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
+

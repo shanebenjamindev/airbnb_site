@@ -1,55 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import { GlobalOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { GlobalOutlined, MenuOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listCityAct } from '../../redux/types/actions';
-import { getRoomByCityAct } from '../../redux/types/actions'
+import { actListCity } from '../../redux/types/actions';
 
 export default function Navbar() {
-    const [formActive, setFormActive] = useState(false);
-    const [buttonActive, setButtonActive] = useState(false);
-
-    const listCityData = useSelector((state) => state.cityReducer.data);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        dispatch(actListCity());
+    }, [dispatch]);
+
+    // Button show the form State
+    const [buttonActive, setButtonActive] = useState(false);
+
+    // Form's State
+    const [formActive, setFormActive] = useState(false);
 
     const [state, setState] = useState({
         id: ""
     });
 
+    const listCityData = useSelector((state) => state.cityReducer.data);
+
+    // Press Button to Show Form
+    const toggleForm = () => {
+        setFormActive(!formActive);
+        setButtonActive(!formActive);
+    };
+
+    // Dropdown on change
     const handleOnChange = (e) => {
         return setState({
             id: e.target.value
         })
     };
 
-    useEffect(() => {
-        dispatch(listCityAct());
-    }, [dispatch]);
-
-    const navigate = useNavigate()
-
+    // Button Submit Pressed
     const handleOnSubmit = (e) => {
         e.preventDefault();
         if (state.id !== "") {
-
-            dispatch(getRoomByCityAct(state.id, navigate))
-
-            // dispatch, navigate
+            navigate(`/roombycity/${state.id}`);
         }
     }
 
-    const toggleForm = () => {
-        setFormActive(!formActive);
-        setButtonActive(!formActive);
-    };
-
     const renderDropDownCity = () => {
         return (
-            <form onSubmit={handleOnSubmit} className='formTimPhong w-75 m-auto d-flex justify-content-around align-items-center text-left'>
-                <div className='col-4 p-4 timPhongItemSearch'>
+            <form onSubmit={handleOnSubmit} className='formFindRoom w-75 m-auto d-flex justify-content-around align-items-center text-left'>
+                <div className='col-4 p-4 formFindRoom__Item'>
                     <span>Địa điểm </span>
                     <select className='' onChange={handleOnChange} name="selectedCityId" >
                         <option value={""}>Chọn thành phố</option>
@@ -61,15 +62,15 @@ export default function Navbar() {
                     </select>
 
                 </div>
-                <div className='col-2 timPhongItemSearch d-flex flex-column'>
+                <div className='col-2 formFindRoom__Item d-flex flex-column'>
                     <label>Nhận phòng</label>
                     <input className=' border-0' type='date' />
                 </div>
-                <div className='col-2 timPhongItemSearch d-flex flex-column'>
+                <div className='col-2 formFindRoom__Item d-flex flex-column'>
                     <label>Trả phòng</label>
                     <input className=' border-0' type='date' />
                 </div>
-                <div className='col-4 timPhongItemSearch w-25 d-flex align-items-center'>
+                <div className='col-4 formFindRoom__Item w-25 d-flex align-items-center'>
                     <div className='d-flex flex-column col-5'>
                         <label>Khách</label>
                         <input className=' border-0' defaultValue={0} />
@@ -100,7 +101,7 @@ export default function Navbar() {
 
                         <li className="nav-item dropdown">
                             <a className="user-avatar nav-link" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <UnorderedListOutlined />
+                                <MenuOutlined />
                                 <img width="25" height="25" alt='avatar user' className='border rounded-circle' src='https://th.bing.com/th/id/R.a3d20cfa04c5affc24975d409ea20974?rik=PafJFHKVzjS2BA&pid=ImgRaw&r=0' />
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -114,18 +115,21 @@ export default function Navbar() {
                     </ul>
                 </div>
             </nav>
-            <div className='timPhongForm w-100 d-flex'>
+
+            {/* Button to Show Form */}
+            <div className='btnFindRoom__Container w-100 d-flex'>
                 <div className={`d-flex text-center m-auto justify-content-between`}>
-                    <Link onClick={toggleForm} className={`timPhong-Show-btn btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `button-active` : ``}`}>
-                        <div className='timPhongItem'>Dia diem</div>
-                        <div className='timPhongItem'>Tuan</div>
-                        <div className='timPhongItem'>Them khach</div>
-                        <button className='timPhongItem btn border rounded-circle btn-danger'>S</button>
-                    </Link>
+                    <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
+                        <div className='btnFindRoom__Item'>Dia diem</div>
+                        <div className='btnFindRoom__Item'>Tuan</div>
+                        <div className='btnFindRoom__Item'>Them khach</div>
+                        <button className='btnFindRoom__Item btn border rounded-circle btn-danger'>S</button>
+                    </div>
                 </div>
             </div>
 
-            <div id='timPhongFormActive' className={`p-2 ${formActive ? 'timPhongForm-Show' : 'timPhongForm-Hide'} container-fluid text-center justify-content-center`}>
+            {/** Form */}
+            <div id='timPhongFormActive' className={`p-2 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
                 {renderDropDownCity()}
             </div>
         </header>

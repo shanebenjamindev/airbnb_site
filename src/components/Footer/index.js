@@ -2,45 +2,45 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <>
-            <div className="row">
-                <div className=" col-md-3"><h2 className="">Hỗ trợ</h2>
+        <div className='container-fluid'>
+            <div className="row w-75 m-auto">
+                <div className=" col-md-3"><h5 className="">Hỗ trợ</h5>
                     <div className="">
-                        <a rel="" className="nav-link" href="/" aria-current="page"><span>Trung tâm trợ giúp</span></a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">AirCover</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Thông tim an toàn</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Hỗ trợ người khuyết tật</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Các tùy chọn hủy</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Biện pháp ứng phó với đại dịch COVID-19 của chúng tôi</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Báo cáo lo ngại của hàng xóm</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page"><span>Trung tâm trợ giúp</span></a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">AirCover</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thông tim an toàn</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Hỗ trợ người khuyết tật</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Các tùy chọn hủy</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Biện pháp ứng phó với đại dịch COVID-19 của chúng tôi</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Báo cáo lo ngại của hàng xóm</a>
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <h2 className="">Cộng đồng</h2>
+                    <h5 className="">Cộng đồng</h5>
                     <div className="">
-                        <a rel="" className="nav-link" href="/" aria-current="page">Airbnb.org: nhà ở cứu trợ</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Hỗ trợ dân tị nạn Afghanistan</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Chống phân biệt đối xử</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Airbnb.org: nhà ở cứu trợ</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Hỗ trợ dân tị nạn Afghanistan</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Chống phân biệt đối xử</a>
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <h2 className="">Đón tiếp khách</h2>
+                    <h5 className="">Đón tiếp khách</h5>
                     <div className="">
-                        <a rel="" className="nav-link" href="/" aria-current="page">Thử đón tiếp khách</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">AirCover cho Chủ nhà</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Xem tài nguyên đón tiếp khách</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Truy cập diễn đàn cộng đồng</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Đón tiếp khách có trách nhiệm</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thử đón tiếp khách</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">AirCover cho Chủ nhà</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Xem tài nguyên đón tiếp khách</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Truy cập diễn đàn cộng đồng</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Đón tiếp khách có trách nhiệm</a>
                     </div>
                 </div>
                 <div className="col-md-3">
-                    <h2 className="">Airbnb</h2>
+                    <h5 className="">Airbnb</h5>
                     <div className="">
-                        <a rel="" className="nav-link" href="/" aria-current="page">Trang tin tức</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Tìm hiểu các tính năng mới</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Thư ngỏ từ các nhà sáng lập</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Cơ hội nghề nghiệp</a>
-                        <a rel="" className="nav-link" href="/" aria-current="page">Nhà đầu tư</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Trang tin tức</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Tìm hiểu các tính năng mới</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thư ngỏ từ các nhà sáng lập</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Cơ hội nghề nghiệp</a>
+                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Nhà đầu tư</a>
                     </div>
                 </div>
             </div>
@@ -64,6 +64,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

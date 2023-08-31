@@ -9,6 +9,14 @@ const routes = [
             {
                 path: "",
                 element: lazy(() => import("../pages/HomePage")),
+            },
+            {
+                path: "roombycity/:id",
+                element: lazy(() => import("../pages/RoomByCityPage"))
+            },
+            {
+                path: "roomdetail/:id",
+                element: lazy(() => import("../pages/RoomDetail"))
             }
         ]
     }

@@ -1,26 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { GlobalOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listCityAct } from '../../redux/types/actions';
+import { getRoomByCityAct } from '../../redux/types/actions'
 
 export default function Navbar() {
     const [formActive, setFormActive] = useState(false);
-    const listCityData = useSelector((state) => state.cityReducer.data);
+    const [buttonActive, setButtonActive] = useState(false);
 
+    const listCityData = useSelector((state) => state.cityReducer.data);
 
     const dispatch = useDispatch();
 
 
+    const [state, setState] = useState({
+        id: ""
+    });
+
+    const handleOnChange = (e) => {
+        return setState({
+            id: e.target.value
+        })
+    };
+
+    useEffect(() => {
+        dispatch(listCityAct());
+    }, [dispatch]);
+
+    const navigate = useNavigate()
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        if (state.id !== "") {
+
+            dispatch(getRoomByCityAct(state.id, navigate))
+
+            // dispatch, navigate
+        }
+    }
 
     const toggleForm = () => {
         setFormActive(!formActive);
+        setButtonActive(!formActive);
     };
 
-
     const renderDropDownCity = () => {
-
         return (
             <form onSubmit={handleOnSubmit} className='formTimPhong w-75 m-auto d-flex justify-content-around align-items-center text-left'>
                 <div className='col-4 p-4 timPhongItemSearch'>
@@ -54,29 +80,6 @@ export default function Navbar() {
                 </div>
             </form>
         )
-    }
-
-    const [state, setState] = useState({
-        id: ""
-    });
-
-    const handleOnChange = (e) => {
-        return setState({
-            id: e.target.value
-        })
-    };
-
-
-    useEffect(() => {
-        dispatch(listCityAct());
-    }, [dispatch]);
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        if (state.id !== "") {
-            // dispatch, navigate
-            console.log(state);
-        }
     }
 
     return (
@@ -113,7 +116,7 @@ export default function Navbar() {
             </nav>
             <div className='timPhongForm w-100 d-flex'>
                 <div className={`d-flex text-center m-auto justify-content-between`}>
-                    <Link onClick={toggleForm} className='timPhong-Show-btn btn d-flex flex-wrap text-center justify-content-center'>
+                    <Link onClick={toggleForm} className={`timPhong-Show-btn btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `button-active` : ``}`}>
                         <div className='timPhongItem'>Dia diem</div>
                         <div className='timPhongItem'>Tuan</div>
                         <div className='timPhongItem'>Them khach</div>

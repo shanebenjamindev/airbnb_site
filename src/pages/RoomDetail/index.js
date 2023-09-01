@@ -115,21 +115,66 @@ export default function RoomDetail() {
         </div>
 
         <div className='section__Checkout col-md-5'>
-          <form className='p-4 form__Checkout rounded rounded-lg'>
+          <form className='p-4 form__Checkout border rounded rounded-lg'>
             <div className="form-group">
               <h5>10000<span> 4 .80 đánh giá</span></h5>
 
-              <div className='rounded border'>
+              <div className='checkout__DateForm'>
+                <div className='d-flex'>
+                  <div className='col-md-6 checkout__DateFormItem'>
+                    NHẬN PHÒNG
+                    31-08-2023
+                  </div>
+                  <div className='col-md-6 checkout__DateFormItem'>
+                    TRẢ PHÒNG
+                    31-08-2023
+                  </div>
+                </div>
+                <div className='col-12 py-2 checkout__Guest'>
+                  <div>
+                    <div>Khach</div>
+                    <div className='d-flex d-flex justify-content-between'>
+                      <button className='btn btn-dark'>-</button>
+
+                      <div>0 Khach</div>
+
+                      <button className='btn btn-dark'>+</button>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+            <button className='w-100 btn btn-danger'>Đặt phòng</button>
+
+            <div className='text-center text-secondary'>Bạn vẫn chưa bị trừ tiền</div>
+
+            <div className='checkout__Bill bg-info'>
+              <div className='d-flex flex-wrap justify-content-between'>
+                <div>$ 100000 x 0 đêm </div>
+                <div>9999999</div>
+
+              </div>
+              <div className='d-flex flex-wrap justify-content-between'>
+                <div>Phí dịch vụ</div>
+                <div>000000000</div>
+              </div>
+            </div>
+
+            <hr />
+            <div className='d-flex flex-wrap justify-content-between'>
+              <h5 className=''>
+                Tổng trước thuế
+              </h5 >
+              <h5 className=''>0</h5>
             </div>
 
           </form>
         </div>
-      </div>
+      </div >
 
       <div className='section__Review'>
 
       </div>
-    </div>
+    </div >
   )
 }

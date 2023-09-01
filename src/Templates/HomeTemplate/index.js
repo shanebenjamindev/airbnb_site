@@ -8,7 +8,7 @@ export default function HomeTemplate() {
   return (
     <div className=''>
       <Navbar />
-      <div className='w-75 main m-auto'>
+      <div className='main m-auto'>
         <Outlet />
       </div>
       <Footer />

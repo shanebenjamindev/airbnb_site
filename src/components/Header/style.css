@@ -3,11 +3,12 @@ header {
     position: fixed;
     width: 100%;
     z-index: 12;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .navbar {
     z-index: 11;
+    padding: 20px 100px;
 }
 
 .rounded-50 {
@@ -29,7 +30,7 @@ header {
 /* BUTTON SHOW FORM */
 .btnFindRoom__Container {
     margin-top: 1rem;
-    top: 3.4%;
+    top: 1rem;
     cursor: pointer;
     position: absolute;
 }

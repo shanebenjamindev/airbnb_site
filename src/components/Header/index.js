@@ -49,8 +49,8 @@ export default function Navbar() {
 
     const renderDropDownCity = () => {
         return (
-            <form onSubmit={handleOnSubmit} className='formFindRoom w-75 m-auto d-flex justify-content-around align-items-center text-left'>
-                <div className='col-4 p-4 formFindRoom__Item'>
+            <form onSubmit={handleOnSubmit} className='formFindRoom w-75 m-auto d-flex flex-wrap justify-content-around align-items-center text-left'>
+                <div className='col-md-4 p-4 formFindRoom__Item'>
                     <span>Địa điểm </span>
                     <select className='' onChange={handleOnChange} name="selectedCityId" >
                         <option value={""}>Chọn thành phố</option>
@@ -62,21 +62,21 @@ export default function Navbar() {
                     </select>
 
                 </div>
-                <div className='col-2 formFindRoom__Item d-flex flex-column'>
+                <div className='col-md-2 formFindRoom__Item d-flex flex-column'>
                     <label>Nhận phòng</label>
                     <input className=' border-0' type='date' />
                 </div>
-                <div className='col-2 formFindRoom__Item d-flex flex-column'>
+                <div className='col-md-2 formFindRoom__Item d-flex flex-column'>
                     <label>Trả phòng</label>
                     <input className=' border-0' type='date' />
                 </div>
-                <div className='col-4 formFindRoom__Item w-25 d-flex align-items-center'>
-                    <div className='d-flex flex-column col-5'>
+                <div className='col-md-4 formFindRoom__Item d-flex align-items-center flex-wrap  w-md-25 '>
+                    <div className='d-flex flex-column col-md-5 mb-3 mb-md-0'>
                         <label>Khách</label>
                         <input className=' border-0' defaultValue={0} />
                     </div>
-                    <div className='col-7'>
-                        <button type='submit' className=' w-100 btn btn-danger rounded-50'>Search</button>
+                    <div className='col-md-7'>
+                        <button type='submit' className=' w-100 mt-3-sm btn btn-danger rounded-50'>Search</button>
                     </div>
                 </div>
             </form>
@@ -85,7 +85,7 @@ export default function Navbar() {
 
     return (
         <header>
-            <nav className="navbar py-3 navbar-expand-sm navbar-light justify-content-between w-75 m-auto">
+            <nav className="navbar navbar-expand-sm navbar-light justify-content-between m-auto">
                 <div className='d-none d-lg-flex'>
                     <Link className="navbar-brand" to="/">Airbnb</Link>
                 </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
             </div>
 
             {/** Form */}
-            <div id='timPhongFormActive' className={`p-2 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
+            <div id='timPhongFormActive' className={`p-2 mt-4 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
                 {renderDropDownCity()}
             </div>
         </header>

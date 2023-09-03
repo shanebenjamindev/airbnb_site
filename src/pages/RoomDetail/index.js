@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { actRoomDetail } from '../../redux/types/actions';
 import './style.css'
+import DateRangeForm from './DateRangeForm';
 
 export default function RoomDetail() {
   const param = useParams();
@@ -26,6 +27,7 @@ export default function RoomDetail() {
 
   }
 
+  const [showDateRange, setShowDateForm] = useState(false)
 
   return (
     <div className='room__Container'>
@@ -116,15 +118,19 @@ export default function RoomDetail() {
 
         <div className='section__Checkout col-md-5'>
           <form className='p-4 form__Checkout border rounded rounded-lg'>
+            <div className='form-group'>{(showDateRange) && (<DateRangeForm />)}</div>
             <div className="form-group">
               <h5>10000<span> 4 .80 đánh giá</span></h5>
 
               <div className='checkout__DateForm'>
                 <div className='d-flex'>
-                  <div className='col-md-6 checkout__DateFormItem'>
+                  <button onClick={(e) => {
+                    e.preventDefault();
+                    setShowDateForm(!showDateRange)
+                  }} className='col-md-6 checkout__DateFormItem'>
                     NHẬN PHÒNG
                     31-08-2023
-                  </div>
+                  </button>
                   <div className='col-md-6 checkout__DateFormItem'>
                     TRẢ PHÒNG
                     31-08-2023

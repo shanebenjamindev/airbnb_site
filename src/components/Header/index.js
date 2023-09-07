@@ -41,7 +41,6 @@ export default function Navbar() {
 
     // Button Submit Pressed
     const handleOnSubmit = (e) => {
-        e.preventDefault();
         if (state.id !== "") {
             navigate(`/roombycity/${state.id}`);
         }
@@ -105,8 +104,8 @@ export default function Navbar() {
                                 <img width="25" height="25" alt='avatar user' className='border rounded-circle' src='https://th.bing.com/th/id/R.a3d20cfa04c5affc24975d409ea20974?rik=PafJFHKVzjS2BA&pid=ImgRaw&r=0' />
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="/">Đăng ký</a>
-                                <a className="dropdown-item" href="/">Đăng nhập</a>
+                                <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
+                                <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
                                 <a className="dropdown-item" href="/">Cho thuê nhà</a>
                                 <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
                                 <a className="dropdown-item" href="/">Trợ giúp</a>
@@ -120,9 +119,9 @@ export default function Navbar() {
             <div className='btnFindRoom__Container w-100 d-flex'>
                 <div className={`d-flex text-center m-auto justify-content-between`}>
                     <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
-                        <div className='btnFindRoom__Item'>Dia diem</div>
-                        <div className='btnFindRoom__Item'>Tuan</div>
-                        <div className='btnFindRoom__Item'>Them khach</div>
+                        <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
+                        <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
+                        <div className='btnFindRoom__Item'>Thêm khách</div>
                         <button className='btnFindRoom__Item btn border rounded-circle btn-danger'>S</button>
                     </div>
                 </div>

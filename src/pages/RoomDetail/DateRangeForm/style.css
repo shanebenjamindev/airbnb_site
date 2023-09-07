@@ -1,0 +1,9 @@
+.checkOut-form{
+    position: absolute;
+    top: 1rem;
+    background-color: white;
+    z-index: 999;
+    left: -10rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 10px;
+}

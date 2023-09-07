@@ -19,6 +19,18 @@ const routes = [
                 element: lazy(() => import("../pages/RoomDetail"))
             }
         ]
+    },
+    {
+        path: "login-page",
+        element: lazy(()=> import ("../pages/LoginPage"))
+    },
+    {
+        path: "register-page",
+        element: lazy(()=> import ("../pages/RegisterPage"))
+    },
+    {
+        path: "admin",
+        element: lazy(()=> import ("../Templates/AdminTemplate"))
     }
 ]
 

@@ -36,13 +36,12 @@ export default function RoomDetail() {
 
       {renderRoom()}
       {roomData && (
-
         <div className='d-flex flex-wrap'>
           <div className='col-md-7'>
             <div className='section__Info  d-flex justify-content-between'>
               <div>
                 <h2>  Toàn bộ căn hộ. Chủ nhà Sungwon</h2>
-                <p>2 khách . 2 phòng ngủ . 3 phòng tắm .</p>
+                <p>{roomData.khach} khách . {roomData.phongNgu} phòng ngủ . {roomData.phongTam} phòng tắm .</p>
 
               </div>
               <div>
@@ -102,7 +101,6 @@ export default function RoomDetail() {
           </div>
 
           <div className='section__Checkout col-md-5'>
-
 
             <DateRangeForm data={roomData} />
 

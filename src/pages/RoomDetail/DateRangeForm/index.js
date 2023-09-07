@@ -7,34 +7,41 @@ import { DateRange, DefinedRange } from 'react-date-range';
 import './style.css'
 import { useDispatch } from 'react-redux';
 
-const DateRangeForm = () => {
+const DateRangeForm = (props) => {
 
     const dispatch = useDispatch();
 
-    const [showDateRange, setShowDateForm] = useState(false)
-    const [guests, setGuests] = useState(0);
+    const { data } = props
 
-    useEffect(()=> {
-        
-    })
-    
+    const [showDateRange, setShowDateForm] = useState(false)
+    const [guests, setGuests] = useState(data.khach);
+
     const [state, setState] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
-            key: 'selection'
+            key: 'selection',
+            soLuongKhach: guests
+            // maKhachHang : lay trong data base
         }
     ]);
+
 
     const handleGuestChange = (increment) => {
         if (guests + increment >= 0) {
             setGuests((prevGuests) => prevGuests + increment);
+            setState([{ ...state[0], soLuongKhach: guests + increment }]);
         }
+    }
+
+
+    const handleOnChange = () => {
+        console.log(state);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("click dat phong");
+        console.log(state);
     }
 
     return (
@@ -80,10 +87,21 @@ const DateRangeForm = () => {
                                             handleGuestChange(-1)
                                         }}>-</button>
 
-                                        <div>{guests} khách</div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type='number'
+                                                    name='soLuongKhach'
+                                                    value={guests}
+                                                    onChange={(e) => setGuests(parseInt(e.target.value))}
+                                                />
+                                                khách
+                                            </label>
+                                        </div>
 
                                         <button className="btn btn-secondary" onClick={(e) => {
-                                            e.preventDefault(); handleGuestChange(1)
+                                            e.preventDefault();
+                                            handleGuestChange(1)
                                         }}>+</button>
                                     </div>
 

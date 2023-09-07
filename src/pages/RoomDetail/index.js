@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { actRoomDetail } from '../../redux/types/actions';
 import './style.css'
 import DateRangeForm from './DateRangeForm';
-import { WifiOutlined, DesktopOutlined } from '@ant-design/icons';
 
 export default function RoomDetail() {
   const param = useParams();
@@ -226,7 +225,10 @@ export default function RoomDetail() {
         </div>
 
         <div className='section__Checkout col-md-5'>
-          <DateRangeForm />
+
+          {(roomData) && (
+            <DateRangeForm data={roomData} />
+          )}
         </div>
 
       </div >

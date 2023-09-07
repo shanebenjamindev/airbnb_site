@@ -42,7 +42,6 @@ export const actRoomDetail = (id) => {
         dispatch(actRoomDetailRequest)
         api.get(`/phong-thue/${id}`)
             .then((result) => {
-                console.log(result.data.content);
                 dispatch(actRoomDetialSucess(result.data.content))
             })
             .catch((error) => {
@@ -55,4 +54,3 @@ export const actRoomDetail = (id) => {
 const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
 const actRoomDetialSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
 const actRoomDetialFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
-

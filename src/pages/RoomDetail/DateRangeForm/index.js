@@ -6,6 +6,7 @@ import { DateRange, DefinedRange } from 'react-date-range';
 
 import './style.css'
 import { useDispatch } from 'react-redux';
+import { actCheckout } from '../../../redux/types/actions';
 
 const DateRangeForm = (props) => {
 
@@ -16,37 +17,52 @@ const DateRangeForm = (props) => {
     const [showDateRange, setShowDateForm] = useState(false)
     const [guests, setGuests] = useState(data.khach);
 
-    const [state, setState] = useState([
+    const [selectionRange, setSelectionRange] = useState({
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    });
+
+    const handleSelect = (ranges) => {
+        const { startDate, endDate } = ranges.selection
+        setSelectionRange(ranges.selection);
+        setState({
+            ...state,
+            ngayDen: startDate,
+            ngayDi: endDate,
+        });
+
+    };
+
+    const selectedRanges = [selectionRange];
+
+    const [state, setState] = useState(
         {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: 'selection',
-            soLuongKhach: guests
+            id: data.id,
+            maPhong: data.id,
+            soLuongKhach: guests,
+            ngayDen: selectionRange.startDate,
+            ngayDi: selectedRanges.endDate
             // maKhachHang : lay trong data base
         }
-    ]);
+    );
 
 
     const handleGuestChange = (increment) => {
         if (guests + increment >= 0) {
             setGuests((prevGuests) => prevGuests + increment);
-            setState([{ ...state[0], soLuongKhach: guests + increment }]);
+            setState({ ...state, soLuongKhach: guests + increment });
         }
-    }
-
-
-    const handleOnChange = () => {
-        console.log(state);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(state);
+
+        dispatch(actCheckout(state))
     }
 
     return (
-
-        <div className=''>
+        <div>
             <div className=''>
                 <form className='p-4 form__Checkout border rounded rounded-lg' onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -62,7 +78,6 @@ const DateRangeForm = (props) => {
                                 >
                                     NHẬN PHÒNG
                                     <br />
-                                    {state[0].startDate ? state[0].startDate.toDateString() : 'Chọn ngày'}
                                 </div>
                                 <div
                                     onClick={() => {
@@ -72,7 +87,6 @@ const DateRangeForm = (props) => {
                                 >
                                     TRẢ PHÒNG
                                     <br />
-                                    {state[0].endDate ? state[0].endDate.toDateString() : 'Chọn ngày'}
                                 </div>
                             </div>
 
@@ -151,18 +165,11 @@ const DateRangeForm = (props) => {
                     </div>
 
                     <div className='d-flex'>
-                        <DefinedRange className='col-6'
-                            onChange={item => setState([item.selection])}
-                            ranges={state}
-                        />
-
-                        <DateRange className='col-6'
-                            onChange={item => setState([item.selection])}
-                            showSelectionPreview={true}
+                        <DateRange
+                            editableDateInputs={true}
+                            onChange={handleSelect}
                             moveRangeOnFirstSelection={false}
-                            months={1}
-                            ranges={state}
-                            direction="horizontal"
+                            ranges={selectedRanges} // Pass the selectedRanges array
                         />
                     </div>
                 </div>

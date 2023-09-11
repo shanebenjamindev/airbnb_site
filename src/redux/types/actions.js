@@ -54,3 +54,11 @@ export const actRoomDetail = (id) => {
 const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
 const actRoomDetialSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
 const actRoomDetialFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
+
+
+
+export const actCheckout = (room) => {
+    return (dispatch) => {
+        console.log(room);
+    }
+}

@@ -78,6 +78,7 @@ const DateRangeForm = (props) => {
                                 >
                                     NHẬN PHÒNG
                                     <br />
+                                    {selectionRange.startDate ? selectionRange.startDate.toLocaleDateString() : "chọn ngày"}
                                 </div>
                                 <div
                                     onClick={() => {
@@ -87,6 +88,7 @@ const DateRangeForm = (props) => {
                                 >
                                     TRẢ PHÒNG
                                     <br />
+                                    {selectionRange.endDate ? selectionRange.endDate.toLocaleDateString() : "chọn ngày"}
                                 </div>
                             </div>
 

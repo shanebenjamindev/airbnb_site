@@ -29,36 +29,43 @@ export default function LoginPage() {
 
     return (
 
-        <div style={{ backgroundImage: 'url("https://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg")' }}>
-
-            <div className='position-absolute p-3'>
-                <NavLink to="/">  <span className='text-info'> {`< Trở về trang chủ`}</span></NavLink>
-            </div>
+        <div style={{ backgroundImage: 'url("https://demo4.cybersoft.edu.vn/static/media/logo_login.a444f2681cc7b623ead2.jpg")' }}>
 
 
-            <div className='container d-flex justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
+            <div className='container d-flex m-auto justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
 
-                <div className='col-lg-5 col-sm-6 border rounded py-2 bg-white'>
+                <div className='w-50 bg-white p-4  border rounded'>
 
-                    <div className="form-group ">
+                    <div className="form-group">
 
                         <h2 className="text-center mb-4">Đăng nhập</h2>
 
                         <form onSubmit={handleLogin}>
                             <div className='form-group'>
+                                <label>Email</label>
                                 <input type="text" name="taikhoan" className="form-control" placeholder='Tên đăng nhập' onChange={handleOnChange} />
                             </div>
 
                             <div className='form-group'>
+                                <label>Mật khẩu</label>
                                 <input type="password" name="matkhau" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} />
                             </div>
 
                             <div className='form-group text-right'>
-                                <div className='my-2'>
-                                    <button type="submit" className="btn btn-danger">Login</button>
+
+                                <div className='d-flex justify-content-between'>
+
+                                    <div className='my-2'>
+                                        <a href='/'>Quên mật khẩu?</a>
+                                    </div>
+
+                                    <div className='my-2'>
+                                        <button type="submit" className="btn btn-danger px-5">Đăng nhập</button>
+                                    </div>
+
                                 </div>
 
-                                <div className="mt-12 text-sm font-display font-semibold text-gray-700 ">
+                                <div className=" text-center mt-2 text-sm font-display font-semibold text-gray-700 ">
                                     Bạn chưa có tài khoản ? <NavLink to="/register-page" className="cursor-pointer text-primary">Đăng ký</NavLink>
                                 </div>
                             </div>

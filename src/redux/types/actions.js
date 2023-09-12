@@ -62,3 +62,27 @@ export const actCheckout = (room) => {
         console.log(room);
     }
 }
+
+export const actRegister = (userRegister) => {
+    return (dispatch) => {
+
+        api.post(`/auth/signup`, userRegister)
+            .then((result) => {
+                dispatch(actRegisterSuccess(result.data.content))
+            })
+            .catch((error) => {
+                dispatch(actRegisterFail(error.response.data))
+            })
+
+    }
+}
+
+const actRegisterSuccess = (data) => ({
+    type: actions.SIGNUP_SUCCESS,
+    payload: data
+})
+
+const actRegisterFail = (error) =>({
+    type: actions.SIGNUP_FAIL,
+    payload: error
+})

@@ -1,133 +1,183 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import './style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { actRegister } from '../../redux/types/actions';
 
 export default function RegisterPage() {
+    const dispatch = useDispatch();
 
-    const initialUserState = {
-        taiKhoan: '',
-        matKhau: '',
+    const { data, error } = useSelector((state) => state.signupReducer)
+
+    const showError = () => {
+
+        if (data) {
+            return <div className='alert alert-success'>Đăng kí thành công</div>
+        }
+        if (error) {
+            return <div className='alert alert-success'>Email đã tồn tại</div>
+        }
+
+    }
+
+    const [state, setState] = useState({
+        name: '',
+        phone: '',
+        gender: '',
         email: '',
-        soDt: '',
-        hoTen: '',
-    };
-    const initialState = {
-        user: { ...initialUserState },
-        errors: { ...initialUserState },
-        formValid: false,
-    };
+        password: '',
+        birthday: true,
+        role: '',
+    });
 
-    const [state, setState] = useState(initialState);
+    const [errors, setErrors] = useState({
+        name: '',
+        phone: '',
+        gender: true,
+        email: '',
+        password: '',
+        birthday: '',
+        role: '',
+    });
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
-        let { formValid, errors } = state;
 
         setState({
             ...state,
-            errors: { ...errors },
-            user: {
-                ...state.user,
-                [name]: value,
-            },
-            formValid: formValid,
+            [name]: value,
         });
+
+        if (name === 'name') {
+            setErrors({
+                ...errors,
+                name: value.trim() === '' ? 'Tên không được để trống' : value.trim().length < 4 ? 'Phải từ 4 kí tự' : '',
+            });
+        } else if (name === 'phone') {
+            setErrors({
+                ...errors,
+                phone: value.trim() === '' ? 'Số điện thoại không được để trống' : !/^\d{10,11}$/.test(value) ? 'Số điện thoại không hợp lệ' : '',
+            });
+        } else if (name === 'email') {
+            setErrors({
+                ...errors,
+                email: value.trim() === '' ? 'Email không được để trống' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Email không hợp lệ' : '',
+            });
+        } else if (name === 'password') {
+            setErrors({
+                ...errors,
+                password: value.trim() === '' ? 'Mật khẩu không được để trống' : value.trim().length < 8 ? 'Mật khẩu phải từ 8 kí tự' : '',
+            });
+        }
+        else {
+            setErrors({
+                ...errors,
+                [name]: '',
+            });
+        }
     };
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(state);
-    };
+        const hasErrors = Object.values(errors).some((error) => error !== '');
 
+        if (!hasErrors) {
+            dispatch(actRegister(state));
+        }
+    };
 
     return (
         <div>
-
-            <div className='position-absolute p-3'>
-                <NavLink to="/">  <span className='text-info'> {`< Trở về trang chủ`}</span></NavLink>
-            </div>
-
-            <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundImage: 'url("https://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg")' }}>
-
-
-                <div className="col-lg-3 col-sm-6 border rounded py-4 bg-white ">
-
-                    <h2 className="mb-4 text-center">Đăng ký</h2>
+            <div className="sign__In d-flex justify-content-center align-items-center vh-100">
+                <div className="border rounded bg-white col-md-6 ">
+                    <div className='m-md-4 d-flex  justify-content-between'>
+                        <NavLink to="/">AirBnb</NavLink>
+                        <h2>Đăng ký tài khoản</h2>
+                        <h2 className="invisible">spa</h2>
+                    </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <input
-                                type='text' required
-                                name="hoTen"
-                                className="form-control"
-                                onChange={handleOnChange}
-                                value={state.user.hoTen}
-                                placeholder='Họ tên *'
-                            />
-                            {state.errors.hoTen && <div className="text-danger my-2">{state.errors.hoTen}</div>}
+                        <div>{showError()}</div>
+                        <div className='d-flex flex-wrap'>
+                            <div className='col-md-6'>
+                                <div className="form-group">
+                                    <label>Tên người dùng</label>
+                                    <input
+                                        type='text' required
+                                        name="name"
+                                        className="form-control"
+                                        onChange={handleOnChange}
+                                        placeholder='Điền tên người dùng vào đây ...'
+                                    />
+                                    {errors.name && <div className="alert alert-danger error">{errors.name}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input
+                                        type="text" required
+                                        name="phone"
+                                        className="form-control"
+                                        onChange={handleOnChange}
+                                        placeholder='098 6888 234'
+                                    />
+                                    {errors.phone && <div className="alert alert-danger error">{errors.phone}</div>}
+                                </div>
+
+                                <label>Giới tính</label>
+                                <select name='gender' onChange={handleOnChange}>
+                                    <option value={true}>Nam</option>
+                                    <option value={false}>Nữ</option>
+                                </select>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-group">
+                                    <label>Email</label>
+                                    <input
+                                        type="email" required
+                                        name="email"
+                                        className="form-control"
+                                        onChange={handleOnChange}
+                                        placeholder='Example@gmail.com'
+                                    />
+                                    {errors.email && <div className="alert alert-danger error">{errors.email}</div>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Mật khẩu</label>
+                                    <input
+                                        type="password" required
+                                        name="password"
+                                        className="form-control"
+                                        onChange={handleOnChange}
+                                        placeholder='**********'
+                                    />
+                                </div>
+                                {errors.password && <div className="alert alert-danger error">{errors.password}</div>}
+
+                                <div className="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input
+                                        type="date"
+                                        name="birthday"
+                                        className="form-control" required
+                                        onChange={handleOnChange}
+                                        placeholder='Tài khoản *'
+                                    />
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="taiKhoan"
-                                className="form-control" required
-                                onChange={handleOnChange}
-                                value={state.user.taiKhoan}
-                                placeholder='Tài khoản *'
-                            />
-                            {state.errors.taiKhoan && <div className="text-danger my-2">{state.errors.taiKhoan}</div>}
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="password" required
-                                name="matKhau"
-                                className="form-control"
-                                onChange={handleOnChange}
-                                value={state.user.matKhau}
-                                placeholder='Mật khẩu *'
-                            />
-                            {state.errors.matKhau && <div className="text-danger my-2">{state.errors.matKhau}</div>}
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="email" required
-                                name="email"
-                                className="form-control"
-                                onChange={handleOnChange}
-                                value={state.user.email}
-                                placeholder='Email *'
-                            />
-                            {state.errors.email && <div className="text-danger my-2">{state.errors.email}</div>}
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type='text' required
-                                name="soDt"
-                                className="form-control"
-                                onChange={handleOnChange}
-                                value={state.user.soDt}
-                                placeholder='Số điện thoại *'
-                            />
-                            {state.errors.soDt && <div className="text-danger my-2">{state.errors.soDt}</div>}
-                        </div>
-
-
-                        <div className='text-right my-3'>
-                            <button type="submit" className="btn btn-danger" disabled={!state.formValid}>
-                                Sign Up
+                        <div className='text-center mb-4'>
+                            <button type="submit" className="rounded btn btn-danger px-5">
+                                Đăng kí
                             </button>
-                        </div>
-
-                        <div className="text-right">
-                            Bạn bạn đã có tài khoản ? <NavLink to="/login-page" className="cursor-pointer text-primary">Đăng nhập</NavLink>
+                            <div>
+                                <NavLink to="/login-page" className="text-danger">Đăng nhập ngay</NavLink>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    )
+    );
 }

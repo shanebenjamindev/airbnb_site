@@ -6,21 +6,22 @@ const initialState = {
     error: null
 }
 
-const signupReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.SIGNUP_REQUEST:
+        case actions.LOGIN_REQUEST:
             state.loading = true;
             state.data = null;
             state.error = null;
             return { ...state }
 
-        case actions.SIGNUP_SUCCESS:
+        case actions.LOGIN_SUCCESS:
             state.loading = false;
             state.data = action.payload;
+            localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload))
             state.error = null;
             return { ...state }
 
-        case actions.SIGNUP_FAIL:
+        case actions.LOGIN_FAIL:
             state.loading = false;
             state.data = null;
             state.error = action.payload;
@@ -31,4 +32,4 @@ const signupReducer = (state = initialState, action) => {
     }
 }
 
-export default signupReducer
+export default loginReducer

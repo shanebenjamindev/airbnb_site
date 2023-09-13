@@ -10,39 +10,42 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+    const listCityData = useSelector((state) => state.cityReducer.data);
+    const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
+
+    console.log(userData);
+
     useEffect(() => {
         dispatch(actListCity());
     }, [dispatch]);
 
-    // Button show the form State
     const [buttonActive, setButtonActive] = useState(false);
-
-    // Form's State
     const [formActive, setFormActive] = useState(false);
 
     const [state, setState] = useState({
-        id: ""
+        id: "",
     });
 
-    const listCityData = useSelector((state) => state.cityReducer.data);
-
-    // Press Button to Show Form
     const toggleForm = () => {
         setFormActive(!formActive);
         setButtonActive(!formActive);
     };
 
-    // Dropdown on change
     const handleOnChange = (e) => {
         return setState({
             id: e.target.value
         })
     };
 
-    // Button Submit Pressed
     const handleOnSubmit = (e) => {
         if (state.id !== "") {
             navigate(`/roombycity/${state.id}`);
+        }
+    }
+
+    const handleLogout = () => {
+        if (window.confirm("Are you sure you want to log out?")) {
+            localStorage.removeItem("USER_LOGIN");
         }
     }
 
@@ -90,8 +93,10 @@ export default function Navbar() {
                 </div>
                 <div className="d-none d-lg-flex" id="collapsibleNavId">
                     <ul className="navbar-nav">
+
                         <li className="nav-item">
                             <a className="nav-link" href="/">Trở thành chủ nhà</a>
+
                         </li>
 
                         <li className="nav-item">
@@ -105,7 +110,15 @@ export default function Navbar() {
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
-                                <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                {userData ?
+                                    (
+
+                                        <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                    ) :
+                                    (
+                                        <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                    )
+                                }
                                 <a className="dropdown-item" href="/">Cho thuê nhà</a>
                                 <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
                                 <a className="dropdown-item" href="/">Trợ giúp</a>

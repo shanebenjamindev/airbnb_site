@@ -66,6 +66,8 @@ export const actCheckout = (room) => {
 export const actRegister = (userRegister) => {
     return (dispatch) => {
 
+        dispatch(actRegisterRequest())
+
         api.post(`/auth/signup`, userRegister)
             .then((result) => {
                 dispatch(actRegisterSuccess(result.data.content))
@@ -77,12 +79,33 @@ export const actRegister = (userRegister) => {
     }
 }
 
-const actRegisterSuccess = (data) => ({
-    type: actions.SIGNUP_SUCCESS,
-    payload: data
-})
+const actRegisterRequest = () => ({ type: actions.SIGNUP_REQUEST })
+const actRegisterSuccess = (data) => ({ type: actions.SIGNUP_SUCCESS, payload: data })
+const actRegisterFail = (error) => ({ type: actions.SIGNUP_FAIL, payload: error })
 
-const actRegisterFail = (error) =>({
-    type: actions.SIGNUP_FAIL,
-    payload: error
-})
+export const actLogin = (userLogin, navigate) => {
+    return (dispatch) => {
+        
+        dispatch(actLoginRequest)
+        
+        api.post('/auth/signin', userLogin)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    const { user } = result.data.content;
+                    dispatch(actLoginSuccess(user))
+                    if (window.confirm("Đăng nhập thành công, về trang chủ?")) {
+                        navigate("/", { replace: true })
+                    }
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data
+                dispatch(actLoginFail(content))
+            })
+    }
+}
+
+
+const actLoginRequest = () => ({ type: actions.LOGIN_REQUEST })
+const actLoginSuccess = (data) => ({ type: actions.LOGIN_SUCCESS, payload: data })
+const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })

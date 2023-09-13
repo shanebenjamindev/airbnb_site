@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { NavLink, Navigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom'
+import { actLogin } from '../../redux/types/actions';
 
 export default function LoginPage() {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [state, setState] = useState({
-        taikhoan: "",
-        matkhau: ""
+        email: "",
+        password: ""
     });
 
     const handleOnChange = (e) => {
@@ -14,15 +18,18 @@ export default function LoginPage() {
             ...state,
             [name]: value,
         });
+
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log(state);
+
+        dispatch(actLogin(state, navigate))
     };
 
 
     if (localStorage.getItem("USER_LOGIN")) {
+        alert("Bạn đã đăng nhập, quay về trang chủ?")
         return <Navigate replace to="/" />;
     }
 
@@ -43,12 +50,14 @@ export default function LoginPage() {
                         <form onSubmit={handleLogin}>
                             <div className='form-group'>
                                 <label>Email</label>
-                                <input type="text" name="taikhoan" className="form-control" placeholder='Tên đăng nhập' onChange={handleOnChange} />
+                                <input type="text" name="email" className="form-control" placeholder='Tên đăng nhập' onChange={handleOnChange} />
+
                             </div>
 
                             <div className='form-group'>
                                 <label>Mật khẩu</label>
-                                <input type="password" name="matkhau" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} />
+                                <input type="password" name="password" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} />
+
                             </div>
 
                             <div className='form-group text-right'>

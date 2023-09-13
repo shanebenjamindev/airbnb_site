@@ -11,8 +11,6 @@ const api = axios.create({
     baseURL: "https://airbnbnew.cybersoft.edu.vn/api",
 })
 
-export const groupid = "GP03"
-
 /**
  * Interceptors (TOKEN)
  */

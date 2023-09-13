@@ -7,12 +7,16 @@ import { DateRange, DefinedRange } from 'react-date-range';
 import './style.css'
 import { useDispatch } from 'react-redux';
 import { actCheckout } from '../../../redux/types/actions';
+import { useNavigate } from 'react-router-dom';
 
 const DateRangeForm = (props) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const { data } = props
+    const { data, user } = props
+
+    console.log(user);
 
     const [showDateRange, setShowDateForm] = useState(false)
     const [guests, setGuests] = useState(data.khach);
@@ -42,8 +46,8 @@ const DateRangeForm = (props) => {
             maPhong: data.id,
             soLuongKhach: guests,
             ngayDen: selectionRange.startDate,
-            ngayDi: selectedRanges.endDate
-            // maKhachHang : lay trong data base
+            ngayDi: selectedRanges.endDate,
+
         }
     );
 
@@ -58,7 +62,14 @@ const DateRangeForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(actCheckout(state))
+        if (!localStorage.getItem("USER_LOGIN")) {
+            if (window.confirm("Hãy đăng nhập để thực hiện chức năng này")) {
+                navigate("/login-page", { replace: true })
+            }
+        }
+        else {
+            dispatch(actCheckout(state))
+        }
     }
 
     return (

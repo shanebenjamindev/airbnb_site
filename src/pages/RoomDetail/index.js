@@ -14,7 +14,9 @@ export default function RoomDetail() {
     dispatch(actRoomDetail(param.id))
   }, [dispatch, param.id])
 
+  const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
   const roomData = useSelector((state) => state.RoomDetailReducer.data);
+
   const renderRoom = () => {
     return <>
       {roomData && (
@@ -31,9 +33,6 @@ export default function RoomDetail() {
 
   return (
     <div className='room__Container'>
-
-
-
       {renderRoom()}
       {roomData && (
         <div className='d-flex flex-wrap'>
@@ -97,12 +96,12 @@ export default function RoomDetail() {
             <hr />
 
             {/**data */}
-            <Comfort data = {roomData}/>
+            <Comfort data={roomData} />
           </div>
 
           <div className='section__Checkout col-md-5'>
 
-            <DateRangeForm data={roomData} />
+            <DateRangeForm data={roomData} user={userData} />
 
           </div>
         </div >

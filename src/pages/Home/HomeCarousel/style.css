@@ -1,0 +1,60 @@
+.carousel-caption {
+  top: 250px;
+}
+h1.unique {
+  font-size: 69px;
+  font-weight: 400;
+  font-family: "Playfair Display", serif;
+  color: #fff;
+  margin-bottom: 17px;
+  text-shadow: none;
+}
+.section-slider.item.carousel-caption.v3 {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.Enjoy {
+  font-size: 24.75px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  text-shadow: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.line-t {
+  width: 74px;
+  height: 1px;
+  background: #ffffff;
+}
+.line-b {
+  width: 74px;
+  height: 1px;
+  background: #ffffff;
+}
+
+@media only screen and (max-width: 1200px) {
+  .carousel-caption {
+    top: 150px;
+    font-size: 20px;
+  }
+  h1.unique {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .carousel-caption {
+    top: 70px !important;
+  }
+  h1.unique {
+    font-size: 20px;
+  }
+
+  .Enjoy {
+    font-size: 7px;
+  }
+}

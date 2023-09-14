@@ -87,7 +87,7 @@ export default function Navbar() {
 
     return (
         <header>
-            <nav className="navbar navbar-expand-sm navbar-light justify-content-between m-auto">
+            <nav className="navbar text-light navbar-expand-sm navbar-light justify-content-between m-auto">
                 <div className='d-none d-lg-flex'>
                     <Link className="navbar-brand" to="/">Airbnb</Link>
                 </div>
@@ -126,73 +126,93 @@ export default function Navbar() {
                         </li>
                     </ul>
                 </div>
-                
-            </nav>
-             {/* Button to Show Form */}
-             <div className='btnFindRoom__Container d-flex'>
-             <div className={`d-flex text-center m-auto justify-content-between`}>
-                 <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
-                     <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
-                     <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
-                     <div className='btnFindRoom__Item'>Thêm khách</div>
-                     <button className='btnFindRoom__Item btn border rounded-circle btn-danger'>S</button>
-                 </div>
-             </div>
-         </div>
 
-         {/** Form */}
-         <div id='timPhongFormActive' className={`p-2 mt-5 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
-             {renderDropDownCity()}
-         </div>
+            </nav>
+            {/* Button to Show Form */}
+            <div className='btnFindRoom__Container d-flex'>
+                <div className={`d-flex text-center m-auto justify-content-between`}>
+                    <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
+                        <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
+                        <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
+                        <div className='btnFindRoom__Item'>Thêm khách</div>
+                        <button className='btnFindRoom__Item btn border rounded-circle '>S</button>
+                    </div>
+                </div>
+            </div>
+
+            {/** Form */}
+            <div id='timPhongFormActive' className={`p-2 mt-5 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
+                {renderDropDownCity()}
+            </div>
 
 
             <div
-                className="d-flex navbar-expand-lg justify-content-end">
-                <div className="content1">
-                    <DingdingOutlined />{" "}
-                    <span>BINH CYBERSOFT</span>
-                </div>
-                <div className="phone1">
-                    <PhoneOutlined />
-                    <span> (+84) 28. 38 12 17 19</span>
-                </div>
+                className=" w-75 m-auto  navbar-expand-lg ">
 
-                <div className="logo p-3 navbar-brand collapse navbar-collapse" id="navbarSupportedContent">
-                    <img
-                        className="nav-item item-link"
-                        src="../img/sky-logo-header.png"
-                        alt=""
-                    />
-                </div>
 
-                <div>
 
-                    <div
-                        className="icon1"
-                        style={{
-                            color: "white",
-                        }}
+
+                <div className="navbar navne navbar-brand collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
+
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
                     >
-                        <a href="">
-                            {" "}
-                            <FacebookOutlined className="px-3" />
-                        </a>
-                        <a href="">
-                            <TwitterOutlined className="px-3" />
-                        </a>
-                        <a href="">
-                            {" "}
-                            <YoutubeOutlined className="px-3" />
-                        </a>
-                        <a href="">
-                            <InstagramOutlined className="px-3" />
-                        </a>
+                        <span className="navbar-toggler-icon">
+                            <MenuOutlined style={{ color: "#FFF" }} />
+                        </span>
+                    </button>
+
+
+                    <div className="content1">
+                        <DingdingOutlined />{" "}
+                        <span>GBairBnb</span>
                     </div>
+                    <div>
+                        <img
+                            className="nav-item item-link"
+                            src="../img/sky-logo-header.png"
+                            alt=""
+                        />
+                    </div>
+                    <div className="phone1">
+                        <PhoneOutlined />
+                        <span> (+84) 28. 38 12 17 19</span>
+                    </div>
+
+
+                </div>
+
+                <div
+                    className="icon1 navne2 text-center"
+                    style={{
+                        color: "white",
+                    }}
+                >
+                    <a href="/">
+                        {" "}
+                        <FacebookOutlined className="px-3" />
+                    </a>
+                    <a href="/">
+                        <TwitterOutlined className="px-3" />
+                    </a>
+                    <a href="/">
+                        {" "}
+                        <YoutubeOutlined className="px-3" />
+                    </a>
+                    <a href="/">
+                        <InstagramOutlined className="px-3" />
+                    </a>
                 </div>
 
             </div>
 
-           
+
         </header>
     )
 }

@@ -27,7 +27,6 @@ export default function RoomDetail() {
           </div>
         </div>)}
     </>
-
   }
 
 

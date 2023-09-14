@@ -8,9 +8,15 @@ header {
     width: 100%;
     z-index: 100;
 }
-.navbar {
-    padding-bottom: 3rem;
+
+.navne {
+    padding-top: 3rem;
 }
+
+.navne2 {
+    padding-bottom: 2rem;
+}
+
 
 .btn:hover {
     color: #8e7037 !important;
@@ -68,7 +74,6 @@ select,
 }
 
 .user-avatar {
-
     z-index: 999;
     background-color: whitesmoke;
     border-radius: 50px;
@@ -99,6 +104,8 @@ select,
 /* items in button */
 .btnFindRoom__Item {
     padding: 0 8px;
+    color: #8e7037 ;
+    
 }
 
 .btnFindRoom__Item:first-child,
@@ -118,18 +125,19 @@ select,
 .formFindRoom-Hide {
     position: absolute;
     opacity: 0;
-    transform: translateY(-50px);
     transition: all 0.25s ease;
 }
 
 .formFindRoom {
     border-radius: 50px;
     border: 1px solid rgb(213, 213, 213);
+    background-color: whitesmoke;
 }
 
 .formFindRoom-Show {
     z-index: 12;
     transition: all 0.5s ease;
+    transform: translateY(30px);
     opacity: 1;
 }
 

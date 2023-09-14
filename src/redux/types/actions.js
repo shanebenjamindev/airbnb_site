@@ -85,9 +85,9 @@ const actRegisterFail = (error) => ({ type: actions.SIGNUP_FAIL, payload: error 
 
 export const actLogin = (userLogin, navigate) => {
     return (dispatch) => {
-        
+
         dispatch(actLoginRequest)
-        
+
         api.post('/auth/signin', userLogin)
             .then((result) => {
                 if (result.data.statusCode === 200) {
@@ -109,3 +109,25 @@ export const actLogin = (userLogin, navigate) => {
 const actLoginRequest = () => ({ type: actions.LOGIN_REQUEST })
 const actLoginSuccess = (data) => ({ type: actions.LOGIN_SUCCESS, payload: data })
 const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
+
+
+
+export const actHomeListRoom = () => {
+    return (dispatch) => {
+        dispatch(actHomeListRoomRequest)
+        api.get(`/phong-thue/`)
+            .then((result) => {
+                actHomeListRoomSuccess(result.data.content)
+            })
+            .catch((error) => {
+                actHomeListRoomFail(error)
+            })
+    }
+}
+
+
+const actHomeListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
+const actHomeListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })
+const actHomeListRoomFail = (error) => ({ type: actions.HOMELIST_ROOM_FAIL, payload: error })
+
+

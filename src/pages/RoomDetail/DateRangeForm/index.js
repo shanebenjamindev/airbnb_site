@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
@@ -25,6 +25,8 @@ const DateRangeForm = (props) => {
         key: 'selection',
     });
 
+   
+
     const handleSelect = (ranges) => {
         const { startDate, endDate } = ranges.selection
         setSelectionRange(ranges.selection);
@@ -45,11 +47,22 @@ const DateRangeForm = (props) => {
             soLuongKhach: guests,
             ngayDen: selectionRange.startDate,
             ngayDi: selectedRanges.endDate,
-            maKhachHang: user.id
+            maKhachHang: null
         }
     );
 
+    useEffect(()=> {
+        if (user) {
+            setState(
+                {
+                    ...state,
+                    maKhachHang: user.id
+                }
+            )
+        }
+    }, [])
 
+    console.log(state);
     const handleGuestChange = (increment) => {
         if (guests + increment >= 0) {
             setGuests((prevGuests) => prevGuests + increment);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import { GlobalOutlined, MenuOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { DingdingOutlined, FacebookOutlined, GlobalOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actListCity } from '../../redux/types/actions';
@@ -55,10 +55,10 @@ export default function Navbar() {
                 <div className='col-md-4 p-4 formFindRoom__Item'>
                     <span>Địa điểm </span>
                     <select className='' onChange={handleOnChange} name="selectedCityId" >
-                        <option value={""}>Chọn thành phố</option>
+                        <option className='bg-dark text-light' value={""}>- Chọn thành phố -</option>
                         {
                             listCityData?.map((city, index) => {
-                                return <option key={index} value={city.id}>{city.tenViTri}</option>
+                                return <option className='bg-dark text-light' key={index} value={city.id}>{city.tenViTri}</option>
                             })
                         }
                     </select>
@@ -126,24 +126,73 @@ export default function Navbar() {
                         </li>
                     </ul>
                 </div>
+                
             </nav>
+             {/* Button to Show Form */}
+             <div className='btnFindRoom__Container d-flex'>
+             <div className={`d-flex text-center m-auto justify-content-between`}>
+                 <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
+                     <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
+                     <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
+                     <div className='btnFindRoom__Item'>Thêm khách</div>
+                     <button className='btnFindRoom__Item btn border rounded-circle btn-danger'>S</button>
+                 </div>
+             </div>
+         </div>
 
-            {/* Button to Show Form */}
-            <div className='btnFindRoom__Container w-100 d-flex'>
-                <div className={`d-flex text-center m-auto justify-content-between`}>
-                    <div onClick={toggleForm} className={`btnFindRoom__Items btn d-flex flex-wrap text-center justify-content-center ${buttonActive ? `btnFindRoom__Container-active` : ``}`}>
-                        <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
-                        <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
-                        <div className='btnFindRoom__Item'>Thêm khách</div>
-                        <button className='btnFindRoom__Item btn border rounded-circle btn-danger'>S</button>
+         {/** Form */}
+         <div id='timPhongFormActive' className={`p-2 mt-5 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
+             {renderDropDownCity()}
+         </div>
+
+
+            <div
+                className="d-flex navbar-expand-lg justify-content-end">
+                <div className="content1">
+                    <DingdingOutlined />{" "}
+                    <span>BINH CYBERSOFT</span>
+                </div>
+                <div className="phone1">
+                    <PhoneOutlined />
+                    <span> (+84) 28. 38 12 17 19</span>
+                </div>
+
+                <div className="logo p-3 navbar-brand collapse navbar-collapse" id="navbarSupportedContent">
+                    <img
+                        className="nav-item item-link"
+                        src="../img/sky-logo-header.png"
+                        alt=""
+                    />
+                </div>
+
+                <div>
+
+                    <div
+                        className="icon1"
+                        style={{
+                            color: "white",
+                        }}
+                    >
+                        <a href="">
+                            {" "}
+                            <FacebookOutlined className="px-3" />
+                        </a>
+                        <a href="">
+                            <TwitterOutlined className="px-3" />
+                        </a>
+                        <a href="">
+                            {" "}
+                            <YoutubeOutlined className="px-3" />
+                        </a>
+                        <a href="">
+                            <InstagramOutlined className="px-3" />
+                        </a>
                     </div>
                 </div>
+
             </div>
 
-            {/** Form */}
-            <div id='timPhongFormActive' className={`p-2 mt-4 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
-                {renderDropDownCity()}
-            </div>
+           
         </header>
     )
 }

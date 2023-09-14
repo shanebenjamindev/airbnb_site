@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
-import { DateRange, DefinedRange } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 
 import './style.css'
 import { useDispatch } from 'react-redux';
@@ -15,8 +15,6 @@ const DateRangeForm = (props) => {
     const navigate = useNavigate();
 
     const { data, user } = props
-
-    console.log(user);
 
     const [showDateRange, setShowDateForm] = useState(false)
     const [guests, setGuests] = useState(data.khach);
@@ -47,7 +45,7 @@ const DateRangeForm = (props) => {
             soLuongKhach: guests,
             ngayDen: selectionRange.startDate,
             ngayDi: selectedRanges.endDate,
-
+            maKhachHang: user.id
         }
     );
 

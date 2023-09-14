@@ -11,7 +11,7 @@ export default function RoomByCityPage() {
 
     useEffect(() => {
         dispatch(actGetRoomByCity(param.id))
-    }, [])
+    }, [dispatch, param.id])
 
     const listRoomByCity = useSelector((state) => state.getRoomByCityReducer.data);
 
@@ -21,7 +21,7 @@ export default function RoomByCityPage() {
             return <Link to={`/roomdetail/${room.id}`} key={index} className='card p-1 m-3'>
                 <div className='d-md-flex align-items-center'>
                     <div className='col-md-6'>
-                        <img className="img-fluid" src={room.hinhAnh} alt="Card image cap" />
+                        <img className="img-fluid" src={room.hinhAnh} alt="Cardcap" />
                     </div>
                     <div className='col-md-6'>
                         <span className="">{room.tenPhong}</span>

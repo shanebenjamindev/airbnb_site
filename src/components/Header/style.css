@@ -1,21 +1,75 @@
 header {
     transition: all 0.5s ease;
+    background: rgba(74, 74, 74, 0.35);
+    backdrop-filter: blur(2px);
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 12;
-    background-color: white;
+    z-index: 100;
+}
+.navbar {
+    padding-bottom: 3rem;
 }
 
-.navbar {
-    z-index: 11;
-    padding: 20px 100px;
+.btn:hover {
+    color: #8e7037 !important;
+    background-color: white;
+    border-color: #8e7037 !important;
 }
+
+.icon>a:hover {
+    background: transparent;
+    color: #8e7037;
+}
+
+header input,
+select,
+.optTrans {
+    background-color: transparent !important;
+}
+
+.nav-item>a {
+    font-weight: 700;
+}
+
+.nav-item>a:hover {
+    background: transparent;
+    color: #8e7037 !important;
+}
+
+.content1 {
+    padding: 0 30px;
+    color: white;
+    font-size: 15px;
+}
+
+.phone1 {
+    color: white;
+    font-size: 15px;
+}
+
+.icon1 {
+
+    font-size: 15px;
+}
+
+.icon1>a {
+    color: white;
+}
+
+.icon1>a:hover {
+    color: #8e7037 !important;
+}
+
 
 .rounded-50 {
     border-radius: 50px;
 }
 
 .user-avatar {
+
+    z-index: 999;
     background-color: whitesmoke;
     border-radius: 50px;
     border: 1px solid rgb(213, 213, 213);
@@ -29,10 +83,10 @@ header {
 
 /* BUTTON SHOW FORM */
 .btnFindRoom__Container {
-    margin-top: 1rem;
-    top: 1rem;
-    cursor: pointer;
     position: absolute;
+    cursor: pointer;
+    top: 3rem;
+    width: 100%;
 }
 
 .btnFindRoom__Items {
@@ -71,14 +125,12 @@ header {
 .formFindRoom {
     border-radius: 50px;
     border: 1px solid rgb(213, 213, 213);
-
 }
 
 .formFindRoom-Show {
     z-index: 12;
     transition: all 0.5s ease;
     opacity: 1;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 10px 0px;
 }
 
 .formFindRoom__Item {

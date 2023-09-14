@@ -1,0 +1,30 @@
+.section-slider .item .wrap-best-v3 {
+  border: 1px solid #ebebeb;
+  padding: 25px 0 20px 0px;
+  margin-right: 1px;
+}
+.sky-h6 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #232323;
+  font-family: "Poppins", Arial, sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 7px;
+}
+
+.icon-best {
+  margin-left: 70px;
+  margin-top: 18px;
+}
+
+.item {
+  width: 100%;
+  height: 118px;
+  border: 1px solid #8e7037;
+  margin-bottom: 41px;
+}
+
+.owl-item {
+  padding: 25px;
+}

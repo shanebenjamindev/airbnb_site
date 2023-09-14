@@ -1,0 +1,25 @@
+.sign__In {
+    background-image: url("https://demo4.cybersoft.edu.vn/static/media/logo_login.a444f2681cc7b623ead2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.error {
+    margin: 5px 0;
+}
+
+input:valid {
+    border-color: green;
+}
+
+/* Style invalid input fields */
+input:invalid {
+    border-color: red;
+    /* Change border color for invalid inputs */
+}
+
+/* Style the error message */
+.error-message {
+    color: red;
+    font-size: 14px;
+}

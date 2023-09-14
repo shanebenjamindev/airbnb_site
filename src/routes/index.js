@@ -8,11 +8,11 @@ const routes = [
         nested: [
             {
                 path: "",
-                element: lazy(() => import("../pages/HomePage")),
+                element: lazy(() => import("../pages/Home")),
             },
             {
                 path: "roombycity/:id",
-                element: lazy(() => import("../pages/RoomByCityPage"))
+                element: lazy(() => import("../pages/RoomByCity"))
             },
             {
                 path: "roomdetail/:id",
@@ -22,11 +22,11 @@ const routes = [
     },
     {
         path: "login-page",
-        element: lazy(()=> import ("../pages/LoginPage"))
+        element: lazy(()=> import ("../pages/Login"))
     },
     {
         path: "register-page",
-        element: lazy(()=> import ("../pages/RegisterPage"))
+        element: lazy(()=> import ("../pages/Register"))
     },
     {
         path: "admin",

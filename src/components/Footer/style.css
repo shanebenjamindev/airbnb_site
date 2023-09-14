@@ -1,0 +1,222 @@
+.footer-sky.footer-sky-v4 {
+    padding-top: 45px;
+    background: url(http://landing.engotheme.com/html/skyline/demo/images/Home-4/footer.jpg)
+      no-repeat;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  .footer-sky .footer-top {
+    padding: 32px 0;
+    margin: -2px 0;
+    background: #2e2e2e;
+  }
+  .icon-email {
+    display: inline-block;
+  }
+  
+  .footer-top h2 {
+    font-weight: 700;
+    color: #fff;
+    font-size: 40px;
+    letter-spacing: 2px;
+  }
+  .footer-top p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+  }
+  .textbox {
+    margin-bottom: 50px;
+    margin-top: 45px;
+  }
+  .textbox .form-inline {
+    margin-top: 2px;
+  }
+  
+  .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .input-group {
+    width: 570px !important;
+    border: 2px solid white;
+    margin-left: 275px;
+  }
+  .form-control {
+    font-size: 14px;
+    font-weight: 300;
+    color: grey;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    padding: 6px 25px;
+    height: 40px;
+  }
+  .footer-sky.footer-sky-v4 .textbox .input-group .form-control {
+    background: transparent !important;
+  }
+  .footer-sky .footer-top .textbox .form-inline .form-group .input-group .btn {
+    width: 80px;
+    height: 60px;
+    border: none;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: #3e3e3e;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    position: absolute;
+    right: 10px;
+    z-index: 99;
+  }
+  .footer-sky.footer-sky-v4 .textbox .input-group .btn {
+    background: transparent !important;
+  }
+  .footer-sky .footer-bottom.bottom-v3 {
+    line-height: 85px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ebebeb;
+    font-weight: 300;
+    font-size: 13px;
+  }
+  .footer-bottom .footer-bottom-l {
+    color: #ebebeb;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .footer-sky.footer-sky-v4 .footer-bottom .footer-bottom-l a {
+    font-weight: 400;
+    color: #8e7037;
+  }
+  .footer-sky.footer-sky-v4 .footer-bottom .footer-icon a {
+    padding: 0px 17px;
+    color: #fff;
+    font-size: 18px;
+  }
+  .footer-sky.footer-sky-v4 .footer-top {
+    background: 0;
+  }
+  
+  .btn-footer {
+    width: 81px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 0px;
+    box-shadow: none;
+    position: absolute;
+    right: 0px;
+    z-index: 99;
+    font-size: 40px;
+  }
+  
+  .forwar {
+    position: absolute;
+    bottom: 0px;
+    left: 23px;
+    color: white;
+  }
+  
+  .payments {
+    margin-left: 390px;
+  }
+  
+  .forwar:hover {
+    color: #8e7037;
+    transform: translateX(10px);
+    transition: all 1s;
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .input-group {
+      width: 350px;
+      border: 2px solid white;
+      margin-left: 90px;
+    }
+  
+    .payments {
+      margin-left: 100px !important;
+    }
+    .footer-bottom-l {
+      text-align: center !important;
+    }
+  }
+  
+  @media only screen and (max-width: 576px) {
+    .input-group {
+      width: 320px !important;
+      margin-left: 15px !important;
+    }
+  
+    .payments {
+      text-align: center !important;
+      margin-left: 25px !important;
+    }
+  
+    .footer-bottom-l {
+      text-align: center !important;
+    }
+    .entry-media > div > img {
+      height: 200px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 428px) {
+    .input-group {
+      width: 320px !important;
+      margin-left: 50px !important;
+    }
+  
+    .payments {
+      text-align: center !important;
+      margin-left: 25px !important;
+    }
+  
+    .footer-bottom-l {
+      text-align: center !important;
+    }
+    .entry-media > div > img {
+      height: 200px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 375px) {
+    .input-group {
+      width: 320px !important;
+      margin-left: 20px !important;
+    }
+  
+    .payments {
+      text-align: center !important;
+      margin-left: 25px !important;
+    }
+  
+    .footer-bottom-l {
+      text-align: center !important;
+    }
+    .entry-media > div > img {
+      height: 200px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 390px) {
+    .input-group {
+      width: 320px !important;
+      margin-left: 18px !important;
+    }
+  
+    .payments {
+      text-align: center !important;
+      margin-left: 25px !important;
+    }
+  
+    .footer-bottom-l {
+      text-align: center !important;
+    }
+    .entry-media > div > img {
+      height: 200px !important;
+    }
+  }
+  

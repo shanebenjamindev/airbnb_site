@@ -1,69 +1,121 @@
 import React from 'react';
+import "./style.css";
+import { Zoom } from 'react-reveal';
+import { ForwardOutlined } from '@ant-design/icons';
 
 export default function Footer() {
     return (
         <div className='container-fluid'>
-            <div className="row w-75 m-auto">
-                <div className=" col-md-3"><h5 className="">Hỗ trợ</h5>
-                    <div className="">
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page"><span>Trung tâm trợ giúp</span></a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">AirCover</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thông tim an toàn</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Hỗ trợ người khuyết tật</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Các tùy chọn hủy</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Biện pháp ứng phó với đại dịch COVID-19 của chúng tôi</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Báo cáo lo ngại của hàng xóm</a>
-                    </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15678.835874782257!2d106.68809554999999!3d10.7568982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e0!4m0!4m0!5e0!3m2!1svi!2s!4v1664300539026!5m2!1svi!2s"
+                height={500}
+                frameBorder={0}
+                style={{ border: 0, width: "100%" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+            />
+            <footer className="footer-sky footer-sky-v4">
+                <div className="container">
+                    <Zoom top right cascade delay={1000}>
+                        <div className="footer-top text-center">
+                            <div className="icon-email">
+                                <a href="#" title="Email">
+                                    <img
+                                        src="http://landing.engotheme.com/html/skyline/demo/images/Home-1/footer-top-icon-l.png"
+                                        alt="Email"
+                                        className="img-responsive"
+                                    />
+                                </a>
+                            </div>
+                            <h2>NEWS &amp; OFFERS</h2>
+                            <p>
+                                Enjoy many benefits and receive our promotions and special offers
+                                directly
+                            </p>
+                            <div className="textbox">
+                                <form className="form-inline">
+                                    <div className="form-group">
+                                        <div className="input-group">
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                placeholder="Your email address"
+                                                aria-label="Search for..."
+                                            />
+                                            <button className=" btn-footer" type="button">
+                                                <span className="forwar">
+                                                    <ForwardOutlined />
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div></Zoom>
+                    <Zoom top left cascade delay={1000}>
+                        <div className="footer-bottom bottom-v3">
+                            <div className="row">
+                                <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+                                    <div className="footer-bottom-l">
+                                        <a
+                                            href="https://thietkeweb9999.com/thiet-ke-web/khach-san-44"
+                                            title="Thiết kế web khách sạn"
+                                            rel="dofollow"
+                                            target="_blank"
+                                            style={{ border: "none" }}
+                                        >
+                                            Thiết kế
+                                        </a>{" "}
+                                        bởi{" "}
+                                        <a target="_blank" style={{ border: "none" }}>
+                                            BINH CYBERSOFT
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-xs-12 col-sm-6 col-md-8 col-lg-8 ">
+                                    <div className="payments text-right" style={{ marginTop: 35 }}>
+                                        <ul className="d-flex">
+                                            <li className="px-3">
+                                                <a href="#" title="Paypal">
+                                                    <img
+                                                        src="http://landing.engotheme.com/html/skyline/demo/images/Home-3/Layer-506.png"
+                                                        alt="Paypal"
+                                                    />
+                                                </a>
+                                            </li>
+                                            <li className="px-3">
+                                                <a href="#" title="Visa">
+                                                    <img
+                                                        src="http://landing.engotheme.com/html/skyline/demo/images/Home-3/Layer-507.png"
+                                                        alt="Visa"
+                                                    />
+                                                </a>
+                                            </li>
+                                            <li className="px-3">
+                                                <a href="#" title="Master">
+                                                    <img
+                                                        src="http://landing.engotheme.com/html/skyline/demo/images/Home-3/Layer-508.png"
+                                                        alt="Master"
+                                                    />
+                                                </a>
+                                            </li>
+                                            <li className="px-3">
+                                                <a href="#" title="Discover">
+                                                    <img
+                                                        src="http://landing.engotheme.com/html/skyline/demo/images/Home-3/Layer-509.png"
+                                                        alt="Discover"
+                                                    />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></Zoom>
                 </div>
-                <div className="col-md-3">
-                    <h5 className="">Cộng đồng</h5>
-                    <div className="">
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Airbnb.org: nhà ở cứu trợ</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Hỗ trợ dân tị nạn Afghanistan</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Chống phân biệt đối xử</a>
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <h5 className="">Đón tiếp khách</h5>
-                    <div className="">
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thử đón tiếp khách</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">AirCover cho Chủ nhà</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Xem tài nguyên đón tiếp khách</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Truy cập diễn đàn cộng đồng</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Đón tiếp khách có trách nhiệm</a>
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <h5 className="">Airbnb</h5>
-                    <div className="">
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Trang tin tức</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Tìm hiểu các tính năng mới</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Thư ngỏ từ các nhà sáng lập</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Cơ hội nghề nghiệp</a>
-                        <a rel="" className="nav-link text-secondary px-0 py-1" href="/" aria-current="page">Nhà đầu tư</a>
-                    </div>
-                </div>
-            </div>
-            <div className="bg-gray-50 border-t fixed bottom-0 w-screen z-10  py-3 hidden md:block">
-                <div className="container mx-auto px-10 flex justify-between items-center text-gray-500 ">
-                    <div>
-                        <span>© 2022 Airbnb, Inc.</span>
-                        <span className="px-3">Quyền riêng tư</span>.
-                        <span className="px-3">Điều khoản</span>.
-                        <span className="px-3">Sơ đồ trang web</span>.
-                    </div>
-                    <div className="text-gray-700">
-                        <span>
-                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{ display: 'inline-block', height: 16, width: 16, fill: 'currentcolor' }}>
-                                <path d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z" /></svg>
-                        </span>
-                        <span className="hover:underline cursor-pointer px-3 font-medium">Tiếng Việt(VN)</span><i className="fa fa-dollar-sign font-medium cursor-pointer" />
-                        <span className="hover:underline cursor-pointer px-2 font-medium">USD</span>
-                        <span className="font-medium hover:underline">Hỗ trợ tài nguyên <i className="fa fa-angle-up" />
-                        </span>
-                    </div>
-                </div>
-            </div>
+            </footer>
         </div>
+
     );
 }

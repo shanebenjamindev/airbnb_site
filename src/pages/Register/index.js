@@ -104,11 +104,13 @@ export default function RegisterPage() {
                                     <input
                                         type='text' required
                                         name="name"
-                                        className="form-control"
+                                        className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                                         onChange={handleOnChange}
                                         placeholder='Điền tên người dùng vào đây ...'
                                     />
-                                    {errors.name && <div className="alert alert-danger error">{errors.name}</div>}
+                                    {errors.name && (
+                                        <div className="alert alert-danger error-message">{errors.name}</div>
+                                    )}
                                 </div>
 
                                 <div className="form-group">
@@ -120,7 +122,9 @@ export default function RegisterPage() {
                                         onChange={handleOnChange}
                                         placeholder='098 6888 234'
                                     />
-                                    {errors.phone && <div className="alert alert-danger error">{errors.phone}</div>}
+                                    {errors.phone && (
+                                        <div className="alert alert-danger error-message">{errors.phone}</div>
+                                    )}
                                 </div>
 
                                 <label>Giới tính</label>
@@ -135,11 +139,14 @@ export default function RegisterPage() {
                                     <input
                                         type="email" required
                                         name="email"
-                                        className="form-control"
+                                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                                         onChange={handleOnChange}
                                         placeholder='Example@gmail.com'
                                     />
-                                    {errors.email && <div className="alert alert-danger error">{errors.email}</div>}
+                                    {errors.email && (
+                                        <div className="alert alert-danger error-message">{errors.email}</div>
+                                    )}
+
                                 </div>
 
                                 <div className="form-group">
@@ -147,12 +154,14 @@ export default function RegisterPage() {
                                     <input
                                         type="password" required
                                         name="password"
-                                        className="form-control"
+                                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                                         onChange={handleOnChange}
                                         placeholder='**********'
                                     />
                                 </div>
-                                {errors.password && <div className="alert alert-danger error">{errors.password}</div>}
+                                {errors.password && (
+                                    <div className="alert alert-danger error-message">{errors.password}</div>
+                                )}
 
                                 <div className="form-group">
                                     <label>Ngày sinh</label>
@@ -161,7 +170,6 @@ export default function RegisterPage() {
                                         name="birthday"
                                         className="form-control" required
                                         onChange={handleOnChange}
-                                        placeholder='Tài khoản *'
                                     />
                                 </div>
                             </div>

@@ -1,67 +1,47 @@
-import React, { useEffect, useState } from "react"; // Import useState
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Slider from "react-slick";
+import Fade from 'react-reveal/Fade';
 import { Flip, Bounce } from "react-reveal";
 import "./style.css";
 import { actHomeListRoom } from "../../../redux/types/actions";
 
 export default function HomeRoom() {
   const dispatch = useDispatch();
+  const [pageIndex, setPageIndex] = useState(1); // Current page index
 
   useEffect(() => {
-    dispatch(actHomeListRoom())
-  }, [dispatch])
+    dispatch(actHomeListRoom(pageIndex));
+  }, [dispatch, pageIndex]);
 
-  const listRoom = useSelector((state) => state.homeListRoomReducer.data)
+  const listRoom = useSelector((state) => state.homeListRoomReducer.data);
 
-  if (listRoom) {
-    console.log(listRoom);
-  }
-
-  const [settings, setSettings] = useState({
+  const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  });
+    slidesToShow: 4, // Adjust the number of items per slide as needed
+    slidesToScroll: 4, // Adjust the number of items to scroll as needed
+  };
 
   const renderListRoom = () => {
-    return listRoom?.map((item) => {
-      return <>{item}</>
-    })
-  }
-
+    if (listRoom) {
+      return listRoom.data?.map((item) => (
+        <div key={item.id} className="my-2 col-md-3 col-sm-6 col-xs-12">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">{item.tenPhong}</h5>
+            </div>
+            <div>
+              <button className="btn">show</button>
+            </div>
+          </div>
+        </div>
+      ));
+    }
+  };
 
   return (
-    <div className="pt-5">
+    <div className="container">
       <Flip delay={2000}>
         <h2 className="ourroom">Our Room</h2>
         <div className="outline"></div>
@@ -72,10 +52,10 @@ export default function HomeRoom() {
           you strengthen bonds with
         </p>
       </Bounce>
-      <div className="container mt-5" style={{ alignItems: "center" }}>
-        <Slider {...settings}>
+      <div className="row">
+        <Fade bottom delay={2000}>
           {renderListRoom()}
-        </Slider>
+        </Fade>
       </div>
     </div>
   );

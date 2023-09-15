@@ -1,3 +1,6 @@
+#carouselExampleControls{
+  z-index: -1;
+}
 .carousel-caption {
   top: 250px;
 }

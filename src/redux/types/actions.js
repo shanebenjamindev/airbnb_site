@@ -112,19 +112,20 @@ const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 
 
 
-export const actHomeListRoom = () => {
+export const actHomeListRoom = (pageIndex, pageSize) => {
     return (dispatch) => {
-        dispatch(actHomeListRoomRequest)
-        api.get(`/phong-thue/`)
-            .then((result) => {
-                actHomeListRoomSuccess(result.data.content)
-            })
-            .catch((error) => {
-                actHomeListRoomFail(error)
-            })
-    }
-}
-
+      dispatch(actHomeListRoomRequest());
+      api
+        .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=${pageIndex}&pageSize=16`)
+        .then((result) => {
+          dispatch(actHomeListRoomSuccess(result.data.content));
+        })
+        .catch((error) => {
+          dispatch(actHomeListRoomFail(error));
+        });
+    };
+  }
+  
 
 const actHomeListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
 const actHomeListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })

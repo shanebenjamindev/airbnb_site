@@ -126,6 +126,7 @@ select,
     opacity: 0;
     transform: translateY(3rem);
     transition: all 0.25s ease;
+    visibility: hidden;
 }
 
 .formFindRoom {
@@ -137,6 +138,7 @@ select,
 .formFindRoom-Show {
     z-index: 12;
     transition: all 0.5s ease;
+    visibility:visible;
 
     opacity: 1;
 }
@@ -144,4 +146,8 @@ select,
 .formFindRoom__Item {
     padding: 8px;
     border-radius: 50px;
+}
+
+.navbar-brand{
+    z-index: 9999;
 }

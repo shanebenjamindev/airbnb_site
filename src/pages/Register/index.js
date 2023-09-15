@@ -87,104 +87,102 @@ export default function RegisterPage() {
     };
 
     return (
-        <div>
-            <div className="sign__In d-flex justify-content-center align-items-center vh-100">
-                <div className="border rounded bg-white col-md-6 ">
-                    <div className='m-md-4 d-flex  justify-content-between'>
-                        <NavLink to="/">AirBnb</NavLink>
-                        <h2>Đăng ký tài khoản</h2>
-                        <h2 className="invisible">spa</h2>
+        <div className="register-page vh-100 d-flex justify-content-center align-items-center">
+            <div className='w-75 m-auto'>
+                <form onSubmit={handleSubmit} className="m-auto col-12 d-flex flex-column text-white">
+                    <div className="text-center  mb-4">
+                        <NavLink to="/" className="text-white"> <h1>AirBnb</h1></NavLink>
+                        <h4>Register</h4>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <div>{showError()}</div>
-                        <div className='d-flex flex-wrap'>
-                            <div className='col-md-6'>
-                                <div className="form-group">
-                                    <label>Tên người dùng</label>
-                                    <input
-                                        type='text' required
-                                        name="name"
-                                        className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                                        onChange={handleOnChange}
-                                        placeholder='Điền tên người dùng vào đây ...'
-                                    />
-                                    {errors.name && (
-                                        <div className="alert alert-danger error-message">{errors.name}</div>
-                                    )}
-                                </div>
+                    {error && <div className="alert alert-danger">{showError}</div>}
+                    <div className="form-group">
+                        <label htmlFor="name">Tên người dùng</label>
+                        <input
+                            type="text"
+                            required
+                            name="name"
+                            id="name"
+                            className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                            onChange={handleOnChange}
+                            placeholder="Điền tên người dùng vào đây ..."
+                        />
+                        {errors.name && <div className="alert alert-danger error-message">{errors.name}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Số điện thoại</label>
+                        <input
+                            type="text"
+                            required
+                            name="phone"
+                            id="phone"
+                            className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                            onChange={handleOnChange}
+                            placeholder="098 6888 234"
+                        />
+                        {errors.phone && <div className="alert alert-danger error-message">{errors.phone}</div>}
+                    </div>
 
-                                <div className="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input
-                                        type="text" required
-                                        name="phone"
-                                        className="form-control"
-                                        onChange={handleOnChange}
-                                        placeholder='098 6888 234'
-                                    />
-                                    {errors.phone && (
-                                        <div className="alert alert-danger error-message">{errors.phone}</div>
-                                    )}
-                                </div>
-
-                                <label>Giới tính</label>
-                                <select name='gender' onChange={handleOnChange}>
-                                    <option value={true}>Nam</option>
-                                    <option value={false}>Nữ</option>
-                                </select>
-                            </div>
-                            <div className='col-md-6'>
-                                <div className="form-group">
-                                    <label>Email</label>
-                                    <input
-                                        type="email" required
-                                        name="email"
-                                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                                        onChange={handleOnChange}
-                                        placeholder='Example@gmail.com'
-                                    />
-                                    {errors.email && (
-                                        <div className="alert alert-danger error-message">{errors.email}</div>
-                                    )}
-
-                                </div>
-
-                                <div className="form-group">
-                                    <label>Mật khẩu</label>
-                                    <input
-                                        type="password" required
-                                        name="password"
-                                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                                        onChange={handleOnChange}
-                                        placeholder='**********'
-                                    />
-                                </div>
-                                {errors.password && (
-                                    <div className="alert alert-danger error-message">{errors.password}</div>
-                                )}
-
-                                <div className="form-group">
-                                    <label>Ngày sinh</label>
-                                    <input
-                                        type="date"
-                                        name="birthday"
-                                        className="form-control" required
-                                        onChange={handleOnChange}
-                                    />
-                                </div>
-                            </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            required
+                            name="email"
+                            id="email"
+                            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                            onChange={handleOnChange}
+                            placeholder="Example@gmail.com"
+                        />
+                        {errors.email && <div className="alert alert-danger error-message">{errors.email}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Mật khẩu</label>
+                        <input
+                            type="password"
+                            required
+                            name="password"
+                            id="password"
+                            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                            onChange={handleOnChange}
+                            placeholder="**********"
+                        />
+                        {errors.password && <div className="alert alert-danger error-message">{errors.password}</div>}
+                    </div>
+                    <div className="form-group d-flex">
+                        <div className='col-6 pl-1'>
+                            <label>Giới tính</label>
+                            <select name="gender" id="gender" className="form-control bg-white" onChange={handleOnChange}>
+                                <option value="">Chọn giới tính</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
                         </div>
 
-                        <div className='text-center mb-4'>
+                        <div className='col-6 p-0'>
+                            <label htmlFor="birthday">Ngày sinh</label>
+                            <input
+                                type="date"
+                                name="birthday"
+                                id="birthday"
+                                className="form-control"
+                                required
+                                onChange={handleOnChange}
+                            />
+                        </div>
+
+
+                    </div>
+                    <div className='form-group'>
+                        <div className="text-center">
                             <button type="submit" className="rounded btn btn-danger px-5">
                                 Đăng kí
                             </button>
-                            <div>
-                                <NavLink to="/login-page" className="text-danger">Đăng nhập ngay</NavLink>
-                            </div>
                         </div>
-                    </form>
-                </div>
+                        <div className="text-center">
+                            <NavLink to="/login-page" className="text-white">Đăng nhập ngay</NavLink>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     );

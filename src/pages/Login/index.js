@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { actLogin } from '../../redux/types/actions';
+import './style.css'
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
 
 export default function LoginPage() {
 
@@ -36,51 +39,44 @@ export default function LoginPage() {
 
     return (
 
-        <div style={{ backgroundImage: 'url("https://demo4.cybersoft.edu.vn/static/media/logo_login.a444f2681cc7b623ead2.jpg")' }}>
+        <div className='login-page'>
+            <div className='w-75 d-flex m-auto justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
+                <div className="">
+                    <h2 className="text-center text-white">LOGIN ACCOUNT</h2>
+                    <h4 className="text-center text-white">Sign In To Use The Service</h4>
 
-
-            <div className='container d-flex m-auto justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
-
-                <div className='w-50 bg-white p-4  border rounded'>
-
-                    <div className="form-group">
-
-                        <h2 className="text-center mb-4">Đăng nhập</h2>
-
-                        <form onSubmit={handleLogin}>
-                            <div className='form-group'>
-                                <label>Email</label>
-                                <input type="text" name="email" className="form-control" placeholder='Tên đăng nhập' onChange={handleOnChange} />
-
-                            </div>
-
-                            <div className='form-group'>
-                                <label>Mật khẩu</label>
-                                <input type="password" name="password" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} />
-
-                            </div>
-
-                            <div className='form-group text-right'>
-
-                                <div className='d-flex justify-content-between'>
-
-                                    <div className='my-2'>
-                                        <a href='/'>Quên mật khẩu?</a>
-                                    </div>
-
-                                    <div className='my-2'>
-                                        <button type="submit" className="btn btn-danger px-5">Đăng nhập</button>
-                                    </div>
-
-                                </div>
-
-                                <div className=" text-center mt-2 text-sm font-display font-semibold text-gray-700 ">
-                                    Bạn chưa có tài khoản ? <NavLink to="/register-page" className="cursor-pointer text-primary">Đăng ký</NavLink>
-                                </div>
-                            </div>
-                        </form>
+                <form onSubmit={handleLogin} className='align-items-center mt-4'>
+                    <div className=''>
+                        <input type="text" name="email" className="form-control" placeholder='Email' onChange={handleOnChange} />
                     </div>
+
+                    <div className='mt-3'>
+                        <input type="password" name="password" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} 
+                        iconRender={(visible) =>
+                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                          }
+                        
+                        />
+
+                    </div>
+
+                    <div className=' text-center'>
+
+                        <div className='d-flex justify-content-center'>
+
+                            <div className='mt-2'>
+                                <button type="submit" className="btn btn-danger px-5">Đăng nhập</button>
+                            </div>
+
+                        </div>
+
+                        <div className=" ">
+                           <NavLink to="/register-page" className="cursor-pointer text-white"> Bạn chưa có tài khoản ? Đăng ký</NavLink>
+                        </div>
+                    </div>
+                </form>
                 </div>
+
             </div>
         </div>
     )

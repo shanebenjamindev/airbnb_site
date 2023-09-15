@@ -87,47 +87,91 @@ export default function Navbar() {
 
     return (
         <header>
-            <nav className="navbar text-light navbar-expand-sm navbar-light justify-content-between m-auto">
-                <div className='d-none d-lg-flex'>
-                    <Link className="navbar-brand" to="/">Airbnb</Link>
-                </div>
-                <div className="d-none d-lg-flex" id="collapsibleNavId">
-                    <ul className="navbar-nav">
+            <nav className="navbar navbar-expand-lg navbar-light">
+                <div className="d-flex justify-content-between w-100 align-items-center">
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon">
+                            <MenuOutlined style={{ color: "#FFF" }} />
+                        </span>
+                    </button>
 
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Trở thành chủ nhà</a>
+                    <div>
 
-                        </li>
+                        <Link className="navbar-brand" to="/">
+                            <img
+                                className="item-link"
+                                src="../img/sky-logo-header.png"
+                                alt=""
+                            />
 
-                        <li className="nav-item">
-                            <a className="nav-link pt-1" href='/'> <GlobalOutlined /></a>
-                        </li>
+                        </Link>
+                    </div>
 
-                        <li className="nav-item dropdown">
-                            <a className="user-avatar nav-link" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div>
+                        <div className='user-avatar'>
+                            <a className=" user-avatar nav-link d-flex" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <MenuOutlined />
-                                <img width="25" height="25" alt='avatar user' className='border rounded-circle' src='https://th.bing.com/th/id/R.a3d20cfa04c5affc24975d409ea20974?rik=PafJFHKVzjS2BA&pid=ImgRaw&r=0' />
+                                <img width="25" height="25" alt=' avatar user' className='border user-avatar rounded-circle' src='https://th.bing.com/th/id/R.a3d20cfa04c5affc24975d409ea20974?rik=PafJFHKVzjS2BA&pid=ImgRaw&r=0' />
                             </a>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div className="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
                                 <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
-                                {userData ?
-                                    (
-
-                                        <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
-                                    ) :
-                                    (
-                                        <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
-                                    )
-                                }
+                                {userData ? (
+                                    <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                ) : (
+                                    <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                )}
                                 <a className="dropdown-item" href="/">Cho thuê nhà</a>
                                 <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
                                 <a className="dropdown-item" href="/">Trợ giúp</a>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+
+
+                    </div>
+
                 </div>
 
+
             </nav>
+            <div className="d-flex container pb-2 justify-content-around text-white">
+
+                <span className="phone-info">
+                    <PhoneOutlined />
+                    <span> (+84) 28. 38 12 17 19</span>
+                </span>
+                <div className='text-white'>
+                    <DingdingOutlined />{" "}
+                    <span>GBairBnb</span>
+
+                </div>
+
+                <div className="text-center icon1">
+                    <a href="/">
+                        {" "}
+                        <FacebookOutlined className="px-2" />
+                    </a>
+                    <a href="/">
+                        <TwitterOutlined className="px-2" />
+                    </a>
+                    <a href="/">
+                        {" "}
+                        <YoutubeOutlined className="px-2" />
+                    </a>
+                    <a href="/">
+                        <InstagramOutlined className="px-2" />
+                    </a>
+                </div>
+
+            </div>
+
             {/* Button to Show Form */}
             <div className='btnFindRoom__Container d-flex'>
                 <div className={`d-flex text-center m-auto justify-content-between`}>
@@ -144,75 +188,7 @@ export default function Navbar() {
             <div id='timPhongFormActive' className={`p-2 mt-5 mt-md-0 ${formActive ? 'formFindRoom-Show' : 'formFindRoom-Hide'} container-fluid text-center justify-content-center`}>
                 {renderDropDownCity()}
             </div>
-
-
-            <div
-                className=" w-75 m-auto  navbar-expand-lg ">
-
-
-
-
-                <div className="navbar navne navbar-brand collapse navbar-collapse justify-content-around" id="navbarSupportedContent">
-
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon">
-                            <MenuOutlined style={{ color: "#FFF" }} />
-                        </span>
-                    </button>
-
-
-                    <div className="content1">
-                        <DingdingOutlined />{" "}
-                        <span>GBairBnb</span>
-                    </div>
-                    <div>
-                        <img
-                            className="nav-item item-link"
-                            src="../img/sky-logo-header.png"
-                            alt=""
-                        />
-                    </div>
-                    <div className="phone1">
-                        <PhoneOutlined />
-                        <span> (+84) 28. 38 12 17 19</span>
-                    </div>
-
-
-                </div>
-
-                <div
-                    className="icon1 navne2 text-center"
-                    style={{
-                        color: "white",
-                    }}
-                >
-                    <a href="/">
-                        {" "}
-                        <FacebookOutlined className="px-3" />
-                    </a>
-                    <a href="/">
-                        <TwitterOutlined className="px-3" />
-                    </a>
-                    <a href="/">
-                        {" "}
-                        <YoutubeOutlined className="px-3" />
-                    </a>
-                    <a href="/">
-                        <InstagramOutlined className="px-3" />
-                    </a>
-                </div>
-
-            </div>
-
-
         </header>
+
     )
 }

@@ -112,11 +112,11 @@ const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 
 
 
-export const actHomeListRoom = (pageIndex, pageSize) => {
+export const actHomeListRoom = () => {
     return (dispatch) => {
       dispatch(actHomeListRoomRequest());
       api
-        .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=${pageIndex}&pageSize=16`)
+        .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
         .then((result) => {
           dispatch(actHomeListRoomSuccess(result.data.content));
         })

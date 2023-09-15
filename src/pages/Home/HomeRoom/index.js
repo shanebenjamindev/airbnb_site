@@ -4,37 +4,23 @@ import Fade from 'react-reveal/Fade';
 import { Flip, Bounce } from "react-reveal";
 import "./style.css";
 import { actHomeListRoom } from "../../../redux/types/actions";
+import Room from "./Room";
 
 export default function HomeRoom() {
   const dispatch = useDispatch();
-  const [pageIndex, setPageIndex] = useState(1); // Current page index
 
   useEffect(() => {
-    dispatch(actHomeListRoom(pageIndex));
-  }, [dispatch, pageIndex]);
+    dispatch(actHomeListRoom());
+  }, [dispatch]);
 
   const listRoom = useSelector((state) => state.homeListRoomReducer.data);
 
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4, // Adjust the number of items per slide as needed
-    slidesToScroll: 4, // Adjust the number of items to scroll as needed
-  };
-
   const renderListRoom = () => {
     if (listRoom) {
-      return listRoom.data?.map((item) => (
-        <div key={item.id} className="my-2 col-md-3 col-sm-6 col-xs-12">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">{item.tenPhong}</h5>
-            </div>
-            <div>
-              <button className="btn">show</button>
-            </div>
-          </div>
+      console.log(listRoom)
+      return listRoom.data?.map((item, index) => (
+        <div key={index} className="col-lg-3 col-sm-6 my-2">
+          <Room room={item} />
         </div>
       ));
     }
@@ -42,18 +28,20 @@ export default function HomeRoom() {
 
   return (
     <div className="container">
-      <Flip delay={2000}>
-        <h2 className="ourroom">Our Room</h2>
-        <div className="outline"></div>
-      </Flip>
-      <Bounce delay={2200}>
+      <div className="text-center">
+        <Flip delay={1000}>
+          <h2 className="ourroom">Our Room</h2>
+          <div className="outline"></div>
+        </Flip>
+      </div>
+      <Bounce delay={1200}>
         <p className="room-p">
           When you host a party or family reunion, the special celebrations let
           you strengthen bonds with
         </p>
       </Bounce>
       <div className="row">
-        <Fade bottom delay={2000}>
+        <Fade bottom delay={500}>
           {renderListRoom()}
         </Fade>
       </div>

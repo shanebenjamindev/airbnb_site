@@ -14,7 +14,7 @@ header {
 }
 
 .navne2 {
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 
 
@@ -25,7 +25,7 @@ header {
 }
 
 .icon>a:hover {
-    background: transparent;
+    background: transparent !important;
     color: #8e7037;
 }
 
@@ -40,23 +40,21 @@ select,
 }
 
 .nav-item>a:hover {
-    background: transparent;
+    background: transparent !important;
     color: #8e7037 !important;
 }
 
 .content1 {
-    padding: 0 30px;
     color: white;
     font-size: 15px;
 }
 
 .phone1 {
     color: white;
-    font-size: 15px;
 }
 
 .icon1 {
-
+    color: white;
     font-size: 15px;
 }
 
@@ -84,13 +82,14 @@ select,
 
 .user-avatar:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: transparent;
 }
 
 /* BUTTON SHOW FORM */
 .btnFindRoom__Container {
     position: absolute;
     cursor: pointer;
-    top: 3rem;
+    top: 1.2rem;
     width: 100%;
 }
 
@@ -104,8 +103,8 @@ select,
 /* items in button */
 .btnFindRoom__Item {
     padding: 0 8px;
-    color: #8e7037 ;
-    
+    color: #8e7037;
+
 }
 
 .btnFindRoom__Item:first-child,
@@ -125,6 +124,7 @@ select,
 .formFindRoom-Hide {
     position: absolute;
     opacity: 0;
+    transform: translateY(3rem);
     transition: all 0.25s ease;
 }
 
@@ -137,7 +137,7 @@ select,
 .formFindRoom-Show {
     z-index: 12;
     transition: all 0.5s ease;
-    transform: translateY(30px);
+
     opacity: 1;
 }
 

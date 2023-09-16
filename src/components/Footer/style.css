@@ -136,3 +136,10 @@
   transform: translateX(10px);
   transition: all 1s;
 }
+
+.payments{
+  display: flex;
+  justify-content: end;
+  height: 100%;
+  align-items: center;
+}

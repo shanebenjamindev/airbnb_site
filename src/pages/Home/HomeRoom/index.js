@@ -27,7 +27,7 @@ export default function HomeRoom() {
   };
 
   return (
-    <div className="container">
+    <div className="room__Content">
       <div className="text-center">
         <Flip delay={1000}>
           <h2 className="ourroom">Our Room</h2>
@@ -35,15 +35,18 @@ export default function HomeRoom() {
         </Flip>
       </div>
       <Bounce delay={1200}>
-        <p className="room-p">
+        <p className="room-p text-center">
           When you host a party or family reunion, the special celebrations let
           you strengthen bonds with
         </p>
       </Bounce>
-      <div className="row">
-        <Fade bottom delay={500}>
-          {renderListRoom()}
-        </Fade>
+      <div className="container my-4">
+        <div className="row">
+          <Fade bottom delay={500}>
+            {renderListRoom()}
+          </Fade>
+        </div>
+
       </div>
     </div>
   );

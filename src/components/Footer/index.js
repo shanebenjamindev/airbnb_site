@@ -70,7 +70,7 @@ export default function Footer() {
                                 </div>
                                 <div className="col-xs-12 col-md-6">
                                     <div className="payments">
-                                        <div className="row justify-content-md-end">
+                                        <div className="row payments__Content">
                                             <li className="mx-3">
                                                 <a href="/" title="Paypal">
                                                     <img

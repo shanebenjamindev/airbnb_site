@@ -56,6 +56,28 @@ body {
   line-height: 1;
 }
 
-Link, a, Link:visited {
+Link,
+a,
+Link:visited {
   color: inherit
+}
+
+.outline {
+  width: 100%;
+  height: 25px;
+  background: url(http://landing.engotheme.com/html/skyline/demo/images/Home-1/icon-our.png) no-repeat center center;
+  margin-top: 10px;
+}
+
+.room-p {
+  color: #ABABAB;
+  font-weight: 300;
+  font-size: 25px;
+  width: 48%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+li {
+  list-style: none;
 }

@@ -137,14 +137,17 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
 .search_btn {
   position: absolute;
   left: 1230px;
   top: 821px;
 }
+
 .search_chil {
   background: #8e7037;
 }
+
 .cover__content input {
   width: 110%;
   padding: 50px;
@@ -181,7 +184,8 @@
   z-index: 9;
 }
 
-.section-slider .check-avail .container .arrival, .section-slider .check-avail .container .departure {
+.section-slider .check-avail .container .arrival,
+.section-slider .check-avail .container .departure {
   width: 27.2%;
   background: #fff;
   padding: 24px 26px 30px 35px;
@@ -196,13 +200,16 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
 label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
 }
-.section-slider .check-avail .container .arrival input, .section-slider .check-avail .container .departure input {
+
+.section-slider .check-avail .container .arrival input,
+.section-slider .check-avail .container .departure input {
   height: 55px;
   border: none;
   box-shadow: none;
@@ -229,7 +236,7 @@ label {
 
   .myCover .cover__content {
     width: 50rem !important;
-    margin-left:19% !important;
+    margin-left: 19% !important;
   }
 
   .myCover .cover__content h1 {
@@ -247,11 +254,12 @@ label {
     margin-left: -110px;
     margin-top: -63px;
   }
+
   .myCover .cover__content {
     width: 50rem !important;
     margin-left: 19% !important;
     height: 350px;
-}
+  }
 }
 
 @media screen and (max-width: 376px) {
@@ -260,40 +268,53 @@ label {
     margin-left: -110px;
     margin-top: -63px;
   }
+
   .myCover .cover__content {
     width: 50rem !important;
     margin-left: 26% !important;
     height: 350px;
-}
+  }
 }
 
-@media (max-width: 767px)
-.section-slider .check-avail.check-avail-v3 {
+@media (max-width: 767px) {
+  .section-slider .check-avail.check-avail-v3 {
     padding: 0;
+  }
 }
 
-@media (max-width: 480px)
-.section-slider .check-avail {
+@media (max-width: 480px) {
+  .section-slider .check-avail {
     position: inherit;
     background: rgba(2, 2, 2, 0.78);
+  }
 }
 
-@media (max-width: 767px)
-.section-slider .check-avail {
+@media (max-width: 767px) {
+  .section-slider .check-avail {
     position: inherit;
     background: rgba(2, 2, 2, 0.78);
+  }
 }
 
-@media (min-width: 768px) and (max-width: 991px)
-.section-slider .check-avail .date-title label {
+@media (min-width: 768px) and (max-width: 991px) {
+  .section-slider .check-avail .date-title label {
     font-size: 13px;
+  }
 }
-@media (max-width: 992px)
-.section-slider .check-avail .container .arrival input, .section-slider .check-avail .container .departure input {
+
+@media (max-width: 992px) {
+
+  .section-slider .check-avail .container .arrival input,
+  .section-slider .check-avail .container .departure input {
     font-size: 25px;
+  }
 }
-@media (max-width: 1200px)
-.section-slider .check-avail .container .arrival input, .section-slider .check-avail .container .departure input {
+
+@media (max-width: 1200px) {
+
+  .section-slider .check-avail .container .arrival input,
+  .section-slider .check-avail .container .departure input {
     height: 47px;
     font-size: 28px;
+  }
 }

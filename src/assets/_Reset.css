@@ -1,5 +1,5 @@
 @import url(./_Variables.css);
-
+/* RESET ELEMENT---------------------------------------------------- */
 li,
 link,
 a,
@@ -58,23 +58,83 @@ body {
     margin-top: 10px;
 }
 
+.thanks-message {
+    color: var(--bg-secondary);
+    font-weight: 300;
+    font-size: 55px;
+}
+
 .room-p {
     color: #ABABAB;
     font-weight: 300;
     font-size: 25px;
-    width: 48%;
     margin: 0 auto;
     margin-top: 15px;
 }
 
-.section__Content-primary {
-    background-color: var(--bg-primary);
-    padding: 10rem 0;
+/* SECTION CUSTOM---------------------------------------------------- */
+.main__Title {
+    color: var(--primary-color);
 }
 
+.section__Title {
+    color: #232323;
+    position: relative;
+    font-size: 48px;
+    font-weight: 400;
+    font-family: "Playfair Display", serif;
+}
+
+.section__Background {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(http://landing.engotheme.com/html/skyline/demo/images/Reservation/header.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.section__BannerTitle {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Section primary */
+.section__Content-primary {
+    padding: 20rem 0 10rem 0 ;
+    z-index: 999;
+    background-color: transparent;
+}
+
+.section__Item-primary {
+    padding: 50px;
+    border-radius: 30px;
+    background-color: white;
+}
+
+/* Section secondary */
 .section__Content-secondary {
+    padding: 8rem 0;
+    padding: 20rem 0 10rem 0 ;
+    z-index: 999;
+    background-color: transparent;
+}
+
+.section__Item-secondary {
+    padding: 50px;
+    border-radius: 30px;
     background-color: var(--bg-secondary);
-    padding: 10rem 0;
+}
+
+/* CARD CUSTOM---------------------------------------------------- */
+.card {
+    height: 100%;
+    transition: all 0.5s ease;
+    position: relative;
 }
 
 .card-title {
@@ -82,16 +142,11 @@ body {
 }
 
 .card:hover {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 29px 0px;
 }
 
-.card {
-    height: 100%;
-    transition: all 0.5s ease;
-    position: relative;
-}
-
+/* BUTTON CUSTOM---------------------------------------------------- */
 .btn__Primary {
     text-align: center;
     border-radius: 5px;
@@ -105,16 +160,4 @@ body {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     border-color: var(--primary-color);
-}
-
-.section__Title {
-    color: #232323;
-    position: relative;
-    font-size: 48px;
-    font-weight: 400;
-    font-family: "Playfair Display", serif;
-}
-
-.main__Title {
-    color: var(--primary-color);
 }

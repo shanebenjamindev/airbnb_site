@@ -189,7 +189,7 @@ export default function Comfort(props) {
         return amenitiesToRender.map((amenity) => {
             if (data[amenity.key]) {
                 return (
-                    <div className='col-6 my-1 p-0' key={amenity.key}>
+                    <div className='d-flex col-6 my-1 p-0 ' key={amenity.key}>
                         {amenity.icon}
                         {amenity.text}
                     </div>
@@ -200,13 +200,11 @@ export default function Comfort(props) {
     }
 
     return (
-        <div className=''>
-            <h5>Nơi này có những gì cho bạn</h5>
-
-            <div className='d-flex flex-wrap py-2 '>
+        <div>
+            <h5 className='main__Title'><b>Nơi này có những gì cho bạn</b></h5>
+            <div className='d-flex flex-wrap py-2'>
                 {renderComfort()}
             </div>
-
             <button className='btn btn-outline-dark'>Hiển thị tất cả 75 tiện nghi</button>
         </div>
     )

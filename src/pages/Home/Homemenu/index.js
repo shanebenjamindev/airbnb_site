@@ -19,7 +19,7 @@ export default function HomeMenu() {
   const handleOnChange = (e) => {
     return navigate(`/roombycity/${e.target.value}`);
   };
-  
+
   const renderDropDownCity = () => {
     return (
       <>

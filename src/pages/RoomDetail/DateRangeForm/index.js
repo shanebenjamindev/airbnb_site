@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
-import { DateRange } from 'react-date-range';
+import { DateRange, DefinedRange } from 'react-date-range';
 
 import './style.css'
 import { useDispatch } from 'react-redux';
@@ -24,8 +24,6 @@ const DateRangeForm = (props) => {
         endDate: new Date(),
         key: 'selection',
     });
-
-   
 
     const handleSelect = (ranges) => {
         const { startDate, endDate } = ranges.selection
@@ -51,7 +49,7 @@ const DateRangeForm = (props) => {
         }
     );
 
-    useEffect(()=> {
+    useEffect(() => {
         if (user) {
             setState(
                 {
@@ -64,7 +62,7 @@ const DateRangeForm = (props) => {
 
     console.log(state);
     const handleGuestChange = (increment) => {
-        if (guests + increment >= 0) {
+        if (guests + increment >= 1) {
             setGuests((prevGuests) => prevGuests + increment);
             setState({ ...state, soLuongKhach: guests + increment });
         }
@@ -86,17 +84,17 @@ const DateRangeForm = (props) => {
     return (
         <div>
             <div className=''>
-                <form className='p-4 form__Checkout border rounded rounded-lg' onSubmit={handleSubmit}>
-                    <div className="form-group">
+                <form className=' p-3 form__Checkout border rounded rounded-lg' onSubmit={handleSubmit}>
+                    <div className="">
                         <h5>10000<span> 4 .80 đánh giá</span></h5>
 
-                        <div className='checkout__DateForm'>
+                        <div className=''>
                             <div className='d-flex'>
                                 <div
                                     onClick={() => {
                                         setShowDateForm(!showDateRange);
                                     }}
-                                    className='col-md-6 btn btn-outline-secondary checkout__DateFormItem'
+                                    className='col-6 btn__Primary'
                                 >
                                     NHẬN PHÒNG
                                     <br />
@@ -106,7 +104,7 @@ const DateRangeForm = (props) => {
                                     onClick={() => {
                                         setShowDateForm(!showDateRange);
                                     }}
-                                    className='col-md-6 btn btn-outline-secondary checkout__DateFormItem'
+                                    className='col-6 btn__Primary'
                                 >
                                     TRẢ PHÒNG
                                     <br />
@@ -119,25 +117,23 @@ const DateRangeForm = (props) => {
                                 <div>
                                     <div>KHÁCH</div>
 
-                                    <div className="d-flex d-flex justify-content-between">
-                                        <button className="btn btn-secondary" onClick={(e) => {
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <button className="btn__Primary" onClick={(e) => {
                                             e.preventDefault();
                                             handleGuestChange(-1)
                                         }}>-</button>
 
-                                        <div>
-                                            <label>
-                                                <input
-                                                    type='number'
-                                                    name='soLuongKhach'
-                                                    value={guests}
-                                                    onChange={(e) => setGuests(parseInt(e.target.value))}
-                                                />
-                                                khách
-                                            </label>
+                                        <div className='guest__Input mx-2'>
+                                            <input
+                                                type='number'
+                                                name='soLuongKhach'
+                                                value={guests}
+                                                onChange={(e) => setGuests(parseInt(e.target.value))}
+                                            />
+                                            Khách
                                         </div>
 
-                                        <button className="btn btn-secondary" onClick={(e) => {
+                                        <button className="btn__Primary" onClick={(e) => {
                                             e.preventDefault();
                                             handleGuestChange(1)
                                         }}>+</button>
@@ -148,7 +144,7 @@ const DateRangeForm = (props) => {
                             </div>
                         </div>
                     </div>
-                    <button className='w-100 btn btn-danger' type='submit'>Đặt phòng</button>
+                    <button className='w-100 btn__Primary' type='submit'>Đặt phòng</button>
 
                     <div className='text-center text-secondary mt-1'>Bạn vẫn chưa bị trừ tiền</div>
 
@@ -178,23 +174,29 @@ const DateRangeForm = (props) => {
 
             {
                 (showDateRange) &&
-                (<div className=' checkOut-form'>
+                (<div className='checkOut-form'>
                     <div className='d-flex justify-content-between'>
                         <div>Ten</div>
-                        <button type='button' className='btn btn-ouline-danger' onClick={(e) => {
-
+                        <button type='button' className='btn' onClick={(e) => {
                             setShowDateForm(!showDateRange)
-
                         }}>Close</button>
                     </div>
 
-                    <div className='d-flex'>
-                        <DateRange
-                            editableDateInputs={true}
-                            onChange={handleSelect}
-                            moveRangeOnFirstSelection={false}
-                            ranges={selectedRanges} // Pass the selectedRanges array
-                        />
+                    <div className='row'>
+                        <div className='col-lg-5 col-md-5 col-sm-12'>
+                            <DefinedRange
+                                onChange={handleSelect}
+                                ranges={selectedRanges}
+                            />
+                        </div>
+                        <div className='col-lg-7 col-md-7 col-sm-12'>
+                            <DateRange
+                                editableDateInputs={true}
+                                onChange={handleSelect}
+                                moveRangeOnFirstSelection={false}
+                                ranges={selectedRanges} // Pass the selectedRanges array
+                            />
+                        </div>
                     </div>
                 </div>
                 )

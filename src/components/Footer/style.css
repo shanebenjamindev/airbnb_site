@@ -139,7 +139,6 @@
 
 .payments{
   display: flex;
-  justify-content: end;
   height: 100%;
   align-items: center;
 }

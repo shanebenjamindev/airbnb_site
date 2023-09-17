@@ -54,7 +54,7 @@ export default function About() {
           style={{ border: 0, width: "100%" }}
           allowFullScreen
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade" title='intro__Video'
         />
       </div>
     </section>

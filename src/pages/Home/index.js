@@ -1,27 +1,18 @@
-import React, { useEffect } from 'react'
-import Fade from 'react-reveal/Fade';
+import React from 'react'
 import './style.css'
 import HomeCarousel from './HomeCarousel';
 import HomeRoom from './HomeRoom';
 import HomeVideo from './HomeVideo';
-import { useDispatch, useSelector } from 'react-redux';
-import { actHomeListRoom } from '../../redux/types/actions';
-import About from '../About';
+import HomeAbout from './HomeAbout';
 
 export default function HomePage() {
 
   return (
     <div>
-      <section>
-        <HomeCarousel />
-      </section>
-
-      <section>
-      </section>
-      <section> <HomeRoom /> </section>
+      <HomeCarousel />
+      <HomeRoom />
       <HomeVideo />
-      <About />
-
+      <HomeAbout />
     </div >
   )
 }

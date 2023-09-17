@@ -1,6 +1,7 @@
+@import url(../../../assets/_Variables.css);
 .room__Content {
     text-align: center;
     padding-top: 60px;
     padding-bottom: 60px;
-    background: #F2F2F2;
+    background-color: var(--grey-background);
 }

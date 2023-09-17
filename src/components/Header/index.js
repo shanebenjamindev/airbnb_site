@@ -78,7 +78,7 @@ export default function Navbar() {
                         <input className=' border-0' defaultValue={0} />
                     </div>
                     <div className='col-md-7'>
-                        <button type='submit' className=' w-100 mt-3-sm btn btn-danger rounded-50'>Search</button>
+                        <button type='submit' className=' w-100 mt-3-sm btn btn__Search rounded-50'>Search</button>
                     </div>
                 </div>
             </form>

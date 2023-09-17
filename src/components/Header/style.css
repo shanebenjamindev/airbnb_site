@@ -1,3 +1,5 @@
+@import url(../../assets/_Variables.css);
+
 header {
     transition: all 0.5s ease;
     background: rgba(74, 74, 74, 0.35);
@@ -17,22 +19,27 @@ header {
     padding-bottom: 1rem;
 }
 
-
-.btn:hover {
-    color: #8e7037 !important;
-    background-color: white;
-    border-color: #8e7037 !important;
+.btn__Search {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
+.btn:hover {
+    color: var(--primary-color);
+    background-color: white;
+    border-color: var(--primary-color);
+}
+
+
 .icon>a:hover {
-    background: transparent !important;
-    color: #8e7037;
+    background: transparent;
+    color: var(--primary-color);
 }
 
 header input,
 select,
 .optTrans {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .nav-item>a {
@@ -40,8 +47,8 @@ select,
 }
 
 .nav-item>a:hover {
-    background: transparent !important;
-    color: #8e7037 !important;
+    background: transparent;
+    color: var(--primary-color);
 }
 
 .content1 {
@@ -63,7 +70,7 @@ select,
 }
 
 .icon1>a:hover {
-    color: #8e7037 !important;
+    color: var(--primary-color) !important;
 }
 
 
@@ -103,7 +110,7 @@ select,
 /* items in button */
 .btnFindRoom__Item {
     padding: 0 8px;
-    color: #8e7037;
+    color: var(--primary-color);
 
 }
 
@@ -138,7 +145,7 @@ select,
 .formFindRoom-Show {
     z-index: 12;
     transition: all 0.5s ease;
-    visibility:visible;
+    visibility: visible;
 
     opacity: 1;
 }
@@ -148,6 +155,6 @@ select,
     border-radius: 50px;
 }
 
-.navbar-brand{
+.navbar-brand {
     z-index: 9999;
 }

@@ -8,7 +8,7 @@ export default function About() {
         <div>
           <div className="about-centent text-center">
             <Fade delay={1000}>
-              <h2 className="about-title">About Us</h2>
+              <h2 className="section__Title">About Us</h2>
             </Fade>
             <div className="outline"></div>
             <div className='overflow-content'>
@@ -31,17 +31,17 @@ export default function About() {
       </div>
       <div className='d-flex about__Content container'>
         <div className="about__Item col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          <Fade left delay={3200}>
+          <Fade left delay={1200}>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about.jpg" className="img-responsive img-v4" alt="" />
           </Fade>
         </div>
         <div className="about__Item col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <Fade bottom delay={3400}>
+          <Fade bottom delay={1400}>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about-1.jpg" className="img-responsive " alt="" />
           </Fade>
         </div>
         <div className="about__Item col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          <Fade right delay={3200}>
+          <Fade right delay={1200}>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about-2.jpg" className="img-responsive img-v4" alt="" />
           </Fade>
         </div>

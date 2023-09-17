@@ -17,7 +17,6 @@ export default function HomeRoom() {
 
   const renderListRoom = () => {
     if (listRoom) {
-      console.log(listRoom)
       return listRoom.data?.map((item, index) => (
         <div key={index} className="col-lg-3 col-sm-6 my-2">
           <Room room={item} />
@@ -30,7 +29,7 @@ export default function HomeRoom() {
     <div className="room__Content">
       <div className="text-center">
         <Flip delay={1000}>
-          <h2 className="ourroom">Our Room</h2>
+          <h2 className="section__Title">Our Room</h2>
           <div className="outline"></div>
         </Flip>
       </div>

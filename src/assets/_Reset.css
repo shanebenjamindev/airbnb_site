@@ -106,3 +106,15 @@ body {
     color: var(--secondary-color);
     border-color: var(--primary-color);
 }
+
+.section__Title {
+    color: #232323;
+    position: relative;
+    font-size: 48px;
+    font-weight: 400;
+    font-family: "Playfair Display", serif;
+}
+
+.main__Title {
+    color: var(--primary-color);
+}

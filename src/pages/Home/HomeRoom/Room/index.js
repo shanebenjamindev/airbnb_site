@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function Room(props) {
     const { room } = props;
 
-    console.log(room);
     const descriptionStyle = {
         overflow: 'hidden',
         textOverflow: 'ellipsis',

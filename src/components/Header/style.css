@@ -1,6 +1,6 @@
 @import url(../../assets/_Variables.css);
 
-header {
+.header {
     transition: all 0.5s ease;
     background: rgba(74, 74, 74, 0.35);
     backdrop-filter: blur(2px);
@@ -9,6 +9,21 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
+}
+
+.navbar__Container {
+    position: relative;
+    height: auto;
+}
+
+#navbarSupportedContent {
+    width: 100%;
+    z-index: 1;
+    align-items: center;
+}
+
+.navbar-brand {
+    z-index: 9999;
 }
 
 .navne {
@@ -82,7 +97,6 @@ select,
     z-index: 999;
     background-color: whitesmoke;
     border-radius: 50px;
-    border: 1px solid rgb(213, 213, 213);
     gap: 10px;
     align-items: center;
 }
@@ -94,7 +108,6 @@ select,
 
 /* BUTTON SHOW FORM */
 .btnFindRoom__Container {
-    position: absolute;
     cursor: pointer;
     top: 1.2rem;
     width: 100%;
@@ -111,7 +124,6 @@ select,
 .btnFindRoom__Item {
     padding: 0 8px;
     color: var(--primary-color);
-
 }
 
 .btnFindRoom__Item:first-child,
@@ -157,4 +169,12 @@ select,
 
 .navbar-brand {
     z-index: 9999;
+}
+
+/* pc: width >= 1024px */
+@media screen and (min-width: 1280px) {
+    #navbarSupportedContent {
+        position: absolute;
+        top: 0.1rem;
+    }
 }

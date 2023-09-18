@@ -29,7 +29,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "install": "if [ \"$FORCE_NPM_INSTALL\" = \"true\" ]; then npm install --force; else npm install; fi"
+        "install": "if \"%FORCE_NPM_INSTALL%\" == \"true\" (npm install --force) else (npm install)"      
     },
     "eslintConfig": {
         "extends": [

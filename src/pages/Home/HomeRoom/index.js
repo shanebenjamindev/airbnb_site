@@ -39,11 +39,8 @@ export default function HomeRoom() {
       </div>
       <div className="container my-4">
         <div className="row">
-          <div bottom delay={500}>
-            {renderListRoom()}
-          </div>
+          {renderListRoom()}
         </div>
-
       </div>
     </div>
   );

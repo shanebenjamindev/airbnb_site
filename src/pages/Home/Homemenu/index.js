@@ -1,67 +1,79 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./homemenu.css";
-
 import { actListCity } from "../../../redux/types/actions";
 import { useNavigate } from "react-router-dom";
 
 export default function HomeMenu() {
-
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const listCityDataMenu = useSelector((state) => state.cityReducer.data);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     dispatch(actListCity());
   }, [dispatch]);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   const handleOnChange = (e) => {
-    return navigate(`/roombycity/${e.target.value}`);
+    const selectedValue = e.target.value;
+
+    if (selectedValue) {
+      navigate(`/roombycity/${selectedValue}`);
+    }
+
   };
 
   const renderDropDownCity = () => {
-    return (
-      <>
-        <option className='bg-dark text-light' value={""}>- Chọn thành phố -</option>
-        {
-          listCityDataMenu?.map((city, index) => {
-            return <option className='bg-dark text-light' key={index} value={city.id}>{city.tenViTri}</option>
-          })
-        }
-      </>
-    )
-  }
+    if (isDropdownOpen) {
+      console.log(listCityDataMenu);
+      return (
+        <div className="dropdown__Menu-Show">
+          <div className="text-light bg-custom-primary" value={""}>
+            - Chọn thành phố -
+          </div>
+          {listCityDataMenu?.map((city, index) => (
+            <option onClick={handleOnChange}
+              className="nav-link text-light bg-custom-primary"
+              key={index}
+              value={city.id}
+            >
+              {city.tenViTri}
+            </option>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
-    <section className="myCover">
-      <div className="cover__content">
-        <div className="row tool-search ">
-          <div left delay={2000} >
-            <div className="drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <div className="dropdown">
-                <span className="room-out">lOCATION</span>
-                <input className="form-control" />
-                <select
-                  className="form-control"
-                  style={{ position: "absolute", left: 10, top: 40 }}
-                  placeholder="Select a person"
-                  onChange={handleOnChange} name="selectedCityId"
-                >
-                  {renderDropDownCity()}
-                </select>
-              </div>
-            </div> </div>
-          <div top delay={2100}>
-            <div className=" drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <span className="room-out">CHECK IN</span>
-              <input className="form-control" type="date" />
-            </div></div>
+    <section className="section__HomeMenu container py-5">
+      <div className="section__Background"></div>
+      <div className="row text-center justify-content-center p-2">
+        <div>
+          <div><h1 className="main__Title text-white">Welcome to our service</h1></div>
+          <div className="dropdown__Content">
+            <div className="">
+              <div className="outline mb-4"></div>
+              <button
+                type="button"
+                className="btn w-100 bg-white"
+                onClick={toggleDropdown}
+              >
+                {isDropdownOpen ? (
+                  <span className="main__Title">CLICK HERE TO CLOSE</span>
+                ) : (
+                  <span className="main__Title">CLICK HERE TO SEE OUR SERVICE LOCATION</span>
+                )}
 
-          <div right delay={2000}>
-            <div className=" drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <span className="room-out">CHECK OUT</span>
-              <input className="form-control" type="date" />
+              </button>
+              {renderDropDownCity()}
             </div>
           </div>
         </div>

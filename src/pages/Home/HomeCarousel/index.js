@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { motion } from 'framer-motion'
 
 export default function HomeCarousel(props) {
   return (
@@ -8,17 +9,20 @@ export default function HomeCarousel(props) {
       className="carousel slide"
       data-ride="carousel"
     >
-
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img src="./img/slider-1.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption">
-            <div bottom big cascade>
+            <motion.div
+              initial={{ y: "30vw", transitionDelay: 2000, }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.5, type: "spring" }}
+            >
               <h1 className="unique">
                 Unique Experience
               </h1>
-            </div>
-            <div bottom big cascade>
+            </motion.div>
+            <div>
               <p className="Enjoy">
                 {" "}
                 <span className="line-t"></span>
@@ -32,12 +36,16 @@ export default function HomeCarousel(props) {
         <div className="carousel-item">
           <img src="./img/slider.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption">
-            <div bottom big cascade>
+            <motion.div
+              initial={{ y: "30vw", transitionDelay: 2000, }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
+            >
               <h1 className="unique">
                 Enjoy a Luxury Experience
               </h1>
-            </div>
-            <div bottom big cascade>
+            </motion.div>
+            <div>
               <p className="Enjoy">
                 {" "}
                 <span className="line-t"></span>
@@ -66,7 +74,7 @@ export default function HomeCarousel(props) {
         <span className="carousel-control-next-icon" aria-hidden="true" />
         <span className="sr-only">Next</span>
       </button>
-    </div>
+    </div >
   );
 }
 

@@ -1,4 +1,5 @@
 @import url(./_Variables.css);
+
 /* RESET ELEMENT---------------------------------------------------- */
 li,
 link,
@@ -74,7 +75,19 @@ body {
 
 /* SECTION CUSTOM---------------------------------------------------- */
 .main__Title {
-    color: var(--primary-color);
+    color: #8e7037;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.main__p {
+    color: #8e7037;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
 }
 
 .section__Title {
@@ -88,6 +101,7 @@ body {
 .section__Background {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: url(http://landing.engotheme.com/html/skyline/demo/images/Reservation/header.jpg) no-repeat;
@@ -103,9 +117,13 @@ body {
     justify-content: center;
 }
 
+.bg-custom-primary {
+    background: #8e7037;
+}
+
 /* Section primary */
 .section__Content-primary {
-    padding: 20rem 0 10rem 0 ;
+    padding: 20rem 0 10rem 0;
     z-index: 999;
     background-color: transparent;
 }
@@ -119,7 +137,7 @@ body {
 /* Section secondary */
 .section__Content-secondary {
     padding: 8rem 0;
-    padding: 20rem 0 10rem 0 ;
+    padding: 20rem 0 10rem 0;
     z-index: 999;
     background-color: transparent;
 }

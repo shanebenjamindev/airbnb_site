@@ -12,9 +12,7 @@ export default function Navbar() {
 
     const listCityData = useSelector((state) => state.cityReducer.data);
     const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-
-    console.log(userData);
-
+    
     useEffect(() => {
         dispatch(actListCity());
     }, [dispatch]);

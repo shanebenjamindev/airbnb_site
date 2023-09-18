@@ -6,10 +6,10 @@ import { ForwardOutlined } from '@ant-design/icons';
 export default function Footer() {
     return (
         <footer className=''>
-          
+
             <div className="footer-sky footer-sky-v4">
                 <div className="container">
-                    <div top right cascade delay={500}>
+                    <div>
                         <div className="footer-top text-center">
                             <div className="icon-email">
                                 <a href="/" title="Email">
@@ -26,24 +26,25 @@ export default function Footer() {
                                 directly
                             </p>
                             <div className="textbox">
-                                    <div className="">
-                                        <div className="input-group">
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="Your email address"
-                                                aria-label="Search for..."
-                                            />
-                                            <button className=" btn-footer" type="button">
-                                                <span className="forwar">
-                                                    <ForwardOutlined />
-                                                </span>
-                                            </button>
-                                        </div>
+                                <div className="">
+                                    <div className="input-group">
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            placeholder="Your email address"
+                                            aria-label="Search for..."
+                                        />
+                                        <button className=" btn-footer" type="button">
+                                            <span className="forwar">
+                                                <ForwardOutlined />
+                                            </span>
+                                        </button>
                                     </div>
+                                </div>
                             </div>
                         </div></div>
-                    <div top left cascade delay={900}>
+
+                    <div>
                         <div className="footer-bottom bottom-v3">
                             <div className="d-md-flex">
                                 <div className="col-xs-12 col-md-6">

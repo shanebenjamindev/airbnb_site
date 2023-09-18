@@ -5,14 +5,14 @@ import HomeRoom from './HomeRoom';
 import HomeVideo from './HomeVideo';
 import HomeAbout from './HomeAbout';
 import HomeNews from './HomeNews';
-import HomeMenu from './HomeMenu';
+import Menu from './Menu';
 
 export default function HomePage() {
 
   return (
     <div>
       <HomeCarousel />
-      <HomeMenu />
+      <Menu />
       <HomeRoom />
       <HomeVideo />
       <HomeAbout />

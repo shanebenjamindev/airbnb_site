@@ -4,7 +4,7 @@ import "./home-menu.css";
 import { actListCity } from "../../../redux/types/actions";
 import { useNavigate } from "react-router-dom";
 
-export default function HomeMenu() {
+export default function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

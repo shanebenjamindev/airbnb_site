@@ -5,8 +5,6 @@ import HomeRoom from './HomeRoom';
 import HomeVideo from './HomeVideo';
 import HomeAbout from './HomeAbout';
 import HomeNews from './HomeNews';
-import HomeMenu from './HomeMenu';
-// import HomeMenu from './HomeMenu';
 
 export default function HomePage() {
 

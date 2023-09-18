@@ -1,6 +1,5 @@
 import React from "react";
 import "./news.css";
-import { Zoom, Fade } from "react-reveal";
 
 export default function HomeNews() {
   return (
@@ -9,14 +8,14 @@ export default function HomeNews() {
       <div className="container">
 
         <h2 className="section__Title">
-          <Zoom left cascade delay={1500}>
+          <div left cascade delay={1500}>
             News
-          </Zoom>
+          </div>
         </h2>
 
         <div className="line-v2" />
         <div className="row">
-          <Fade left delay={1000}>
+          <div left delay={1000}>
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div className="substance">
                 <div className="date">
@@ -38,8 +37,8 @@ export default function HomeNews() {
                 </a>
               </div>
             </div>
-          </Fade>
-          <Fade bottom delay={1100}>
+          </div>
+          <div bottom delay={1100}>
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div className="substance">
                 <div className="date">
@@ -62,8 +61,8 @@ export default function HomeNews() {
                 </a>
               </div>
             </div>
-          </Fade>
-          <Fade right delay={1000}>
+          </div>
+          <div right delay={1000}>
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div className="substance">
                 <div className="date">
@@ -86,7 +85,7 @@ export default function HomeNews() {
                 </a>
               </div>
             </div>
-          </Fade>
+          </div>
         </div>
       </div>
     </section>

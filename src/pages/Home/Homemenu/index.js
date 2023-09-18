@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./homemenu.css";
 
-import { Fade } from 'react-reveal'
 import { actListCity } from "../../../redux/types/actions";
 import { useNavigate } from "react-router-dom";
 export default function HomeMenu() {
@@ -37,7 +36,7 @@ export default function HomeMenu() {
     <section className="myCover">
       <div className="cover__content">
         <div className="row tool-search ">
-          <Fade left delay={2000} >
+          <div left delay={2000} >
             <div className="drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div className="dropdown">
                 <span className="room-out">lOCATION</span>
@@ -51,19 +50,19 @@ export default function HomeMenu() {
                   {renderDropDownCity()}
                 </select>
               </div>
-            </div> </Fade>
-          <Fade top delay={2100}>
+            </div> </div>
+          <div top delay={2100}>
             <div className=" drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <span className="room-out">CHECK IN</span>
               <input className="form-control" type="date" />
-            </div></Fade>
+            </div></div>
 
-          <Fade right delay={2000}>
+          <div right delay={2000}>
             <div className=" drop col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <span className="room-out">CHECK OUT</span>
               <input className="form-control" type="date" />
             </div>
-          </Fade>
+          </div>
         </div>
       </div>
     </section>

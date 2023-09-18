@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import React from 'react';
 import "./style.css";
-import { Zoom } from 'react-reveal';
 import { ForwardOutlined } from '@ant-design/icons';
 
 export default function Footer() {
@@ -10,7 +9,7 @@ export default function Footer() {
           
             <div className="footer-sky footer-sky-v4">
                 <div className="container">
-                    <Zoom top right cascade delay={500}>
+                    <div top right cascade delay={500}>
                         <div className="footer-top text-center">
                             <div className="icon-email">
                                 <a href="/" title="Email">
@@ -43,8 +42,8 @@ export default function Footer() {
                                         </div>
                                     </div>
                             </div>
-                        </div></Zoom>
-                    <Zoom top left cascade delay={900}>
+                        </div></div>
+                    <div top left cascade delay={900}>
                         <div className="footer-bottom bottom-v3">
                             <div className="d-md-flex">
                                 <div className="col-xs-12 col-md-6">
@@ -107,7 +106,7 @@ export default function Footer() {
                                     </div>
                                 </div>
                             </div>
-                        </div></Zoom>
+                        </div></div>
                 </div>
             </div>
         </footer>

@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import { Fade } from "react-reveal";
 
 export default function HomeCarousel(props) {
   return (
@@ -14,38 +13,38 @@ export default function HomeCarousel(props) {
         <div className="carousel-item active">
           <img src="./img/slider-1.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption">
-            <Fade bottom big cascade>
+            <div bottom big cascade>
               <h1 className="unique">
                 Unique Experience
               </h1>
-            </Fade>
-            <Fade bottom big cascade>
+            </div>
+            <div bottom big cascade>
               <p className="Enjoy">
                 {" "}
                 <span className="line-t"></span>
                 Enjoy With US
                 <span className="line-b"></span>
               </p>
-            </Fade>
+            </div>
           </div>
         </div>
 
         <div className="carousel-item">
           <img src="./img/slider.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption">
-            <Fade bottom big cascade>
+            <div bottom big cascade>
               <h1 className="unique">
                 Enjoy a Luxury Experience
               </h1>
-            </Fade>
-            <Fade bottom big cascade>
+            </div>
+            <div bottom big cascade>
               <p className="Enjoy">
                 {" "}
                 <span className="line-t"></span>
                 Enjoy With US
                 <span className="line-b"></span>
               </p>
-            </Fade>
+            </div>
           </div>
         </div>
       </div>

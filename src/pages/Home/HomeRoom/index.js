@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Fade from 'react-reveal/Fade';
-import { Flip, Bounce } from "react-reveal";
 import "./style.css";
 import { actHomeListRoom } from "../../../redux/types/actions";
 import Room from "./Room";
@@ -28,22 +26,22 @@ export default function HomeRoom() {
   return (
     <div className="room__Content">
       <div className="text-center">
-        <Flip delay={1000}>
+        <div delay={1000}>
           <h2 className="section__Title">Our Room</h2>
           <div className="outline"></div>
-        </Flip>
+        </div>
       </div>
-      <Bounce delay={1200}>
+      <div delay={1200}>
         <p className="room-p text-center">
           When you host a party or family reunion, the special celebrations let
           you strengthen bonds with
         </p>
-      </Bounce>
+      </div>
       <div className="container my-4">
         <div className="row">
-          <Fade bottom delay={500}>
+          <div bottom delay={500}>
             {renderListRoom()}
-          </Fade>
+          </div>
         </div>
 
       </div>

@@ -112,6 +112,42 @@ const DateRangeForm = (props) => {
                                 </div>
                             </div>
 
+                            {/** Form */}
+
+                            {
+                                (showDateRange) &&
+                                (
+                                    <div className='checkOut-form'>
+                                        <div className=' mb-2 d-flex justify-content-between'>
+                                            <span className='main__Title'></span>
+                                            <button type='button' className='btn' onClick={(e) => {
+                                                setShowDateForm(!showDateRange)
+                                            }}>Close</button>
+                                        </div>
+
+                                        <div className='d-md-flex justify-content-center bg-dark'>
+                                            <DefinedRange
+                                                className='m-auto'
+                                                onChange={handleSelect}
+                                                ranges={selectedRanges}
+                                            />
+                                            <div
+                                                className='overflow-auto'
+                                            >
+                                                <DateRange
+                                                    editableDateInputs={true}
+                                                    onChange={handleSelect}
+                                                    moveRangeOnFirstSelection={false}
+                                                    ranges={selectedRanges} // Pass the selectedRanges array
+                                                />
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                )
+                            }
+
 
                             <div className='col-12 py-2 checkout__Guest'>
                                 <div>
@@ -170,37 +206,6 @@ const DateRangeForm = (props) => {
 
                 </form>
             </div >
-            {/** Form */}
-
-            {
-                (showDateRange) &&
-                (<div className='checkOut-form'>
-                    <div className='d-flex justify-content-between'>
-                        <div>Ten</div>
-                        <button type='button' className='btn' onClick={(e) => {
-                            setShowDateForm(!showDateRange)
-                        }}>Close</button>
-                    </div>
-
-                    <div className='row'>
-                        <div className='col-lg-5 col-md-5 col-sm-12'>
-                            <DefinedRange
-                                onChange={handleSelect}
-                                ranges={selectedRanges}
-                            />
-                        </div>
-                        <div className='col-lg-7 col-md-7 col-sm-12'>
-                            <DateRange
-                                editableDateInputs={true}
-                                onChange={handleSelect}
-                                moveRangeOnFirstSelection={false}
-                                ranges={selectedRanges} // Pass the selectedRanges array
-                            />
-                        </div>
-                    </div>
-                </div>
-                )
-            }
 
         </div >
     )

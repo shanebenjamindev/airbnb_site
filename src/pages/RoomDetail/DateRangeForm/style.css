@@ -1,9 +1,9 @@
 .checkOut-form {
     position: absolute;
-    top: 1rem;
+    top: 2rem;
     background-color: white;
     z-index: 1;
-    left: -10rem;
+    left: -18rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 10px;
 }
@@ -31,4 +31,11 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+/* moblie: width < 740px */
+@media screen and (max-width: 739px) {
+    .checkOut-form {
+        position: unset;
+    }
 }

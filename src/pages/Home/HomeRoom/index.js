@@ -27,7 +27,7 @@ export default function HomeRoom() {
     <div className="room__Content">
       <div className="text-center">
         <div delay={1000}>
-          <h2 className="section__Title">Our Room</h2>
+          <h2 className="main__Title">Our Room</h2>
           <div className="outline"></div>
         </div>
       </div>

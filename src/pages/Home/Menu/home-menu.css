@@ -1,12 +1,20 @@
 .menu__Item {
-    background-color: #ffffff;
-    border: solid 1px #a18758;
-  }
-  
-  .search_chil {
-    background: #8e7037;
-  }
-  
-  .dropdown__Menu{
-    height: auto;
-  }
+  background-color: #ffffff;
+  border: solid 1px #a18758;
+}
+
+.dropdown__Item {
+  cursor: pointer;
+}
+
+.dropdown__Item:hover {
+  background-color: #b6914e;
+}
+
+.search_chil {
+  background: #8e7037;
+}
+
+.MenuImg__Img {
+  margin: 30px 0;
+}

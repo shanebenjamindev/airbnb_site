@@ -81,6 +81,15 @@ body {
     letter-spacing: 2px;
 }
 
+.line {
+    width: 170px;
+    height: 2px;
+    background: #8e7037;
+    margin-top: 20px;
+    margin-bottom: -10px;
+    margin-left: 0;
+}
+
 .main__p {
     color: #8e7037;
     font-size: 16px;

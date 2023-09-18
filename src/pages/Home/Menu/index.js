@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./home-menu.css";
 import { actListCity } from "../../../redux/types/actions";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from 'framer-motion'
 export default function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,23 +29,127 @@ export default function Menu() {
 
   };
 
+  const animateLeft = {
+    hidden: {
+      x: '10vw',
+      opacity: 0
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        duration: 0.75,
+        stiffness: 120
+      }
+    }
+  }
+
+  const animateRight = {
+    hidden: {
+      x: '-10vw',
+      opacity: 0
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        delay: 1,
+        duration: 1,
+        stiffness: 120
+      }
+    }
+  }
+
+  const animateUpToDown = {
+    hidden: {
+      y: '-10vw',
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 1,
+        duration: 1,
+        stiffness: 120
+      }
+    }
+  }
+
+  const animateDownToUp = {
+    hidden: {
+      y: '10vw',
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 1,
+        duration: 0.5,
+        stiffness: 120
+      }
+    }
+  }
+
   const renderDropDownCity = () => {
     if (isDropdownOpen) {
-      console.log(listCityDataMenu);
       return (
-        <div className="dropdown__Menu-Show">
-          <div className="text-light bg-custom-primary" value={""}>
-            - Chọn thành phố -
+        <div>
+          <div className="d-flex align-items-center">
+            <div className="dropdown__MenuImg col-4">
+              <motion.div
+                variants={animateRight}
+                initial="hidden"
+                animate="visible"
+              >
+                <img className="MenuImg__Img" src="../../img/decoroom2.png" alt="" />
+              </motion.div>
+              <motion.div
+                variants={animateDownToUp}
+                initial="hidden"
+                animate="visible"
+              >
+                <img className="MenuImg__Img" src="../../img/decoroom4.png" alt="" />
+              </motion.div>
+            </div>
+
+            <div className="col-4">
+              <div className="text-light bg-custom-primary" value={""}>
+                - Chọn thành phố -
+              </div>
+              {listCityDataMenu?.map((city, index) => (
+                <option onClick={handleOnChange}
+                  className="nav-link dropdown__Item text-light bg-custom-primary"
+                  key={index}
+                  value={city.id}
+                >
+                  {city.tenViTri}
+                </option>
+              ))}
+            </div>
+
+            <div className="dropdown__MenuImg col-4">
+
+              <motion.div
+                variants={animateUpToDown}
+                initial="hidden" animate="visible"
+                className="MenuImg__Img">
+                <img src="../../img/decoroom3.png" alt="" />
+              </motion.div>
+
+              <motion.div
+                variants={animateLeft}
+                initial="hidden"
+                animate="visible"
+              >
+                <img className="MenuImg__Img" src="../../img/decoroom1.png" alt="" />
+              </motion.div>
+
+            </div>
+
           </div>
-          {listCityDataMenu?.map((city, index) => (
-            <option onClick={handleOnChange}
-              className="nav-link text-light bg-custom-primary"
-              key={index}
-              value={city.id}
-            >
-              {city.tenViTri}
-            </option>
-          ))}
         </div>
       );
     }
@@ -63,7 +167,7 @@ export default function Menu() {
               <div className="outline mb-4"></div>
               <button
                 type="button"
-                className="btn w-100 bg-white"
+                className="btn bg-white mb-2"
                 onClick={toggleDropdown}
               >
                 {isDropdownOpen ? (
@@ -74,6 +178,7 @@ export default function Menu() {
 
               </button>
               {renderDropDownCity()}
+
             </div>
           </div>
         </div>

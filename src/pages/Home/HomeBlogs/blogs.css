@@ -1,0 +1,28 @@
+.event__Item {
+    position: relative;
+}
+
+.event__Content, .event__Img, .event__Item {
+    overflow: hidden;
+
+}
+
+.event__Img {
+    padding: 1rem 0;
+    transition: all 0.2s ease;
+}
+
+.event__Img {
+    height: 100%;
+}
+
+.event__Img:hover {
+    transform: scale(1.1);
+}
+
+.event__Text {
+    z-index: 1;
+    bottom: 3rem;
+    left: 3rem;
+    position: absolute;
+}

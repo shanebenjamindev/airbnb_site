@@ -125,7 +125,7 @@ const DateRangeForm = (props) => {
                                             }}>Close</button>
                                         </div>
 
-                                        <div className='d-md-flex justify-content-center bg-dark'>
+                                        <div className='d-md-flex justify-content-center'>
                                             <DefinedRange
                                                 className='m-auto'
                                                 onChange={handleSelect}

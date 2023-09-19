@@ -80,11 +80,11 @@ select,
     font-size: 15px;
 }
 
-.icon1>a {
+.icon1 a {
     color: white;
 }
 
-.icon1>a:hover {
+.icon1 a:hover {
     color: var(--primary-color) !important;
 }
 
@@ -95,14 +95,22 @@ select,
 
 .user-avatar {
     z-index: 999;
+    display: flex;
     background-color: whitesmoke;
     border-radius: 50px;
-    gap: 10px;
+    align-items: center;
+    color: var(--primary-color) !important;
+}
+
+.customHover {
+    z-index: 999;
+    background-color: whitesmoke;
+    border-radius: 50px;
     align-items: center;
 }
 
-.user-avatar:hover {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+.customHover:hover {
+    box-shadow: rgba(0, 0, 0, 16) 0px 1px 4px;
     background-color: transparent;
 }
 
@@ -143,7 +151,7 @@ select,
 .formFindRoom-Hide {
     position: absolute;
     opacity: 0;
-    transform: translateY(3rem);
+    transform: translateY(1rem);
     transition: all 0.25s ease;
     visibility: hidden;
 }

@@ -60,7 +60,6 @@ const DateRangeForm = (props) => {
         }
     }, [])
 
-    console.log(state);
     const handleGuestChange = (increment) => {
         if (guests + increment >= 1) {
             setGuests((prevGuests) => prevGuests + increment);

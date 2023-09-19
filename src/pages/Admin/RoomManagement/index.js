@@ -1,22 +1,21 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  DeleteDatPhongIDAction,
-  GetApiDatPhongAction,
-} from "../../../redux/Actions/QuanLyDatPhongAction";
 import { Table } from "antd";
 import { AudioOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink } from "react-router-dom";
 import "../Dashboard/Dashboard.css";
+import { actHomeListRoom } from "../../../redux/types/actions";
 
-export default function QlDatPhong(props) {
-  const { GetApiDatPhong } = useSelector((state) => state.QlDatPhongReducer);
-  console.log({ GetApiDatPhong });
+export default function RoomManagement() {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(GetApiDatPhongAction());
+    dispatch(actHomeListRoom());
   }, []);
+
+  const listRoom = useSelector((state) => state.homeListRoomReducer.data);
 
   const columns = [
     {
@@ -78,14 +77,14 @@ export default function QlDatPhong(props) {
             <NavLink
               className=" text-primary mr-3"
               style={{ fontSize: 20 }}
-              to={`/admin/Booking/edit/${ttnd.id}`}
+              to={`/admin/manage-room-edit?${ttnd.id}`}
             >
               <EditOutlined />
             </NavLink>
             <span
               onClick={() => {
                 if (window.confirm("Bạn có muốn xóa Phòng " + " " + ttnd.id)) {
-                  dispatch(DeleteDatPhongIDAction(ttnd.id));
+                  // dispatch((ttnd.id));
                 }
               }}
               style={{ fontSize: 20, cursor: "pointer" }}
@@ -100,7 +99,11 @@ export default function QlDatPhong(props) {
       sortDirections: ["descend", "ascend"],
     },
   ];
-  const data = GetApiDatPhong;
+
+  if (listRoom) {
+    var listRoomdata = listRoom.data;
+    console.log(listRoomdata);
+  }
   const { Search } = Input;
 
   const suffix = (
@@ -118,14 +121,18 @@ export default function QlDatPhong(props) {
 
   return (
     <div className="container">
+
       <h3 style={{ fontSize: 30, fontWeight: 600 }}>Quản Lý Đặt Phòng</h3>
-      <Table
-        className="mt-3 table1"
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        rowKey={"id"}
-      />
+      {listRoomdata && (
+        <Table
+          className="mt-3 table1"
+          columns={columns}
+          dataSource={listRoomdata}
+          onChange={onChange}
+          rowKey={"id"}
+        />
+
+      )}
     </div>
   );
 }

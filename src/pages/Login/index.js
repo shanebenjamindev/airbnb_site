@@ -45,36 +45,28 @@ export default function LoginPage() {
                     <h2 className="text-center text-white main__Title">LOGIN ACCOUNT</h2>
                     <h4 className="text-center text-white main__Title">- Sign In To Use The Service -</h4>
 
-                <form onSubmit={handleLogin} className='align-items-center mt-4'>
-                    <div className=''>
-                        <input type="text" name="email" className="form-control" placeholder='Email' onChange={handleOnChange} />
-                    </div>
+                    <form onSubmit={handleLogin} className='align-items-center mt-4'>
+                        <div className=''>
+                            <input type="text" name="email" className="form-control" required placeholder='Email' onChange={handleOnChange} />
+                        </div>
 
-                    <div className='mt-3'>
-                        <input type="password" name="password" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange} 
-                        iconRender={(visible) =>
-                            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                          }
-                        
-                        />
+                        <div className='mt-3'>
+                            <input type="password" name="password" className="form-control" required placeholder='Mật khẩu' onChange={handleOnChange} />
+                        </div>
 
-                    </div>
+                        <div className=' text-center'>
 
-                    <div className=' text-center'>
-
-                        <div className='d-flex justify-content-center'>
-
-                            <div className='mt-2'>
-                                <button type="submit" className="btn btn-danger px-5">Đăng nhập</button>
+                            <div className='d-flex justify-content-center'>
+                                <div className='my-4'>
+                                    <button type="submit" className="btn__Secondary px-5">Đăng nhập</button>
+                                </div>
                             </div>
 
+                            <div className=" ">
+                                <NavLink to="/register-page" className="cursor-pointer text-white"> Bạn chưa có tài khoản ? Đăng ký</NavLink>
+                            </div>
                         </div>
-
-                        <div className=" ">
-                           <NavLink to="/register-page" className="cursor-pointer text-white"> Bạn chưa có tài khoản ? Đăng ký</NavLink>
-                        </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
 
             </div>

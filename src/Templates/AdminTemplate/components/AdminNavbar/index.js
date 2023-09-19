@@ -62,12 +62,16 @@ export default function AdminNavbar(props) {
 
       <div id='navbarSupportedContentAdmin' className="collapse navbar-collapse">
         <ul className="container text-center justify-content-around text-white">
-          <Link className='nav-link'>
+          <Link className='nav-link' to="/admin/manage-room">
             <p className="nav-item">Rooms Management</p>
           </Link>
 
           <Link className='nav-link'>
             <p className="nav-item">Customers Management</p>
+          </Link>
+
+          <Link className='nav-link'>
+            <p className="nav-item">Location Management</p>
           </Link>
 
           <Link className='nav-link'>

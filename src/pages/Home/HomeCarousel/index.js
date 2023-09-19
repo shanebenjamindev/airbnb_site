@@ -14,9 +14,9 @@ export default function HomeCarousel(props) {
           <img src="./img/slider-1.jpg" className="d-block w-100" alt="..." />
           <div className="carousel-caption">
             <motion.div
-              initial={{ y: "30vw", transitionDelay: 2000, }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.5, type: "spring" }}
+              initial={{ y: "3vw", opacity: 0, transitionDelay: 2000, }}
+              animate={{ y: 0, opacity : 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
             >
               <h1 className="unique">
                 Unique Experience

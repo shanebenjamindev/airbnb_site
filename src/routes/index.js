@@ -35,7 +35,12 @@ const routes = [
             {
                 path: "dashboard",
                 element: lazy(() => import("../pages/Admin/Dashboard"))
-            }
+            },
+            {
+                path: "manage-comments",
+                element: lazy(() => import("../pages/Admin/CommentManagement"))
+            },
+            
         ]
     },
     {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
-import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actListCity } from '../../redux/types/actions';
@@ -77,7 +77,7 @@ export default function Navbar() {
                         <input className=' border-0' defaultValue={0} />
                     </div>
                     <div className='col-md-7'>
-                        <button type='submit' className=' w-100 mt-3-sm btn btn__Search rounded-50'>Search</button>
+                        <button type='submit' className=' w-100 mt-3-sm btn__Primary rounded-50'>Search</button>
                     </div>
                 </div>
             </form>
@@ -115,25 +115,23 @@ export default function Navbar() {
                                 </div>
                             </Link>
 
-                            <div className='user-avatar'>
-                                <a className="nav-link user-avatar d-flex justify-content-center" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <MenuOutlined />
-                                    <img width="25" height="25" alt=' avatar user' className='border rounded-circle' src='https://th.bing.com/th/id/R.a3d20cfa04c5affc24975d409ea20974?rik=PafJFHKVzjS2BA&pid=ImgRaw&r=0' />
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                                    <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
-                                    {userData ? (
-                                        <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
-                                    ) : (
-                                        <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
-                                    )}
-                                    <a className="dropdown-item" href="/">Cho thuê nhà</a>
-                                    <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
-                                    <a className="dropdown-item" href="/">Trợ giúp</a>
-                                    <Link className='dropdown-item' to="/auth">
-                                        <span className='main__p'>Admin Page</span>
-                                    </Link>
-                                </div>
+                            <a className="user-avatar nav-link" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <MenuOutlined />
+                                <UserOutlined />
+                            </a>
+                            <div className="dropdown-menu main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
+                                <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
+                                {userData ? (
+                                    <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                ) : (
+                                    <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                )}
+                                <a className="dropdown-item" href="/">Cho thuê nhà</a>
+                                <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
+                                <a className="dropdown-item" href="/">Trợ giúp</a>
+                                <Link className='dropdown-item' to="/auth">
+                                    <span className='main__p'>Admin Page</span>
+                                </Link>
                             </div>
                         </div>
 

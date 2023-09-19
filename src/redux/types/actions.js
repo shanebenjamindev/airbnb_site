@@ -10,7 +10,7 @@ export const actListCity = () => {
                 dispatch(actlistCitySucess(result.data.content))
             })
             .catch((error) => {
-                dispatch(actlistCityFail(error))
+                dispatch(actlistCityFail(error.response.data))
             })
     }
 }
@@ -28,7 +28,7 @@ export const actGetRoomByCity = (id) => {
             })
             .catch((error) => {
                 // console.log(error);
-                dispatch(actGetRoomByCityFail(error))
+                dispatch(actGetRoomByCityFail(error.response.data))
             })
     }
 }
@@ -46,7 +46,7 @@ export const actRoomDetail = (id) => {
             })
             .catch((error) => {
                 // console.log(error);
-                dispatch(actRoomDetialFail(error))
+                dispatch(actRoomDetialFail(error.response.data))
             })
     }
 }
@@ -70,7 +70,6 @@ export const actRegister = (userRegister) => {
 
         api.post(`/auth/signup`, userRegister)
             .then((result) => {
-                // console.log();
                 if (result.data.statusCode === 200) {
                     dispatch(actRegisterSuccess(result.data.content))
                 }
@@ -124,7 +123,8 @@ export const actHomeListRoom = () => {
                 dispatch(actHomeListRoomSuccess(result.data.content));
             })
             .catch((error) => {
-                dispatch(actHomeListRoomFail(error));
+                const { content } = error.response.data
+                dispatch(actHomeListRoomFail(content))
             });
     };
 }
@@ -145,15 +145,11 @@ export const actAuth = (userLogin, navigate) => {
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     const { user } = result.data.content;
-
                     dispatch(actAuthSuccess(user))
-
-                    // console.log(user);
                     navigate("/auth", { replace: true })
                 }
             })
             .catch((error) => {
-                // console.log(error);
                 const { content } = error.response.data
                 dispatch(actAuthFail(content))
             })
@@ -163,3 +159,69 @@ export const actAuth = (userLogin, navigate) => {
 const actAuthRequest = () => ({ type: actions.AUTH_REQUEST })
 const actAuthSuccess = (data) => ({ type: actions.AUTH_SUCCESS, payload: data })
 const actAuthFail = (error) => ({ type: actions.AUTH_FAIL, payload: error })
+
+
+export const actListComment = () => {
+    return (dispatch) => {
+
+        dispatch(actCommentsRequest)
+
+        api.get('/binh-luan')
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actCommentsSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data
+                dispatch(actCommentsFail(content))
+            })
+    }
+}
+
+const actCommentsRequest = () => ({ type: actions.COMMENTS_REQUEST })
+const actCommentsSuccess = (data) => ({ type: actions.COMMENTS_SUCCESS, payload: data })
+const actCommentsFail = (error) => ({ type: actions.COMMENTS_FAIL, payload: error })
+
+export const actGetRoomComment = (roomId) => {
+    return (dispatch) => {
+
+        dispatch(actCommentsRequest)
+
+        api.get(`/binh-luan/lay-binh-luan-theo-phong/${roomId}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    // console.log(result.data);
+                    dispatch(actCommentsSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data
+                dispatch(actCommentsFail(content))
+            })
+    }
+}
+
+export const actRoomComment = (comment, navigate) => {
+    return (dispatch) => {
+
+        dispatch(actCommentsRequest)
+
+        api.post(`/binh-luan/`, comment)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actCommentsSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                if (window.confirm("Lỗi phía sever," + " " + content + ", " + "về trang chủ?")) {
+                    navigate(`/`, { replace: true });
+                } else {
+                    window.location.reload();
+                }
+                dispatch(actCommentsFail(content));
+            });
+    }
+
+}

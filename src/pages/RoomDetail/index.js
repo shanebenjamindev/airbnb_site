@@ -5,6 +5,7 @@ import { actRoomDetail } from '../../redux/types/actions';
 import './style.css'
 import DateRangeForm from './DateRangeForm';
 import Comfort from './Comfort';
+import Comments from './Comments';
 
 export default function RoomDetail() {
   const param = useParams();
@@ -32,11 +33,11 @@ export default function RoomDetail() {
 
   return (
     <div>
-    <div className='section__Background'>
-      <div className='section__BannerTitle'>
-        <h2 className='thanks-message'>Thanks for chosing us</h2>
+      <div className='section__Background'>
+        <div className='section__BannerTitle'>
+          <h2 className='thanks-message'>Thanks for chosing us</h2>
+        </div>
       </div>
-    </div>
       <div className='section__Content-primary'>
         <div className='container section__Item-primary px-lg-5'>
           {renderRoom()}
@@ -108,11 +109,12 @@ export default function RoomDetail() {
               <div className='section__Checkout col-lg-4 col-md-5 col-sm-12 mt-4 mt-md-0 '>
                 <DateRangeForm data={roomData} user={userData} />
               </div>
-            </div >
 
+              <div className='section__Review col-12'>
+                <Comments data={roomData} user={userData} />
+              </div>
+            </div >
           )}
-          <div className='section__Review'>
-          </div>
 
         </div>
       </div >

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { actAuth } from '../../redux/types/actions';
 import './style.css';
@@ -7,6 +7,15 @@ import './style.css';
 export default function Auth() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { error } = useSelector((state) => state.authReducer)
+
+    const showError = () => {
+        if (error) {
+            return <div className='alert alert-danger'>{error}</div>
+        }
+
+    }
 
     const [state, setState] = useState({
         email: "",
@@ -34,22 +43,29 @@ export default function Auth() {
             return (
                 <form onSubmit={handleLogin} className='align-items-center mt-4'>
                     <div className=' text-center'>
-                        <h2 className="text-center text-white">AUTHENTICATION</h2>
-                        <h4 className="text-center text-white">Only for Adminstrators</h4>
+                        <h2 className="text-center text-white main__Title">AUTHENTICATION</h2>
+                        <h4 className="text-center text-warning main__p">Only for Adminstrators</h4>
 
+
+                        {error && <div className="">{showError()}</div>}
                         <div className=''>
-                            <input type="text" name="email" className="form-control" placeholder='Email' onChange={handleOnChange} />
+                            <input type="text" name="email" className="form-control" required placeholder='Email' onChange={handleOnChange} />
                         </div>
 
                         <div className='mt-3'>
-                            <input type="password" name="password" className="form-control" placeholder='Mật khẩu' onChange={handleOnChange}
+                            <input type="password" name="password" className="form-control" required placeholder='Mật khẩu' onChange={handleOnChange}
                             />
                         </div>
 
-                        <div className='d-flex justify-content-center'>
-                            <div className='mt-2'>
-                                <button type="submit" className="btn btn-danger px-5">Đăng nhập</button>
+                        <div className='d-flex mt-4 justify-content-center'>
+                            <div className=''>
+                                <Link to="/" type="submit" className="btn__Secondary text-white mx-1">Tro ve trang chu</Link>
                             </div>
+
+                            <div className=''>
+                                <button type="submit" className="btn__Secondary mx-1">Đăng nhập</button>
+                            </div>
+
                         </div>
                     </div>
                 </form>

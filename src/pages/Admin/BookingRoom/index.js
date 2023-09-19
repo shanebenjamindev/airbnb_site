@@ -9,20 +9,22 @@ import {
 import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import {
-  DeletePhongAction,
-  PhongAction,
-} from "../../../redux/Actions/PhongActions";
 import "../Dashboard/Dashboard.css";
+import { actGetRoomByCity } from "../../../redux/types/actions";
 
-export default function AdminRoom(props) {
-  const { Phong } = useSelector((state) => state.DSPhongTheoVitriReducer);
-  console.log({ Phong });
+export default function BookingRoom(props) {
+  
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
-    dispatch(PhongAction());
+    dispatch(actGetRoomByCity());
   }, []);
+  
+  const listRoom = useSelector((state) => state.getRoomByCityReducer.data);
+  if (listRoom) {
+    console.log(listRoom);
+  }
+
   const columns = [
     {
       title: "ID",
@@ -120,7 +122,7 @@ export default function AdminRoom(props) {
             <span
               onClick={() => {
                 if (window.confirm("Bạn có muốn xóa " + " " + room.tenPhong)) {
-                  dispatch(DeletePhongAction(room.id));
+                  // dispatch(DeletePhongAction(room.id));
                 }
               }}
               style={{ fontSize: 20, cursor: "pointer" }}
@@ -142,7 +144,9 @@ export default function AdminRoom(props) {
       sortDirections: ["descend", "ascend"],
     },
   ];
-  const data = Phong;
+  if (listRoom) {
+    var data = listRoom;
+  }
   const { Search } = Input;
 
   const suffix = (

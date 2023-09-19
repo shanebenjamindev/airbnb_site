@@ -1,0 +1,57 @@
+.comments-container {
+  height: 30rem;
+  overflow-y: scroll;
+  padding: 10px;
+  background-color: var(--bg-secondary);
+}
+
+.comments-container::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+.comments-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+}
+
+.comment-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: var(--secondary-color);
+  padding: 20px;
+  transition: all 0.25s ease;
+}
+
+.avatar {
+  padding: 0;
+  /* background-color: red; */
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.avatar-image {
+  width: 70%;
+  margin: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comment-container:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.star {
+  font-size: 24px;
+  color: #cccccc; /* Default star color */
+  cursor: pointer;
+  transition: color 0.2s; /* Transition color change over 0.2 seconds */
+}
+
+/* Define styles for a star when hovered */
+.star:hover {
+  color: #ffc107; /* Change star color to yellow when hovered */
+}

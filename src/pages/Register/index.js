@@ -174,7 +174,7 @@ export default function RegisterPage() {
                     </div>
                     <div className='form-group'>
                         <div className="text-center">
-                            <button type="submit" className="rounded btn btn-danger px-5">
+                            <button type="submit" className="rounded btn__Secondary px-5 my-2">
                                 Đăng kí
                             </button>
                         </div>

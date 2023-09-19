@@ -139,7 +139,6 @@ body {
 
 .section__Item-primary {
     padding: 50px;
-    border-radius: 30px;
     background-color: white;
 }
 
@@ -153,7 +152,6 @@ body {
 
 .section__Item-secondary {
     padding: 50px;
-    border-radius: 30px;
     background-color: var(--bg-secondary);
 }
 
@@ -187,4 +185,16 @@ body {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     border-color: var(--primary-color);
+}
+
+.btn__Secondary {
+    padding: 10px 30px;
+    border: 2px solid white;
+    color: white;
+    transition: all 0.25s ease;
+}
+
+.btn__Secondary:hover {
+    background-color: var(--primary-color);
+    border: 2px solid transparent ;
 }

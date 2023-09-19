@@ -2,15 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../Dashboard/Dashboard.css";
 import { Table } from "antd";
-import {
-  LineChartOutlined,
-  FacebookOutlined,
-  YoutubeOutlined,
-  InstagramOutlined,
-  StarOutlined,
-} from "@ant-design/icons";
-import moment from "moment";
-import { actListCity, actGetRoomByCity, actHomeListRoom } from "../../../redux/types/actions";
+import { actListCity, actHomeListRoom } from "../../../redux/types/actions";
 
 export default function Dashboard(props) {
 
@@ -27,7 +19,7 @@ export default function Dashboard(props) {
   useEffect(() => {
     dispatch(actListCity())
     dispatch(actHomeListRoom())
-  }, []);
+  }, [dispatch]);
 
   const columns = [
     {
@@ -124,7 +116,7 @@ export default function Dashboard(props) {
         <div key={index}>
           <div className="all-users">
             <div className="infos">
-              <img src={hinhanh.hinhAnh} width={80} height={80} />
+              <img src={hinhanh.hinhAnh} width={80} height={80} alt="" />
               <div>
                 <h4 width={30}>{hinhanh.tenPhong}</h4>
                 <span

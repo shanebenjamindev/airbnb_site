@@ -20,19 +20,23 @@ const routes = [
             },
             {
                 path: "login-page",
-                element: lazy(()=> import ("../pages/Login"))
+                element: lazy(() => import("../pages/Login"))
             },
             {
                 path: "register-page",
-                element: lazy(()=> import ("../pages/Register"))
+                element: lazy(() => import("../pages/Register"))
             },
         ]
     },
-   
-  
     {
         path: "admin",
-        element: lazy(()=> import ("../Templates/AdminTemplate"))
+        element: lazy(() => import("../Templates/AdminTemplate")),
+        nested: [
+            {
+                path: "dashboard",
+                element: lazy(() => import("../pages/Admin/Dashboard"))
+            }
+        ]
     }
 ]
 

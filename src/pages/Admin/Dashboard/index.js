@@ -10,28 +10,31 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-import {  getDsViTriAction } from "../../../redux/Actions/ViTriDatVeAction";
-import { PhongAction} from "../../../redux/Actions/PhongActions";
+import { actListCity, actGetRoomByCity, actHomeListRoom } from "../../../redux/types/actions";
 
 export default function Dashboard(props) {
-  const {DsViTri} = useSelector(state=>state.DSVitri)
-  const{Phong} = useSelector(state=>state.DSPhongTheoVitriReducer)
+
+  const DsViTri = useSelector(state => state.cityReducer.data)
+  const Phong = useSelector(state => state.homeListRoomReducer.data)
+
+  let DsPhong = [];
+  if (Phong) {
+    DsPhong = Phong.data
+  }
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getDsViTriAction())
-      dispatch(PhongAction())
+    dispatch(actListCity())
+    dispatch(actHomeListRoom())
   }, []);
-
-
 
   const columns = [
     {
       title: "ID",
       dataIndex: "id",
       value: (text, object) => {
-        return <span key={object}>{text}</span>;
+        return <td key={object}>{text}</td>;
       },
       width: "5%",
       sorter: (a, b) => a.id - b.id,
@@ -44,7 +47,6 @@ export default function Dashboard(props) {
       width: "20%",
       render: (text, location, index) => {
         return (
-          <Fragment>
             <img
               src={location.hinhAnh}
               alt={location.tenViTri}
@@ -55,7 +57,6 @@ export default function Dashboard(props) {
                 e.target.src = `https://piscum.photos/id/${index}/50/50`;
               }}
             />
-          </Fragment>
         );
       },
       sorter: (a, b) => a.age - b.age,
@@ -87,11 +88,11 @@ export default function Dashboard(props) {
       },
       render: (text, tinhThanh, index) => {
         return (
-          <Fragment key={index}>
-            {tinhThanh.quocGia.length > 50
-              ? tinhThanh.quocGia.substr(0, 50) + "..."
-              : tinhThanh.quocGia}
-          </Fragment>
+            <Fragment key={index}>
+              {tinhThanh.quocGia.length > 50
+                ? tinhThanh.quocGia.substr(0, 50) + "..."
+                : tinhThanh.quocGia}
+            </Fragment>
         );
       },
       width: "20%",
@@ -102,12 +103,12 @@ export default function Dashboard(props) {
 
   // render 
   const renderPhong = () => {
-    return Phong.map((rap, index) => {
+    return DsPhong?.map((phong, index) => {
       return <tr key={index}>
-         <td >{rap.id}</td>
-        <td ><img src={rap.hinhAnh} width={100} height={200} alt="" /></td>
-        <td >{rap.tenPhong}</td>
-        <td >{rap.khach}</td>
+        <td >{phong.id}</td>
+        <td ><img src={phong.hinhAnh} width={100} height={200} alt="" /></td>
+        <td >{phong.tenPhong}</td>
+        <td >{phong.khach}</td>
       </tr>;
     });
   };
@@ -118,7 +119,7 @@ export default function Dashboard(props) {
 
   // render 
   const client = () => {
-    return Phong.slice(0, 7).map((hinhanh, index) => {
+    return DsPhong?.slice(0, 5).map((hinhanh, index) => {
       return (
         <div key={index}>
           <div className="all-users">
@@ -133,7 +134,7 @@ export default function Dashboard(props) {
                     display: "flex",
                   }}
                 >
-                 Khách: {hinhanh.khach} 
+                  Khách: {hinhanh.khach}
                 </span>
               </div>
             </div>
@@ -146,13 +147,14 @@ export default function Dashboard(props) {
   return (
     <div>
       <div>
-        <div className="content">
-          <main>
-            <div className="cards">
+        <div >
+          <div className=" bg-warning">
+            {/** hang ngang*/}
+            <div className="dashboard__Content">
               <div className="card-single">
                 <div >
-                <h2 className="text-warning mt-2" style={{fontSize:20}}>300000$</h2>
-                <small >All Earnings</small>  
+                  <h2 className="text-warning mt-2" style={{ fontSize: 20 }}>300000$</h2>
+                  <small >All Earnings</small>
                 </div>
                 <div className="mt-2">
                   <img src="https://cdn-icons-png.flaticon.com/128/5012/5012689.png" width={50} alt="" />
@@ -160,7 +162,7 @@ export default function Dashboard(props) {
               </div>
               <div className="card-single">
                 <div>
-                  <h2 className="text-success" style={{fontSize:20}}>290+</h2>
+                  <h2 className="text-success" style={{ fontSize: 20 }}>290+</h2>
                   <small>Page Views</small>
                 </div>
                 <div className="mt-2">
@@ -169,7 +171,7 @@ export default function Dashboard(props) {
               </div>
               <div className="card-single">
                 <div>
-                  <h2 className="text-danger" style={{fontSize:20}}>145</h2>
+                  <h2 className="text-danger" style={{ fontSize: 20 }}>145</h2>
                   <small>Task Completed</small>
                 </div>
                 <div className="mt-2">
@@ -178,7 +180,7 @@ export default function Dashboard(props) {
               </div>
               <div className="card-single">
                 <div>
-                  <h2 className="text-success" style={{fontSize:20}}>500,000+</h2>
+                  <h2 className="text-success" style={{ fontSize: 20 }}>500,000+</h2>
                   <small>Booking</small>
                 </div>
                 <div className="mt-2">
@@ -186,11 +188,12 @@ export default function Dashboard(props) {
                 </div>
               </div>
             </div>
-            <div className="composant table1">
-            <div className="statistique">
+
+            <div className="dashboard__Content">
+              <div className="statistique col-8">
                 <div>
-                  <div className="title mt-3">
-                    <p>Number Of Rock Tickets Sold</p>
+                  <div className="title">
+                    <p>Number Of Rooms Sold</p>
                     <p className="name">Monthly Revenue</p>
                   </div>
                   <svg
@@ -408,150 +411,151 @@ export default function Dashboard(props) {
                 </div>
               </div>
 
-              <div className="legende">
-                <div className="main-container">
-                  <div className="year-stats">
-                    <div className="month-group">
-                      <div className="bar h-100" />
-                      <p className="month">Jan</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-50" />
-                      <p className="month">Feb</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-75" />
-                      <p className="month">Mar</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-25" />
-                      <p className="month">Apr</p>
-                    </div>
-                    <div className="month-group selected">
-                      <div className="bar h-100" />
-                      <p className="month">May</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-50" />
-                      <p className="month">Jun</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-75" />
-                      <p className="month">Jul</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-25" />
-                      <p className="month">Aug</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-50" />
-                      <p className="month">Sep</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-75" />
-                      <p className="month">Oct</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-25" />
-                      <p className="month">Nov</p>
-                    </div>
-                    <div className="month-group">
-                      <div className="bar h-100" />
-                      <p className="month">Dez</p>
-                    </div>
+              <div className="graph col-4">
+                <div className="year-stats">
+                  <div className="month-group">
+                    <div className="bar h-100" />
+                    <p className="month">Jan</p>
                   </div>
-                  <div className="stats-info">
-                    <div className="graph-container">
-                      <div className="percent">
-                        <svg viewBox="0 0 36 36" style={{marginTop:77}} className="circular-chart">
-                          <path
-                            className="circle-x"
-                            strokeDasharray="100, 100"
-                            d="M18 2.0845
+                  <div className="month-group">
+                    <div className="bar h-50" />
+                    <p className="month">Feb</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-75" />
+                    <p className="month">Mar</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-25" />
+                    <p className="month">Apr</p>
+                  </div>
+                  <div className="month-group selected">
+                    <div className="bar h-100" />
+                    <p className="month">May</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-50" />
+                    <p className="month">Jun</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-75" />
+                    <p className="month">Jul</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-25" />
+                    <p className="month">Aug</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-50" />
+                    <p className="month">Sep</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-75" />
+                    <p className="month">Oct</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-25" />
+                    <p className="month">Nov</p>
+                  </div>
+                  <div className="month-group">
+                    <div className="bar h-100" />
+                    <p className="month">Dez</p>
+                  </div>
+                </div>
+                <div className="stats-info">
+                  <div className="graph-container">
+                    <div className="percent">
+                      <svg viewBox="0 0 36 36" style={{ marginTop: 77 }} className="circular-chart">
+                        <path
+                          className="circle-x"
+                          strokeDasharray="100, 100"
+                          d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                          <path
-                            className="circle-x"
-                            strokeDasharray="85, 100"
-                            d="M18 2.0845
+                        />
+                        <path
+                          className="circle-x"
+                          strokeDasharray="85, 100"
+                          d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                          <path
-                            className="circle-x"
-                            strokeDasharray="60, 100"
-                            d="M18 2.0845
+                        />
+                        <path
+                          className="circle-x"
+                          strokeDasharray="60, 100"
+                          d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                          <path
-                            className="circle-x"
-                            strokeDasharray="30, 100"
-                            d="M18 2.0845
+                        />
+                        <path
+                          className="circle-x"
+                          strokeDasharray="30, 100"
+                          d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
-                          />
-                        </svg>
-                      </div>
-                      <p>Total: $20.175</p>
+                        />
+                      </svg>
                     </div>
-                    <div className="info">
-                      <p>
-                        Total Earnings each month
-                        <br />
-                        <span>Restaurants &amp; Dining</span>
-                      </p>
-                      <p>
-                        Update new customers <span>2</span>
-                      </p>
-                      <p>
-                        Bonus of the month <span>$92</span>
-                      </p>
-                    </div>
+                    <p>Total: $20.175</p>
+                  </div>
+                  <div className="info">
+                    <p>
+                      Total Earnings each month
+                      <br />
+                      <span>Restaurants &amp; Dining</span>
+                    </p>
+                    <p>
+                      Update new customers <span>2</span>
+                    </p>
+                    <p>
+                      Bonus of the month <span>$92</span>
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="ventes">
-                <div className="case">
-                  <div className="header-case">
-                    <h2
-                      className="text-danger mt-2"
-                      style={{ fontSize: "30px" }}
-                    >
-                      Listes Location
-                    </h2>
-                  </div>
-                  <div className="body-case">
-                    <div className="tableau">
-                      <Table
-                        style={{ height: "545px", backgroundColor:'#de437d' }}
-                        columns={columns}
-                        dataSource={data}
-                        onChange={onChange}
-                        rowKey={"id"}
-                      />
-                    </div>
+            </div>
+
+            <div className="dashboard__Content">
+              <div className="case col-8">
+                <div className="header-case">
+                  <h2
+                    className="text-danger"
+                  >
+                    Listes Location
+                  </h2>
+                </div>
+                <div className="body-case">
+                  <div className="tableau">
+                    <Table
+                      style={{ height: "500px", backgroundColor: '#de437d' }}
+                      columns={columns}
+                      dataSource={data}
+                      onChange={onChange}
+                      rowKey={"id"}
+                    />
                   </div>
                 </div>
+
               </div>
-              <div className="stock">
+
+              <div className="stock col-4">
                 <div className="case">
                   <div className="header-case">
                     <h2 className="text-danger" style={{ fontSize: 30 }}>
-                    Featured room
+                      Featured room
                     </h2>
                   </div>
                   <div className="body-case">{client()}</div>
                 </div>
               </div>
-              
+
             </div>
+
             <div className="calendar table1">
               <div className="mois-annee">
                 <ul>
                   <li>
-                   Thống Kê Phòng Đã Được Đặt
+                    Thống Kê Phòng Đã Được Đặt
                     <br />
                     <span>2022</span>
                   </li>
@@ -571,7 +575,7 @@ export default function Dashboard(props) {
                 </tbody>
               </table>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>

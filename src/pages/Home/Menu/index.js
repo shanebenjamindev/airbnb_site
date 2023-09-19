@@ -97,8 +97,8 @@ export default function Menu() {
     if (isDropdownOpen) {
       return (
         <div>
-          <div className="d-flex align-items-center">
-            <div className="dropdown__MenuImg col-4">
+          <div className="d-flex align-items-center flex-wrap">
+            <div className="dropdown__MenuImg col-lg-4 col-md-4 d-none d-md-block">
               <motion.div
                 variants={animateRight}
                 initial="hidden"
@@ -115,7 +115,7 @@ export default function Menu() {
               </motion.div>
             </div>
 
-            <div className="col-4">
+            <div className="col-lg-4 col-md-4">
               <div className="text-light bg-custom-primary" value={""}>
                 - Chọn thành phố -
               </div>
@@ -130,7 +130,7 @@ export default function Menu() {
               ))}
             </div>
 
-            <div className="dropdown__MenuImg col-4">
+            <div className="dropdown__MenuImg col-lg-4 col-md-4">
 
               <motion.div
                 variants={animateUpToDown}

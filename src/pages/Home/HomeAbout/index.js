@@ -1,9 +1,10 @@
 import React from 'react'
 import './about.css'
 
+
 export default function About() {
   return (
-    <section id='section__About' className="about about-v2 about-v4 mt-3" >
+    <section id='section__About' className="about p-5" >
       <div className="container-fluid">
         <div>
           <div className="about-centent text-center">
@@ -29,18 +30,18 @@ export default function About() {
 
 
       </div>
-      <div className='d-flex about__Content container'>
-        <div className="about__Item col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <div className='d-flex about__Content container flex-wrap'>
+        <div className="about__Item col-md-3 col-lg-3">
           <div>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about.jpg" className="img-responsive img-v4" alt="" />
           </div>
         </div>
-        <div className="about__Item col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div className="about__Item col-md-6">
           <div>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about-1.jpg" className="img-responsive " alt="" />
           </div>
         </div>
-        <div className="about__Item col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div className="about__Item col-md-3 col-lg-3">
           <div>
             <img src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/about-2.jpg" className="img-responsive img-v4" alt="" />
           </div>

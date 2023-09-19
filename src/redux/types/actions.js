@@ -114,21 +114,51 @@ const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 
 export const actHomeListRoom = () => {
     return (dispatch) => {
-      dispatch(actHomeListRoomRequest());
-      api
-        .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
-        .then((result) => {
-          dispatch(actHomeListRoomSuccess(result.data.content));
-        })
-        .catch((error) => {
-          dispatch(actHomeListRoomFail(error));
-        });
+        dispatch(actHomeListRoomRequest);
+        api
+            .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
+            .then((result) => {
+                dispatch(actHomeListRoomSuccess(result.data.content));
+            })
+            .catch((error) => {
+                dispatch(actHomeListRoomFail(error));
+            });
     };
-  }
-  
+}
+
 
 const actHomeListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
 const actHomeListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })
 const actHomeListRoomFail = (error) => ({ type: actions.HOMELIST_ROOM_FAIL, payload: error })
 
 
+
+export const actAuth = (userLogin, navigate) => {
+    return (dispatch) => {
+
+        dispatch(actAuthRequest)
+
+        api.post('/auth/signin', userLogin)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    const { user } = result.data.content;
+                    
+                    dispatch(actAuthSuccess(user))
+
+                    // console.log(user);
+                    if (window.confirm("Đăng nhập thành công, về trang chủ?")) {
+                        navigate("/", { replace: true })
+                    }
+                }
+            })
+            .catch((error) => {
+                // console.log(error);
+                const { content } = error.response.data
+                dispatch(actAuthFail(content))
+            })
+    }
+}
+
+const actAuthRequest = () => ({ type: actions.AUTH_REQUEST })
+const actAuthSuccess = (data) => ({ type: actions.AUTH_SUCCESS, payload: data })
+const actAuthFail = (error) => ({ type: actions.AUTH_FAIL, payload: error })

@@ -106,7 +106,7 @@ export default function Dashboard(props) {
     return DsPhong?.map((phong, index) => {
       return <tr key={index}>
         <td >{phong.id}</td>
-        <td ><img src={phong.hinhAnh} width={100} height={200} alt="" /></td>
+        <td ><img src={phong.hinhAnh}  alt="" /></td>
         <td >{phong.tenPhong}</td>
         <td >{phong.khach}</td>
       </tr>;
@@ -516,7 +516,7 @@ export default function Dashboard(props) {
             </div>
 
             <div className="dashboard__Content">
-              <div className="case col-8">
+              <div className="case col-6">
                 <div className="header-case">
                   <h2
                     className="text-danger"
@@ -538,7 +538,7 @@ export default function Dashboard(props) {
 
               </div>
 
-              <div className="stock col-4">
+              <div className="stock col-6">
                 <div className="case">
                   <div className="header-case">
                     <h2 className="text-danger" style={{ fontSize: 30 }}>
@@ -564,8 +564,8 @@ export default function Dashboard(props) {
               <table className="table table-bordered ">
                 <thead>
                   <tr>
-                    <th >id</th>
-                    <th >Hình Ảnh</th>
+                    <th>id</th>
+                    <th>Hình Ảnh</th>
                     <th>Tên Phòng</th>
                     <th>Khách</th>
                   </tr>

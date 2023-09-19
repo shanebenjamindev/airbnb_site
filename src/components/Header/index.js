@@ -12,7 +12,7 @@ export default function Navbar() {
 
     const listCityData = useSelector((state) => state.cityReducer.data);
     const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-    
+
     useEffect(() => {
         dispatch(actListCity());
     }, [dispatch]);
@@ -129,6 +129,9 @@ export default function Navbar() {
                                     <a className="dropdown-item" href="/">Cho thuê nhà</a>
                                     <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
                                     <a className="dropdown-item" href="/">Trợ giúp</a>
+                                    <Link className='dropdown-item' to="/auth">
+                                        <span className='main__p'>Admin Page</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

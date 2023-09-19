@@ -1,0 +1,29 @@
+.login-page {
+    background: url(http://landing.engotheme.com/html/skyline/demo/images/Login/login.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.login-page .btn {
+    margin-bottom: 28px;
+    margin-top: 15px;
+    height: 42px;
+    background: transparent;
+    border: 2px solid white;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.login-page .form-control {
+    height: 43px;
+    /* background-color: transparent; */
+    border: 2px solid white;
+    -webkit-border-radius: 0px;
+    border-radius: 10px;
+    color: #191616;
+    padding-left: 17px;
+    padding-right: 17px;
+    margin: 0 auto;
+}

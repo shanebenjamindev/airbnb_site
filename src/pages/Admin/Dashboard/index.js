@@ -148,7 +148,7 @@ export default function Dashboard(props) {
     <div>
       <div>
         <div >
-          <div className=" bg-warning">
+          <div className=" bg-dark">
             {/** hang ngang*/}
             <div className="dashboard__Content">
               <div className="card-single">

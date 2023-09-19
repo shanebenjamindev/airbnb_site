@@ -66,11 +66,14 @@ export const actCheckout = (room) => {
 export const actRegister = (userRegister) => {
     return (dispatch) => {
 
-        dispatch(actRegisterRequest())
+        dispatch(actRegisterRequest)
 
         api.post(`/auth/signup`, userRegister)
             .then((result) => {
-                dispatch(actRegisterSuccess(result.data.content))
+                // console.log();
+                if (result.data.statusCode === 200) {
+                    dispatch(actRegisterSuccess(result.data.content))
+                }
             })
             .catch((error) => {
                 dispatch(actRegisterFail(error.response.data))
@@ -142,13 +145,11 @@ export const actAuth = (userLogin, navigate) => {
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     const { user } = result.data.content;
-                    
+
                     dispatch(actAuthSuccess(user))
 
                     // console.log(user);
-                    if (window.confirm("Đăng nhập thành công, về trang chủ?")) {
-                        navigate("/", { replace: true })
-                    }
+                    navigate("/auth", { replace: true })
                 }
             })
             .catch((error) => {

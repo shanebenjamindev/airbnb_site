@@ -4,8 +4,16 @@ import AdminNavbar from "./components/AdminNavbar";
 
 export default function AdminTemplate() {
   return (
-    <div>
+    <div className="container-fluid bg-dark ">
+      <div className="row">
+        <div className="col-lg-3">
+          <AdminNavbar />
+        </div>
+
+        <div className="col-lg-9">
           <Outlet />
+        </div>
+      </div>
     </div>
   );
 }

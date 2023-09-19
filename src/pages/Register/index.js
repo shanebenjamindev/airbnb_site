@@ -15,7 +15,7 @@ export default function RegisterPage() {
             return <div className='alert alert-success'>Đăng kí thành công</div>
         }
         if (error) {
-            return <div className='alert alert-success'>Email đã tồn tại</div>
+            return <div className='alert alert-danger'>Đăng kí không thành công, vui lòng kiểm tra lại</div>
         }
 
     }
@@ -87,14 +87,14 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="register-page vh-100 d-flex justify-content-center align-items-center">
-            <div className='w-75 m-auto'>
+        <div className="register-page py-5">
+            <div className='w-75 d-flex py-5 m-auto justify-content-center align-items-center' >
                 <form onSubmit={handleSubmit} className="m-auto col-12 d-flex flex-column text-white">
                     <div className="text-center  mb-4">
-                        <NavLink to="/" className="text-white"> <h1>AirBnb</h1></NavLink>
-                        <h4>Register</h4>
+                        <NavLink to="/" className=""> <h1 className='text-white main__Title'>REGISTER PAGE</h1></NavLink>
+                        <h4 className='main__Title text-white'>- Register -</h4>
                     </div>
-                    {error && <div className="alert alert-danger">{showError}</div>}
+                    {error && <div className="">{showError()}</div>}
                     <div className="form-group">
                         <label htmlFor="name">Tên người dùng</label>
                         <input

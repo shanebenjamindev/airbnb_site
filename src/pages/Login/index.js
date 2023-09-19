@@ -42,8 +42,8 @@ export default function LoginPage() {
         <div className='login-page'>
             <div className='w-75 d-flex m-auto justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
                 <div className="">
-                    <h2 className="text-center text-white">LOGIN ACCOUNT</h2>
-                    <h4 className="text-center text-white">Sign In To Use The Service</h4>
+                    <h2 className="text-center text-white main__Title">LOGIN ACCOUNT</h2>
+                    <h4 className="text-center text-white main__Title">- Sign In To Use The Service -</h4>
 
                 <form onSubmit={handleLogin} className='align-items-center mt-4'>
                     <div className=''>

@@ -44,6 +44,7 @@ export default function Navbar() {
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
             localStorage.removeItem("USER_LOGIN");
+            navigate(`/`);
         }
     }
 

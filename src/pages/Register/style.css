@@ -1,6 +1,8 @@
 .register-page {
     background: url(http://landing.engotheme.com/html/skyline/demo/images/Login/login.jpg) no-repeat center center;
     background-size: cover;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .error {

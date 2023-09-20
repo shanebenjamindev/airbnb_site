@@ -10,12 +10,14 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const listCityData = useSelector((state) => state.cityReducer.data);
-    const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-
     useEffect(() => {
         dispatch(actListCity());
     }, [dispatch]);
+
+    const listCityData = useSelector((state) => state.cityReducer.data);
+    const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
+    // console.log(listCityData);
+
 
     const [buttonActive, setButtonActive] = useState(false);
     const [formActive, setFormActive] = useState(false);

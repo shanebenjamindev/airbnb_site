@@ -30,51 +30,55 @@ export default function AdminNavbar(props) {
   }
 
   return (
-    <div className='adminNavbar__Container align-items-center navbar-expand-lg'>
+    <div className='adminNavbar__Container bg-warning align-items-center navbar-expand-lg'>
       <nav className="navbar">
-        <div className="">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContentAdmin"
-            aria-controls="navbarSupportedContentAdmin"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon">
-            </span>
-          </button>
 
-          <Link className="nav-link navbar-brand d-flex align-items-center" to="/">
-            <img
-              width="30px"
-              className="item-link"
-              src="https://cdn-icons-png.flaticon.com/512/2111/2111254.png"
-              alt=""
-            />
-            <div className='main__Title ml-2'>
-              AirBnb
-            </div>
-          </Link>
+        <div className="w-100 navbar-brand d-flex justify-content-between">
+          <div className='m-sm-auto'>
+            <Link className=" d-flex align-items-center" to="/">
+              <img
+                width="30px"
+                src="https://cdn-icons-png.flaticon.com/512/2111/2111254.png"
+                alt=""
+              />
+              <div className="main__Title ml-2">AirBnb</div>
+            </Link>
+          </div>
+
+
+          <div>
+            <button
+              className="navbar-toggler bg-secondary text-white"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContentAdmin"
+              aria-controls="navbarSupportedContentAdmin"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+          </div>
         </div>
-      </nav>
+      </nav >
+
 
       <div id='navbarSupportedContentAdmin' className="collapse navbar-collapse">
         <ul className="container text-center justify-content-around text-white">
-          <Link className='nav-link' to="/admin/manage-room">
+          <Link className='nav-link' to="/admin/manage-rooms">
             <p className="nav-item">Rooms Management</p>
           </Link>
 
-          <Link className='nav-link'>
+          <Link className='nav-link' to="/admin/manage-rooms">
             <p className="nav-item">Customers Management</p>
           </Link>
 
-          <Link className='nav-link'>
+          <Link className='nav-link' to="/admin/manage-locations">
             <p className="nav-item">Location Management</p>
           </Link>
 
-          <Link className='nav-link' to="/manage-comments">
+          <Link className='nav-link' to="/admin/manage-comments">
             <p className="nav-item">Comments Management</p>
           </Link>
 
@@ -83,6 +87,6 @@ export default function AdminNavbar(props) {
           </li>
         </ul>
       </div>
-    </div>
+    </div >
   );
 }

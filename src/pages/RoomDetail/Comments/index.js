@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actGetRoomComment, actRoomComment } from '../../../redux/types/actions';
 import { Rate } from 'antd';
 import './comments.css';
-import '../../../assets/notificationModel.css'
+// import '../../../assets/notificationModel.css'
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Comments(props) {

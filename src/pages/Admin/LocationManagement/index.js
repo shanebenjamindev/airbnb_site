@@ -8,15 +8,17 @@ import {
 import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { DeleteViTriIDAction, getDsViTriAction } from "../../../redux/Actions/ViTriDatVeAction";
-import "../Dashboard/Dashboard.css";
+// import { DeleteViTriIDAction, getDsViTriAction } from "../../../redux/Actions/ViTriDatVeAction";
+import { actListCity } from "../../../redux/types/actions";
+import './manage-location.css'
 
 export default function QlLocation(props) {
-  const {DsViTri} = useSelector(state=>state.DSVitri)
+  const DsViTri = useSelector(state => state.cityReducer.data)
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getDsViTriAction())
+    dispatch(actListCity())
   }, []);
+
   const columns = [
     {
       title: "ID",
@@ -24,20 +26,17 @@ export default function QlLocation(props) {
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "20%",
       sorter: (a, b) => a.id - b.id,
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Tên Vị Trí",
       dataIndex: "tenViTri",
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Hình Ảnh",
       dataIndex: "hinhAnh",
-      width: "20%",
       render: (text, location, index) => {
         return (
           <Fragment>
@@ -67,7 +66,6 @@ export default function QlLocation(props) {
         }
         return -1;
       },
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -90,7 +88,6 @@ export default function QlLocation(props) {
           </Fragment>
         );
       },
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -99,32 +96,37 @@ export default function QlLocation(props) {
       render: (text, action, index) => {
         return (
           <Fragment key={index}>
-            <NavLink
-              className=" text-primary mr-3" style={{fontSize:20}}
-              to={`/admin/location/edit/${action.id}`}
-            >
-              <EditOutlined/>
-            </NavLink>
-            <span
-              onClick={() => {
-                if (window.confirm("Bạn có muốn xóa " + " " + action.tenViTri)) {
-                    dispatch(DeleteViTriIDAction(action.id))
-                }
-                console.log(action.id, "ma vị trí cần xóa");
-              }}
-              style={{ fontSize: 20, cursor: "pointer" }}
-              className=" text-danger mr-3 p-2 "
-            >
-              <DeleteOutlined/>
-            </span>
+            <div className="d-md-flex justify-content-around">
+              <NavLink
+                className="text-info btn btn-outline-info" style={{ fontSize: 20 }}
+                to={`/admin/location/edit/${action.id}`}
+              >
+                <EditOutlined />
+              </NavLink>
+              <span
+                onClick={() => {
+                  if (window.confirm("Bạn có muốn xóa " + " " + action.tenViTri)) {
+                    // dispatch(DeleteViTriIDAction(action.id))
+                  }
+                  console.log(action.id, "ma vị trí cần xóa");
+                }}
+                style={{ fontSize: 20, cursor: "pointer" }}
+                className="btn btn-outline-danger"
+              >
+                <DeleteOutlined />
+              </span>
+            </div>
           </Fragment>
         );
       },
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
   ];
-  const data = DsViTri;
+
+  if (DsViTri) {
+    var data = DsViTri;
+  }
+
   const { Search } = Input;
   const suffix = (
     <AudioOutlined
@@ -138,23 +140,24 @@ export default function QlLocation(props) {
 
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters);
   };
 
   return (
     <div className="container">
-      <h3 style={{ fontSize: 30, fontWeight: 600 }}>Quản Lý Vị Trí</h3>
-      <Button className="mb-3">
-        <NavLink to="/admin/location/addnew">Thêm Vị Trí</NavLink>
+      <h3 className="main__Title">Quản Lý Vị Trí</h3>
+      <Button className="mb-3 main__p">
+        <NavLink to="/admin/manage-locations/add-location">Thêm Vị Trí</NavLink>
       </Button>
 
-      <Table
-        className=" table1"
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        rowKey={"id"}
-      />
+      <div className="bg-white container main__p" style={{ overflowX: "auto" }}>
+        <Table
+          className=""
+          columns={columns}
+          dataSource={data}
+          onChange={onChange}
+          rowKey={"id"}
+        />
+      </div>
     </div>
   );
 }

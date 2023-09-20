@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Form, Input, DatePicker,  Button } from "antd";
+import { Form, Input, DatePicker, Button } from "antd";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { PostViTriAction } from "../../../../redux/Actions/ViTriDatVeAction";
-
-
+// import { PostViTriAction } from "../../../../redux/Actions/ViTriDatVeAction";
 
 
 export default function AddLocation(props) {
   const { RangePicker } = DatePicker;
   const [componentSize, setComponentSize] = useState('default');
   const [componentDisabled, setComponentDisabled] = useState(true);
- 
+
   const [imgSrc, setImgSrc] = useState("");
   const { PostViTri } = useSelector(state => state.DSVitri)
   console.log({ PostViTri })
@@ -30,36 +28,36 @@ export default function AddLocation(props) {
       hinhAnh: '',
     },
     validationSchema: Yup.object({
-      tenViTri:Yup.string().required('Tên Vị trí không được để trống'),
-      tinhThanh:Yup.string().required('Tỉnh thành không được để trống'),
-      quocGia:Yup.string().required('Quốc Gia không được để trống'),
-      hinhAnh:Yup.string().required('Hình ảnh không được để trống'),
+      tenViTri: Yup.string().required('Tên Vị trí không được để trống'),
+      tinhThanh: Yup.string().required('Tỉnh thành không được để trống'),
+      quocGia: Yup.string().required('Quốc Gia không được để trống'),
+      hinhAnh: Yup.string().required('Hình ảnh không được để trống'),
     }),
     onSubmit: (value) => {
       console.log(value);
-      dispatch(PostViTriAction(value))
+      // dispatch(PostViTriAction(value))
     },
   });
 
 
   return (
     <Form
-    labelCol={{
-      span: 4,
-    }}
-    wrapperCol={{
-      span: 14,
-    }}
-    layout="horizontal"
-    initialValues={{
-      size: componentSize,
-    }}
-    onValuesChange={onFormLayoutChange}
-    size={componentSize}
-className='table1'
-    onSubmitCapture={Formik.handleSubmit}
-  >
-      <h3  style={{ fontSize: 30, fontWeight: 600 }}>
+      labelCol={{
+        span: 4,
+      }}
+      wrapperCol={{
+        span: 14,
+      }}
+      layout="horizontal"
+      initialValues={{
+        size: componentSize,
+      }}
+      onValuesChange={onFormLayoutChange}
+      size={componentSize}
+      className='table1'
+      onSubmitCapture={Formik.handleSubmit}
+    >
+      <h3 style={{ fontSize: 30, fontWeight: 600 }}>
         Thêm Mới Vị Trí
       </h3>
 

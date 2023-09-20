@@ -37,10 +37,24 @@ const routes = [
                 element: lazy(() => import("../pages/Admin/Dashboard"))
             },
             {
+                path: "manage-rooms",
+                element: lazy(() => import("../pages/Admin/RoomManagement"))
+            },
+            {
+                path: "manage-locations",
+                element: lazy(() => import("../pages/Admin/LocationManagement")),
+                nested: [
+                    {
+                        path: "add-location",
+                        element: lazy(() => import("../pages/Admin/LocationManagement/AddLocation"))
+                    }
+                ]
+            },
+            {
                 path: "manage-comments",
                 element: lazy(() => import("../pages/Admin/CommentManagement"))
             },
-            
+
         ]
     },
     {

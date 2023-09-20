@@ -7,7 +7,9 @@ export const actListCity = () => {
 
         api.get('/vi-tri')
             .then((result) => {
-                dispatch(actlistCitySucess(result.data.content))
+                if (result.data.statusCode === 200) {
+                    dispatch(actlistCitySucess(result.data.content))
+                }
             })
             .catch((error) => {
                 dispatch(actlistCityFail(error.response.data))
@@ -24,7 +26,9 @@ export const actGetRoomByCity = (id) => {
         dispatch(actGetRoomByCityRequest)
         api.get(`/phong-thue/lay-phong-theo-vi-tri?maViTri=${id}`)
             .then((result) => {
-                dispatch(actGetRoomByCitySucess(result.data.content))
+                if (result.data.statusCode === 200) {
+                    dispatch(actGetRoomByCitySucess(result.data.content))
+                }
             })
             .catch((error) => {
                 // console.log(error);
@@ -42,7 +46,9 @@ export const actRoomDetail = (id) => {
         dispatch(actRoomDetailRequest)
         api.get(`/phong-thue/${id}`)
             .then((result) => {
-                dispatch(actRoomDetialSucess(result.data.content))
+                if (result.data.statusCode === 200) {
+                    dispatch(actRoomDetialSucess(result.data.content))
+                }
             })
             .catch((error) => {
                 // console.log(error);
@@ -121,7 +127,9 @@ export const actHomeListRoom = () => {
         api
             .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
             .then((result) => {
-                dispatch(actHomeListRoomSuccess(result.data.content));
+                if (result.data.statusCode === 200) {
+                    dispatch(actHomeListRoomSuccess(result.data.content));
+                }
             })
             .catch((error) => {
                 const { content } = error.response.data

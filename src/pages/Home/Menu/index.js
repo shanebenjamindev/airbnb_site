@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./home-menu.css";
-import { actListCity } from "../../../redux/types/actions";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 export default function Menu() {
@@ -11,10 +10,6 @@ export default function Menu() {
   const listCityDataMenu = useSelector((state) => state.cityReducer.data);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    dispatch(actListCity());
-  }, [dispatch]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

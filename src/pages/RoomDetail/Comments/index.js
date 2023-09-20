@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actGetRoomComment, actRoomComment } from '../../../redux/types/actions';
-
+import { Rate } from 'antd';
 import './comments.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -80,16 +80,9 @@ export default function Comments(props) {
                                         onChange={(e) => setCommentText(e.target.value)}
                                     />
                                 </div>
-                                <div className="text-right mt-2">
+                                <div className="mt-2 text-right">
                                     <label>Đánh giá: </label>
-                                    <select className='ml-2' value={rating} onChange={(e) => setRating(Number(e.target.value))}>
-                                        <option value={0}>Chọn đánh giá</option>
-                                        <option value={1}>1 sao</option>
-                                        <option value={2}>2 sao</option>
-                                        <option value={3}>3 sao</option>
-                                        <option value={4}>4 sao</option>
-                                        <option value={5}>5 sao</option>
-                                    </select>
+                                    <Rate value={rating} className='ml-2' onChange={(value) => setRating(value)} />
                                 </div>
                                 <div className='text-right'>
                                     <button type="submit" className="mt-2 btn__Primary">Bình luận</button>

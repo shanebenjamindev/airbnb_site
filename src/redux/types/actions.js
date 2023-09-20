@@ -205,21 +205,24 @@ export const actGetRoomComment = (roomId) => {
 export const actRoomComment = (comment, navigate) => {
     return (dispatch) => {
 
+        console.log(comment);
         dispatch(actCommentsRequest)
 
         api.post(`/binh-luan/`, comment)
             .then((result) => {
+
+
                 if (result.data.statusCode === 200) {
                     dispatch(actCommentsSuccess(result.data.content))
                 }
             })
             .catch((error) => {
                 const { content } = error.response.data;
-                if (window.confirm("Lỗi phía sever," + " " + content + ", " + "về trang chủ?")) {
-                    navigate(`/`, { replace: true });
-                } else {
-                    window.location.reload();
-                }
+                // if (window.confirm("Lỗi phía sever," + " " + content + ", " + "về trang chủ?")) {
+                //     navigate(`/`, { replace: true });
+                // } else {
+                //     window.location.reload();
+                // }
                 dispatch(actCommentsFail(content));
             });
     }

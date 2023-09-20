@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actGetRoomComment, actRoomComment } from '../../../redux/types/actions';
 import { Rate } from 'antd';
 import './comments.css';
+import '../../../assets/notificationModel.css'
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Comments(props) {
-    const { data, user } = props;
+    const { data } = props;
+
+    const { user } = JSON?.parse(localStorage.getItem("USER_LOGIN"));
+
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,14 +26,22 @@ export default function Comments(props) {
 
     const [rating, setRating] = useState(0);
 
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
     const handleCommentSubmit = (e) => {
         e.preventDefault();
 
         const newComment = {
             maPhong: data.id,
             maNguoiBinhLuan: user.id,
-            ngayBinhLuan: new Date(),
-            noiDung: commentText,
+            ngayBinhLuan: formatDate(new Date()),
+            noiDung: commentText.toString(),
             saoBinhLuan: rating
         };
 
@@ -61,6 +73,7 @@ export default function Comments(props) {
             <div className='comments-container mt-5'>
                 {renderComments()}
             </div>
+
             <div>
                 {(user) ? (
                     <>

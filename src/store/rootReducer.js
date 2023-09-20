@@ -7,6 +7,7 @@ import loginReducer from "../redux/reducers/loginReducer"
 import homeListRoomReducer from "../redux/reducers/homeListRoomReducer"
 import authReducer from "../redux/reducers/authReducer"
 import commentReducer from "../redux/reducers/commentReducer"
+import commentPostReducer from "../redux/reducers/commentPostReducer"
 
 const rootReducer = combineReducers({
     cityReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     loginReducer,
     homeListRoomReducer,
     authReducer,
-    commentReducer
+    commentReducer,
+    commentPostReducer
 })
 
 export default rootReducer

@@ -111,7 +111,7 @@ export default function RoomDetail() {
               </div>
 
               <div className='section__Review col-12'>
-                <Comments data={roomData} user={userData} />
+                <Comments data={roomData} />
               </div>
             </div >
           )}

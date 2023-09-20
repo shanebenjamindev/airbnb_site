@@ -74,7 +74,7 @@ export default function AdminNavbar(props) {
             <p className="nav-item">Location Management</p>
           </Link>
 
-          <Link className='nav-link'>
+          <Link className='nav-link' to="/manage-comments">
             <p className="nav-item">Comments Management</p>
           </Link>
 

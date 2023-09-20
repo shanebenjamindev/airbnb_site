@@ -93,8 +93,9 @@ export const actLogin = (userLogin, navigate) => {
         api.post('/auth/signin', userLogin)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    const { user } = result.data.content;
-                    dispatch(actLoginSuccess(user))
+                    const { user, token } = result.data.content;
+                    const userData = { user, token }
+                    dispatch(actLoginSuccess(userData))
                     if (window.confirm("Đăng nhập thành công, về trang chủ?")) {
                         navigate("/", { replace: true })
                     }
@@ -201,30 +202,28 @@ export const actGetRoomComment = (roomId) => {
             })
     }
 }
-
-export const actRoomComment = (comment, navigate) => {
+export const actRoomComment = (newComment, navigate) => {
     return (dispatch) => {
+        console.log(newComment);
+        dispatch(actCommentPostRequest)
 
-        console.log(comment);
-        dispatch(actCommentsRequest)
-
-        api.post(`/binh-luan/`, comment)
+        api.post(`/binh-luan/`, newComment)
             .then((result) => {
-
-
-                if (result.data.statusCode === 200) {
-                    dispatch(actCommentsSuccess(result.data.content))
+                dispatch(actCommentPostSuccess(result.data.content));
+                if (window.confirm("comment đã được gửi, tiếp tục tìm phòng khác?")) {
+                    navigate("/", { replace: true })
+                } else {
+                    window.location.reload()
                 }
+
             })
             .catch((error) => {
-                const { content } = error.response.data;
-                // if (window.confirm("Lỗi phía sever," + " " + content + ", " + "về trang chủ?")) {
-                //     navigate(`/`, { replace: true });
-                // } else {
-                //     window.location.reload();
-                // }
-                dispatch(actCommentsFail(content));
+                dispatch(actCommentPostFail(error));
             });
     }
-
 }
+
+
+const actCommentPostRequest = () => ({ type: actions.COMMENTS_POST_REQUEST })
+const actCommentPostSuccess = (data) => ({ type: actions.COMMENTS_POST_SUCCESS, payload: data })
+const actCommentPostFail = (error) => ({ type: actions.COMMENTS_POST_FAIL, payload: error })

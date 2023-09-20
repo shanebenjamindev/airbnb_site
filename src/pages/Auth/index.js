@@ -14,7 +14,6 @@ export default function Auth() {
         if (error) {
             return <div className='alert alert-danger'>{error}</div>
         }
-
     }
 
     const [state, setState] = useState({
@@ -37,7 +36,8 @@ export default function Auth() {
 
     const renderContent = () => {
         const userJSON = localStorage.getItem("USER_LOGIN");
-        const user = userJSON ? JSON.parse(userJSON) : null;
+        const userData = userJSON ? JSON.parse(userJSON) : null;
+        const { user } = userData
 
         if (!user) {
             return (

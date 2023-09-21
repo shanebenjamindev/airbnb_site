@@ -47,8 +47,8 @@ export default function Comments(props) {
         setRating(0);
     };
     const renderComments = () => {
-        if (listComment.length !== 0) {
-            return listComment.map((comment) => (
+        if (listComment?.length !== 0) {
+            return listComment?.map((comment) => (
                 <div key={comment.id} className='custom__Comment comment-container'>
                     <div className='col-1 avatar'>
                         <img src={comment.avatar ? comment.avatar : `https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif`} alt='Avatar' className='avatar-image img-fluid rounded-circle' />

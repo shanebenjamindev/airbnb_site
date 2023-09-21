@@ -17,11 +17,7 @@ export default function RoomDetail() {
   }, [dispatch, param.id])
 
   const roomData = useSelector((state) => state.RoomDetailReducer.data);
-  const { loading, error } = useSelector((state) => state.RoomDetailReducer);
-
-  if (loading) {
-    return <CheckLoading />
-  }
+  const { error } = useSelector((state) => state.RoomDetailReducer);
 
   const userFromLocalStorage = localStorage.getItem("USER_LOGIN");
   const user = userFromLocalStorage ? JSON.parse(userFromLocalStorage).user : null;

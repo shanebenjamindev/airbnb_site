@@ -11,7 +11,7 @@ export const actAuth = (userLogin, navigate) => {
                 if (result.data.statusCode === 200) {
                     const { user, token } = result.data.content;
                     const userData = { user, token }
-                    
+
                     dispatch(actAuthSuccess(userData))
                     navigate("/auth", { replace: true })
                 }
@@ -75,7 +75,7 @@ const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 
 
 
-// Get Locations
+// Get Citys
 export const actListCity = () => {
     return (dispatch) => {
         dispatch(actlistCityRequest)
@@ -95,6 +95,30 @@ export const actListCity = () => {
 const actlistCityRequest = () => ({ type: actions.LIST_CITY_REQUEST })
 const actlistCitySucess = (data) => ({ type: actions.LIST_CITY_SUCCESS, payload: data })
 const actlistCityFail = (error) => ({ type: actions.LIST_CITY_FAIL, payload: error })
+
+// Delete City
+export const actDeleteCity = (cityId) => {
+    return (dispatch) => {
+        dispatch(actDeleteCityRequest)
+
+        api.delete(`/vi-tri/${cityId}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actDeleteCitySucess(result.data.content))
+                    alert("xóa thành công")
+                    window.location.reload()
+                }
+            })
+            .catch((error) => {
+                dispatch(actDeleteCityFail(error.response.data))
+            })
+    }
+}
+
+const actDeleteCityRequest = () => ({ type: actions.DELETE_CITY_REQUEST })
+const actDeleteCitySucess = (data) => ({ type: actions.DELETE_CITY_SUCCESS, payload: data })
+const actDeleteCityFail = (error) => ({ type: actions.DELETE_CITY_FAIL, payload: error })
+
 
 // Get Room
 export const actGetRoomByCity = (id) => {

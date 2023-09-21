@@ -9,7 +9,7 @@ import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 // import { DeleteViTriIDAction, getDsViTriAction } from "../../../redux/Actions/ViTriDatVeAction";
-import { actListCity } from "../../../redux/types/actions";
+import { actDeleteCity, actListCity } from "../../../redux/types/actions";
 import './manage-location.css'
 
 export default function QlLocation(props) {
@@ -19,7 +19,7 @@ export default function QlLocation(props) {
     dispatch(actListCity())
   }, []);
 
-  const DsViTri = useSelector(state => state.cityReducer.data)  
+  const DsViTri = useSelector(state => state.cityReducer.data)
   if (DsViTri) {
     var data = DsViTri;
   }
@@ -98,22 +98,22 @@ export default function QlLocation(props) {
     {
       title: "Hành  Động",
       dataIndex: "id",
-      render: (text, action, index) => {
+      render: (text, city, index) => {
         return (
           <Fragment key={index}>
             <div className="d-md-flex justify-content-around">
               <NavLink
                 className="text-info btn btn-outline-info" style={{ fontSize: 20 }}
-                to={`/admin/location/edit/${action.id}`}
+                to={`/admin/location/edit/${city.id}`}
               >
                 <EditOutlined />
               </NavLink>
               <span
                 onClick={() => {
-                  if (window.confirm("Bạn có muốn xóa " + " " + action.tenViTri)) {
-                    // dispatch(DeleteViTriIDAction(action.id))
+                  if (window.confirm("Bạn có muốn xóa " + " " + city.tenViTri)) {
+                    dispatch(actDeleteCity(city.id))
                   }
-                  console.log(action.id, "ma vị trí cần xóa");
+                  console.log(city.id, "ma vị trí cần xóa");
                 }}
                 style={{ fontSize: 20, cursor: "pointer" }}
                 className="btn btn-outline-danger"

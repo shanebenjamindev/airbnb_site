@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { AudioOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import { NavLink } from "react-router-dom";
@@ -15,7 +15,17 @@ export default function RoomManagement() {
     dispatch(actHomeListRoom());
   }, []);
 
-  const listRoom = useSelector((state) => state.homeListRoomReducer.data);
+  const { data, loading, error } = useSelector((state) => state.homeListRoomReducer);
+  
+  if (loading) {
+    return <div>loading...</div>
+  } else if (error) {
+    console.log(error);
+  }
+  else if (data) {
+    var listRoomData = data.data
+    console.log(listRoomData);
+  }
 
   const columns = [
     {
@@ -24,7 +34,6 @@ export default function RoomManagement() {
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "5%",
       sorter: (a, b) => a.id - b.id,
       sortDirections: ["descend", "ascend"],
     },
@@ -35,7 +44,6 @@ export default function RoomManagement() {
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "5%",
       sorter: (a, b) => a.maNguoiDung - b.maNguoiDung,
       sortDirections: ["descend", "ascend"],
     },
@@ -45,7 +53,6 @@ export default function RoomManagement() {
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "5%",
       sorter: (a, b) => a.maPhong - b.maPhong,
       sortDirections: ["descend", "ascend"],
     },
@@ -53,38 +60,35 @@ export default function RoomManagement() {
     {
       title: "ArrivalDate",
       dataIndex: "ngayDen",
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Date of department",
       dataIndex: "ngayDi",
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
       title: " the number of guests",
       dataIndex: "soLuongKhach",
-      width: "5%",
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Hành  Động",
       dataIndex: "id",
-      render: (text, ttnd, index) => {
+      render: (text, room, index) => {
         return (
           <Fragment key={index}>
             <NavLink
               className=" text-primary mr-3"
               style={{ fontSize: 20 }}
-              to={`/admin/manage-room-edit?${ttnd.id}`}
+              to={`/admin/manage-room-edit?${room.id}`}
             >
               <EditOutlined />
             </NavLink>
             <span
               onClick={() => {
-                if (window.confirm("Bạn có muốn xóa Phòng " + " " + ttnd.id)) {
-                  // dispatch((ttnd.id));
+                if (window.confirm("Bạn có muốn xóa Phòng " + " " + room.id)) {
+                  // dispatch((room.id));
                 }
               }}
               style={{ fontSize: 20, cursor: "pointer" }}
@@ -95,15 +99,10 @@ export default function RoomManagement() {
           </Fragment>
         );
       },
-      width: "5%",
       sortDirections: ["descend", "ascend"],
     },
   ];
 
-  if (listRoom) {
-    var listRoomdata = listRoom.data;
-    console.log(listRoomdata);
-  }
   const { Search } = Input;
 
   const suffix = (
@@ -121,18 +120,19 @@ export default function RoomManagement() {
 
   return (
     <div className="container">
+      <h3 className="main__Title">Quản Lý Phòng</h3>
+      <Button className="mb-3 main__p">
+        <NavLink to="/admin/manage-locations/add-location">Thêm Vị Trí</NavLink>
+      </Button>
 
-      <h3 style={{ fontSize: 30, fontWeight: 600 }}>Quản Lý Đặt Phòng</h3>
-      {listRoomdata && (
+      <div className="bg-white container main__p" style={{ overflowX: "auto" }}>
         <Table
-          className="mt-3 table1"
+          className=""
           columns={columns}
-          dataSource={listRoomdata}
+          dataSource={listRoomData}
           onChange={onChange}
           rowKey={"id"}
         />
-
-      )}
-    </div>
-  );
+      </div>
+    </div>);
 }

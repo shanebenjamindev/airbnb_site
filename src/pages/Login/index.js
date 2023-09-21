@@ -10,7 +10,7 @@ export default function LoginPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { loading, error } = useSelector((state) => state.loginReducer)
+    const { loading, error } = useSelector((state) => state.authReducer)
 
     const showError = () => {
         if (error) {

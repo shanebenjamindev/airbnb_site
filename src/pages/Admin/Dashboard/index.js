@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "../Dashboard/Dashboard.css";
 import { Table } from "antd";
 import { actListCity, actHomeListRoom } from "../../../redux/types/actions";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
 
 export default function Dashboard(props) {
 
@@ -21,34 +23,40 @@ export default function Dashboard(props) {
     dispatch(actHomeListRoom())
   }, [dispatch]);
 
+
+
   const columns = [
     {
       title: "ID",
       dataIndex: "id",
       value: (text, object) => {
-        return <td key={object}>{text}</td>;
+        return <span key={object}>{text}</span>;
       },
-      width: "5%",
       sorter: (a, b) => a.id - b.id,
       sortDirections: ["descend", "ascend"],
     },
-
+    {
+      title: "Tên Vị Trí",
+      dataIndex: "tenViTri",
+      sortDirections: ["descend", "ascend"],
+    },
     {
       title: "Hình Ảnh",
       dataIndex: "hinhAnh",
-      width: "20%",
       render: (text, location, index) => {
         return (
-          <img
-            src={location.hinhAnh}
-            alt={location.tenViTri}
-            width={50}
-            height={50}
-            onError={(e) => {
-              e.target.onError = null;
-              e.target.src = `https://piscum.photos/id/${index}/50/50`;
-            }}
-          />
+          <Fragment>
+            <img
+              src={location.hinhAnh}
+              alt={location.tenViTri}
+              width={50}
+              height={50}
+              onError={(e) => {
+                e.target.onError = null;
+                e.target.src = `https://piscum.photos/id/${index}/50/50`;
+              }}
+            />
+          </Fragment>
         );
       },
       sorter: (a, b) => a.age - b.age,
@@ -64,7 +72,6 @@ export default function Dashboard(props) {
         }
         return -1;
       },
-      width: "20%",
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -87,13 +94,46 @@ export default function Dashboard(props) {
           </Fragment>
         );
       },
-      width: "20%",
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Hành  Động",
+      dataIndex: "id",
+      render: (text, action, index) => {
+        return (
+          <Fragment key={index}>
+            <div className="d-md-flex justify-content-around">
+              <NavLink
+                className="text-info btn btn-outline-info" style={{ fontSize: 20 }}
+                to={`/admin/location/edit/${action.id}`}
+              >
+                <EditOutlined />
+              </NavLink>
+              <span
+                onClick={() => {
+                  if (window.confirm("Bạn có muốn xóa " + " " + action.tenViTri)) {
+                    // dispatch(DeleteViTriIDAction(action.id))
+                  }
+                  console.log(action.id, "ma vị trí cần xóa");
+                }}
+                style={{ fontSize: 20, cursor: "pointer" }}
+                className="btn btn-outline-danger"
+              >
+                <DeleteOutlined />
+              </span>
+            </div>
+          </Fragment>
+        );
+      },
       sortDirections: ["descend", "ascend"],
     },
   ];
-  const data = DsViTri;
 
-  // render 
+  if (DsViTri) {
+    var data = DsViTri;
+  }
+
+  // render room
   const renderPhong = () => {
     return DsPhong?.map((phong, index) => {
       return <tr key={index}>
@@ -109,15 +149,15 @@ export default function Dashboard(props) {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  // render 
+  // render feature room for client
   const client = () => {
     return DsPhong?.slice(0, 5).map((hinhanh, index) => {
       return (
-        <div key={index} className="custom-card">
-          <img src={hinhanh.hinhAnh} width={80} height={80} alt="" />
-          <div className="main__p">
-            <h4 width={30}>{hinhanh.tenPhong}</h4>
-            <span>
+        <div key={index} className="custom-card d-flex flex-wrap">
+          <img className="col-md-2 col-lg-2 col-12" src={hinhanh.hinhAnh} width={80} height={80} alt="" />
+          <div className=" col-md-10 col-lg-10 col-12">
+            <p className="main__Title" width={30}>{hinhanh.tenPhong}</p>
+            <span className="main__p">
               Khách: {hinhanh.khach}
             </span>
           </div>
@@ -457,8 +497,8 @@ export default function Dashboard(props) {
 
       </div>
 
-      <div className="dashboard__Content">
-        <div className="case col-5">
+      <div className="dashboard__Content d-flex">
+        <div className="bg-white col-5">
           <div className="header-case">
             <h2
               className="text-danger"
@@ -479,32 +519,108 @@ export default function Dashboard(props) {
           </div>
 
         </div>
+
+        <div className="overflow-container col-7">
+          <div className="mois-annee">
+            <ul>
+              <li>
+                Thống Kê Phòng Đã Được Đặt
+                <br />
+                <span>2022</span>
+              </li>
+            </ul>
+          </div>
+          <table className="table table-bordered ">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Hình Ảnh</th>
+                <th>Tên Phòng</th>
+                <th>Khách</th>
+              </tr>
+            </thead>
+            <tbody>
+              {renderPhong()}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="calendar table1">
-        <div className="mois-annee">
-          <ul>
-            <li>
-              Thống Kê Phòng Đã Được Đặt
-              <br />
-              <span>2022</span>
-            </li>
-          </ul>
-        </div>
-        <table className="table table-bordered ">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Hình Ảnh</th>
-              <th>Tên Phòng</th>
-              <th>Khách</th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderPhong()}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }
+
+
+
+
+// const columns = [
+//   {
+//     title: "ID",
+//     dataIndex: "id",
+//     value: (text, object) => {
+//       return <td key={object}>{text}</td>;
+//     },
+//     width: "5%",
+//     sorter: (a, b) => a.id - b.id,
+//     sortDirections: ["descend", "ascend"],
+//   },
+
+//   {
+//     title: "Hình Ảnh",
+//     dataIndex: "hinhAnh",
+//     width: "20%",
+//     render: (text, location, index) => {
+//       return (
+//         <img
+//           src={location.hinhAnh}
+//           alt={location.tenViTri}
+//           width={50}
+//           height={50}
+//           onError={(e) => {
+//             e.target.onError = null;
+//             e.target.src = `https://piscum.photos/id/${index}/50/50`;
+//           }}
+//         />
+//       );
+//     },
+//     sorter: (a, b) => a.age - b.age,
+//   },
+//   {
+//     title: "Tỉnh Thành",
+//     dataIndex: "tinhThanh",
+//     sorter: (a, b) => {
+//       let tinhThanhA = a.tinhThanh.toLowerCase().trim();
+//       let tinhThanhB = b.tinhThanh.toLowerCase().trim();
+//       if (tinhThanhA > tinhThanhB) {
+//         return 1;
+//       }
+//       return -1;
+//     },
+//     width: "20%",
+//     sortDirections: ["descend", "ascend"],
+//   },
+//   {
+//     title: "Quốc Gia",
+//     dataIndex: "quocGia",
+//     sorter: (a, b) => {
+//       let quocGiaA = a.quocGia.toLowerCase().trim();
+//       let quocGiaB = b.quocGia.toLowerCase().trim();
+//       if (quocGiaA > quocGiaB) {
+//         return 1;
+//       }
+//       return -1;
+//     },
+//     render: (text, tinhThanh, index) => {
+//       return (
+//         <Fragment key={index}>
+//           {tinhThanh.quocGia.length > 50
+//             ? tinhThanh.quocGia.substr(0, 50) + "..."
+//             : tinhThanh.quocGia}
+//         </Fragment>
+//       );
+//     },
+//     width: "20%",
+//     sortDirections: ["descend", "ascend"],
+//   },
+// ];
+// const data = DsViTri;

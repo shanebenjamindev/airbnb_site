@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { actRegister } from '../../redux/types/actions';
@@ -8,14 +8,14 @@ import CheckLoading from '../../components/CheckLoading';
 export default function RegisterPage() {
     const dispatch = useDispatch();
 
-    const { data, error, loading } = useSelector((state) => state.signupReducer)
+    const { data, error, loading } = useSelector((state) => state.authReducer)
 
     const showError = () => {
         if (data) {
             return <div className='alert alert-success'>Đăng kí thành công</div>
         }
         if (error) {
-            return <div className='alert alert-danger'>Đăng kí không thành công, vui lòng kiểm tra lại</div>
+            return <div className='alert alert-danger'>Đăng kí không thành công, vui lòng kiểm tra lại {error}</div>
         }
         if (loading) {
             return <CheckLoading />
@@ -71,6 +71,11 @@ export default function RegisterPage() {
                 ...errors,
                 password: value.trim() === '' ? 'Mật khẩu không được để trống' : value.trim().length < 8 ? 'Mật khẩu phải từ 8 kí tự' : '',
             });
+        } else if (name === 'birthday') {
+            setErrors({
+                ...error,
+                birthday: !/^\d{4}-\d{2}-\d{2}$/.test(value) ? "Ngày sinh không hợp lệ" : ""
+            })
         }
         else {
             setErrors({
@@ -80,12 +85,14 @@ export default function RegisterPage() {
         }
     };
 
+    const navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const hasErrors = Object.values(errors).some((error) => error !== '');
 
         if (!hasErrors) {
-            dispatch(actRegister(state));
+            dispatch(actRegister(state, navigate));
         }
     };
 
@@ -156,8 +163,8 @@ export default function RegisterPage() {
                             <label>Giới tính</label>
                             <select name="gender" id="gender" className="form-control bg-white" onChange={handleOnChange}>
                                 <option value="">Chọn giới tính</option>
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
+                                <option value={true}>Nam</option>
+                                <option value={false}>Nữ</option>
                             </select>
                         </div>
 
@@ -167,7 +174,7 @@ export default function RegisterPage() {
                                 type="date"
                                 name="birthday"
                                 id="birthday"
-                                className="form-control"
+                                className={`form-control ${errors.birthday ? 'is-invalid' : ''}`}
                                 required
                                 onChange={handleOnChange}
                             />

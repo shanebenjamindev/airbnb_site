@@ -13,11 +13,16 @@ import { actListCity } from "../../../redux/types/actions";
 import './manage-location.css'
 
 export default function QlLocation(props) {
-  const DsViTri = useSelector(state => state.cityReducer.data)
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(actListCity())
   }, []);
+
+  const DsViTri = useSelector(state => state.cityReducer.data)  
+  if (DsViTri) {
+    var data = DsViTri;
+  }
 
   const columns = [
     {
@@ -122,10 +127,6 @@ export default function QlLocation(props) {
       sortDirections: ["descend", "ascend"],
     },
   ];
-
-  if (DsViTri) {
-    var data = DsViTri;
-  }
 
   const { Search } = Input;
   const suffix = (

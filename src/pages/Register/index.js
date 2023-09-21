@@ -3,22 +3,25 @@ import { NavLink } from 'react-router-dom';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { actRegister } from '../../redux/types/actions';
+import CheckLoading from '../../components/CheckLoading';
 
 export default function RegisterPage() {
     const dispatch = useDispatch();
 
-    const { data, error } = useSelector((state) => state.signupReducer)
+    const { data, error, loading } = useSelector((state) => state.signupReducer)
 
     const showError = () => {
-
         if (data) {
             return <div className='alert alert-success'>Đăng kí thành công</div>
         }
         if (error) {
             return <div className='alert alert-danger'>Đăng kí không thành công, vui lòng kiểm tra lại</div>
         }
-
+        if (loading) {
+            return <CheckLoading />
+        }
     }
+
 
     const [state, setState] = useState({
         name: '',

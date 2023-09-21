@@ -1,92 +1,94 @@
 import React, { useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import {
-  HomeOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  UserOutlined,
-  GlobalOutlined,
-} from "@ant-design/icons";
-import './admin-navbar.css'
+import { Link, useNavigate } from "react-router-dom";
+import './admin-navbar.css';
+import { UserOutlined } from "@ant-design/icons";
 
 export default function AdminNavbar(props) {
   useEffect(() => {
-    window.scrollTo(1, 0);
-  });
+    window.scrollTo(0, 0);
+  }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
 
-
   if (!userData) {
-    return navigate(`/`, { replace: true });
+    navigate(`/`, { replace: true });
+    return null;
+  }
+  else {
+    var { user } = userData
   }
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
       localStorage.removeItem("USER_LOGIN");
-      return navigate(`/`, { replace: true });
+      navigate(`/`, { replace: true });
     }
-  }
+  };
 
   return (
-    <div className='adminNavbar__Container bg-warning align-items-center navbar-expand-lg'>
-      <nav className="navbar">
+    <nav className="bg-white admin__Navbar navbar navbar-expand-lg navbar-light fixed-top">
+      <Link className="navbar-brand d-flex justify-content-center align-items-center" to="/admin/dashboard">
+        <img
+          width="30px"
+          src="https://cdn-icons-png.flaticon.com/512/2111/2111254.png"
+          alt=""
+        />
+        <div className="main__Title ml-2">AirBnb</div>
+      </Link>
 
-        <div className="w-100 navbar-brand d-flex justify-content-between">
-          <div className='m-sm-auto'>
-            <Link className=" d-flex align-items-center" to="/">
-              <img
-                width="30px"
-                src="https://cdn-icons-png.flaticon.com/512/2111/2111254.png"
-                alt=""
-              />
-              <div className="main__Title ml-2">AirBnb</div>
-            </Link>
-          </div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContentAdmin"
+        aria-controls="navbarSupportedContentAdmin"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
 
-
-          <div>
-            <button
-              className="navbar-toggler bg-secondary text-white"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContentAdmin"
-              aria-controls="navbarSupportedContentAdmin"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-
-          </div>
-        </div>
-      </nav >
-
-
-      <div id='navbarSupportedContentAdmin' className="collapse navbar-collapse">
-        <ul className="container text-center justify-content-around text-white">
-          <Link className='nav-link' to="/admin/manage-rooms">
-            <p className="nav-item">Rooms Management</p>
-          </Link>
-
-          <Link className='nav-link' to="/admin/manage-rooms">
-            <p className="nav-item">Customers Management</p>
-          </Link>
-
-          <Link className='nav-link' to="/admin/manage-locations">
-            <p className="nav-item">Location Management</p>
-          </Link>
-
-          <Link className='nav-link' to="/admin/manage-comments">
-            <p className="nav-item">Comments Management</p>
-          </Link>
-
+      <div
+        className="collapse navbar-collapse text-center "
+        id="navbarSupportedContentAdmin"
+      >
+        <ul className="navbar-nav d-flex align-items-center ml-auto">
           <li className="nav-link">
-            <button onClick={handleLogout} className='btn btn-warning '>Logout</button>
+            <Link className="" to="/admin/manage-rooms">
+              Rooms
+            </Link>
+          </li>
+          <li className="nav-link">
+            <Link className="" to="/admin/manage-customers">
+              Customers
+            </Link>
+          </li>
+          <li className="nav-link">
+            <Link className="" to="/admin/manage-locations">
+              Location
+            </Link>
+          </li>
+          <li className="nav-link">
+            <Link className="" to="/admin/manage-comments">
+              Comments
+            </Link>
+          </li>
+          <li className="nav-link">
+            <Link className="" to="/admin/manage-rooms">
+              <img width="40" height="40" alt="" src={(user.length === 0) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+            </Link>
+          </li>
+          <li className="nav-link">
+            <button
+              onClick={handleLogout}
+              className="btn__Primary  m-auto"
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </div>
-    </div >
+    </nav>
   );
 }

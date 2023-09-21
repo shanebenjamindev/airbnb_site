@@ -6,6 +6,7 @@ import './style.css'
 import DateRangeForm from './DateRangeForm';
 import Comfort from './Comfort';
 import Comments from './Comments';
+import CheckLoading from '../../components/CheckLoading';
 
 export default function RoomDetail() {
   const param = useParams();
@@ -15,8 +16,15 @@ export default function RoomDetail() {
     dispatch(actRoomDetail(param.id))
   }, [dispatch, param.id])
 
-  const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
   const roomData = useSelector((state) => state.RoomDetailReducer.data);
+  const { loading, error } = useSelector((state) => state.RoomDetailReducer);
+
+  if (loading) {
+    return <CheckLoading />
+  }
+
+  const userFromLocalStorage = localStorage.getItem("USER_LOGIN");
+  const user = userFromLocalStorage ? JSON.parse(userFromLocalStorage).user : null;
 
   const renderRoom = () => {
     return <>
@@ -107,11 +115,11 @@ export default function RoomDetail() {
               </div>
 
               <div className='section__Checkout col-lg-4 col-md-5 col-sm-12 mt-4 mt-md-0 '>
-                <DateRangeForm data={roomData} user={userData} />
+                <DateRangeForm data={roomData} user={user} />
               </div>
 
               <div className='section__Review col-12'>
-                <Comments data={roomData} />
+                <Comments data={roomData} user={user} />
               </div>
             </div >
           )}

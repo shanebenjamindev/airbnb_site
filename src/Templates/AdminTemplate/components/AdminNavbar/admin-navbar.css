@@ -1,36 +1,3 @@
-.adminNavbar__Container {
-    position: fixed;
-    z-index: 999;
-
-}
-
-/* RESPONSIVE */
-/*  pc: width >= 1024px */
-@media screen and (min-width: 1025px) {
-    .adminNavbar__Container {
-        position: fixed;
-        color: #232323;
-        font-family: "Poppins", sans-serif;
-        font-size: 14px;
-        align-items: center;
-        justify-content: space-between;
-        font-weight: 400;
-        height: 100%;
-    }
-}
-
-/* tablet: 740<= width < 1024 */
-@media screen and (min-width: 740px) and (max-width: 1024px) {
-    .adminNavbar__Container {
-        width: 100%;
-    }
-
-}
-
-/* moblie: width < 740px */
-@media screen and (max-width: 739px) {
-
-    .adminNavbar__Container {
-        width: 100%;
-    }
+.admin__Navbar {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

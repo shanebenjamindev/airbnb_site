@@ -153,8 +153,11 @@ export const actAuth = (userLogin, navigate) => {
         api.post('/auth/signin', userLogin)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    const { user } = result.data.content;
-                    dispatch(actAuthSuccess(user))
+                    const { user, token } = result.data.content;
+
+                    const userData = { user, token }
+
+                    dispatch(actAuthSuccess(userData))
                     navigate("/auth", { replace: true })
                 }
             })

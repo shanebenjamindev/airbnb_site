@@ -7,10 +7,7 @@ import './comments.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Comments(props) {
-    const { data } = props;
-
-    const { user } = JSON?.parse(localStorage.getItem("USER_LOGIN"));
-
+    const { data, user } = props;
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -50,21 +47,27 @@ export default function Comments(props) {
         setRating(0);
     };
     const renderComments = () => {
-        return listComment?.map((comment) => (
-            <div key={comment.id} className='custom__Comment comment-container'>
-                <div className='col-1 avatar'>
-                    <img src={comment.avatar ? comment.avatar : `https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif`} alt='Avatar' className='avatar-image img-fluid rounded-circle' />
-                </div>
-                <div className='col-11 comment-details'>
-                    <div className='comment-header'>
-                        <p className='comment-author main__p'>{comment.tenNguoiBinhLuan}
-                            <span className='comment-date'> || {comment.ngayBinhLuan}</span></p>
+        if (listComment.length !== 0) {
+            return listComment.map((comment) => (
+                <div key={comment.id} className='custom__Comment comment-container'>
+                    <div className='col-1 avatar'>
+                        <img src={comment.avatar ? comment.avatar : `https://artscimedia.case.edu/wp-content/uploads/sites/79/2016/12/14205134/no-user-image.gif`} alt='Avatar' className='avatar-image img-fluid rounded-circle' />
                     </div>
-                    <div className='comment-content'> <p>{comment.noiDung}</p> </div>
-                    <div className='comment-rating'>Đánh giá: {comment.saoBinhLuan}</div>
+                    <div className='col-11 comment-details'>
+                        <div className='comment-header'>
+                            <p className='comment-author main__p'>{comment.tenNguoiBinhLuan}
+                                <span className='comment-date'> || {comment.ngayBinhLuan}</span></p>
+                        </div>
+                        <div className='comment-content'> <p>{comment.noiDung}</p> </div>
+                        <div className='comment-rating'>Đánh giá: {comment.saoBinhLuan}</div>
+                    </div>
                 </div>
-            </div>
-        ));
+            ));
+        }
+        else {
+            return <div className='main__p'>Hiện chưa có comment</div>
+        }
+
     };
 
     return (
@@ -81,8 +84,7 @@ export default function Comments(props) {
                         <div className='container section__Item-secondary p-2'>
 
                             <form onSubmit={handleCommentSubmit}>
-                                {(error) ? (
-                                    <div className='alert alert-danger'>{error}</div>) : null}
+                                {(error) ? (<div className='alert alert-danger'>{error}</div>) : null}
                                 <div className="">
                                     <textarea
                                         className="form-control"

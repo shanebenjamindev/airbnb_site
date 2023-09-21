@@ -35,34 +35,33 @@ export default function Auth() {
     };
 
     const renderContent = () => {
-        const userJSON = localStorage.getItem("USER_LOGIN");
-        const userData = userJSON ? JSON.parse(userJSON) : null;
-        const { user } = userData
+        const userData = localStorage.getItem("USER_LOGIN");
+        const user = userData ? JSON.parse(userData).user : "";
 
         if (!user) {
             return (
-                <form onSubmit={handleLogin} className='align-items-center mt-4'>
+                <form onSubmit={handleLogin} className='m-auto p-2 align-items-center mt-4'>
                     <div className=' text-center'>
                         <h2 className="text-center text-white main__Title">AUTHENTICATION</h2>
                         <h4 className="text-center text-warning main__p">Only for Adminstrators</h4>
 
 
                         {error && <div className="">{showError()}</div>}
-                        <div className=''>
+                        <div className=' '>
                             <input type="text" name="email" className="form-control" required placeholder='Email' onChange={handleOnChange} />
                         </div>
 
-                        <div className='mt-3'>
+                        <div className='mt-3  '>
                             <input type="password" name="password" className="form-control" required placeholder='Mật khẩu' onChange={handleOnChange}
                             />
                         </div>
 
-                        <div className='d-flex mt-4 justify-content-center'>
-                            <div className=''>
-                                <Link to="/" type="submit" className="btn__Secondary text-white mx-1">Tro ve trang chu</Link>
+                        <div className='d-flex mt-4 justify-content-center  '>
+                            <div className=' '>
+                                <Link to="/" type="submit" className="btn__Secondary text-white mx-1">Trở về trang chủ</Link>
                             </div>
 
-                            <div className=''>
+                            <div className=' '>
                                 <button type="submit" className="btn__Secondary mx-1">Đăng nhập</button>
                             </div>
 
@@ -94,12 +93,8 @@ export default function Auth() {
     };
 
     return (
-        <div className='login-page'>
-            <div className='w-75 d-flex m-auto justify-content-center align-items-center' style={{ minHeight: '100vh' }}>
-                <div className="">
-                    <div>{renderContent()}</div>
-                </div>
-            </div>
+        <div className='login-page d-flex justify-content-center align-items-center' style={{ height: "100vh" }}>
+            <div>{renderContent()}</div>
         </div>
     );
 }

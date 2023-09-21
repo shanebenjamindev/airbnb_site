@@ -3,12 +3,13 @@ import './App.css';
 
 import { BrowserRouter, Routes } from 'react-router-dom'
 import renderRoutes from './routes';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
+import CheckLoading from './components/CheckLoading';
 
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<CheckLoading />}>
       <BrowserRouter>
         <Routes>
           {renderRoutes()}

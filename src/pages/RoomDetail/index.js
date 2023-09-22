@@ -12,6 +12,14 @@ export default function RoomDetail() {
   const param = useParams();
   const dispatch = useDispatch();
 
+  const userFromLocal = localStorage?.getItem("USER_LOGIN");
+  
+  if (userFromLocal) {
+    var {user} = userFromLocal
+  }else {
+    var user = []
+  }
+
   useEffect(() => {
     dispatch(actRoomDetail(param.id))
   }, [dispatch, param.id])
@@ -20,20 +28,17 @@ export default function RoomDetail() {
   // const  = useSelector((state) => state.roomReducer.data);
   // console.log(roomDetail);
 
-  const userFromLocalStorage = localStorage.getItem("USER_LOGIN");
-  const user = userFromLocalStorage ? JSON.parse(userFromLocalStorage).user : null;
 
   const renderRoom = () => {
     return <>
       {roomDetail && (
-        <div className='mb-4'>
-          <div className='section__Image'>
-            <img alt='' width="" className=' img-fluid rounded rounded-lg' src={roomDetail.hinhAnh} />
+        <div className='mb-4 container-fluid d-flex justify-content-center'>
+          <div className='section__Image text-center '>
+            <img alt='' width="" className='rounded rounded-lg' src={roomDetail.hinhAnh} />
           </div>
         </div>)}
     </>
   }
-
 
   return (
     <>

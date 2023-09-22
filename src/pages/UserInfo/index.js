@@ -132,13 +132,13 @@ export default function UserInfo() {
         }
     };
     return (
-        <div className='container section__Content-secondary'>
+        <div className='container section__Content-primary-center'>
             <div className='section__Background'>
                 <div className='section__BackgroundTitle'>
                     <h2 className='thanks-message'>Profile Page</h2>
                 </div>
             </div>
-            <div className=' row pb-5'>
+            <div className=' row '>
                 <div className='userAvatar__Container bg-info col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
                     <div className='userAvatar text-center flex-column align-items-center h-100 justify-content-center'>
                         <div className='d-flex justify-content-center py-2'>
@@ -325,7 +325,7 @@ export default function UserInfo() {
                         )}
                     </Box>
                 </div>
-            </div >
+            </div>
         </div >
 
     );

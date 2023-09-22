@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { actGetUserInfo } from '../../redux/types/actions';
+import { actDeleteUserRoom, actGetUserInfo } from '../../redux/types/actions';
 import './user-info.css'
 
 export default function UserInfo() {
@@ -43,7 +43,6 @@ export default function UserInfo() {
     }, [dispatch, user.avatar, user.birthday, user.email, user.gender, user.id, user.name, user.phone, user.role])
 
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
-    console.log(listRoomByUser);
     // Tab:
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -72,8 +71,9 @@ export default function UserInfo() {
     };
 
     const handleDelete = (e) => {
-        e.preventDefault()
-        console.log(e.target.value);
+        if (window.confirm(`Bạn có muốn xóa phòng ${e.target.value} ?`)) {
+            dispatch(actDeleteUserRoom(e.target.value))
+        }
     }
 
     const renderListRoomByUser = () => {
@@ -81,7 +81,7 @@ export default function UserInfo() {
             <table className="table text-center">
                 <thead>
                     <tr className='text-center'>
-                        <th>Phòng số</th>
+                        <th>Phòng</th>
                         <th>Ngày đến</th>
                         <th>Ngày đi</th>
                         <th>Khách</th>
@@ -96,8 +96,8 @@ export default function UserInfo() {
                             <td>{room.ngayDi}</td>
                             <td>{room.soLuongKhach}</td>
                             <td className='d-flex justify-content-around'>
-                                <Link to={`/roomdetail/${room.maPhong}`} className="btn btn-primary"  >View</Link>
-                                <button className="btn btn-danger" onClick={handleDelete} value={room.id}>Delete</button>
+                                <Link to={`/roomdetail/${room.maPhong}`} className="btn btn-outline-info"  >View</Link>
+                                <button className="btn btn-outline-danger" onClick={handleDelete} value={room.id}>Delete</button>
                             </td>
                         </tr>
                     )).slice(0, 5)}
@@ -138,10 +138,10 @@ export default function UserInfo() {
                     <h2 className='thanks-message'>Profile Page</h2>
                 </div>
             </div>
-            <div className='row pb-5'>
+            <div className=' row pb-5'>
                 <div className='userAvatar__Container bg-info col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
                     <div className='userAvatar text-center flex-column align-items-center h-100 justify-content-center'>
-                        <div className='d-flex justify-content-center py-5'>
+                        <div className='d-flex justify-content-center py-2'>
                             <input
                                 name='avatar'
                                 type="file"
@@ -158,11 +158,11 @@ export default function UserInfo() {
                                 src={`${newProfile.avatar}` || (user.avatar) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                             />
                         </div>
-                        <div className='main__p my-4'>{user.name}</div>
+                        <div className='main__p text-white'>{user.name}</div>
                     </div>
                 </div>
 
-                <div className='userInfo__Container col-md-9 col-lg-9 section__Item-primary'>
+                <div className='user-Info__Container  col-md-9 col-lg-9 section__Item-primary'>
 
                     <div className='userAvatar__Container text-center d-block d-md-none'>
                         <div className='userAvatar d-flex justify-content-center align-items-center h-100 '>
@@ -300,10 +300,27 @@ export default function UserInfo() {
                         {/* Content for Tab 1 (Room) */}
                         {value === 1 && (
                             <div>
-                                {listRoomByUser && (
-                                    <div className='section__Item-secondary'>
-                                        {renderListRoomByUser()}
-                                    </div>)}
+                                <div className='user__ListRoom'>
+                                    {(listRoomByUser) && listRoomByUser.length >= 1 ? (
+                                        <div className=' section__Item-secondary p-2 table-responsive'>
+                                            <div className='d-flex mb-2 justify-content-between'>
+                                                <div className=''></div>
+                                                <Link to="/" className='btn btn-outline-info'>Thêm phòng</Link>
+                                            </div>
+                                            <>
+                                                {renderListRoomByUser()}
+                                            </>
+                                        </div>
+                                    ) : (
+                                        <div className='text-center noti__NotFound'>
+                                            <div>
+                                                <h3 className='main__Title'>Not Found</h3>
+                                                <div className='main__'>Hiện bạn chưa đặt phòng ó</div>
+                                                <Link to="/">Hãy đặt thêm tại đây</Link>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </Box>

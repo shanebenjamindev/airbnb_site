@@ -187,7 +187,6 @@ const actGetRoomDataSuccess = (data) => ({ type: actions.ROOM_DATA_SUCCESS, payl
 const actGetRoomDataFail = (error) => ({ type: actions.ROOM_DATA_FAIL, payload: error })
 
 
-// Room Detail Reducer
 export const actRoomDetail = (id) => {
     return (dispatch) => {
         dispatch(actRoomDetailRequest)
@@ -207,6 +206,7 @@ export const actRoomDetail = (id) => {
 const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
 const actRoomDetailSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
 const actRoomDetailFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
+
 
 // Post Checkout
 export const actCheckout = (roomData) => {
@@ -316,12 +316,11 @@ const actCommentPostRequest = () => ({ type: actions.COMMENTS_POST_REQUEST })
 const actCommentPostSuccess = (data) => ({ type: actions.COMMENTS_POST_SUCCESS, payload: data })
 const actCommentPostFail = (error) => ({ type: actions.COMMENTS_POST_FAIL, payload: error })
 
-// Get user: // Redux action creators related to user information
+
 export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
 export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
 export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
 
-// Async action creator for getting user information
 export const actGetUserInfo = (id) => {
     return (dispatch) => {
         dispatch(actGetUserInfoRequest());
@@ -341,3 +340,26 @@ export const actGetUserInfo = (id) => {
             });
     };
 };
+
+// User Delete Room:
+export const actDeleteUserRoom = (id) => {
+    return (dispatch) => {
+        dispatch(actDeleteUserRoomRequest)
+        api.delete(`/dat-phong/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actDeleteUserRoomSucess(result.data.content))
+                    alert("xóa thành công")
+                    window.location.reload()
+                }
+            })
+            .catch((error) => {
+                // console.log(error);
+                dispatch(actDeleteUserRoomFail(error.response.data))
+            })
+    }
+}
+
+const actDeleteUserRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
+const actDeleteUserRoomSucess = (data) => ({ type: actions.DELETE_ROOM_USER_SUCCESS, payload: data })
+const actDeleteUserRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })

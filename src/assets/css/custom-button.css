@@ -6,6 +6,7 @@
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 
 .btn__Primary:hover {

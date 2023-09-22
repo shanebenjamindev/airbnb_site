@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './style.css';
+import './header-navbar.css';
 import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

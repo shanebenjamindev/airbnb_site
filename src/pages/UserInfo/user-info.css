@@ -1,3 +1,21 @@
 .custom-formControl {
     margin-bottom: 20px;
 }
+
+.user-Info__Container {
+    height: 30rem;
+}
+
+.noti__NotFound {
+    padding: 9rem 0;    
+}
+
+/* tablet: 740<= width < 1024 */
+@media screen and (min-width: 740px) and (max-width: 1024px) {
+}
+/* moblie: width < 740px */
+@media screen and (max-width: 739px) {
+    .user-Info__Container {
+        height: auto;
+    }
+}

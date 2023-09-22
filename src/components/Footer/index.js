@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import React from 'react';
-import "./style.css";
+import "./footer.css";
 import { ForwardOutlined } from '@ant-design/icons';
 
 export default function Footer() {

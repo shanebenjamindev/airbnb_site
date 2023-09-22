@@ -7,7 +7,7 @@ export default function CheckAdmin() {
 
     useEffect(() => {
         if (userData) {
-            const { role } = userData
+            const { role } = userData.user
             
             if (role !== "ADMIN") {
                 alert("Bạn không có quyền truy cập");

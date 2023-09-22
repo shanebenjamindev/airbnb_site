@@ -2,14 +2,15 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../Dashboard/Dashboard.css";
 import { Table } from "antd";
-import { actListCity, actHomeListRoom } from "../../../redux/types/actions";
+import { actListCity, actHomeListRoom, actListComment } from "../../../redux/types/actions";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 
 export default function Dashboard(props) {
 
   const DsViTri = useSelector(state => state.cityReducer.data)
-  const Phong = useSelector(state => state.homeListRoomReducer.data)
+  const Phong = useSelector(state => state.roomReducer.data)
+  const listComment = useSelector(state => state.commentReducer.data)
 
   let DsPhong = [];
   if (Phong) {
@@ -21,9 +22,8 @@ export default function Dashboard(props) {
   useEffect(() => {
     dispatch(actListCity())
     dispatch(actHomeListRoom())
+    dispatch(actListComment())
   }, [dispatch]);
-
-
 
   const columns = [
     {
@@ -134,13 +134,14 @@ export default function Dashboard(props) {
   }
 
   // render room
-  const renderPhong = () => {
-    return DsPhong?.map((phong, index) => {
+  const renderCommentList = () => {
+    return listComment?.map((comment, index) => {
       return <tr key={index}>
-        <td >{phong.id}</td>
-        <td ><img src={phong.hinhAnh} alt="" /></td>
-        <td >{phong.tenPhong}</td>
-        <td >{phong.khach}</td>
+        <td >{comment.id}</td>
+        <td >{comment.maPhong}</td>
+        <td >{comment.noiDung}</td>
+        <td >{comment.maNguoiBinhLuan}</td>
+        <td >{comment.saoBinhLuan}</td>
       </tr>;
     });
   };
@@ -432,9 +433,9 @@ export default function Dashboard(props) {
           </div>
 
           <div className="p-5">
-            <div className="stats-info text-white">
-              <div className="graph-container">
-                <div className="percent ">
+            <div className="stats-info d-md-flex  text-white">
+              <div className="graph-container  ">
+                <div className="percent d-none d-lg-block">
                   <svg viewBox="0 0 36 36" style={{ marginTop: 77 }} className="circular-chart">
                     <path
                       className="circle-x"
@@ -466,9 +467,9 @@ export default function Dashboard(props) {
                     />
                   </svg>
                 </div>
-                <p>Total: $20.175</p>
+                <p className="position-absolute d-none d-lg-block">Total: $20.175</p>
               </div>
-              <div className="info">
+              <div className="info ">
                 <p>
                   Total Earnings each month
                   <br />
@@ -497,19 +498,13 @@ export default function Dashboard(props) {
 
       </div>
 
-      <div className="dashboard__Content d-flex">
-        <div className="bg-white col-5">
-          <div className="header-case">
-            <h2
-              className="text-danger"
-            >
-              Listes Location
-            </h2>
-          </div>
-          <div className="body-case">
-            <div className="tableau">
+      <div className="dashboard__Content container d-md-flex">
+        <div className="bg-white col-md-8 col-lg-8">
+          <h3 className="main__Title my-3 text-center">Danh sách vị trí</h3>
+          <div className="">
+            <div className="table-responsive">
               <Table
-                style={{ height: "500px", backgroundColor: '#de437d' }}
+                style={{ height: "500px" }}
                 columns={columns}
                 dataSource={data}
                 onChange={onChange}
@@ -517,34 +512,31 @@ export default function Dashboard(props) {
               />
             </div>
           </div>
-
         </div>
 
-        <div className="overflow-container col-7">
-          <div className="mois-annee">
-            <ul>
-              <li>
-                Thống Kê Phòng Đã Được Đặt
-                <br />
-                <span>2022</span>
-              </li>
-            </ul>
+
+        <div className=" col-md-4 col-lg-4">
+          <h3 className="text-white my-4 text-center main__p">
+            Thống kê Comments
+          </h3>
+          <div className="overflow-container">
+            <table className="table  bg-white ">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Hình Ảnh</th>
+                  <th>Tên Phòng</th>
+                  <th>Khách</th>
+                </tr>
+              </thead>
+              <tbody>
+                {renderCommentList()}
+              </tbody>
+            </table>
           </div>
-          <table className="table table-bordered ">
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Hình Ảnh</th>
-                <th>Tên Phòng</th>
-                <th>Khách</th>
-              </tr>
-            </thead>
-            <tbody>
-              {renderPhong()}
-            </tbody>
-          </table>
         </div>
       </div>
+
 
     </div>
   );

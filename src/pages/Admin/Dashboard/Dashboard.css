@@ -447,7 +447,6 @@ ul {
 }
 
 .stats-info {
-  display: flex;
   align-items: center;
   position: relative;
   gap:30px
@@ -497,8 +496,7 @@ ul {
   stroke: #4cc790;
 }
 
-.graph-container p {
-  position: absolute;
+.graph-container p{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

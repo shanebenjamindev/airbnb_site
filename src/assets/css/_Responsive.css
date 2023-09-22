@@ -4,6 +4,7 @@
 }
 /* tablet: 740<= width < 1024 */
 @media screen and (min-width: 740px) and (max-width: 1024px) {
+
 }
 /* moblie: width < 740px */
 @media screen and (max-width: 739px) {

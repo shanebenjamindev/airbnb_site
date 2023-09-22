@@ -1,28 +1,54 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Table } from "antd";
 import {
-  AudioOutlined,
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-// import { DeleteViTriIDAction, getDsViTriAction } from "../../../redux/Actions/ViTriDatVeAction";
 import { actDeleteCity, actListCity } from "../../../redux/types/actions";
 import './manage-location.css'
+import LocationModal from "./LocationModal";
 
-export default function QlLocation(props) {
+export default function AdminLocation(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actListCity())
-  }, []);
+  }, [dispatch]);
 
   const DsViTri = useSelector(state => state.cityReducer.data)
+
   if (DsViTri) {
     var data = DsViTri;
   }
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMode, setModalMode] = useState("add");
+  const [formData, setFormData] = useState(null); // Initialize with an empty object
+
+  const showModal = (mode, editData) => {
+    setModalMode(mode);
+    setFormData(editData); // Initialize with empty data or editData if provided
+    setIsModalVisible(true);
+  };
+
+  const handleModalOk = (newData) => {
+    // Handle the form submission based on modalMode (add or edit)
+    if (modalMode === "add") {
+      
+      console.log('Added Data:', newData);
+
+    } else if (modalMode === "edit") {
+      // Handle editing logic here
+      console.log('Edited Data:', newData);
+      // Update your state or dispatch actions as needed
+    }
+    setIsModalVisible(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const columns = [
     {
@@ -102,18 +128,18 @@ export default function QlLocation(props) {
         return (
           <Fragment key={index}>
             <div className="d-md-flex justify-content-around">
-              <NavLink
-                className="text-info btn btn-outline-info" style={{ fontSize: 20 }}
-                to={`/admin/location/edit/${city.id}`}
+              <button
+                onClick={() => showModal("edit", city)}
+                className="btn btn-outline-info"
               >
                 <EditOutlined />
-              </NavLink>
+              </button>
               <span
                 onClick={() => {
-                  if (window.confirm("Bạn có muốn xóa " + " " + city.tenViTri)) {
+                  if (window.confirm("Bạn có muốn xóa " + city.tenViTri)) {
                     dispatch(actDeleteCity(city.id))
                   }
-                  console.log(city.id, "ma vị trí cần xóa");
+                  console.log(city.id, "Ma vị trí cần xóa");
                 }}
                 style={{ fontSize: 20, cursor: "pointer" }}
                 className="btn btn-outline-danger"
@@ -121,24 +147,12 @@ export default function QlLocation(props) {
                 <DeleteOutlined />
               </span>
             </div>
-          </Fragment>
+          </Fragment >
         );
       },
       sortDirections: ["descend", "ascend"],
     },
   ];
-
-  const { Search } = Input;
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1890ff",
-      }}
-    />
-  );
-
-
 
   const onChange = (pagination, filters, sorter, extra) => {
   };
@@ -146,9 +160,15 @@ export default function QlLocation(props) {
   return (
     <div className="container">
       <h3 className="main__Title">Quản Lý Vị Trí</h3>
-      <Button className="mb-3 main__p">
-        <NavLink to="/admin/manage-locations/add-location">Thêm Vị Trí</NavLink>
-      </Button>
+      <Button className="mb-3 main__p" onClick={() => showModal("add")}>Thêm Vị Trí</Button>
+      {/* Add Location Modal */}
+      <LocationModal
+        visible={isModalVisible}
+        onCancel={handleModalCancel}
+        onOk={handleModalOk}
+        mode={modalMode}
+        data={formData}
+      />
 
       <div className="bg-white container main__p" style={{ overflowX: "auto" }}>
         <Table

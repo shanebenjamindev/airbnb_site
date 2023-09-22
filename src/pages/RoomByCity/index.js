@@ -13,7 +13,7 @@ export default function RoomByCityPage() {
         dispatch(actGetRoomByCity(param.id))
     }, [dispatch, param.id])
 
-    const listRoomByCity = useSelector((state) => state.getRoomByCityReducer.data);
+    const listRoomByCity = useSelector((state) => state.listRoomByIdReducer.data);
 
     console.log(listRoomByCity);
     const renderRoomByCity = () => {

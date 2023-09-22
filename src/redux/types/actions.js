@@ -58,8 +58,6 @@ export const actLogin = (userLogin, navigate) => {
                     const { user, token } = result.data.content;
                     const userData = { user, token }
                     dispatch(actLoginSuccess(userData))
-                    alert("Đăng nhập thành công, về trang chủ?")
-                    navigate("/", { replace: true })
                 }
             })
             .catch((error) => {
@@ -120,26 +118,44 @@ const actDeleteCitySucess = (data) => ({ type: actions.DELETE_CITY_SUCCESS, payl
 const actDeleteCityFail = (error) => ({ type: actions.DELETE_CITY_FAIL, payload: error })
 
 
-// Get Room
+// Get Room By Id
 export const actGetRoomByCity = (id) => {
     return (dispatch) => {
-        dispatch(actGetRoomByCityRequest)
+        dispatch(actGetListRoomByIdRequest)
         api.get(`/phong-thue/lay-phong-theo-vi-tri?maViTri=${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch(actGetRoomByCitySucess(result.data.content))
+                    dispatch(actGetListRoomByIdSuccess(result.data.content))
                 }
             })
             .catch((error) => {
                 // console.log(error);
-                dispatch(actGetRoomByCityFail(error.response.data))
+                dispatch(actGetListRoomByIdFail(error.response.data))
             })
     }
 }
 
-const actGetRoomByCityRequest = () => ({ type: actions.GET_ROOM_BY_CITY_REQUEST })
-const actGetRoomByCitySucess = (data) => ({ type: actions.GET_ROOM_BY_CITY_SUCCESS, payload: data })
-const actGetRoomByCityFail = (error) => ({ type: actions.GET_ROOM_BY_CITY_FAIL, payload: error })
+export const actGetRoomByUser = (id) => {
+    return (dispatch) => {
+        // console.log(id);
+        dispatch(actGetListRoomByIdRequest)
+        api.get(`/dat-phong/lay-theo-nguoi-dung/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actGetListRoomByIdSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                dispatch(actGetListRoomByIdFail(error.response.data))
+            })
+    }
+}
+
+const actGetListRoomByIdRequest = () => ({ type: actions.GET_ROOM_BY_ID_REQUEST })
+const actGetListRoomByIdSuccess = (data) => ({ type: actions.GET_ROOM_BY_ID_SUCCESS, payload: data })
+const actGetListRoomByIdFail = (error) => ({ type: actions.GET_ROOM_BY_ID_FAIL, payload: error })
+
+// =====================================
 
 export const actRoomDetail = (id) => {
     return (dispatch) => {

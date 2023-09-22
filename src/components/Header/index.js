@@ -16,8 +16,6 @@ export default function Navbar() {
 
     const listCityData = useSelector((state) => state.cityReducer.data);
     const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-    // console.log(listCityData);
-
 
     const [buttonActive, setButtonActive] = useState(false);
     const [formActive, setFormActive] = useState(false);
@@ -122,11 +120,16 @@ export default function Navbar() {
                                 <UserOutlined />
                             </a>
                             <div className="dropdown-menu main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                                <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
                                 {userData ? (
-                                    <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                    <>
+                                        <Link to="/user-info" className="dropdown-item">Hồ sơ</Link>
+                                        <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                    </>
                                 ) : (
-                                    <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                    <>
+                                        <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
+                                        <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                    </>
                                 )}
                                 <a className="dropdown-item" href="/">Cho thuê nhà</a>
                                 <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>

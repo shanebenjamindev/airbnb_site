@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './admin-navbar.css';
-import { UserOutlined } from "@ant-design/icons";
+// import { UserOutlined } from "@ant-design/icons";
 
 export default function AdminNavbar(props) {
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function AdminNavbar(props) {
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="" to="/admin/manage-rooms">
+            <Link className="" to="/admin/admin-info">
               <img width="40" height="40" alt="" src={(user.length === 0) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
             </Link>
           </li>

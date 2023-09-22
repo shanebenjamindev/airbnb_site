@@ -6,21 +6,21 @@ const initialState = {
     error: null
 }
 
-const getRoomByCityReducer = (state = initialState, action) => {
+const listRoomByIdReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.GET_ROOM_BY_CITY_REQUEST:
+        case actions.GET_ROOM_BY_ID_REQUEST:
             state.loading = true;
             state.data = null;
             state.error = null;
             return { ...state }
 
-        case actions.GET_ROOM_BY_CITY_SUCCESS:
+        case actions.GET_ROOM_BY_ID_SUCCESS:
             state.loading = false;
             state.data = action.payload;
             state.error = null;
             return { ...state }
 
-        case actions.GET_ROOM_BY_CITY_FAIL:
+        case actions.GET_ROOM_BY_ID_FAIL:
             state.loading = false;
             state.data = null;
             state.error = action.payload;
@@ -31,4 +31,4 @@ const getRoomByCityReducer = (state = initialState, action) => {
     }
 }
 
-export default getRoomByCityReducer
+export default listRoomByIdReducer

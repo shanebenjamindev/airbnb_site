@@ -11,6 +11,10 @@ const routes = [
                 element: lazy(() => import("../pages/Home")),
             },
             {
+                path: "user-info",
+                element: lazy(() => import("../pages/UserInfo")),
+            },
+            {
                 path: "roombycity/:id",
                 element: lazy(() => import("../pages/RoomByCity"))
             },
@@ -43,17 +47,16 @@ const routes = [
             {
                 path: "manage-locations",
                 element: lazy(() => import("../pages/Admin/LocationManagement")),
-                nested: [
-                    {
-                        path: "add-location",
-                        element: lazy(() => import("../pages/Admin/LocationManagement/AddLocation"))
-                    }
-                ]
             },
             {
                 path: "manage-comments",
                 element: lazy(() => import("../pages/Admin/CommentManagement"))
             },
+            {
+                path: "admin-info",
+                element: lazy(() => import("../pages/Admin/AdminInfo")),
+            },
+
 
         ]
     },

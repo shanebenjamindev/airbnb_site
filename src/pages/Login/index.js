@@ -43,7 +43,7 @@ export default function LoginPage() {
 
 
     if (localStorage.getItem("USER_LOGIN")) {
-        alert("Bạn đã đăng nhập, quay về trang chủ?")
+        alert("Đã đăng nhập, đang về trang chủ...")
         return <Navigate replace to="/" />;
     }
 

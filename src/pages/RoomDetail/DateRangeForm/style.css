@@ -8,6 +8,10 @@
     padding: 10px;
 }
 
+.btn__dateForm{
+    cursor: pointer;
+}
+
 .guest__Input input {
     width: 20%;
     text-align: center;

@@ -5,13 +5,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { actGetRoomByUser } from '../../redux/types/actions';
+import { actGetUserInfo } from '../../redux/types/actions';
 import './user-info.css'
 
 export default function UserInfo() {
     const dispatch = useDispatch();
 
-    const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
+    const { user } = JSON?.parse(localStorage?.getItem("USER_LOGIN"));
+    // const user = useSelector((state) => state.userReducer.data)
+    // console.log(token);
     const [isEditMode, setIsEditMode] = useState(false);
     const [newProfile, setNewProfile] = useState({
         avatar: '',
@@ -23,26 +25,25 @@ export default function UserInfo() {
         role: '',
     })
 
+
     useEffect(() => {
-        dispatch(actGetRoomByUser(user.id))
-        if (user) {
-            setNewProfile({
-                avatar: user.avatar,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-                birthday: user.birthday,
-                gender: user.gender,
-                role: user.role,
-            })
-        }
+        dispatch(actGetUserInfo(user.id))
 
-    }, [])
+        // dispatch(actGetRoomByUser(user.id))
+        setNewProfile({
+            avatar: user.avatar,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            birthday: user.birthday,
+            gender: user.gender,
+            role: user.role,
+        })
 
-    const { loading, data, error } = useSelector((state) => state.listRoomByIdReducer)
+    }, [dispatch, user.avatar, user.birthday, user.email, user.gender, user.id, user.name, user.phone, user.role])
 
-    const listRoomByUser = data
-
+    const listRoomByUser = useSelector((state) => state.roomReducer.data)
+    console.log(listRoomByUser);
     // Tab:
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -57,16 +58,8 @@ export default function UserInfo() {
             role: user.role,
         })
     };
-    const [selectedImage, setSelectedImage] = useState(null);
-
-    if (!userData) {
-        return null;
-    } else {
-        var { user } = userData;
-    }
 
     const handleSave = (e) => {
-        console.log(newProfile);
         setIsEditMode(false);
     };
 
@@ -78,36 +71,54 @@ export default function UserInfo() {
         })
     };
 
-
-    const renderListRoomByUser = () => {
-        return listRoomByUser?.map((room, index) => {
-            return <Link to={`/roomdetail/${room.id}`} key={index} className='card p-1 m-3'>
-                <div className='d-md-flex align-items-center'>
-                    <div className='col-md-6'>
-                        <img className="img-fluid" src={room.hinhAnh} alt="Cardcap" />
-                    </div>
-                    <div className='col-md-6'>
-                        <span className="">{room.tenPhong}</span>
-                        <p>Price: {room.giaTien}</p>
-                    </div>
-                </div>
-            </Link>
-
-        })
+    const handleDelete = (e) => {
+        e.preventDefault()
+        console.log(e.target.value);
     }
 
-    const handleAvatarClick = () => {
-        // Open a file selection dialog when the avatar is clicked
-        const fileInput = document.getElementById('avatar-input');
-        fileInput.click();
-    };
+    const renderListRoomByUser = () => {
+        return (
+            <table className="table text-center">
+                <thead>
+                    <tr className='text-center'>
+                        <th>Phòng số</th>
+                        <th>Ngày đến</th>
+                        <th>Ngày đi</th>
+                        <th>Khách</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listRoomByUser?.map((room, index) => (
+                        <tr key={index}>
+                            <td>{room.maPhong}</td>
+                            <td>{room.ngayDen}</td>
+                            <td>{room.ngayDi}</td>
+                            <td>{room.soLuongKhach}</td>
+                            <td className='d-flex justify-content-around'>
+                                <Link to={`/roomdetail/${room.maPhong}`} className="btn btn-primary"  >View</Link>
+                                <button className="btn btn-danger" onClick={handleDelete} value={room.id}>Delete</button>
+                            </td>
+                        </tr>
+                    )).slice(0, 5)}
+                </tbody>
 
-    const handleUploadImage = (e) => {
-        // Send the selected image to the server for upload
-        // Update the user's avatar URL with the received image URL
-        // Update the state accordingly
-        console.log(e.target.value);
-    };
+            </table>
+        );
+    }
+
+    // const handleAvatarClick = () => {
+    //     // Open a file selection dialog when the avatar is clicked
+    //     const fileInput = document.getElementById('avatar-input');
+    //     fileInput.click();
+    // };
+
+    // const handleUploadImage = (e) => {
+    //     // Send the selected image to the server for upload
+    //     // Update the user's avatar URL with the received image URL
+    //     // Update the state accordingly
+    //     console.log(e.target.value);
+    // };
 
 
     const handleAvatarChange = (e) => {
@@ -115,7 +126,7 @@ export default function UserInfo() {
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
-                setSelectedImage(event.target.result); // Store the selected image
+                // setSelectedImage(event.target.result); // Store the selected image
             };
             reader.readAsDataURL(file);
         }
@@ -123,11 +134,11 @@ export default function UserInfo() {
     return (
         <div className='container section__Content-secondary'>
             <div className='section__Background'>
-                <div className='section__BannerTitle'>
+                <div className='section__BackgroundTitle'>
                     <h2 className='thanks-message'>Profile Page</h2>
                 </div>
             </div>
-            <div className='row'>
+            <div className='row pb-5'>
                 <div className='userAvatar__Container bg-info col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
                     <div className='userAvatar text-center flex-column align-items-center h-100 justify-content-center'>
                         <div className='d-flex justify-content-center py-5'>
@@ -289,10 +300,10 @@ export default function UserInfo() {
                         {/* Content for Tab 1 (Room) */}
                         {value === 1 && (
                             <div>
-                                {listRoomByUser.length !== 0 ? (
+                                {listRoomByUser && (
                                     <div className='section__Item-secondary'>
                                         {renderListRoomByUser()}
-                                    </div>) : (<div className='main__p'> Hiện chưa đặt phòng </div>)}
+                                    </div>)}
                             </div>
                         )}
                     </Box>
@@ -302,3 +313,5 @@ export default function UserInfo() {
 
     );
 }
+
+// : (<div className='main__p'> Hiện chưa đặt phòng </div>)

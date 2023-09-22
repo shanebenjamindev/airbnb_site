@@ -12,10 +12,15 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(actListCity());
+
     }, [dispatch]);
 
     const listCityData = useSelector((state) => state.cityReducer.data);
-    const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
+    const userData = JSON?.parse(localStorage.getItem("USER_LOGIN"));
+
+    if (userData) {
+        var { user, token } = userData
+    }
 
     const [buttonActive, setButtonActive] = useState(false);
     const [formActive, setFormActive] = useState(false);
@@ -122,7 +127,7 @@ export default function Navbar() {
                             <div className="dropdown-menu main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
                                 {userData ? (
                                     <>
-                                        <Link to="/user-info" className="dropdown-item">Hồ sơ</Link>
+                                        <Link to="/user-info" className="dropdown-item">Hồ sơ của {user.name}</Link>
                                         <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
                                     </>
                                 ) : (

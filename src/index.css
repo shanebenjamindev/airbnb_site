@@ -1,6 +1,7 @@
 @import-normalize;
-@import url(./assets/_Reset.css);
-@import url(./assets/_Variables.css);
+@import url(./assets/css/_Reset.css);
+@import url(./assets/css/_Variables.css);
+@import url(./assets/css/style.css);
 
 body {
   margin: 0;

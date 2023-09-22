@@ -29,53 +29,11 @@
   color: #fff;
 }
 
-.textbox {
-  margin-bottom: 50px;
-  margin-top: 45px;
-}
-
-.textbox .form-inline {
-  margin-top: 2px;
-}
-
-.form-group {
-  display: inline-block;
-  margin-bottom: 0;
-  vertical-align: middle;
-}
-
 .input-group {
   border: 2px solid white;
 }
-
-.form-control {
-  font-size: 14px;
-  font-weight: 300;
-  color: grey;
-  font-family: "Poppins", sans-serif;
-  border: none;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
-  padding: 6px 25px;
-  height: 40px;
-}
-
 .footer-sky.footer-sky-v4 .textbox .input-group .form-control {
   background: transparent !important;
-}
-
-.footer-sky .footer-top .textbox .form-inline .form-group .input-group .btn {
-  width: 80px;
-  height: 60px;
-  border: none;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
-  background: #3e3e3e;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  position: absolute;
-  right: 10px;
-  z-index: 99;
 }
 
 .footer-sky.footer-sky-v4 .textbox .input-group .btn {
@@ -112,24 +70,24 @@
 }
 
 .btn-footer {
-  width: 81px;
-  height: 40px;
   border: 1px solid grey;
   border-radius: 0px;
   box-shadow: none;
-  position: absolute;
+  position: relative;
   right: 0px;
+  bottom: 0;
+  padding: 0 40px;
   z-index: 99;
   font-size: 40px;
 }
 
 .forwar {
-  position: absolute;
-  bottom: 0px;
-  left: 23px;
+  width: 100%;
+  top: -13px;
+  left: 0;
   color: white;
+  position: absolute;
 }
-
 
 .forwar:hover {
   color: #8e7037;
@@ -137,7 +95,7 @@
   transition: all 1s;
 }
 
-.payments{
+.payments {
   display: flex;
   height: 100%;
   align-items: center;

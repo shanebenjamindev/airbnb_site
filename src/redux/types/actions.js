@@ -1,7 +1,10 @@
 import * as actions from './constants'
 import api from '../../ApiUtils'
 
-// Post Auth
+/**
+ *  Auth Reducer  
+*/
+//  Post
 export const actAuth = (userLogin, navigate) => {
     return (dispatch) => {
         dispatch(actAuthRequest)
@@ -71,9 +74,9 @@ const actLoginRequest = () => ({ type: actions.LOGIN_REQUEST })
 const actLoginSuccess = (data) => ({ type: actions.LOGIN_SUCCESS, payload: data })
 const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 
-
-
-// Get Citys
+/**
+ * City Reducer
+  */
 export const actListCity = () => {
     return (dispatch) => {
         dispatch(actlistCityRequest)
@@ -94,7 +97,6 @@ const actlistCityRequest = () => ({ type: actions.LIST_CITY_REQUEST })
 const actlistCitySucess = (data) => ({ type: actions.LIST_CITY_SUCCESS, payload: data })
 const actlistCityFail = (error) => ({ type: actions.LIST_CITY_FAIL, payload: error })
 
-// Delete City
 export const actDeleteCity = (cityId) => {
     return (dispatch) => {
         dispatch(actDeleteCityRequest)
@@ -117,8 +119,9 @@ const actDeleteCityRequest = () => ({ type: actions.DELETE_CITY_REQUEST })
 const actDeleteCitySucess = (data) => ({ type: actions.DELETE_CITY_SUCCESS, payload: data })
 const actDeleteCityFail = (error) => ({ type: actions.DELETE_CITY_FAIL, payload: error })
 
-
-// Get Room By Id
+/**
+ * Room Reducer 
+ */
 export const actGetRoomByCity = (id) => {
     return (dispatch) => {
         dispatch(actGetListRoomByIdRequest)
@@ -137,11 +140,13 @@ export const actGetRoomByCity = (id) => {
 
 export const actGetRoomByUser = (id) => {
     return (dispatch) => {
-        // console.log(id);
+        console.log(id);
         dispatch(actGetListRoomByIdRequest)
+
         api.get(`/dat-phong/lay-theo-nguoi-dung/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
+                    // console.log(result.data.content);
                     dispatch(actGetListRoomByIdSuccess(result.data.content))
                 }
             })
@@ -155,39 +160,78 @@ const actGetListRoomByIdRequest = () => ({ type: actions.GET_ROOM_BY_ID_REQUEST 
 const actGetListRoomByIdSuccess = (data) => ({ type: actions.GET_ROOM_BY_ID_SUCCESS, payload: data })
 const actGetListRoomByIdFail = (error) => ({ type: actions.GET_ROOM_BY_ID_FAIL, payload: error })
 
-// =====================================
+// Room data để xem thông tin phòng có người đặt chưa
+export const actGetRoomData = (id) => {
+    return (dispatch) => {
+        console.log(id);
+        dispatch(actGetRoomDataRequest)
+        api.get(`/phong-thue/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    // console.log(result);
+                    dispatch(actGetRoomDataSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                // console.log(error.statusCode);
+                // if (error.statusCode === 404) {
+                //     console.log("Phòng trống");
+                dispatch(actGetRoomDataFail(error.response.data))
+                // }
+            })
+    }
+}
 
+const actGetRoomDataRequest = () => ({ type: actions.ROOM_DATA_REQUEST })
+const actGetRoomDataSuccess = (data) => ({ type: actions.ROOM_DATA_SUCCESS, payload: data })
+const actGetRoomDataFail = (error) => ({ type: actions.ROOM_DATA_FAIL, payload: error })
+
+
+// Room Detail Reducer
 export const actRoomDetail = (id) => {
     return (dispatch) => {
         dispatch(actRoomDetailRequest)
         api.get(`/phong-thue/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch(actRoomDetialSucess(result.data.content))
+                    dispatch(actRoomDetailSucess(result.data.content))
                 }
             })
             .catch((error) => {
                 // console.log(error);
-                dispatch(actRoomDetialFail(error.response.data))
+                dispatch(actRoomDetailFail(error.response.data))
             })
     }
 }
 
 const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
-const actRoomDetialSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
-const actRoomDetialFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
+const actRoomDetailSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
+const actRoomDetailFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
 
-
-export const actCheckout = (room) => {
+// Post Checkout
+export const actCheckout = (roomData) => {
     return (dispatch) => {
-        console.log(room);
+        dispatch(actCheckoutRequest)
+        api.post(`/dat-phong/`, roomData)
+            .then((result) => {
+                console.log(result.data.content);
+                dispatch(actCheckoutSuccess(result.data.content))
+                // alert("Đã thêm vào hồ sơ")
+            })
+            .catch((error) => {
+                dispatch(actCheckoutFail(error.response.data))
+            })
     }
 }
+
+const actCheckoutRequest = () => ({ type: actions.CHECKOUT_REQUEST })
+const actCheckoutSuccess = (data) => ({ type: actions.CHECKOUT_SUCCESS, payload: data })
+const actCheckoutFail = (error) => ({ type: actions.CHECKOUT_SUCCESS, payload: error })
 
 // Home Get :
 export const actHomeListRoom = () => {
     return (dispatch) => {
-        dispatch(actHomeListRoomRequest);
+        dispatch(actHomeListRoomRequest());
         api
             .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
             .then((result) => {
@@ -205,10 +249,6 @@ export const actHomeListRoom = () => {
 const actHomeListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
 const actHomeListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })
 const actHomeListRoomFail = (error) => ({ type: actions.HOMELIST_ROOM_FAIL, payload: error })
-
-
-
-
 
 // Get Comments
 export const actGetRoomComment = (roomId) => {
@@ -275,3 +315,29 @@ export const actRoomComment = (newComment, navigate) => {
 const actCommentPostRequest = () => ({ type: actions.COMMENTS_POST_REQUEST })
 const actCommentPostSuccess = (data) => ({ type: actions.COMMENTS_POST_SUCCESS, payload: data })
 const actCommentPostFail = (error) => ({ type: actions.COMMENTS_POST_FAIL, payload: error })
+
+// Get user: // Redux action creators related to user information
+export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
+export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
+export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
+
+// Async action creator for getting user information
+export const actGetUserInfo = (id) => {
+    return (dispatch) => {
+        dispatch(actGetUserInfoRequest());
+
+        api.get(`/users/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    console.log(result.data.content);
+                    dispatch(actGetUserInfoSuccess(result.data.content));
+                    // After fetching user info, you can dispatch an action to get user's rooms here
+                    dispatch(actGetRoomByUser(id));
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                dispatch(actGetUserInfoFail(content));
+            });
+    };
+};

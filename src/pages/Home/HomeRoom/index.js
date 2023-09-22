@@ -11,16 +11,20 @@ export default function HomeRoom() {
     dispatch(actHomeListRoom());
   }, [dispatch]);
 
-  const listRoom = useSelector((state) => state.homeListRoomReducer.data);
+  const { loading, data, error } = useSelector((state) => state.roomReducer);
+  const listRoom = data
 
+  // const error = useSelector((state) => state.roomReducer.error);
   const renderListRoom = () => {
-    if (listRoom) {
-      return listRoom.data?.map((item, index) => (
-        <div key={index} className="col-lg-3 col-sm-6 my-2">
-          <Room room={item} />
-        </div>
-      ));
+    if (loading && error) {
+      return null
     }
+
+    return listRoom?.data?.map((item, index) => (
+      <div key={index} className="col-lg-3 col-sm-6 my-2">
+        <Room room={item} />
+      </div>
+    ));
   };
 
   return (

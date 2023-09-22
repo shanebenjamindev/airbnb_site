@@ -6,21 +6,22 @@ const initialState = {
     error: null
 }
 
-const homeListRoomReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.HOMELIST_ROOM_REQUEST:
+        // Get user
+        case actions.USER_GET_REQUEST:
             state.loading = true;
             state.data = null;
             state.error = null;
             return { ...state }
 
-        case actions.HOMELIST_ROOM_SUCCESS:
+        case actions.USER_GET_SUCCESS:
             state.loading = false;
             state.data = action.payload;
             state.error = null;
             return { ...state }
 
-        case actions.HOMELIST_ROOM_FAIL:
+        case actions.USER_GET_FAIL:
             state.loading = false;
             state.data = null;
             state.error = action.payload;
@@ -31,4 +32,4 @@ const homeListRoomReducer = (state = initialState, action) => {
     }
 }
 
-export default homeListRoomReducer
+export default userReducer

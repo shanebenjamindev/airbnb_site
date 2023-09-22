@@ -30,7 +30,7 @@ export default function Footer() {
                                     <div className="input-group">
                                         <input
                                             type="email"
-                                            className="form-control"
+                                            className="form-control text-white"
                                             placeholder="Your email address"
                                             aria-label="Search for..."
                                         />

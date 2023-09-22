@@ -6,29 +6,30 @@ const initialState = {
     error: null
 }
 
-const RoomDetailReducer = (state = initialState, action) => {
+const checkoutReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.ROOM_DETAIL_REQUEST:
+        // post cmt
+        case actions.CHECKOUT_REQUEST:
             state.loading = true;
             state.data = null;
             state.error = null;
             return { ...state }
 
-        case actions.ROOM_DETAIL_SUCCESS:
+        case actions.CHECKOUT_SUCCESS:
             state.loading = false;
             state.data = action.payload;
             state.error = null;
             return { ...state }
 
-        case actions.ROOM_DETAIL_FAIL:
+        case actions.CHECKOUT_FAIL:
             state.loading = false;
             state.data = null;
             state.error = action.payload;
             return { ...state }
-
+        
         default:
             return { ...state }
     }
 }
 
-export default RoomDetailReducer
+export default checkoutReducer

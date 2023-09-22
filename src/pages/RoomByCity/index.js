@@ -13,10 +13,16 @@ export default function RoomByCityPage() {
         dispatch(actGetRoomByCity(param.id))
     }, [dispatch, param.id])
 
-    const listRoomByCity = useSelector((state) => state.listRoomByIdReducer.data);
-
-    console.log(listRoomByCity);
+    const { loading, data, error } = useSelector((state) => state.roomReducer);
+    const listRoomByCity = data
     const renderRoomByCity = () => {
+        if (loading) {
+            return null
+        }
+        else if (error) {
+            return <div>Error 404</div> 
+        }
+        // const listRoomByCity = data
         return listRoomByCity?.map((room, index) => {
             return <Link to={`/roomdetail/${room.id}`} key={index} className='card p-1 m-3'>
                 <div className='d-md-flex align-items-center'>
@@ -40,9 +46,13 @@ export default function RoomByCityPage() {
 
     return (
         <div>
-            <div className='section__Background'></div>
+            <div className='section__Background'>
+                <div className='section__BackgroundTitle'>
+                    <h2 className='thanks-message'>List Rooms</h2>
+                </div>
+            </div>
             <div className='section__Content-secondary'>
-                <div className='container section__Item-secondary'>
+                <div className='section__Item-secondary'>
                     <div className='row'>
                         <div className='col-sm-12 col-lg-6 col-md-6'>
                             <div className='d-flex justify-content-between'>

@@ -1,18 +1,18 @@
 import { combineReducers } from "redux"
 import cityReducer from "../redux/reducers/cityReducer"
-import listRoomByIdReducer from "../redux/reducers/listRoomByIdReducer"
-import RoomDetailReducer from "../redux/reducers/roomDetailReducer"
-import homeListRoomReducer from "../redux/reducers/homeListRoomReducer"
 import authReducer from "../redux/reducers/authReducer"
 import commentReducer from "../redux/reducers/commentReducer"
+import checkoutReducer from "../redux/reducers/checkoutReducer"
+import userReducer from "../redux/reducers/userReducer"
+import roomReducer from "../redux/reducers/roomReducer"
 
 const rootReducer = combineReducers({
     cityReducer,
-    listRoomByIdReducer,
-    RoomDetailReducer,
-    homeListRoomReducer,
     authReducer,
     commentReducer,
+    checkoutReducer,
+    roomReducer,
+    userReducer
 })
 
 export default rootReducer

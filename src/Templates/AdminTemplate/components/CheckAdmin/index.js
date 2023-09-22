@@ -6,9 +6,13 @@ export default function CheckAdmin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userData?.data !== "ADMIN") {
-            alert("Bạn không có quyền truy cập");
-            return navigate("/");
+        if (userData) {
+            const { role } = userData
+            
+            if (role !== "ADMIN") {
+                alert("Bạn không có quyền truy cập");
+                return navigate("/");
+            }
         }
     }, [])
 }

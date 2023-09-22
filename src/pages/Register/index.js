@@ -161,7 +161,7 @@ export default function RegisterPage() {
                     <div className="form-group d-flex">
                         <div className='col-6 pl-1'>
                             <label>Giới tính</label>
-                            <select name="gender" id="gender" className="form-control bg-white" onChange={handleOnChange}>
+                            <select name="gender" required id="gender" className="form-control bg-white" onChange={handleOnChange}>
                                 <option value="">Chọn giới tính</option>
                                 <option value={true}>Nam</option>
                                 <option value={false}>Nữ</option>

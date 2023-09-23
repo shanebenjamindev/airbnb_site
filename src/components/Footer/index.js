@@ -6,7 +6,6 @@ import { ForwardOutlined } from '@ant-design/icons';
 export default function Footer() {
     return (
         <footer className=''>
-
             <div className="footer-sky footer-sky-v4">
                 <div className="container">
                     <div>
@@ -64,7 +63,7 @@ export default function Footer() {
                                             title="Thiết kế web khách sạn"
                                             rel="dofollow noreferrer"
                                             target="_blank" style={{ border: "none" }}>
-                                            BINH CYBERSOFT
+                                            GIANG BINH CYBERSOFT
                                         </a>
                                     </div>
                                 </div>

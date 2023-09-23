@@ -10,9 +10,9 @@ Link:visited {
     color: inherit;
 }
 
-.reset-link, .reset-link:hover {
+.reset-link, .reset-link:hover, a {
     color: inherit !important;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 *,

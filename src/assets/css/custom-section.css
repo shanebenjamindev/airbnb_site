@@ -11,7 +11,7 @@
     background-size: cover;
     background-position: center;
     /* background-blend-mode: darken; */
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     z-index: -1;
 }
 
@@ -37,16 +37,16 @@
 
 /* Section primary */
 .section__Content-primary {
-    margin: 15rem 0;
-    background-color: transparent;
+    /* padding: 15rem 0; */
     /* background-color: transparent; */
+    /* background-color: red; */
 }
 
 .section__Item-primary {
-    width: 90%;
     margin: auto;
-    padding: 50px 0;
-    border-radius: 50px;
+    background-color: #fff;
+    padding: 15rem 0;
+    /* border-radius: 50px; */
     background-color: white;
 }
 
@@ -57,15 +57,14 @@
 /* ----------------------------------- */
 /* Section secondary */
 .section__Content-secondary {
-    padding: 15rem  0;
+    /* padding: 15rem  0; */
 }
 
 .section__Content-primary-center {
-    padding: 15rem 0;
+    /* padding: 15rem 0; */
 }
 
 .section__Item-secondary {
-    width: 99%;
     margin: 2rem auto;
     border-radius: 15px;
     padding: 50px;

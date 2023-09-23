@@ -71,9 +71,9 @@ export default function Comments(props) {
     };
 
     return (
-        <div className='section__Comments mt-5'>
+        <div className='py-5'>
             <div className=''><h2 className='main__Title'>Comments</h2></div>
-            <div className='comments-container mt-5'>
+            <div className='comments-container w-75 container'>
                 {renderComments()}
             </div>
 

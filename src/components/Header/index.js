@@ -92,7 +92,7 @@ export default function Navbar() {
     return (
         <header>
             <div className='header'>
-                <div className='navbar__Container align-items-center navbar-expand-lg navbar-dark pb-2'>
+                <div className='navbar__Container container align-items-center navbar-expand-lg navbar-dark pb-2'>
                     <nav className="navbar d-flex">
                         <div className="d-flex w-100 justify-content-between">
                             <button
@@ -120,41 +120,58 @@ export default function Navbar() {
                                 </div>
                             </Link>
 
-                            <a className="user-avatar nav-link" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <MenuOutlined />
-                                <UserOutlined />
-                            </a>
-                            <div className="dropdown-menu main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                                {userData ? (
-                                    <>
-                                        <Link to="/user-info" className="dropdown-item">Hồ sơ của {user.name}</Link>
-                                        <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
-                                        <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
-                                    </>
-                                )}
-                                <a className="dropdown-item" href="/">Cho thuê nhà</a>
-                                <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
-                                <a className="dropdown-item" href="/">Trợ giúp</a>
-                                <Link className='dropdown-item' to="/auth">
-                                    <span className='main__p'>Admin Page</span>
-                                </Link>
+                            <div className='d-flex'>
+                                <div className='text-white icon1 nav-link'>
+                                    <div>
+                                        <a href="/">
+                                            {" "}
+                                            <FacebookOutlined className="px-2" />
+                                        </a>
+                                        <a href="/">
+                                            <TwitterOutlined className="px-2" />
+                                        </a>
+                                        <a href="/">
+                                            {" "}
+                                            <YoutubeOutlined className="px-2" />
+                                        </a>
+                                        <a href="/">
+                                            <InstagramOutlined className="px-2" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a className="user-avatar nav-link" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                    <MenuOutlined />
+                                    <UserOutlined />
+                                </a>
+                                <div id='dropdown-menu' className="dropdown-menu custom__Border-50 main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
+                                    {userData ? (
+                                        <>
+                                            <Link to="/user-info" className="dropdown-item">Hồ sơ của {user.name}</Link>
+                                            <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link to="/register-page" className="dropdown-item">Đăng ký</Link>
+                                            <Link to="/login-page" className="dropdown-item">Đăng nhập</Link>
+                                        </>
+                                    )}
+                                    <a className="dropdown-item" href="/">Cho thuê nhà</a>
+                                    <a className="dropdown-item" href="/">Tổ chức trãi nghiệm</a>
+                                    <a className="dropdown-item" href="/">Trợ giúp</a>
+                                    <Link className='dropdown-item' to="/auth">
+                                        <span className='main__p'>Admin Page</span>
+                                    </Link>
+                                </div>
                             </div>
+
                         </div>
-                        
+
                     </nav>
                     {/** Form */}
                     <div id='navbarSupportedContent' className="collapse navbar-collapse">
                         <div className="d-flex flex-wrap container align-items-center justify-content-around text-white">
-
-                            <div className="nav-link phone-info">
-                                <PhoneOutlined />
-                                <span> (+84) 83. 47 82 18</span>
-                            </div>
-
                             <div className="text-center nav-link">
                                 {/* Button to Show Form */}
                                 <div className='btnFindRoom__Container d-flex'>
@@ -168,26 +185,6 @@ export default function Navbar() {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className='text-white icon1 nav-link'>
-                                <div>
-                                    <a href="/">
-                                        {" "}
-                                        <FacebookOutlined className="px-2" />
-                                    </a>
-                                    <a href="/">
-                                        <TwitterOutlined className="px-2" />
-                                    </a>
-                                    <a href="/">
-                                        {" "}
-                                        <YoutubeOutlined className="px-2" />
-                                    </a>
-                                    <a href="/">
-                                        <InstagramOutlined className="px-2" />
-                                    </a>
-                                </div>
-                            </div>
-
                         </div>
 
                     </div>

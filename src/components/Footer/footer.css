@@ -1,6 +1,8 @@
 .footer-sky.footer-sky-v4 {
   padding-top: 45px;
-  background: url(http://landing.engotheme.com/html/skyline/demo/images/Home-4/footer.jpg) no-repeat;
+  box-shadow:  inset rgba(0, 0, 0, 0.2) 10rem 10rem 10rem 10rem;
+  background-color: transparent ;
+  /* background: url(http://landing.engotheme.com/html/skyline/demo/images/Home-4/footer.jpg) no-repeat; */
   width: 100%;
   background-size: cover;
   background-position: center center;

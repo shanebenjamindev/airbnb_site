@@ -117,15 +117,13 @@ export default function RoomDetail() {
                 <div className='section__Checkout col-lg-4 col-md-5 col-sm-12 mt-4 mt-md-0 '>
                   <DateRangeForm detail={roomDetail} user={user} />
                 </div>
-
-                <div className='section__Review col-12'>
-                  <Comments data={roomDetail} user={user} />
-                </div>
               </div >
-
             </div>
           </div >
 
+          <div className='bg-white container'>
+            <Comments data={roomDetail} user={user} />
+          </div>
         </div>
       )}
 

@@ -10,6 +10,16 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+#dropdown-menu {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.dropdown-item:hover{
+    border-radius: 20px;
+    background-color: var(--primary-color);
+}
+
 .navbar__Container {
     position: relative;
     height: auto;

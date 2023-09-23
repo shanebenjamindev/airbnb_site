@@ -83,6 +83,45 @@ const roomReducer = (state = initialState, action) => {
             state.data = null;
             state.error = action.payload;
             return { ...state }
+            
+        // Add room
+        case actions.ADD_ROOM_REQUEST:
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+            return { ...state }
+
+        case actions.ADD_ROOM_SUCCESS:
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+            return { ...state }
+
+        case actions.ADD_ROOM_FAIL:
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+            return { ...state }
+
+        // // Edit room
+        // case actions.EDIT_ROOM_REQUEST:
+        //     state.loading = true;
+        //     state.data = null;
+        //     state.error = null;
+        //     return { ...state }
+
+        // case actions.EDIT_ROOM_SUCCESS:
+        //     state.loading = false;
+        //     state.data = action.payload;
+        //     state.error = null;
+        // //     return { ...state }
+
+        // case actions.EDIT_ROOM_FAIL:
+        //     state.loading = false;
+        //     state.data = null;
+        //     state.error = action.payload;
+        //     return { ...state }
+
 
         // delete room user
         case actions.DELETE_ROOM_USER_REQUEST:

@@ -12,13 +12,8 @@ export default function RoomDetail() {
   const param = useParams();
   const dispatch = useDispatch();
 
-  const userFromLocal = localStorage?.getItem("USER_LOGIN");
-  
-  if (userFromLocal) {
-    var {user} = userFromLocal
-  }else {
-    var user = []
-  }
+  const userData = localStorage.getItem("USER_LOGIN");
+  const user = userData ? JSON.parse(userData).user : "";
 
   useEffect(() => {
     dispatch(actRoomDetail(param.id))

@@ -144,10 +144,7 @@ export default function Navbar() {
                                 </Link>
                             </div>
                         </div>
-
-
-
-
+                        
                     </nav>
                     {/** Form */}
                     <div id='navbarSupportedContent' className="collapse navbar-collapse">
@@ -155,7 +152,7 @@ export default function Navbar() {
 
                             <div className="nav-link phone-info">
                                 <PhoneOutlined />
-                                <span> (+84) 28. 38 12 17 19</span>
+                                <span> (+84) 83. 47 82 18</span>
                             </div>
 
                             <div className="text-center nav-link">

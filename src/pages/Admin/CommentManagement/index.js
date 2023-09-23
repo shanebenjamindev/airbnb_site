@@ -20,41 +20,30 @@ export default function CommentManagement() {
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "10%",
       sorter: (a, b) => a.id - b.id,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Room id",
+      title: "Mã phòng",
       dataIndex: "maPhong",
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "20%",
       sorter: (a, b) => a.maPhong - b.maPhong,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Customer id",
+      title: "Mã khách hàng",
       dataIndex: "maNguoiBinhLuan",
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "20%",
       sorter: (a, b) => a.maNguoiBinhLuan - b.maNguoiBinhLuan,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "comment",
+      title: "Nội dung",
       dataIndex: "noiDung",
-      sorter: (a, b) => {
-        let commentA = a.comment.toLowerCase().trim();
-        let commentB = b.comment.toLowerCase().trim();
-        if (commentA > commentB) {
-          return 1;
-        }
-        return -1;
-      },
       render: (text, room, index) => {
         return (
           <Fragment key={index}>
@@ -64,16 +53,26 @@ export default function CommentManagement() {
           </Fragment>
         );
       },
-      width: "40%",
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "saoBinhLuan",
+      title: "Sao bình luận",
       dataIndex: "saoBinhLuan",
       value: (text, object) => {
         return <span key={object}>{text}</span>;
       },
-      width: "10%",
+
+      sorter: (a, b) => a.saoBinhLuan - b.saoBinhLuan,
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Hành động",
+      dataIndex: "saoBinhLuan",
+      value: (text, object) => {
+        return <span key={object}>{text}</span>;
+      },
+
+      sorter: (a, b) => a.saoBinhLuan - b.saoBinhLuan,
       sortDirections: ["descend", "ascend"],
     },
   ];
@@ -89,10 +88,10 @@ export default function CommentManagement() {
   const onChange = (pagination, filters, sorter, extra) => {
   };
   return (
-    <div className="container">
-      <h3 style={{ fontSize: 30, fontWeight: 600 }}>Quản Lý Comment</h3>
+    <div className="container section__Item-secondary">
+      <h3 className='main__Title text-center'>Quản Lý Comment</h3>
       <Table
-        className="mt-5 table1"
+        className="mt-5 table table-responsive"
         columns={columns}
         dataSource={data}
         onChange={onChange}

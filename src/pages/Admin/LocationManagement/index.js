@@ -5,7 +5,7 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { actDeleteCity, actListCity } from "../../../redux/types/actions";
+import { actAddCity, actDeleteCity, actListCity } from "../../../redux/types/actions";
 import './manage-location.css'
 import LocationModal from "./LocationModal";
 
@@ -24,18 +24,23 @@ export default function AdminLocation(props) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
-  const [formData, setFormData] = useState(null); // Initialize with an empty object
+  const [formData, setFormData] = useState(null);
 
-  const showModal = (mode, editData) => {
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const showModal = (mode, cityData) => {
     setModalMode(mode);
-    setFormData(editData); // Initialize with empty data or editData if provided
+
+    setFormData(cityData);
+
     setIsModalVisible(true);
   };
 
   const handleModalOk = (newData) => {
     // Handle the form submission based on modalMode (add or edit)
     if (modalMode === "add") {
-      
+
+      dispatch(actAddCity(newData))
       console.log('Added Data:', newData);
 
     } else if (modalMode === "edit") {
@@ -134,18 +139,17 @@ export default function AdminLocation(props) {
               >
                 <EditOutlined />
               </button>
-              <span
+              <button
                 onClick={() => {
                   if (window.confirm("Bạn có muốn xóa " + city.tenViTri)) {
                     dispatch(actDeleteCity(city.id))
                   }
                   console.log(city.id, "Ma vị trí cần xóa");
                 }}
-                style={{ fontSize: 20, cursor: "pointer" }}
                 className="btn btn-outline-danger"
               >
                 <DeleteOutlined />
-              </span>
+              </button>
             </div>
           </Fragment >
         );
@@ -158,21 +162,23 @@ export default function AdminLocation(props) {
   };
 
   return (
-    <div className="container">
-      <h3 className="main__Title">Quản Lý Vị Trí</h3>
-      <Button className="mb-3 main__p" onClick={() => showModal("add")}>Thêm Vị Trí</Button>
+    <div className="container section__Item-secondary">
+      <h3 className="main__Title text-center">Quản Lý Vị Trí</h3>
+      <div className="text-right my-2">
+        <button className="btn__Primary" onClick={() => showModal("add")}>Thêm Vị Trí</button>
+      </div>
       {/* Add Location Modal */}
       <LocationModal
         visible={isModalVisible}
         onCancel={handleModalCancel}
         onOk={handleModalOk}
+        formData={formData}
         mode={modalMode}
-        data={formData}
       />
 
-      <div className="bg-white container main__p" style={{ overflowX: "auto" }}>
+      <div className="bg-white container table-responsive" >
         <Table
-          className=""
+          className="table"
           columns={columns}
           dataSource={data}
           onChange={onChange}

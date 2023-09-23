@@ -14,34 +14,36 @@ export default function RoomByCityPage() {
     }, [dispatch, param.id])
 
     const { loading, data, error } = useSelector((state) => state.roomReducer);
-    const listRoomByCity = data
+
     const renderRoomByCity = () => {
         if (loading) {
-            return null
-        }
-        else if (error) {
-            return <div>Error 404</div> 
-        }
-        // const listRoomByCity = data
-        return listRoomByCity?.map((room, index) => {
-            return <Link to={`/roomdetail/${room.id}`} key={index} className='card p-1 m-3'>
-                <div className='d-md-flex align-items-center'>
-                    <div className='col-md-6'>
-                        <img className="img-fluid" src={room.hinhAnh} alt="Cardcap" />
+            return null;
+        } else if (error) {
+            return <div>Error 404</div>;
+        } else if (Array.isArray(data)) { // Check if data is an array
+            const listRoomByCity = data;
+            return listRoomByCity.map((room, index) => (
+                <Link to={`/roomdetail/${room.id}`} key={index} className='card p-1 m-3'>
+                    <div className='d-md-flex align-items-center'>
+                        <div className='col-md-6'>
+                            <img className="img-fluid" src={room.hinhAnh} alt="Cardcap" />
+                        </div>
+                        <div className='col-md-6'>
+                            <span className="">{room.tenPhong}</span>
+                            <p>Price: {room.giaTien}</p>
+                        </div>
                     </div>
-                    <div className='col-md-6'>
-                        <span className="">{room.tenPhong}</span>
-                        <p>Price: {room.giaTien}</p>
-                    </div>
-                </div>
-            </Link>
+                </Link>
+            ));
+        } else {
+            return <div>No rooms available</div>; // Handle the case where data is not an array
+        }
+    };
 
-        })
-    }
 
     const renderCount = () => {
-        if (listRoomByCity?.length === 0) { return <div>Hiện không có chỗ ở</div> }
-        else return <div>Hiện có {listRoomByCity?.length} chỗ ở </div>
+        if (data?.length === 0) { return <div>Hiện không có chỗ ở</div> }
+        else return <div>Hiện có {data?.length} chỗ ở </div>
     }
 
     return (

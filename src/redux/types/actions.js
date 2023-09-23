@@ -77,6 +77,7 @@ const actLoginFail = (error) => ({ type: actions.LOGIN_FAIL, payload: error })
 /**
  * City Reducer
   */
+//  get city
 export const actListCity = () => {
     return (dispatch) => {
         dispatch(actlistCityRequest)
@@ -97,6 +98,50 @@ const actlistCityRequest = () => ({ type: actions.LIST_CITY_REQUEST })
 const actlistCitySucess = (data) => ({ type: actions.LIST_CITY_SUCCESS, payload: data })
 const actlistCityFail = (error) => ({ type: actions.LIST_CITY_FAIL, payload: error })
 
+// add city
+export const actAddCity = (roomData) => {
+    return (dispatch) => {
+        dispatch(actAddCityRequest)
+        api.post(`/vi-tri/`, roomData)
+            .then((result) => {
+                console.log(result.data.content);
+                dispatch(actAddCitySuccess(result.data.content))
+                // alert("Đã thêm vào hồ sơ")
+            })
+            .catch((error) => {
+                dispatch(actAddCityFail(error.response.data))
+            })
+    }
+}
+
+const actAddCityRequest = () => ({ type: actions.ADD_CITY_REQUEST })
+const actAddCitySuccess = (data) => ({ type: actions.ADD_CITY_SUCCESS, payload: data })
+const actAddCityFail = (error) => ({ type: actions.ADD_CITY_SUCCESS, payload: error })
+
+// edit city
+
+// add city
+export const actEditCity = (roomData) => {
+    return (dispatch) => {
+        dispatch(actEditCityRequest)
+        api.put(`/vi-tri/`, roomData)
+            .then((result) => {
+                console.log(result.data.content);
+                dispatch(actEditCitySuccess(result.data.content))
+                // alert("Đã thêm vào hồ sơ")
+            })
+            .catch((error) => {
+                dispatch(actEditCityFail(error.response.data))
+            })
+    }
+}
+
+const actEditCityRequest = () => ({ type: actions.EDIT_CITY_REQUEST })
+const actEditCitySuccess = (data) => ({ type: actions.EDIT_CITY_SUCCESS, payload: data })
+const actEditCityFail = (error) => ({ type: actions.EDIT_CITY_SUCCESS, payload: error })
+
+
+// delete city
 export const actDeleteCity = (cityId) => {
     return (dispatch) => {
         dispatch(actDeleteCityRequest)
@@ -168,16 +213,11 @@ export const actGetRoomData = (id) => {
         api.get(`/phong-thue/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    // console.log(result);
                     dispatch(actGetRoomDataSuccess(result.data.content))
                 }
             })
             .catch((error) => {
-                // console.log(error.statusCode);
-                // if (error.statusCode === 404) {
-                //     console.log("Phòng trống");
                 dispatch(actGetRoomDataFail(error.response.data))
-                // }
             })
     }
 }
@@ -185,7 +225,6 @@ export const actGetRoomData = (id) => {
 const actGetRoomDataRequest = () => ({ type: actions.ROOM_DATA_REQUEST })
 const actGetRoomDataSuccess = (data) => ({ type: actions.ROOM_DATA_SUCCESS, payload: data })
 const actGetRoomDataFail = (error) => ({ type: actions.ROOM_DATA_FAIL, payload: error })
-
 
 export const actRoomDetail = (id) => {
     return (dispatch) => {
@@ -206,6 +245,26 @@ export const actRoomDetail = (id) => {
 const actRoomDetailRequest = () => ({ type: actions.ROOM_DETAIL_REQUEST })
 const actRoomDetailSucess = (data) => ({ type: actions.ROOM_DETAIL_SUCCESS, payload: data })
 const actRoomDetailFail = (error) => ({ type: actions.ROOM_DETAIL_FAIL, payload: error })
+
+// Post Room 
+export const actAddRoom = (roomData) => {
+    return (dispatch) => {
+        dispatch(actAddRoomRequest)
+        api.post(`/phong-thue/`, roomData)
+            .then((result) => {
+                console.log(result.data.content);
+                dispatch(actAddRoomSuccess(result.data.content))
+                // alert("Đã thêm vào hồ sơ")
+            })
+            .catch((error) => {
+                dispatch(actAddRoomFail(error.response.data))
+            })
+    }
+}
+
+const actAddRoomRequest = () => ({ type: actions.ADD_ROOM_REQUEST })
+const actAddRoomSuccess = (data) => ({ type: actions.ADD_ROOM_SUCCESS, payload: data })
+const actAddRoomFail = (error) => ({ type: actions.ADD_ROOM_SUCCESS, payload: error })
 
 
 // Post Checkout

@@ -27,8 +27,45 @@ const cityReducer = (state = initialState, action) => {
             state.error = action.payload;
             return { ...state }
 
-        // Post city
-        // Put city
+        // Add city
+        case actions.ADD_CITY_REQUEST:
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+            return { ...state }
+
+        case actions.ADD_CITY_SUCCESS:
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+            return { ...state }
+
+        case actions.ADD_CITY_FAIL:
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+            return { ...state }
+
+        // Edit city
+        case actions.EDIT_CITY_REQUEST:
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+            return { ...state }
+
+        case actions.EDIT_CITY_SUCCESS:
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+            return { ...state }
+
+        case actions.EDIT_CITY_FAIL:
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+            return { ...state }
+
+
         // Delete city
         case actions.DELETE_CITY_REQUEST:
             state.loading = true;

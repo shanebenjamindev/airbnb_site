@@ -138,9 +138,9 @@ export default function UserInfo() {
                     <h2 className='thanks-message'>Profile Page</h2>
                 </div>
             </div>
-            <div className=' row '>
-                <div className='userAvatar__Container bg-info col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
-                    <div className='userAvatar text-center flex-column align-items-center h-100 justify-content-center'>
+            <div className='section__Item-primary d-flex'>
+                <div className='userAvatar__Container section__Item-primary  col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
+                    <div className='text-center flex-column align-items-center h-100 justify-content-center'>
                         <div className='d-flex justify-content-center py-2'>
                             <input
                                 name='avatar'
@@ -158,11 +158,11 @@ export default function UserInfo() {
                                 src={`${newProfile.avatar}` || (user.avatar) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                             />
                         </div>
-                        <div className='main__p text-white'>{user.name}</div>
+                        <div className='main__p'>{user.name}</div>
                     </div>
                 </div>
 
-                <div className='user-Info__Container  col-md-9 col-lg-9 section__Item-primary'>
+                <div className='user-Info__Container  col-md-9 col-lg-9'>
 
                     <div className='userAvatar__Container text-center d-block d-md-none'>
                         <div className='userAvatar d-flex justify-content-center align-items-center h-100 '>

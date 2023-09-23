@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { Table } from "antd";
 import { AudioOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { actListComment } from '../../../redux/types/actions'
+import { actListComment } from '../../../redux/actions/actComment'
 
 export default function CommentManagement() {
 
@@ -79,24 +79,14 @@ export default function CommentManagement() {
     },
   ];
   const data = listComment;
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1890ff",
-      }}
-    />
-  );
-  const onChange = (pagination, filters, sorter, extra) => {
-  };
+
   return (
-    <div className="">
-      <h3 className='main__Title text-center'>Quản Lý Comment</h3>
+    <div className="container">
+      <h3 className='main__Title'>Quản Lý Comment</h3>
       <Table
         className="mt-5 table table-responsive"
         columns={columns}
         dataSource={data}
-        onChange={onChange}
         rowKey={"id"}
       />
     </div>

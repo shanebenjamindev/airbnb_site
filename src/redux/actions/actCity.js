@@ -31,7 +31,8 @@ export const actAddCity = (roomData) => {
         api.post(`/vi-tri/`, roomData)
             .then((result) => {
                 dispatch(actAddCitySuccess(result.data.content))
-                // alert("Đã thêm vào hồ sơ")
+                alert("Đã thêm vào vị trí")
+                dispatch(actListCity())
             })
             .catch((error) => {
                 dispatch(actAddCityFail(error.response.data))

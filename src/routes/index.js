@@ -53,8 +53,12 @@ const routes = [
                 element: lazy(() => import("../pages/Admin/CommentManagement"))
             },
             {
-                path: "admin-info",
+                path: "admin-info/:id",
                 element: lazy(() => import("../pages/Admin/AdminInfo")),
+            },
+            {
+                path: "manage-users",
+                element: lazy(() => import("../pages/Admin/UserManagement")),
             },
 
 

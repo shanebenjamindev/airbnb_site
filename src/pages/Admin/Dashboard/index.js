@@ -3,7 +3,7 @@ import "../Dashboard/Dashboard.css";
 import { Card, Space, Statistic, Table, Typography } from "antd";
 import { CommentBankOutlined, DonutLargeOutlined, LocalActivityOutlined, LocationCityOutlined, PinDropOutlined, RoomOutlined, SupervisedUserCircleOutlined } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { actListCity } from "../../../redux/types/actions";
+import { actListCity } from "../../../redux/actions/actCity";
 import {
   Chart as ChartJS,
   CategoryScale,

@@ -5,7 +5,7 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { actAddCity, actDeleteCity, actListCity } from "../../../redux/types/actions";
+import { actAddCity, actDeleteCity, actListCity } from "../../../redux/actions/actCity";
 import './manage-location.css'
 import LocationModal from "./LocationModal";
 
@@ -17,10 +17,6 @@ export default function AdminLocation(props) {
   }, [dispatch]);
 
   const DsViTri = useSelector(state => state.cityReducer.data)
-
-  if (DsViTri) {
-    var data = DsViTri;
-  }
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
@@ -39,7 +35,7 @@ export default function AdminLocation(props) {
   const handleModalOk = (newData) => {
     // Handle the form submission based on modalMode (add or edit)
     if (modalMode === "add") {
-
+      // console.log(newData);
       dispatch(actAddCity(newData))
 
     } else if (modalMode === "edit") {
@@ -182,7 +178,7 @@ export default function AdminLocation(props) {
           <Table
             className="table"
             columns={columns}
-            dataSource={data}
+            dataSource={DsViTri}
             onChange={onChange}
             rowKey={"id"}
           />

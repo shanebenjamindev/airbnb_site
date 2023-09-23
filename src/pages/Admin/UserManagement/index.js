@@ -1,145 +1,71 @@
-import React, { Fragment, useEffect } from "react";
-import { Button, Table } from "antd";
-import {
-  AudioOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  CalendarOutlined,
-} from "@ant-design/icons";
-import { Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
+import { Table } from 'antd'
+import { actDeleteCity } from '../../../redux/actions/actCity'
+import { Link } from 'react-router-dom'
+import { actGetListUser } from '../../../redux/actions/actUser'
 
-import { NavLink } from "react-router-dom";
-import {
-  DeleteUserAction,
-  GetUserAction,
-} from "../../../redux/Actions/QLNDAction";
-import "../Dashboard/Dashboard.css";
-
-function User(props) {
-  const { DSUser } = useSelector((state) => state.QLNDReducer);
-  const dispatch = useDispatch();
-
+export default function UserManagement() {
+  const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(GetUserAction());
-  }, []);
+    dispatch(actGetListUser())
+  }, [])
 
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      value: (text, object) => {
-        return <span key={object}>{text}</span>;
-      },
-      width: "5%",
-      sorter: (a, b) => a.id - b.id,
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "Họ Tên",
-      dataIndex: "name",
-      value: (text, object) => {
-        return <span key={object}>{text}</span>;
-      },
-      width: "10%",
-      sorter: (a, b) => a.hoTen - b.hoTen,
-      sortDirections: ["descend", "ascend"],
-    },
-
-    {
-      title: "email",
-      dataIndex: "email",
-      value: (text, object) => {
-        return <span key={object}>{text}</span>;
-      },
-      width: "10%",
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "Ngày Sinh",
-      dataIndex: "birthday",
-      width: "10%",
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "role",
-      dataIndex: "role",
-      width: "10%",
-      sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "Hành  Động",
-      dataIndex: "id",
-      render: (text, ttnd, index) => {
-        return (
-          <Fragment key={index}>
-            <NavLink
-              style={{ fontSize: 20 }}
-              className=" text-primary mr-3 p-2"
-              to={`/admin/user/edituser/${ttnd.id}`}
-            >
-              <EditOutlined />
-            </NavLink>
-            <span
-              onClick={() => {
-                dispatch(DeleteUserAction(ttnd.id));
-              }}
-              style={{ fontSize: 20, cursor: "pointer" }}
-              className=" text-danger mr-3 p-2"
-            >
-              <DeleteOutlined></DeleteOutlined>
-            </span>
-          </Fragment>
-        );
-      },
-      width: "10%",
-      sortDirections: ["descend", "ascend"],
-    },
-  ];
-
-  const data = DSUser;
-  const { Search } = Input;
-
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1890ff",
-      }}
-    />
-  );
-
-  const onSearch = (value) => {
-    console.log(value);
-    dispatch(GetUserAction(value));
-  };
-
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
+  const listUserData = useSelector((state) => state.userReducer.data)
 
   return (
-    <div className="container">
-      <h3 style={{ fontSize: 30, fontWeight: 600 }}>Quản Lý Người Dùng</h3>
-      <Button className="mb-3">
-        <NavLink to="/admin/user/adduser">Thêm Người Dùng</NavLink>
-      </Button>
-      <Search
-        className="mb-4"
-        placeholder="search account"
-        onSearch={onSearch}
-        enterButton
-      />
-
-      <Table
-        className="table1"
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        rowKey={"id"}
-      />
+    <div className='container'>
+      <div className="table-responsive">
+        <h3 className="main__Title">Quản lý người dùng</h3>
+        <div className='text-right mb-2'><button className='btn__Primary'>Thêm phòng</button></div>
+        <Table
+          className="table"
+          dataSource={listUserData}
+          rowKey={"id"}
+          columns={[
+            {
+              title: "ID",
+              dataIndex: "id"
+            },
+            {
+              title: "Hình ảnh",
+              dataIndex: "avatar",
+              render: (hinhAnh, index) => {
+                return <img key={index} width={150} src={hinhAnh} alt=''></img>
+              }
+            },
+            {
+              title: "Họ Tên",
+              dataIndex: "name"
+            },
+            {
+              title: "Email",
+              dataIndex: "email",
+            },
+            {
+              title: "Chức vụ",
+              dataIndex: "role",
+            },
+            {
+              title: "Hành động",
+              render: (user, index) => {
+                return <div className='d-flex justify-content-around' key={index}>
+                  <button className='btn btn-info' value={user.id} > <Link to={`/roomdetail/${user.id}`}>View</Link> </button>
+                  <button className='btn btn-danger' value={user.id} onClick={(e) => {
+                    e.preventDefault();
+                    if (window.confirm("Bạn có muốn xóa " + user.name)) {
+                      dispatch(actDeleteCity(user.id))
+                    }
+                  }}
+                  > Delete </button>
+                </div>
+              }
+            }
+          ]}
+        >
+        </Table >
+      </div >
     </div>
-  );
+  )
 }
-
-export default User;

@@ -102,6 +102,7 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
           hinhAnh: imagePreview,
           tinhThanh: selectedCity,
           tenViTri: selectedDistrict,
+          quocGia: "Việt Nam"
         };
         onOk(state);
       })
@@ -194,11 +195,11 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
             ]}
           >
             <Upload
-              name="image"
+              name="fileList"
               listType="picture-card"
               showUploadList={false}
               beforeUpload={beforeUpload}
-              customRequest={dummyRequest}
+              // customRequest={dummyRequest}
               fileList={fileList} // Set fileList here
             >
               {imagePreview ? (

@@ -21,7 +21,33 @@ const actCheckoutRequest = () => ({ type: actions.CHECKOUT_REQUEST })
 const actCheckoutSuccess = (data) => ({ type: actions.CHECKOUT_SUCCESS, payload: data })
 const actCheckoutFail = (error) => ({ type: actions.CHECKOUT_SUCCESS, payload: error })
 
+// Get list user
+export const actGetListUser = () => {
+    return (dispatch) => {
+        dispatch(actGetListUserRequest());
 
+        api.get(`/users/`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    console.log(result.data.content);
+                    dispatch(actGetListUserSuccess(result.data.content));
+                    // After fetching user info, you can dispatch an action to get user's rooms here
+                    // dispatch(actGetRoomByUser(id));
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                dispatch(actGetListUserFail(content));
+            });
+    };
+};
+
+export const actGetListUserRequest = () => ({ type: actions.USER_GET_REQUEST });
+export const actGetListUserSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
+export const actGetListUserFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
+
+
+// Get user
 export const actGetUserInfo = (id) => {
     return (dispatch) => {
         dispatch(actGetUserInfoRequest());

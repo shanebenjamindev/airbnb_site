@@ -10,14 +10,7 @@ export default function AdminNavbar(props) {
 
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-
-  if (!userData) {
-    navigate(`/`, { replace: true });
-    return null;
-  }
-  else {
-    var { user } = userData
-  }
+  const user = userData?.user
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
@@ -75,7 +68,7 @@ export default function AdminNavbar(props) {
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="" to="/admin/admin-info">
+            <Link className="" to={`/admin/admin-info/${user.id}`}>
               <img width="40" height="40" alt="" src={(user.length === 0) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
             </Link>
           </li>

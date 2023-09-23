@@ -123,3 +123,24 @@ export const actHomeListRoom = () => {
 const actHomeListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
 const actHomeListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })
 const actHomeListRoomFail = (error) => ({ type: actions.HOMELIST_ROOM_FAIL, payload: error })
+
+// Delete Room
+export const actDeleteRoom = (id) => {
+    return (dispatch) => {
+        dispatch(actDeleteRoomRequest)
+        api.delete(`/phong-thue/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actDeleteRoomSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                // console.log(error);
+                dispatch(actDeleteRoomFail(error.response.data))
+            })
+    }
+}
+
+const actDeleteRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
+const actDeleteRoomSuccess = (data) => ({ type: actions.DELETE_ROOM_USER_SUCCESS, payload: data })
+const actDeleteRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })

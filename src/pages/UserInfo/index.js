@@ -17,9 +17,6 @@ export default function UserInfo() {
         avatar: '',
         name: '',
         email: '',
-        phone: '',
-        birthday: '',
-        gender: true,
         role: '',
     })
 
@@ -31,16 +28,12 @@ export default function UserInfo() {
             avatar: user.avatar,
             name: user.name,
             email: user.email,
-            phone: user.phone,
-            birthday: user.birthday,
-            gender: user.gender,
             role: user.role,
         })
 
     }, [dispatch, user.avatar, user.birthday, user.email, user.gender, user.id, user.name, user.phone, user.role])
 
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
-    console.log(listRoomByUser);
 
     // Tab:
     const [value, setValue] = React.useState(0);

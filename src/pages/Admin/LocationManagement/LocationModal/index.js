@@ -6,8 +6,6 @@ import axios from 'axios';
 function LocationModal({ visible, onCancel, onOk, formData, mode }) {
   const [form] = Form.useForm();
 
-  console.log(formData);
-
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
 
@@ -83,6 +81,7 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
 
 
   const handleCityChange = (event) => {
+    console.log(event.target.value);
     const [name, code] = event.target.value.split(',');
     fetchDistricts(code);
     setSelectedCity(name)
@@ -103,7 +102,6 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
           hinhAnh: imagePreview,
           tinhThanh: selectedCity,
           tenViTri: selectedDistrict,
-          quocGia: "Việt Nam",
         };
         onOk(state);
       })
@@ -140,35 +138,46 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
 
           <Form.Item
             label="Tỉnh thành"
+            rules={[
+              {
+                required: true,
+                message: 'This field is required.',
+              },
+            ]}
           >
-            <div className='d-md-flex ant-form-item-control-input-content'>
-              <div className='col-md-7 '>
-                <select name='tinhThanh' className='ant-input css-dev-only-do-not-override-i0102m' id="city" onChange={handleCityChange} value={selectedCity}>
+            <select name='tinhThanh' className='ant-input css-dev-only-do-not-override-i0102m' id="city" onChange={handleCityChange}>
 
-                  {formData ? <option value="" >{formData.tinhThanh}</option>
-                    : <option value="">Chọn Thanh Pho</option>}
+              {formData ? <option value={formData.tinhThanh} >{formData.tinhThanh}</option>
+                : <option value="" required >Chọn Thành phố</option>}
 
-                  {cities.map((city) => (
-                    <option key={city.code} value={`${city.name.replace('Tỉnh ', '')},${city.code}`}>
-                      {city.name.replace('Tỉnh ', '')}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {cities.map((city) => (
+                <option key={city.code} value={`${city.name.replace('Tỉnh ', '')},${city.code}`}>
+                  {city.name.replace('Tỉnh ', '')}
+                </option>
+              ))}
+            </select>
+          </Form.Item>
 
-              <div className='col-md-5'>
-                <select name='tenViTri' className='ant-input css-dev-only-do-not-override-i0102m' id="district" onChange={handleDistrictChange} value={selectedDistrict}>
-                  {formData ? <option value="" disabled>{formData.tenViTri}</option> : <option value="">Chọn vị trí</option>}
-                  {districts.map((district) => (
+          <Form.Item
+            label="Vị trí"
+            name="tenViTri"
+            rules={[
+              {
+                required: true,
+                message: 'This field is required.',
+              },
+            ]}
+          >
+            <select name='tenViTri' className='ant-input css-dev-only-do-not-override-i0102m' id="district" onChange={handleDistrictChange} value={selectedDistrict}>
+              {formData ? <option value={formData.tenViTri} >{formData.tenViTri}</option> : <option value="">Chọn vị trí</option>}
+              {districts.map((district) => (
 
-                    <option key={district.code} value={district.name.replace('Quận ', '').replace('Huyện ', '')}>
-                      {district.name.replace('Quận ', '').replace('Huyện ', '')}
-                    </option>
+                <option key={district.code} value={district.name.replace('Quận ', '').replace('Huyện ', '')}>
+                  {district.name.replace('Quận ', '').replace('Huyện ', '')}
+                </option>
 
-                  ))}
-                </select>
-              </div>
-            </div>
+              ))}
+            </select>
 
           </Form.Item>
 
@@ -177,6 +186,12 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
             name="hinhAnh"
             valuePropName="hinhAnh"
             getValueFromEvent={normFile}
+            rules={[
+              {
+                required: true,
+                message: 'This field is required.',
+              },
+            ]}
           >
             <Upload
               name="image"
@@ -193,13 +208,8 @@ function LocationModal({ visible, onCancel, onOk, formData, mode }) {
               )}
             </Upload>
           </Form.Item>
-
-
         </Form>
-
-
-
-      </Modal>
+      </Modal >
 
     );
   };

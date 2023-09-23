@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { actRoomDetail } from '../../redux/types/actions';
+import { actRoomDetail } from '../../redux/actions/actRoom';
 import './style.css'
 import DateRangeForm from './DateRangeForm';
 import Comfort from './Comfort';
@@ -16,8 +16,9 @@ export default function RoomDetail() {
   const user = userData ? JSON.parse(userData).user : "";
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     dispatch(actRoomDetail(param.id))
-  }, [dispatch, param.id])
+  }, [])
 
   const roomDetail = useSelector((state) => state.roomReducer.data);
   // const  = useSelector((state) => state.roomReducer.data);
@@ -48,15 +49,17 @@ export default function RoomDetail() {
             </div>
           </div>
           <div className='section__Content-primary'>
+
             <div className='section__Item-primary px-lg-5'>
+
+              <h2 className='main__Title'>  {roomDetail.tenPhong} </h2>
+              <p>{roomDetail.khach} khách . {roomDetail.phongNgu} phòng ngủ . {roomDetail.phongTam} phòng tắm .</p>
               {renderRoom()}
               <div className='d-flex container  flex-wrap'>
                 <div className='col-lg-8 col-md-7 col-sm-12'>
                   <div className='section__Info  d-flex justify-content-between'>
                     <div>
-                      <h2 className='main__Title'>  {roomDetail.tenPhong} </h2>
-                      <p>{roomDetail.khach} khách . {roomDetail.phongNgu} phòng ngủ . {roomDetail.phongTam} phòng tắm .</p>
-
+                      <h2>Phòng trong nhà. Chủ nhà Gene</h2>
                     </div>
                     <div>
                       <img width="80px" alt='avatar' src='https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png' />
@@ -118,12 +121,14 @@ export default function RoomDetail() {
                   <DateRangeForm detail={roomDetail} user={user} />
                 </div>
               </div >
+
+              <div className='bg-white container'>
+                <Comments data={roomDetail} user={user} />
+              </div>
             </div>
+
           </div >
 
-          <div className='bg-white container'>
-            <Comments data={roomDetail} user={user} />
-          </div>
         </div>
       )}
 

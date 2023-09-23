@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom'
-import { actLogin } from '../../redux/types/actions';
+import { actLogin } from '../../redux/actions/actAuth';
 import './style.css'
 import CheckLoading from '../../components/CheckLoading';
 

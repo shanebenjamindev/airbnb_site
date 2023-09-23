@@ -1,0 +1,23 @@
+.dropdown-menu {
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#dropdown-menu {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.dropdown-item:hover{
+    border-radius: 20px;
+    color: white !important;
+    background-color: var(--primary-color) !important;
+}
+
+select {
+    background-color: dark;
+}
+
+option {
+        /* background-color: var(--primary-color); */
+}

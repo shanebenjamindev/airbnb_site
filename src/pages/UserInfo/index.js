@@ -5,15 +5,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { actDeleteUserRoom, actGetUserInfo } from '../../redux/types/actions';
+import { actDeleteUserRoom, actGetUserInfo } from '../../redux/actions/actUser';
 import './user-info.css'
 
 export default function UserInfo() {
     const dispatch = useDispatch();
 
     const { user } = JSON?.parse(localStorage?.getItem("USER_LOGIN"));
-    // const user = useSelector((state) => state.userReducer.data)
-    // console.log(token);
     const [isEditMode, setIsEditMode] = useState(false);
     const [newProfile, setNewProfile] = useState({
         avatar: '',
@@ -29,7 +27,6 @@ export default function UserInfo() {
     useEffect(() => {
         dispatch(actGetUserInfo(user.id))
 
-        // dispatch(actGetRoomByUser(user.id))
         setNewProfile({
             avatar: user.avatar,
             name: user.name,
@@ -43,6 +40,8 @@ export default function UserInfo() {
     }, [dispatch, user.avatar, user.birthday, user.email, user.gender, user.id, user.name, user.phone, user.role])
 
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
+    console.log(listRoomByUser);
+
     // Tab:
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -71,62 +70,51 @@ export default function UserInfo() {
     };
 
     const handleDelete = (e) => {
+        e.preventDefault();
         if (window.confirm(`Bạn có muốn xóa phòng ${e.target.value} ?`)) {
             dispatch(actDeleteUserRoom(e.target.value))
+            dispatch(actGetUserInfo(user.id))
         }
     }
 
     const renderListRoomByUser = () => {
         return (
-            <table className="table text-center">
-                <thead>
-                    <tr className='text-center'>
-                        <th>Phòng</th>
-                        <th>Ngày đến</th>
-                        <th>Ngày đi</th>
-                        <th>Khách</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {listRoomByUser?.map((room, index) => (
-                        <tr key={index}>
-                            <td>{room.maPhong}</td>
-                            <td>{room.ngayDen}</td>
-                            <td>{room.ngayDi}</td>
-                            <td>{room.soLuongKhach}</td>
-                            <td className='d-flex justify-content-around'>
-                                <Link to={`/roomdetail/${room.maPhong}`} className="btn btn-outline-info"  >View</Link>
-                                <button className="btn btn-outline-danger" onClick={handleDelete} value={room.id}>Delete</button>
-                            </td>
+            <>
+                <table className="table text-center">
+                    <thead>
+                        <tr className='text-center'>
+                            <th>Phòng</th>
+                            <th>Ngày đến</th>
+                            <th>Ngày đi</th>
+                            <th>Khách</th>
+                            <th>Hành động</th>
                         </tr>
-                    )).slice(0, 5)}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {listRoomByUser?.map((room, index) => (
+                            <tr key={index}>
+                                <td>{room.maPhong}</td>
+                                <td>{room.ngayDen}</td>
+                                <td>{room.ngayDi}</td>
+                                <td>{room.soLuongKhach}</td>
+                                <td className='d-flex justify-content-around'>
+                                    <Link to={`/roomdetail/${room.maPhong}`} className="btn btn-outline-info">View</Link>
+                                    <button className="btn btn-outline-danger" onClick={handleDelete} value={room.id}>Delete</button>
+                                </td>
+                            </tr>
+                        )).slice(0, 5)}
+                    </tbody>
 
-            </table>
+                </table>
+            </>
         );
     }
-
-    // const handleAvatarClick = () => {
-    //     // Open a file selection dialog when the avatar is clicked
-    //     const fileInput = document.getElementById('avatar-input');
-    //     fileInput.click();
-    // };
-
-    // const handleUploadImage = (e) => {
-    //     // Send the selected image to the server for upload
-    //     // Update the user's avatar URL with the received image URL
-    //     // Update the state accordingly
-    //     console.log(e.target.value);
-    // };
-
 
     const handleAvatarChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
-                // setSelectedImage(event.target.result); // Store the selected image
             };
             reader.readAsDataURL(file);
         }
@@ -192,7 +180,7 @@ export default function UserInfo() {
                             aria-label="wrapped label tabs example"
                         >
                             <Tab label="User Information" className='' value={0} />
-                            <Tab label="Room" value={1} />
+                            <Tab label="Room Contract" value={1} />
                         </Tabs>
 
                         {/* Content for Tab 0 (User Information) */}
@@ -297,20 +285,26 @@ export default function UserInfo() {
                             </div>
                         )}
 
-                        {/* Content for Tab 1 (Room) */}
+                        {/* Content for Tab 2 (Room) */}
                         {value === 1 && (
                             <div>
-                                <div className='user__ListRoom'>
+                                <div className='user__ListRoom '>
                                     {(listRoomByUser) && listRoomByUser.length >= 1 ? (
-                                        <div className=' section__Item-secondary p-2 table-responsive'>
-                                            <div className='d-flex mb-2 justify-content-between'>
-                                                <div className=''></div>
-                                                <Link to="/" className='btn btn-outline-info'>Thêm phòng</Link>
+                                        <>
+
+                                            <div className='text-right py-2'>
+                                                <Link to="/" className='btn__Primary' >
+                                                    Thêm phòng
+                                                </Link>
                                             </div>
-                                            <>
-                                                {renderListRoomByUser()}
-                                            </>
-                                        </div>
+                                            <div className=' p-2 table-responsive'>
+
+                                                <>
+                                                    {renderListRoomByUser()}
+                                                </>
+                                            </div>
+
+                                        </>
                                     ) : (
                                         <div className='text-center noti__NotFound'>
                                             <div>

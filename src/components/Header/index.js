@@ -3,7 +3,7 @@ import './header-navbar.css';
 import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { actListCity } from '../../redux/types/actions';
+import { actListCity } from '../../redux/actions/actCity';
 
 export default function Navbar() {
 
@@ -12,7 +12,7 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(actListCity());
-
+        window.scrollTo(0, 0)
     }, [dispatch]);
 
     const listCityData = useSelector((state) => state.cityReducer.data);
@@ -121,7 +121,7 @@ export default function Navbar() {
                             </Link>
 
                             <div className='d-flex'>
-                                <div className='text-white icon1 nav-link'>
+                                <div className='text-white icon1 nav-link d-none d-md-block'>
                                     <div>
                                         <a href="/">
                                             {" "}

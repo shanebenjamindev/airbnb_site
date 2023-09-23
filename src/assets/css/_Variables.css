@@ -1,8 +1,8 @@
 :root {
     --primary-color: #c69841;
-    --secondary-color: white;
+    --secondary-color: #b6914e;
     --transparent-color: transparent;
-    --bg-primary: #8e7037;
+    --bg-primary: #a48244;
+    --bg-secondary: rgb(222, 222, 222);
     --white-color: white;
-    --bg-secondary: #F2F2F2;
 }

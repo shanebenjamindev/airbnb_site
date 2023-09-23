@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -41,7 +41,6 @@ export default function AdminLocation(props) {
     if (modalMode === "add") {
 
       dispatch(actAddCity(newData))
-      console.log('Added Data:', newData);
 
     } else if (modalMode === "edit") {
       // Handle editing logic here
@@ -143,6 +142,7 @@ export default function AdminLocation(props) {
                 onClick={() => {
                   if (window.confirm("Bạn có muốn xóa " + city.tenViTri)) {
                     dispatch(actDeleteCity(city.id))
+                    dispatch(actListCity())
                   }
                   console.log(city.id, "Ma vị trí cần xóa");
                 }}
@@ -162,28 +162,31 @@ export default function AdminLocation(props) {
   };
 
   return (
-    <div className="container section__Item-secondary">
-      <h3 className="main__Title text-center">Quản Lý Vị Trí</h3>
-      <div className="text-right my-2">
-        <button className="btn__Primary" onClick={() => showModal("add")}>Thêm Vị Trí</button>
-      </div>
-      {/* Add Location Modal */}
-      <LocationModal
-        visible={isModalVisible}
-        onCancel={handleModalCancel}
-        onOk={handleModalOk}
-        formData={formData}
-        mode={modalMode}
-      />
+    <div className="container-fluid">
+      <div>
+        <h3 className="main__Title my-2 text-center">Quản Lý Vị Trí</h3>
 
-      <div className="bg-white container table-responsive" >
-        <Table
-          className="table"
-          columns={columns}
-          dataSource={data}
-          onChange={onChange}
-          rowKey={"id"}
+        <LocationModal
+          visible={isModalVisible}
+          onCancel={handleModalCancel}
+          onOk={handleModalOk}
+          formData={formData}
+          mode={modalMode}
         />
+        <div className="text-right my-2">
+          <button className="btn__Primary" onClick={() => showModal("add")}>Thêm Vị Trí</button>
+        </div>
+
+        <div className="bg-white table-responsive" >
+
+          <Table
+            className="table"
+            columns={columns}
+            dataSource={data}
+            onChange={onChange}
+            rowKey={"id"}
+          />
+        </div>
       </div>
     </div>
   );

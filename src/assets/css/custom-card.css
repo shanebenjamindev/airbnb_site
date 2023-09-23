@@ -1,25 +1,26 @@
 /* CARD CUSTOM---------------------------------------------------- */
-.card {
-    height: 100%;
-    transition: all 0.5s ease;
-    position: relative;
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-}
 
-.card-title {
-    color: var(--primary-color);
-}
-
-.card:hover {
-    color: var(--primary-color) !important;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 29px 0px;
-}
-
-.custom-card {
+.custom__Card {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     background-color: var(--secondary-color);
     padding: 20px;
     transition: all 0.25s ease;
+}
+
+.custom__Card-content {
+    height: 100%;
+    transition: all 0.5s ease;
+    position: relative;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+}
+
+.custom__Card-title {
+    color: var(--primary-color);
+}
+
+.card:hover {
+    color: var(--primary-color) !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 29px 0px;
 }

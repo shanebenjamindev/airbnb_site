@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
-import { actGetRoomByCity } from '../../redux/types/actions';
+import { actGetRoomByCity } from '../../redux/actions/actRoom';
 import './style.css'
 import { NodeIndexOutlined } from '@ant-design/icons';
 

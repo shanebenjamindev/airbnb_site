@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { actAuth } from '../../redux/types/actions';
+import { actAuth } from '../../redux/actions/actAuth';
 import './style.css';
 
 export default function Auth() {

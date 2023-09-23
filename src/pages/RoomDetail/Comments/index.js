@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actGetRoomComment, actRoomComment } from '../../../redux/types/actions';
+import { actGetRoomComment, actRoomComment } from '../../../redux/actions/actComment';
 import { Rate } from 'antd';
 import './comments.css';
 // import '../../../assets/notificationModel.css'
@@ -16,7 +16,7 @@ export default function Comments(props) {
 
     useEffect(() => {
         dispatch(actGetRoomComment(data.id));
-    }, [dispatch, data.id]);
+    }, []);
 
     const listComment = useSelector((state) => state.commentReducer.data);
     const error = useSelector((state) => state.commentReducer.error);
@@ -73,7 +73,7 @@ export default function Comments(props) {
     return (
         <div className='py-5'>
             <div className=''><h2 className='main__Title'>Comments</h2></div>
-            <div className='comments-container w-75 container'>
+            <div className='comments-container'>
                 {renderComments()}
             </div>
 

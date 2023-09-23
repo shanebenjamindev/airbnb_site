@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
-import { actHomeListRoom } from "../../../redux/types/actions";
+import { actHomeListRoom } from "../../../redux/actions/actRoom";
 import Room from "./Room";
 
 export default function HomeRoom() {

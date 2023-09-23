@@ -11,6 +11,11 @@ export default function CommentManagement() {
     dispatch(actListComment())
   }, [])
 
+  const handleDeleteComment = (e) => {
+    e.preventDefault();
+    dispatch()
+  }
+
   const listComment = useSelector(state => state.commentReducer.data)
 
   const columns = [
@@ -67,12 +72,9 @@ export default function CommentManagement() {
     },
     {
       title: "Hành động",
-      dataIndex: "saoBinhLuan",
-      value: (text, object) => {
-        return <span key={object}>{text}</span>;
+      render: (text, comment, index) => {
+        return <button onClick={handleDeleteComment} value={comment.id} className='btn btn-danger'>Delete</button>
       },
-
-      sorter: (a, b) => a.saoBinhLuan - b.saoBinhLuan,
       sortDirections: ["descend", "ascend"],
     },
   ];
@@ -88,7 +90,7 @@ export default function CommentManagement() {
   const onChange = (pagination, filters, sorter, extra) => {
   };
   return (
-    <div className="container section__Item-secondary">
+    <div className="">
       <h3 className='main__Title text-center'>Quản Lý Comment</h3>
       <Table
         className="mt-5 table table-responsive"

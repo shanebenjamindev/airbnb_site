@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './style.css'
 import HomeCarousel from './HomeCarousel';
 import HomeRoom from './HomeRoom';
@@ -9,6 +9,10 @@ import Menu from './Menu';
 import HomeBlogs from './HomeBlogs';
 
 export default function HomePage() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
 
   return (
     <div>

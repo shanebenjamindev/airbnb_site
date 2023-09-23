@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { actRegister } from '../../redux/types/actions';
+import { actRegister } from '../../redux/actions/actAuth';
 import CheckLoading from '../../components/CheckLoading';
 
 export default function RegisterPage() {

@@ -5,31 +5,33 @@ import { useState } from 'react';
 import { DateRange, DefinedRange } from 'react-date-range';
 
 import './style.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { actCheckout, actGetRoomData } from '../../../redux/types/actions';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actCheckout } from '../../../redux/actions/actUser';
+import { actGetRoomData } from '../../../redux/actions/actRoom';
+import { useNavigate } from 'react-router-dom';
 
 const DateRangeForm = (props) => {
-
-    // const param = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { detail, user } = props
 
-    // console.log(detail.khach);
-
     const [showDateRange, setShowDateForm] = useState(false)
     const [guests, setGuests] = useState(detail.khach);
 
+    const [state, setState] = useState({
+        maPhong: detail.id,
+        soLuongKhach: guests,
+        ngayDen: detail.ngayDen,
+        ngayDi: detail.ngayDi,
+        maNguoiDung: user.id ? user.id : null
+    })
+
     const [selectionRange, setSelectionRange] = useState({
-        startDate: new Date(),
-        endDate: new Date(),
+        startDate: detail.ngayDen ? detail.ngayDen : new Date(),
+        endDate: detail.ngayDi ? detail.ngayDi : new Date(),
         key: 'selection',
     });
-
-    const roomData = useSelector((state) => state.roomReducer.data)
-    console.log(roomData);
 
     const handleSelect = (ranges) => {
         const { startDate, endDate } = ranges.selection
@@ -44,21 +46,8 @@ const DateRangeForm = (props) => {
 
     const selectedRanges = [selectionRange];
 
-    const [state, setState] = useState(null);
-
     useEffect(() => {
         dispatch(actGetRoomData(detail.id))
-        setState(
-            {
-                id: detail.id,
-                maPhong: detail.id,
-                soLuongKhach: guests,
-                ngayDen: selectionRange.startDate,
-                ngayDi: selectedRanges.endDate,
-                maNguoiDung: user.id
-            }
-        )
-
         if (user) {
             setState(
                 {
@@ -97,8 +86,6 @@ const DateRangeForm = (props) => {
                     <form className=' p-3 form__Checkout border rounded rounded-lg' onSubmit={handleSubmit}>
                         <div className="">
                             <h5>Trạng thái: {detail.khach !== 0 ? <>đã có người đặt</> : <>chưa có người đặt</>}<span> 4 .80 đánh giá</span></h5>
-
-
                             <div className=''>
                                 <div className='d-flex'>
                                     <div

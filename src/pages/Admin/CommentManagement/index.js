@@ -82,13 +82,15 @@ export default function CommentManagement() {
 
   return (
     <div className="container">
-      <h3 className='main__Title'>Quản Lý Comment</h3>
-      <Table
-        className="mt-5 table table-responsive"
-        columns={columns}
-        dataSource={data}
-        rowKey={"id"}
-      />
+      <h3 className='main__Title text-center'>Quản Lý Comment</h3>
+      <div className='table-responsive'>
+        <Table
+          className="mt-5 table"
+          columns={columns}
+          dataSource={data}
+          rowKey={"id"}
+        />
+      </div>
     </div>
   )
 }

@@ -16,9 +16,9 @@ export default function UserManagement() {
 
   return (
     <div className='container'>
+      <h3 className="main__Title text-center">Quản lý người dùng</h3>
+      <div className='text-right mb-2'><button className='btn__Primary'>Thêm phòng</button></div>
       <div className="table-responsive">
-        <h3 className="main__Title">Quản lý người dùng</h3>
-        <div className='text-right mb-2'><button className='btn__Primary'>Thêm phòng</button></div>
         <Table
           className="table"
           dataSource={listUserData}

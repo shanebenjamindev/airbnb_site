@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Input, Modal, Button, Form, Table, Upload, Select } from "antd";
 import axios from "axios";
 import { UploadOutlined } from "@ant-design/icons";
-
 const { Option } = Select;
 
-export default function LocationForm({ visible, onCancel, onOk, formData, mode }) {
+export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
   const [form] = Form.useForm();
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -64,7 +63,7 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
   };
 
   const handleCityChange = (value) => {
-    setSelectedCity(value);
+    setSelectedCity(value.split(`,`)[0]);
     fetchDistricts(value.split(',')[1]);
   };
 
@@ -75,15 +74,15 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
   const handleOk = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(() => {
         form.resetFields();
         const state = {
-          ...values,
           hinhAnh: imagePreview,
           tinhThanh: selectedCity,
           tenViTri: selectedDistrict,
+          quocGia: "Việt Nam"
         };
-        onOk(state);
+        onOk(formData ? formData.id : null, state);
       })
       .catch((errorInfo) => {
         console.error('Validation error:', errorInfo);
@@ -93,8 +92,11 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
   const renderEditModal = () => {
     return (
       <Modal
-        visible={visible}
-        title={mode === "edit" ? "Edit Location" : "Add Location"}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        open={open}
+        title={mode === "edit" ? "Cập nhật vị trí" : "Thêm vị trí"}
         onCancel={onCancel}
         onOk={handleOk}
         footer={[
@@ -107,17 +109,34 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
         ]}
       >
         <Form form={form} initialValues={formData}>
-          <Form.Item name="quocGia" label="Quốc gia" initialValue="Việt Nam">
-            <Input />
+          <Form.Item
+            label="Quốc gia"
+            name="quocGia"
+            labelCol={{ span: 6 }} 
+            wrapperCol={{ span: 16 }} 
+            initialValue="Việt Nam"
+          >
+            <Input value="Việt Nam" disabled />
           </Form.Item>
 
-          <Form.Item label="Tỉnh thành">
+          <Form.Item
+            label="Tỉnh thành"
+            name="tinhThanh"
+            labelCol={{ span: 6 }} 
+            wrapperCol={{ span: 16 }} 
+            rules={[
+              {
+                required: true,
+                message: 'This field is required.',
+              },
+            ]}
+          >
             <Select
               name="tinhThanh"
               className="ant-input"
               id="city"
               onChange={handleCityChange}
-              value={selectedCity}
+              value={(formData) ? formData.tinhThanh : ""}
             >
               <Option value="" disabled>
                 Chọn Thành phố
@@ -132,7 +151,9 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
 
           <Form.Item
             label="Vị trí"
-            name="tenViTri"
+            name="viTri"
+            labelCol={{ span: 6 }} 
+            wrapperCol={{ span: 16 }} 
             rules={[
               {
                 required: true,
@@ -140,30 +161,14 @@ export default function LocationForm({ visible, onCancel, onOk, formData, mode }
               },
             ]}
           >
-            <Select
-              name="tenViTri"
-              className="ant-input"
-              id="district"
-              onChange={handleDistrictChange}
-              value={selectedDistrict}
-            >
-              <Option value="" disabled>
-                Chọn vị trí
-              </Option>
-              {districts.map((district) => (
-                <Option
-                  key={district.code}
-                  value={district.name.replace('Quận ', '').replace('Huyện ', '')}
-                >
-                  {district.name.replace('Quận ', '').replace('Huyện ', '')}
-                </Option>
-              ))}
-            </Select>
+            <Input />
           </Form.Item>
 
           <Form.Item
             label="Upload Image"
             name="hinhAnh"
+            labelCol={{ span: 6 }} 
+            wrapperCol={{ span: 16 }} 
             valuePropName="hinhAnh"
             getValueFromEvent={normFile}
             rules={[

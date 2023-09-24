@@ -1,0 +1,30 @@
+/* Add a CSS file (e.g., LocationForm.css) and import it into your component file */
+/* LocationForm.css */
+
+/* Style the modal's content */
+.ant-modal-body {
+    padding: 24px; /* Adjust padding as needed */
+  }
+  
+  /* Style the modal's title */
+  .ant-modal-title {
+    font-size: 18px; /* Adjust font size as needed */
+  }
+  
+  /* Style the modal's footer */
+  .ant-modal-footer {
+    text-align: center; /* Center-align the buttons */
+  }
+  
+  /* Style the "Save" button */
+  .ant-modal-footer button.ant-btn-primary {
+    background-color: #1890ff; /* Change the button's background color */
+    border-color: #1890ff; /* Change the button's border color */
+    color: #fff; /* Change the button's text color */
+  }
+  
+  /* Style the "Cancel" button */
+  .ant-modal-footer button.ant-btn {
+    margin-right: 8px; /* Add margin between buttons */
+  }
+  

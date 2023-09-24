@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Table } from "antd";
 import {
   DeleteOutlined,
@@ -16,11 +16,12 @@ export default function AdminLocation(props) {
     dispatch(actListCity())
   }, [dispatch]);
 
-  const cityListData = useSelector(state => state.cityReducer?.data)
-
+  const { data } = useSelector(state => state.cityReducer)
+  console.log(data);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
   const [formData, setFormData] = useState(null);
+  // const [cityListData, setListCity] = useState(null)
 
   const showModal = (mode, cityData) => {
     setModalMode(mode);
@@ -30,12 +31,14 @@ export default function AdminLocation(props) {
     setIsModalVisible(true);
   };
 
-  const handleModalOk = (newData) => {
+  const handleModalOk = (id, newData) => {
     if (modalMode === "add") {
-      dispatch(actAddCity(newData))
+      if (!id) {
+        dispatch(actAddCity(newData))
+      }
 
     } else if (modalMode === "edit") {
-      dispatch(actEditCity(newData))
+      dispatch(actEditCity(id, newData))
     }
     setIsModalVisible(false);
   };
@@ -100,47 +103,45 @@ export default function AdminLocation(props) {
       title: "Hành  Động",
       render: (city, index) => {
         return (
-          <div key={index}>
-            <div className="d-md-flex justify-content-around">
-              <button
-                onClick={() => showModal("edit", city)}
-                className="btn btn-outline-info"
-              >
-                <EditOutlined />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  if (window.confirm("Bạn có muốn xóa " + city.tenViTri)) {
-                    dispatch(actDeleteCity(city.id))
-                  }
-                }}
-                className="btn btn-outline-danger"
-              >
-                <DeleteOutlined />
-              </button>
-            </div>
-          </div >
+          <div key={index} className="d-md-flex justify-content-around">
+            <button
+              onClick={() => showModal("edit", city)}
+              className="btn btn-outline-info"
+            >
+              <EditOutlined />
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                if (window.confirm("Bạn có muốn xóa " + city.tenViTri)) {
+                  dispatch(actDeleteCity(city.id))
+                }
+              }}
+              className="btn btn-outline-danger"
+            >
+              <DeleteOutlined />
+            </button>
+          </div>
         );
       },
     },
   ];
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div>
         <h3 className="main__Title my-2 text-center">Quản Lý Vị Trí</h3>
-        <LocationForm visible={isModalVisible} formData={formData} onCancel={handleModalCancel} onOk={handleModalOk} mode={modalMode} />
+        <LocationForm open={isModalVisible} formData={formData} onCancel={handleModalCancel} onOk={handleModalOk} mode={modalMode} />
         <div className="text-right my-2">
-          <button className="btn__Primary" onClick={() => showModal("add")}>Thêm Vị Trí</button>
+          <button className="btn__Primary" onClick={() => showModal("add", null)}>Thêm Vị Trí</button>
         </div>
 
         <div className="bg-white table-responsive" >
-          {cityListData && (
+          {data && (
             <Table
               className="table"
               columns={columns}
-              dataSource={cityListData}
+              dataSource={data}
               rowKey={"id"}
             />
           )}

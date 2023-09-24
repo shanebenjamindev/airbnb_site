@@ -48,10 +48,12 @@ const actAddCityFail = (error) => ({ type: actions.ADD_CITY_SUCCESS, payload: er
 export const actEditCity = (roomData) => {
     return (dispatch) => {
         dispatch(actEditCityRequest)
-        api.put(`/vi-tri/`, roomData)
+        api.put(`/vi-tri/${roomData.id}`, roomData)
             .then((result) => {
-                console.log(result.data.content);
-                dispatch(actEditCitySuccess(result.data.content))
+                alert(result.data.message)
+                dispatch(actListCity())
+                // console.log(result.data.content);
+                // dispatch(actEditCitySuccess(result.data.content))
                 // alert("Đã thêm vào hồ sơ")
             })
             .catch((error) => {
@@ -61,7 +63,7 @@ export const actEditCity = (roomData) => {
 }
 
 const actEditCityRequest = () => ({ type: actions.EDIT_CITY_REQUEST })
-const actEditCitySuccess = (data) => ({ type: actions.EDIT_CITY_SUCCESS, payload: data })
+// const actEditCitySuccess = (data) => ({ type: actions.EDIT_CITY_SUCCESS, payload: data })
 const actEditCityFail = (error) => ({ type: actions.EDIT_CITY_SUCCESS, payload: error })
 
 

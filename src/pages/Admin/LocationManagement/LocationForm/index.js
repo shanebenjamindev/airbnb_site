@@ -112,8 +112,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Quốc gia"
             name="quocGia"
-            labelCol={{ span: 6 }} 
-            wrapperCol={{ span: 16 }} 
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
             initialValue="Việt Nam"
           >
             <Input value="Việt Nam" disabled />
@@ -122,8 +122,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Tỉnh thành"
             name="tinhThanh"
-            labelCol={{ span: 6 }} 
-            wrapperCol={{ span: 16 }} 
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
             rules={[
               {
                 required: true,
@@ -152,8 +152,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Vị trí"
             name="viTri"
-            labelCol={{ span: 6 }} 
-            wrapperCol={{ span: 16 }} 
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
             rules={[
               {
                 required: true,
@@ -161,14 +161,33 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
               },
             ]}
           >
-            <Input />
+            <Select
+              className="ant-input"
+              id="district"
+              onChange={handleDistrictChange}
+              value={(selectedDistrict) ? selectedDistrict : ""}
+            >
+              <Option value="" disabled>
+                Chọn vị trí
+              </Option>
+              {
+                districts.map((district) => (
+                  <Option
+                    key={district.code}
+                    value={district.name.replace('Quận ', '').replace('Huyện ', '')}
+                  >
+                    {district.name.replace('Quận ', '').replace('Huyện ', '')}
+                  </Option>
+                ))
+              }
+            </Select>
           </Form.Item>
 
           <Form.Item
             label="Upload Image"
             name="hinhAnh"
-            labelCol={{ span: 6 }} 
-            wrapperCol={{ span: 16 }} 
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
             valuePropName="hinhAnh"
             getValueFromEvent={normFile}
             rules={[

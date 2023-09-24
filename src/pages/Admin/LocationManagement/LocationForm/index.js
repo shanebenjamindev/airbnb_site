@@ -92,9 +92,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
   const renderEditModal = () => {
     return (
       <Modal
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
+        labelCol={{ span: 8}}
+        wrapperCol={{ span: 13 }}
         open={open}
         title={mode === "edit" ? "Cập nhật vị trí" : "Thêm vị trí"}
         onCancel={onCancel}
@@ -112,8 +111,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Quốc gia"
             name="quocGia"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 8}}
+            wrapperCol={{ span: 13 }}
             initialValue="Việt Nam"
           >
             <Input value="Việt Nam" disabled />
@@ -122,8 +121,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Tỉnh thành"
             name="tinhThanh"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 8}}
+            wrapperCol={{ span: 13 }}
             rules={[
               {
                 required: true,
@@ -152,8 +151,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Vị trí"
             name="viTri"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 8}}
+            wrapperCol={{ span: 13 }}
             rules={[
               {
                 required: true,
@@ -186,8 +185,8 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Upload Image"
             name="hinhAnh"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 16 }}
+            labelCol={{ span: 8}}
+            wrapperCol={{ span: 13 }}
             valuePropName="hinhAnh"
             getValueFromEvent={normFile}
             rules={[

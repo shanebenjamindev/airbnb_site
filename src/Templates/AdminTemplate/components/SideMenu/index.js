@@ -10,6 +10,8 @@ export default function SideMenu() {
     return (
         <div className='SideMenu'>
             <Menu
+                className='main__p'
+                style={{  padding: '20px', backgroundColor: 'white' }}
                 onClick={(item) => {
                     navigate(item.key)
                 }}
@@ -43,7 +45,7 @@ export default function SideMenu() {
                         icon: <UserOutlined />,
                         key: "manage-users"
                     },
-                    
+
                 ]}
             >
             </Menu>

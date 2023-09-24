@@ -60,8 +60,6 @@ const routes = [
                 path: "manage-users",
                 element: lazy(() => import("../pages/Admin/UserManagement")),
             },
-
-
         ]
     },
     {

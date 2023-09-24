@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './admin-navbar.css';
-// import { UserOutlined } from "@ant-design/icons";
 
 export default function AdminNavbar(props) {
   useEffect(() => {
@@ -10,7 +9,7 @@ export default function AdminNavbar(props) {
 
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-  const user = userData?.user
+  const user = userData?.user;
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
@@ -43,39 +42,49 @@ export default function AdminNavbar(props) {
       </button>
 
       <div
-        className="collapse navbar-collapse text-center "
+        className="collapse navbar-collapse text-center"
         id="navbarSupportedContentAdmin"
       >
-        <ul className="navbar-nav d-flex align-items-center ml-auto">
-          <li className="nav-link">
-            <Link className="" to="/admin/manage-rooms">
+        <div className=" overlay-hidden"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContentAdmin"
+          aria-controls="navbarSupportedContentAdmin"
+          aria-expanded="false"
+          aria-label="Toggle navigation" >
+        </div>
+
+        <ul className="navbar-nav ml-auto main__p">
+          <li className="nav-item">
+            <Link className="nav-link d-flex flex-column align-items-center justify-content-center" to={`/admin/admin-info/${user.id}`}>
+              <img width="40" height="40" alt="" src={(user.avatar) || "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+              <span className="">{`${(user.name)}'s profile`}</span>
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin/manage-rooms">
               Rooms
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="" to="/admin/manage-customers">
-              Customers
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin/manage-users">
+              Users
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="" to="/admin/manage-locations">
-              Location
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin/manage-locations">
+              Locations
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="" to="/admin/manage-comments">
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin/manage-comments">
               Comments
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="" to={`/admin/admin-info/${user.id}`}>
-              <img width="40" height="40" alt="" src={(user.length === 0) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
-            </Link>
-          </li>
-          <li className="nav-link">
+          <li className="nav-item">
             <button
               onClick={handleLogout}
-              className="btn__Primary  m-auto"
+              className="btn btn-danger my-2"
             >
               Logout
             </button>

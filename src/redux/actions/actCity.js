@@ -30,9 +30,10 @@ export const actAddCity = (roomData) => {
         dispatch(actAddCityRequest)
         api.post(`/vi-tri/`, roomData)
             .then((result) => {
-                dispatch(actAddCitySuccess(result.data.content))
-                alert("Đã thêm vào vị trí")
-                dispatch(actListCity())
+                if (result.data.statusCode === 201) {
+                    alert(result.data.message)
+                    dispatch(actListCity())
+                }
             })
             .catch((error) => {
                 dispatch(actAddCityFail(error.response.data))
@@ -41,12 +42,9 @@ export const actAddCity = (roomData) => {
 }
 
 const actAddCityRequest = () => ({ type: actions.ADD_CITY_REQUEST })
-const actAddCitySuccess = (data) => ({ type: actions.ADD_CITY_SUCCESS, payload: data })
 const actAddCityFail = (error) => ({ type: actions.ADD_CITY_SUCCESS, payload: error })
 
 // edit city
-
-// add city
 export const actEditCity = (roomData) => {
     return (dispatch) => {
         dispatch(actEditCityRequest)
@@ -71,11 +69,12 @@ const actEditCityFail = (error) => ({ type: actions.EDIT_CITY_SUCCESS, payload: 
 export const actDeleteCity = (cityId) => {
     return (dispatch) => {
         dispatch(actDeleteCityRequest)
-
         api.delete(`/vi-tri/${cityId}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     dispatch(actDeleteCitySucess(result.data.content))
+                    alert(result.data.message)
+                    dispatch(actListCity())
                 }
             })
             .catch((error) => {

@@ -25,6 +25,8 @@ export default function AdminInfo() {
   const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
   const user = userData?.user
 
+  console.log(user);
+
   const [isEditMode, setIsEditMode] = useState(false);
   const [newProfile, setNewProfile] = useState({
     avatar: '',
@@ -188,7 +190,7 @@ export default function AdminInfo() {
                       >
                         {isEditMode ? 'Close' : 'Edit'}
                       </Button>
-                      
+
                       <Button
                         variant="contained"
                         color="warning"

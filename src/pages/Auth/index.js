@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { actAuth } from '../../redux/actions/actAuth';
 import './style.css';
-import { useCheckRole } from '../../hooks/useCheckRole';
+import { useCheckRole } from 'hooks/useCheckRole';
 
 export default function Auth() {
     const dispatch = useDispatch();

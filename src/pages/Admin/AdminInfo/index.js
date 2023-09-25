@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { actGetRoomByUser } from '../../../redux/actions/actRoom'
-import { actDeleteUserRoom } from '../../../redux/actions/actUser'
+import { actGetRoomByUser } from 'redux/actions/actRoom'
+import { actDeleteUserRoom } from 'redux/actions/actUser'
+
 import { Box, Tab, Tabs } from '@mui/material'
 import { Button } from 'antd'
-import { useCheckRole } from '../../../hooks/useCheckRole'
+import { useCheckRole } from 'hooks/useCheckRole'
 
 export default function AdminInfo() {
   const dispatch = useDispatch()

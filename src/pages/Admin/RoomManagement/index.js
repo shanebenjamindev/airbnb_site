@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
+import { actHomeListRoom } from 'redux/actions/actRoom'
 import { Table } from 'antd'
-import { actDeleteCity } from '../../../redux/actions/actCity'
+import { actDeleteCity } from 'redux/actions/actCity'
 import { Link } from 'react-router-dom'
 
 export default function RoomManagement() {

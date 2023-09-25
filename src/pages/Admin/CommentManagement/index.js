@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Table } from "antd";
-import { AudioOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { actListComment } from '../../../redux/actions/actComment'
+import { actListComment } from 'redux/actions/actComment'
 
 export default function CommentManagement() {
 

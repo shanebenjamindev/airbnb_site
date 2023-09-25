@@ -1,15 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { actAddCity, actDeleteCity, actEditCity, actListCity } from "../../../redux/actions/actCity";
+import { actAddCity, actDeleteCity, actEditCity, actListCity } from "redux/actions/actCity";
 import './manage-location.css'
 import LocationForm from "./LocationForm";
 
-export default function AdminLocation(props) {
+export default function AdminLocation() {
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import * as actions from '../types/constants'
-import api from '../../ApiUtils'
+import api from 'ApiUtils'
 /**
  * City Reducer
   */

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
-import { actDeleteCity } from '../../../redux/actions/actCity'
+import { actDeleteCity } from 'redux/actions/actCity'
 import { Link } from 'react-router-dom'
-import { actGetListUser } from '../../../redux/actions/actUser'
+import { actGetListUser } from 'redux/actions/actUser'
 import { UploadFileOutlined } from '@mui/icons-material'
 import { Input, Modal, Button, Form, Table, Upload, Select } from "antd";
 

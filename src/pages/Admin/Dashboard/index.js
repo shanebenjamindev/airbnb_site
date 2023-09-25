@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../Dashboard/Dashboard.css";
-import { Card, Space, Statistic, Table, Typography } from "antd";
-import { CommentBankOutlined, DonutLargeOutlined, LocalActivityOutlined, LocationCityOutlined, PinDropOutlined, RoomOutlined, SupervisedUserCircleOutlined } from "@mui/icons-material";
+import { Card, Space, Statistic, Table } from "antd";
+import { CommentBankOutlined, LocationCityOutlined, RoomOutlined, SupervisedUserCircleOutlined } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { actListCity } from "../../../redux/actions/actCity";
+import { actListCity } from "redux/actions/actCity";
 import {
   Chart as ChartJS,
   CategoryScale,

@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 export function useCheckRole() {
 
   const userData = JSON?.parse(localStorage.getItem("USER_LOGIN"));

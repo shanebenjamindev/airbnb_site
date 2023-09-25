@@ -7,16 +7,16 @@ export default function HomeNews() {
     <section className="section__News bg-white p-5">
       <div className="container">
 
-        <h2 className="section__Title">
+        <h2 className="section__Title" data-aos="fade-down"  data-aos-duration="1000">
           <div>
             News
           </div>
         </h2>
 
         <div className="line" />
-        <div className="row">
+        <div className="row" data-aos="fade-up"  data-aos-duration="1500">
 
-          <div className="substance col-lg-4 col-md-4 col-sm-12">
+          <div className="substance col-lg-4 col-md-4 col-sm-12" >
             <div className="date">
               <div className="day">25</div>
               <div className="year">

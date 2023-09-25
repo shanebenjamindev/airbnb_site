@@ -13,14 +13,14 @@ export default function HomeBlogs() {
 
                 <div className="row event__Container align-items-center">
                     <div className="event__Content col-lg-6 col-sm-12 ">
-                        <div className="event__Item ">
-                            <div className="event__Img">
+                        <div className="event__Item " data-aos="fade-right" data-aos-duration="1000">
+                            <div className="event__Img" >
                                 <img
                                     src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/events.jpg"
                                     alt=""
                                 />
                                 <div className="event__Text">
-                                    <h2 className='main__Title '>
+                                    <h2 className='main__Title'>
                                         EVENTS
                                     </h2>
                                     <h3 className="main__p text-white bg-warning">Beach Sports</h3>
@@ -30,14 +30,14 @@ export default function HomeBlogs() {
                     </div>
 
                     <div className="event__Content col-lg-6 col-sm-12">
-                        <div className="event__Item">
+                        <div className="event__Item" data-aos="fade-down"  data-aos-duration="1000">
                             <div className="event__Img">
                                 <img
                                     src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/events-1.jpg"
                                     alt=""
                                 />
-                                <div className="event__Text ">
-                                    <h2 className="main__Title " >
+                                <div className="event__Text">
+                                    <h2 className="main__Title">
                                         EVENTS
                                     </h2>
                                     <h3 className="main__p text-white bg-warning">Music Festival</h3>
@@ -45,7 +45,7 @@ export default function HomeBlogs() {
                             </div>
                         </div>
 
-                        <div className="event__Item">
+                        <div className="event__Item" data-aos="fade-left" data-aos-duration="1000">
                             <div className="event__Img">
                                 <img
                                     src="http://landing.engotheme.com/html/skyline/demo/images/Home-4/events-2.jpg"

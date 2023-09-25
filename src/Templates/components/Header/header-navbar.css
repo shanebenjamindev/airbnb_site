@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     z-index: 100;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 30px;
 }
 
 .navbar__Container {
@@ -129,13 +129,19 @@ select,
 
 /* items in button */
 .btnFindRoom__Item {
-    padding: 0 8px;
+    font-size: smaller;
+    padding: 0 5px;
     color: var(--primary-color);
 }
 
 .btnFindRoom__Item:first-child,
 .btnFindRoom__Item:nth-child(2) {
-    border-right: 1px solid grey;
+    border-right: 1px solid var(--primary-color);
+}
+
+.btnFindRoom__Item:last-child {
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
 }
 
 
@@ -150,32 +156,47 @@ select,
 .formFindRoom-Hide {
     position: absolute;
     opacity: 0;
-    transform: translateY(1rem);
-    transition: all 0.25s ease;
+    transform: translateY(-3rem);
     visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: -99;
+    left: 0;
 }
 
 .formFindRoom {
     border-radius: 50px;
     border: 1px solid rgb(213, 213, 213);
     background-color: whitesmoke;
+
 }
 
 .formFindRoom-Show {
     z-index: 12;
-    transition: all 0.5s ease;
-    visibility: visible;
-
     opacity: 1;
+    transition: all 0.25s ease;
+    visibility: visible;
 }
 
 .formFindRoom__Item {
+    font-size: 14px;
     padding: 8px;
     border-radius: 50px;
+
 }
 
 .navbar-brand {
     z-index: 9999;
+}
+
+.form__Fragment {
+    border: 1px solid var(--primary-color) !important;
+}
+
+.formDropdown {
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 8px;
+    height: 30px;
 }
 
 /* pc: width >= 1024px */

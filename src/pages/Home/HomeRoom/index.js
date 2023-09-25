@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./style.css";
 import { actHomeListRoom } from "../../../redux/actions/actRoom";
 import Room from "./Room";
 
@@ -21,14 +20,14 @@ export default function HomeRoom() {
     }
 
     return listRoom?.data?.map((item, index) => (
-      <div key={index} className="col-lg-3 col-sm-6 my-2">
+      <div key={index} className="col-lg-3 col-sm-6 my-2" data-aos="fade-up" data-aos-anchor-placement="top-center">
         <Room room={item} />
       </div>
     ));
   };
 
   return (
-    <div className="room__Content">
+    <div className="section__Item-primary p-5">
       <div className="text-center">
         <div delay={1000}>
           <h2 className="main__Title">Our Room</h2>

@@ -1,0 +1,17 @@
+.section__About {
+    background-color: transparent;
+    box-shadow: inset rgb(0, 0, 0) 0px 0px 5rem 1rem;
+    background-size: cover;
+    background-position: center center;
+}
+
+.about-us {
+    box-shadow: inset rgba(100, 100, 111, 0.2) 0px 7px 100px 100px;
+}
+
+.about-image-content {
+    /* display: flex; */
+    justify-content: space-evenly;
+    gap: 30px;
+    align-items: center;
+}

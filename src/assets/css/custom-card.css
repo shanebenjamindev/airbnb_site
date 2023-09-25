@@ -1,16 +1,24 @@
 /* CARD CUSTOM---------------------------------------------------- */
+.card {
+    height: 100%;
+    transition: all 0.25s ease;
+    text-align: center;
+    align-items: center;
+}
 
 .custom__Card {
-    display: flex;
+    /* display: flex; */
+    text-align: center;
     align-items: center;
     margin-bottom: 15px;
-    background-color: var(--secondary-color);
+    /* background-color: var(--secondary-color); */
     padding: 20px;
     transition: all 0.25s ease;
 }
 
 .custom__Card-content {
     height: 100%;
+    background-color: red;
     transition: all 0.5s ease;
     position: relative;
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */

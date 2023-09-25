@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './header-navbar.css';
-import { FacebookOutlined, InstagramOutlined, MenuOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
+import { FacebookOutlined, InstagramOutlined, MenuOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCheckRole } from '../../../hooks/useCheckRole';
 import { actListCity } from '../../../redux/actions/actCity'
+import { Button, DatePicker, Form, InputNumber, Select } from 'antd';
+
+
+const { Option } = Select;
 
 export default function Navbar() {
 
@@ -34,10 +38,10 @@ export default function Navbar() {
     };
 
     const handleOnChange = (e) => {
-        return setState({
+        setState({
             id: e.target.value
         })
-    };
+    }
 
     const handleOnSubmit = (e) => {
         if (state.id !== "") {
@@ -54,35 +58,34 @@ export default function Navbar() {
 
     const renderDropDownCity = () => {
         return (
-            <form onSubmit={handleOnSubmit} className='formFindRoom w-75 m-auto d-flex flex-wrap justify-content-around align-items-center text-left'>
-                <div className='col-md-4 p-4 formFindRoom__Item'>
+            <form onSubmit={handleOnSubmit} className='formFindRoom container-fluid w-75 m-auto d-flex flex-wrap justify-content-around align-items-center text-left'>
+                <div className='col-md-3 formFindRoom__Item '>
                     <span>Địa điểm </span>
-                    <select className='' onChange={handleOnChange} name="selectedCityId" >
-                        <option className='bg-dark text-light' value={""}>- Chọn thành phố -</option>
-                        {
-                            listCityData?.map((city, index) => {
-                                return <option className='bg-dark text-light' key={index} value={city.id}>{city.tenViTri}</option>
-                            })
-                        }
+                    <select className='w-100 formDropdown form__Fragment' onChange={handleOnChange} defaultValue="" >
+                        <option value="">- Chọn thành phố -</option>
+                        {listCityData?.map((city) => (
+                            <option key={city.id} value={city.id}>
+                                {city.tenViTri}
+                            </option>
+                        ))}
                     </select>
-
                 </div>
                 <div className='col-md-2 formFindRoom__Item d-flex flex-column'>
                     <label>Nhận phòng</label>
-                    <input className=' border-0' type='date' />
+                    <DatePicker className=' border-0 form__Fragment' />
                 </div>
                 <div className='col-md-2 formFindRoom__Item d-flex flex-column'>
                     <label>Trả phòng</label>
-                    <input className=' border-0' type='date' />
+                    <DatePicker className=' border-0 form__Fragment' />
                 </div>
-                <div className='col-md-4 formFindRoom__Item d-flex align-items-center flex-wrap  w-md-25 '>
+                <div className='col-md-2 formFindRoom__Item d-flex align-items-center flex-wrap w-md-25'>
                     <div className='d-flex flex-column col-md-5 mb-3 mb-md-0'>
                         <label>Khách</label>
-                        <input className=' border-0' defaultValue={0} />
+                        <InputNumber className='border-0 form__Fragment' defaultValue={0} type="number" />
                     </div>
-                    <div className='col-md-7'>
-                        <button type='submit' className=' w-100 mt-3-sm btn__Primary rounded-50'>Search</button>
-                    </div>
+                </div>
+                <div className='col-md-3'>
+                    <button type='submit' className='btn__Primary w-100 mt-3-sm rounded-50'>Search</button>
                 </div>
             </form>
         )
@@ -91,7 +94,7 @@ export default function Navbar() {
     return (
         <header>
             <div className='header'>
-                <div className='navbar__Container container align-items-center navbar-expand-lg navbar-dark pb-2'>
+                <div className='navbar__Container container main__p align-items-center navbar-expand-lg navbar-dark pb-2'>
                     <nav className="navbar d-flex">
                         <div className="d-flex w-100 justify-content-between">
                             <button
@@ -179,7 +182,9 @@ export default function Navbar() {
                                             <div className='btnFindRoom__Item'>Địa điểm bất kỳ</div>
                                             <div className='btnFindRoom__Item'>Tuần bất kỳ</div>
                                             <div className='btnFindRoom__Item'>Thêm khách</div>
-                                            <button className='btnFindRoom__Item btn border rounded-circle '>S</button>
+                                            <button className='btnFindRoom__Item'>
+                                                <SearchOutlined />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

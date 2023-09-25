@@ -9,7 +9,7 @@ export default function HomeTemplate() {
     window.scrollTo(0, 0)
   })
   return (
-    <div className=''>
+    <div>
       <Navbar />
       <Outlet />
       <Footer />

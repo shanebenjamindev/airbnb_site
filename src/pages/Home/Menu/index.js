@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./home-menu.css";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
 export default function Menu() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const listCityDataMenu = useSelector((state) => state.cityReducer.data);

@@ -6,24 +6,20 @@ import './style.css'
 import DateRangeForm from './DateRangeForm';
 import Comfort from './Comfort';
 import Comments from './Comments';
-// import CheckLoading from '../../components/CheckLoading';
+import { useCheckRole } from '../../hooks/useCheckRole'
 
 export default function RoomDetail() {
   const param = useParams();
   const dispatch = useDispatch();
 
-  const userData = localStorage.getItem("USER_LOGIN");
-  const user = userData ? JSON.parse(userData).user : "";
+  const user = useCheckRole()
 
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(actRoomDetail(param.id))
-  }, [])
+  }, [dispatch, param.id])
 
   const roomDetail = useSelector((state) => state.roomReducer.data);
-  // const  = useSelector((state) => state.roomReducer.data);
-  // console.log(roomDetail);
-
 
   const renderRoom = () => {
     return <>

@@ -31,13 +31,15 @@ export default function AdminTemplate() {
         <AdminNavbar />
       </div>
 
-      <div className="SideMenuAndPageContent d-md-flex">
+      <div className="SideMenuAndPageContent d-md-flex container-fluid">
 
-        <div className="d-none d-md-block">
+        <div className="d-none d-md-block col-md-2">
           <SideMenu />
         </div>
 
-        <PageContent />
+        <div className="col-md-10">
+          <PageContent />
+        </div>
       </div>
       <AdminFooter />
 

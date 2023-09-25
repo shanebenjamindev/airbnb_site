@@ -3,8 +3,8 @@ import './App.css';
 
 import { BrowserRouter, Routes } from 'react-router-dom'
 import renderRoutes from './routes';
-import { Suspense, lazy } from 'react';
-import CheckLoading from './components/CheckLoading';
+import { Suspense} from 'react';
+import CheckLoading from './Templates/components/CheckLoading'
 
 
 function App() {

@@ -27,25 +27,6 @@ const roomReducer = (state = initialState, action) => {
             state.error = action.payload;
             return { ...state }
 
-        // get room data
-        case actions.ROOM_DATA_REQUEST:
-            state.loading = true;
-            state.data = null;
-            state.error = null;
-            return { ...state }
-
-        case actions.ROOM_DATA_SUCCESS:
-            state.loading = false;
-            state.data = action.payload;
-            state.error = null;
-            return { ...state }
-
-        case actions.ROOM_DATA_FAIL:
-            state.loading = false;
-            state.data = null;
-            state.error = action.payload;
-            return { ...state }
-
         // Get list room by Id        
         case actions.GET_ROOM_BY_ID_REQUEST:
             state.loading = true;

@@ -3,12 +3,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { actRegister } from '../../redux/actions/actAuth';
-import CheckLoading from '../../components/CheckLoading';
 
 export default function RegisterPage() {
     const dispatch = useDispatch();
 
-    const { data, error, loading } = useSelector((state) => state.authReducer)
+    const { data, error } = useSelector((state) => state.authReducer)
 
     const showError = () => {
         if (data) {
@@ -16,9 +15,6 @@ export default function RegisterPage() {
         }
         if (error) {
             return <div className='alert alert-danger'>Đăng kí không thành công, vui lòng kiểm tra lại {error}</div>
-        }
-        if (loading) {
-            return <CheckLoading />
         }
     }
 

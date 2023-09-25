@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Navigate, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { actLogin } from '../../redux/actions/actAuth';
 import './style.css'
-import CheckLoading from '../../components/CheckLoading';
 import { useCheckRole } from '../../hooks/useCheckRole';
 
 export default function LoginPage() {
@@ -11,7 +10,7 @@ export default function LoginPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { loading, error, data } = useSelector((state) => state.authReducer)
+    const { error } = useSelector((state) => state.authReducer)
 
     const user = useCheckRole()
 
@@ -24,9 +23,6 @@ export default function LoginPage() {
     const showError = () => {
         if (error) {
             return <div className='alert alert-danger'>{error}</div>
-        }
-        if (loading) {
-            return <CheckLoading />
         }
     }
 

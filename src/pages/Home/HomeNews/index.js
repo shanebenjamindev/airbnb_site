@@ -27,11 +27,11 @@ export default function HomeNews() {
               </div>
             </div>
             <div className="text">
-              <a href="#">
+              <a href="/">
                 Update menu food in <br /> Skyline Hote
               </a>
             </div>
-            <a href="#" className="read-more">
+            <a href="/" className="read-more">
               Read More
             </a>
           </div>
@@ -46,12 +46,12 @@ export default function HomeNews() {
                 2017
               </div>
               <div className="text">
-                <a href="#">
+                <a href="/">
                   Las Maquinas
                   <br /> on Tragamonedas
                 </a>
               </div>
-              <a href="#" className="read-more">
+              <a href="/" className="read-more">
                 Read More{" "}
               </a>
             </div>
@@ -67,12 +67,12 @@ export default function HomeNews() {
               </div>
             </div>
             <div className="text">
-              <a href="#">
+              <a href="/">
                 Mother Earth Hosts
                 <br /> Our Travels
               </a>
             </div>
-            <a href="#" className="read-more">
+            <a href="/" className="read-more">
               Read More{" "}
             </a>
           </div>

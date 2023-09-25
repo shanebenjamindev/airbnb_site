@@ -7,7 +7,7 @@ import { DateRange, DefinedRange } from 'react-date-range';
 import './style.css'
 import { useDispatch } from 'react-redux';
 import { actCheckout } from '../../../redux/actions/actUser';
-import { actGetRoomData } from '../../../redux/actions/actRoom';
+import { actRoomDetail } from '../../../redux/actions/actRoom';
 import { useNavigate } from 'react-router-dom';
 
 const DateRangeForm = (props) => {
@@ -47,7 +47,7 @@ const DateRangeForm = (props) => {
     const selectedRanges = [selectionRange];
 
     useEffect(() => {
-        dispatch(actGetRoomData(detail.id))
+        dispatch(actRoomDetail(detail.id))
         if (user) {
             setState(
                 {
@@ -56,6 +56,7 @@ const DateRangeForm = (props) => {
                 }
             )
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleGuestChange = (increment) => {
@@ -68,7 +69,7 @@ const DateRangeForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!localStorage.getItem("USER_LOGIN")) {
+        if (!user) {
             if (window.confirm("Hãy đăng nhập để thực hiện chức năng này")) {
                 navigate("/login-page", { replace: true })
             }

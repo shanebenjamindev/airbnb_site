@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Modal, Button, Form, Table, Upload, Select } from "antd";
+import { Input, Modal, Button, Form,  Upload, Select } from "antd";
 import axios from "axios";
 import { UploadOutlined } from "@ant-design/icons";
 const { Option } = Select;

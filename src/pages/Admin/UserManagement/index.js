@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
+// import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
 import { actDeleteCity } from '../../../redux/actions/actCity'
 import { Link } from 'react-router-dom'
 import { actGetListUser } from '../../../redux/actions/actUser'
 import { UploadFileOutlined } from '@mui/icons-material'
-import { Input, Modal, Button, Form, Table, Upload, Select } from "antd";
+import { Input, Modal, Button, Form, Table, Upload } from "antd";
 
 export default function UserManagement() {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export default function UserManagement() {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
-  const [formData, setFormData] = useState(null);
+  // const [formData, setFormData] = useState(null);
   // const [cityListData, setListCity] = useState(null)
 
   const showModal = (mode, cityData) => {
@@ -110,7 +110,7 @@ export default function UserManagement() {
 function UserModal({ open, mode, onCancel, onOk }) {
 
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]); // Define fileList in the state
+  // const [fileList, setFileList] = useState([]); // Define fileList in the state
   const [imagePreview, setImagePreview] = useState(null);
 
 

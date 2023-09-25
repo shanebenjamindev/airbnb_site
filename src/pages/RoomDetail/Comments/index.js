@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actGetRoomComment, actRoomComment } from '../../../redux/actions/actComment';
 import { Rate } from 'antd';
 import './comments.css';
-// import '../../../assets/notificationModel.css'
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Comments(props) {
@@ -15,8 +14,10 @@ export default function Comments(props) {
     const [commentText, setCommentText] = useState('');
 
     useEffect(() => {
-        dispatch(actGetRoomComment(data.id));
-    }, []);
+        if (data.id) {
+            dispatch(actGetRoomComment(data.id));
+        }
+    }, [dispatch, data.id]);
 
     const listComment = useSelector((state) => state.commentReducer.data);
     const error = useSelector((state) => state.commentReducer.error);

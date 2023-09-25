@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./home-menu.css";
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion'
+
 export default function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();

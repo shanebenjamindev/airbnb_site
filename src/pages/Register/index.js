@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { actRegister } from '../../redux/actions/actAuth';
-import CheckLoading from '../../components/CheckLoading';
+import { actRegister } from 'redux/actions/actAuth';
+import CheckLoading from 'Templates/components/CheckLoading';
 
 export default function RegisterPage() {
     const dispatch = useDispatch();

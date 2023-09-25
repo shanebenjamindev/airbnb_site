@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './header-navbar.css';
-import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
+import { FacebookOutlined, InstagramOutlined, MenuOutlined, TwitterOutlined, YoutubeOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { actListCity } from '../../redux/actions/actCity';
-import { useCheckRole } from '../../hooks/useCheckRole';
+// import { actListCity } from '../../../../redux/actions/actCity';
+import { useCheckRole } from 'hooks/useCheckRole';
+import { actListCity } from 'redux/actions/actCity'
 
 export default function Navbar() {
 

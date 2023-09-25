@@ -1,14 +1,14 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from '../../components/Header'
-import Footer from '../../components/Footer'
+import Navbar from './components/Header'
+import Footer from './components/Footer'
 import './style.css'
+import PageContent from './components/PageContent'
 
 export default function HomeTemplate() {
   return (
     <div className=''>
       <Navbar />
-      <Outlet />
+      <PageContent />
       <Footer />
     </div>
   )

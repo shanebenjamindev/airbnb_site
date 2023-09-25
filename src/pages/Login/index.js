@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { actLogin } from '../../redux/actions/actAuth';
 import './style.css'
-import CheckLoading from '../../components/CheckLoading';
-import { useCheckRole } from '../../hooks/useCheckRole';
+import { useCheckRole } from 'hooks/useCheckRole';
+import CheckLoading from 'Templates/components/CheckLoading';
 
 export default function LoginPage() {
 

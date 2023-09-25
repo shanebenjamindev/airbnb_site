@@ -17,7 +17,6 @@ export default function AdminLocation(props) {
   }, [dispatch]);
 
   const { data } = useSelector(state => state.cityReducer)
-  console.log(data);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
   const [formData, setFormData] = useState(null);

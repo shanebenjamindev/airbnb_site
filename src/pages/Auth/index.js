@@ -4,14 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { actAuth } from '../../redux/actions/actAuth';
 import './style.css';
 import { useCheckRole } from '../../hooks/useCheckRole';
-// import { userData } from "../../ApiUtils";
 
 export default function Auth() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const user = useCheckRole()
-    // const user = userData?.user;
 
     const { error } = useSelector((state) => state.authReducer)
 

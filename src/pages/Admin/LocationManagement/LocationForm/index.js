@@ -14,7 +14,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
   const [fileList, setFileList] = useState([]); // Define fileList in the state
 
 
-  console.log(formData);
+  // console.log(formData);
 
   useEffect(() => {
     axios

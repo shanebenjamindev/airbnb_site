@@ -13,7 +13,6 @@ export const actGetRoomByCity = (id) => {
                 }
             })
             .catch((error) => {
-                // console.log(error);
                 dispatch(actGetListRoomByIdFail(error.response.data))
             })
     }
@@ -27,7 +26,6 @@ export const actGetRoomByUser = (id) => {
         api.get(`/dat-phong/lay-theo-nguoi-dung/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    // console.log(result.data.content);
                     dispatch(actGetListRoomByIdSuccess(result.data.content))
                 }
             })
@@ -44,7 +42,6 @@ const actGetListRoomByIdFail = (error) => ({ type: actions.GET_ROOM_BY_ID_FAIL, 
 // Room data để xem thông tin phòng có người đặt chưa
 export const actGetRoomData = (id) => {
     return (dispatch) => {
-        console.log(id);
         dispatch(actGetRoomDataRequest)
         api.get(`/phong-thue/${id}`)
             .then((result) => {
@@ -72,7 +69,6 @@ export const actRoomDetail = (id) => {
                 }
             })
             .catch((error) => {
-                // console.log(error);
                 dispatch(actRoomDetailFail(error.response.data))
             })
     }
@@ -135,7 +131,6 @@ export const actDeleteRoom = (id) => {
                 }
             })
             .catch((error) => {
-                // console.log(error);
                 dispatch(actDeleteRoomFail(error.response.data))
             })
     }

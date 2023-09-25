@@ -1,12 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import { useCheckRole } from '../../../../hooks/useCheckRole';
 export default function AdminHeader() {
 
-  const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-  const user = userData?.user
-  const token = userData?.token
-  const { avatar } = user
+  const user = useCheckRole()
+  // console.log(user);
 
   return (
     <div className='px-5 d-flex justify-content-between AdminHeader'>
@@ -32,7 +30,7 @@ export default function AdminHeader() {
           <div className='main__p mr-2'>
             {user.name}
           </div>
-          <img width="40" height="40" alt="" src={(avatar.length !== 0) ? (user.avatar) :
+          <img width="40" height="40" alt="" src={(user.avatar.length !== 0) ? (user.avatar) :
             ("https://cdn-icons-png.flaticon.com/512/149/149071.png")} />
         </div>
       </Link>

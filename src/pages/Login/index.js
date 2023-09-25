@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { actLogin } from '../../redux/actions/actAuth';
 import './style.css'
 import CheckLoading from '../../components/CheckLoading';
+import { useCheckRole } from '../../hooks/useCheckRole';
 
 export default function LoginPage() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { loading, error } = useSelector((state) => state.authReducer)
+    const { loading, error, data } = useSelector((state) => state.authReducer)
+
+    const user = useCheckRole()
+
+    useEffect(() => {
+        if (user) {
+            console.log(user);
+        }
+    })
 
     const showError = () => {
         if (error) {
@@ -41,11 +50,10 @@ export default function LoginPage() {
         dispatch(actLogin(state, navigate))
     };
 
-
-    if (localStorage.getItem("USER_LOGIN")) {
-        alert("Đã đăng nhập, đang về trang chủ...")
-        return <Navigate replace to="/" />;
-    }
+    // if (localStorage.getItem("USER_LOGIN")) {
+    //     // alert("Đã đăng nhập, đang về trang chủ...")
+    // return <Navigate replace to="/" />;
+    // }
 
 
     return (

@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Space } from 'antd'
 import "./admin.css";
 import CheckAdmin from "./components/CheckAdmin";
@@ -8,12 +8,22 @@ import SideMenu from "./components/SideMenu";
 import AdminHeader from "./components/AdminHeader";
 import PageContent from "./components/PageContent";
 import AdminNavbar from "./components/AdminNavbar";
+import { useCheckRole } from "../../hooks/useCheckRole";
 
 export default function AdminTemplate() {
-  return (
-    <div className="Admin">
-      <CheckAdmin />
+  const user = useCheckRole()
 
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!user) {
+      navigate('/', { replace: true })
+      alert("Hãy đăng nhập trước")
+    }
+    else navigate('/admin/dashboard')
+  }, [])
+
+  const renderAdmin = () => {
+    return <>
       <div className="d-none d-md-block">
         <AdminHeader />
       </div>
@@ -30,6 +40,13 @@ export default function AdminTemplate() {
         <PageContent />
       </div>
       <AdminFooter />
+
+    </>
+  }
+
+  return (
+    <div className="Admin">
+      {(user) && renderAdmin()}
     </div>
   );
 }

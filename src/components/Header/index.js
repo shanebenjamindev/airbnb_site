@@ -4,11 +4,14 @@ import { FacebookOutlined, InstagramOutlined, MenuOutlined, PhoneOutlined, Twitt
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actListCity } from '../../redux/actions/actCity';
+import { useCheckRole } from '../../hooks/useCheckRole';
 
 export default function Navbar() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
+
+    const user = useCheckRole()
 
     useEffect(() => {
         dispatch(actListCity());
@@ -16,11 +19,7 @@ export default function Navbar() {
     }, [dispatch]);
 
     const listCityData = useSelector((state) => state.cityReducer.data);
-    const userData = JSON?.parse(localStorage.getItem("USER_LOGIN"));
 
-    if (userData) {
-        var { user, token } = userData
-    }
 
     const [buttonActive, setButtonActive] = useState(false);
     const [formActive, setFormActive] = useState(false);
@@ -146,7 +145,7 @@ export default function Navbar() {
                                     <UserOutlined />
                                 </a>
                                 <div id='dropdown-menu' className="dropdown-menu custom__Border-50 main__p dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                                    {userData ? (
+                                    {user ? (
                                         <>
                                             <Link to="/user-info" className="dropdown-item">Hồ sơ của {user.name}</Link>
                                             <Link to="/" onClick={handleLogout} className="dropdown-item">Đăng xuất</Link>

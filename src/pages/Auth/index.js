@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { actAuth } from '../../redux/actions/actAuth';
 import './style.css';
+import { useCheckRole } from '../../hooks/useCheckRole';
+// import { userData } from "../../ApiUtils";
 
 export default function Auth() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const user = useCheckRole()
+    // const user = userData?.user;
 
     const { error } = useSelector((state) => state.authReducer)
 
@@ -35,9 +40,6 @@ export default function Auth() {
     };
 
     const renderContent = () => {
-        const userData = localStorage.getItem("USER_LOGIN");
-        const user = userData ? JSON.parse(userData).user : "";
-
         if (!user) {
             return (
                 <form onSubmit={handleLogin} className='m-auto p-2 align-items-center mt-4'>
@@ -78,15 +80,16 @@ export default function Auth() {
                 <Link to="/"> <p className='main__p text-warning'> (Back to Home page)</p></Link>
             </div>
         }
+
         else if (user.role === "ADMIN") {
             setTimeout(() => {
-                navigate('/admin/dashboard');
+                navigate('/admin/', { replace: true })
             }, 1500);
 
             return (
                 <div className='text-center text-warning'>
                     <h2 className="text-center main__Title text-white">AUTHENTICATION SUCCESS</h2>
-                    <h4 className="text-center main__p text-warning">Bạn đã đăng nhập, Directing to dashboard...</h4>
+                    <h4 className="text-center main__p text-warning">Bạn đã đăng nhập chào {user.name}, Directing to dashboard...</h4>
                 </div>
             );
         }

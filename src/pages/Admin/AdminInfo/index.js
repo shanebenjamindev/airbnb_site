@@ -5,10 +5,13 @@ import { actGetRoomByUser } from '../../../redux/actions/actRoom'
 import { actDeleteUserRoom } from '../../../redux/actions/actUser'
 import { Box, Tab, Tabs } from '@mui/material'
 import { Button } from 'antd'
+import { useCheckRole } from '../../../hooks/useCheckRole'
 
 export default function AdminInfo() {
   const dispatch = useDispatch()
   const param = useParams()
+
+  const user = useCheckRole()
 
   useEffect(() => {
     dispatch(actGetRoomByUser(param.id))
@@ -21,11 +24,6 @@ export default function AdminInfo() {
     })
 
   }, [])
-
-  const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-  const user = userData?.user
-
-  console.log(user);
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [newProfile, setNewProfile] = useState({

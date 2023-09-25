@@ -60,6 +60,7 @@ export const actLogin = (userLogin, navigate) => {
                     const { user, token } = result.data.content;
                     const userData = { user, token }
                     dispatch(actLoginSuccess(userData))
+                    navigate('/')
                 }
             })
             .catch((error) => {

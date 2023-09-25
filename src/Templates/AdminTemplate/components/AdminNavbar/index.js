@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './admin-navbar.css';
+import { useCheckRole } from "../../../../hooks/useCheckRole";
 
 export default function AdminNavbar(props) {
   useEffect(() => {
@@ -8,8 +9,8 @@ export default function AdminNavbar(props) {
   }, []);
 
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("USER_LOGIN"));
-  const user = userData?.user;
+
+  const user = useCheckRole()
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {

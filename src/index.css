@@ -10,9 +10,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* disable the overflow item */
-  overflow-x: hidden;
 }
 
 code {

@@ -29,7 +29,7 @@ export default function About() {
         </div>
 
         <div className='d-md-flex my-5 about-image-content'>
-          <div className="about__Item" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">
+          <div className="about__Item" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="900">
             <div>
             <img width={"300px"} height={"450px"} src="https://i.pinimg.com/originals/3c/07/86/3c07863b9dfc0a06314462f0d84f70fe.jpg" className="img-responsive img-v4" alt="" />
             </div>
@@ -39,7 +39,7 @@ export default function About() {
               <img width={""} height={"600px"} src="https://hips.hearstapps.com/hmg-prod/images/melanie-pounds-mountain-brook-house-tour-living-room-fireplace-jpg-1623351404.jpg" className="img-responsive " alt="" />
             </div>
           </div>
-          <div className="about__Item" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="900">
+          <div className="about__Item" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">
             <img width={"300px"} height={"450px"} src="https://i.pinimg.com/564x/38/c4/94/38c49428e91dbd05e0650c83edc86a04.jpg" className="img-responsive img-v4" alt="" />
             <div>
             </div>

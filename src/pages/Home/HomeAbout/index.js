@@ -28,13 +28,13 @@ export default function About() {
           </div>
         </div>
 
-        <div className='d-md-flex my-5 about-image-content'>
+        <div className='d-md-flex my-5 d-none d-md-block about-image-content overflow-content'>
           <div className="about__Item" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="900">
             <div>
             <img width={"300px"} height={"450px"} src="https://i.pinimg.com/originals/3c/07/86/3c07863b9dfc0a06314462f0d84f70fe.jpg" className="img-responsive img-v4" alt="" />
             </div>
           </div>
-          <div className="about__Item" data-aos="fade-up" data-aos-duration="1500">
+          <div className="about__Item " data-aos="fade-up" data-aos-duration="1500">
             <div>
               <img width={""} height={"600px"} src="https://hips.hearstapps.com/hmg-prod/images/melanie-pounds-mountain-brook-house-tour-living-room-fireplace-jpg-1623351404.jpg" className="img-responsive " alt="" />
             </div>

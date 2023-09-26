@@ -92,7 +92,7 @@ export default function Menu() {
       return (
         <div>
           <div className="d-flex align-items-center flex-wrap">
-            <div className="dropdown__MenuImg col-lg-4 col-md-4 d-none d-md-block">
+            <div className="dropdown__MenuImg col-lg-4 col-md-4 d-none d-md-block d-none d-md-block">
               <motion.div
                 variants={animateRight}
                 initial="hidden"

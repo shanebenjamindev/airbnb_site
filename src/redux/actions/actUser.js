@@ -50,7 +50,6 @@ export const actGetUserInfo = (id) => {
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     dispatch(actGetUserInfoSuccess(result.data.content));
-                    dispatch(actGetRoomByUser(id));
                 }
             })
             .catch((error) => {
@@ -72,8 +71,8 @@ export const actEditUserInfo = (id, newProfile) => {
         api.put(`/users/${id}`, newProfile)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    console.log(result.data);
                     alert("done")
+                    dispatch(actEditUserInfoSuccess(result.data.content))
                 }
             })
             .catch((error) => {

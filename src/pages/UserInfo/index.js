@@ -12,7 +12,7 @@ import { useCheckRole } from '../../hooks/useCheckRole'
 export default function UserInfo() {
     const dispatch = useDispatch()
     const user = useCheckRole()
-    
+
     const { loading, error } = useSelector(state => state.userReducer)
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
     const [isEditMode, setIsEditMode] = useState(false);
@@ -27,6 +27,7 @@ export default function UserInfo() {
         role: user.role,
     });
     const [errors, setErrors] = useState({
+        avatar: '',
         name: '',
         phone: '',
         gender: true,
@@ -124,7 +125,24 @@ export default function UserInfo() {
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
-     
+    };
+
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setEditedUser({
+                    ...editedUser,
+                    avatar: e.target.result,
+                });
+            console.log(editedUser);
+
+            };
+            reader.readAsDataURL(file);
+        
+        }
+
     };
 
     const handleDelete = (e) => {
@@ -147,20 +165,27 @@ export default function UserInfo() {
                     <div className='userAvatar__Container section__Item-primary  col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
                         <div className='text-center flex-column align-items-center h-100 justify-content-center'>
                             <div className='d-flex justify-content-center py-2'>
-                                <input
-                                    name='avatar'
-                                    type="file"
-                                    id="avatar-input"
-                                    accept="image/*"
-                                    style={{ display: 'none' }}
-                             
-                                />
+                                {/* Add a button or icon to trigger the file input */}
+                                <label htmlFor="avatar-input" className="avatar-trigger">
+                                    <div className="avatar-overlay">
+                                        <div className="avatar-overlay-text">Change Avatar</div>
+                                    </div>
+                                    <input
+                                        name='avatar'
+                                        type="file"
+                                        id="avatar-input"
+                                        accept="image/*"
+                                        style={{ display: 'none' }}
+                                        onChange={handleAvatarChange}
+                                    />
+                                </label>
+                                {/* Display the selected or default avatar */}
                                 <img
                                     className=''
                                     width="200"
                                     height="200"
                                     alt=""
-                                    src={`${editedUser.avatar}` || (user.avatar) ? (user.avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                    src={editedUser.avatar || user.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                                 />
                             </div>
                             <div className='main__p'>{user.name}</div>
@@ -177,7 +202,7 @@ export default function UserInfo() {
                                     id="avatar-input"
                                     accept="image/*"
                                     style={{ display: 'none' }}
-                     
+
                                 />
                                 <img
                                     className=''
@@ -359,7 +384,7 @@ export default function UserInfo() {
                     </div>
                 </div>
             </div >
-          
+
         </>
     );
 };

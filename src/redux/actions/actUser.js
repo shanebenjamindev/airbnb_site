@@ -59,29 +59,45 @@ export const actGetUserInfo = (id) => {
     };
 };
 
+
 export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
 export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
 export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
 
-// User Edit: 
+
+// User Edit:
+
 export const actEditUserInfo = (id, newProfile) => {
     return (dispatch) => {
-        console.log(newProfile);
-        dispatch(actEditUserInfoRequest);
-        api.put(`/users/${id}`, newProfile)
-            .then((result) => {
-                if (result.data.statusCode === 200) {
-                    alert("done")
-                    dispatch(actEditUserInfoSuccess(result.data.content))
-                }
-            })
-            .catch((error) => {
-                // console.log(error.response.data);
-                const { content } = error.response.data;
-                dispatch(actEditUserInfoFail(content));
-            });
+        if (newProfile.avatar) {
+            // Upload the avatar first
+            api.post(`/users/upload-avatar`, newProfile.avatar)
+                .then((result) => {
+                    console.log(result);
+                })
+                .catch((error) => {
+                
+                    // dispatch(actEditUserInfoFail(content));
+                    console.log(error);
+                });
+        } else {
+            dispatch(actEditUserInfoRequest);
+            api.put(`/users/${id}`, newProfile)
+                .then((result) => {
+                    if (result.data.statusCode === 200) {
+                        dispatch(actEditUserInfoSuccess(result.data.content));
+                        alert("done");
+                    }
+                })
+                .catch((error) => {
+                    const { content } = error.response.data;
+                    dispatch(actEditUserInfoFail(content));
+                });
+        }
     };
 };
+
+// Rest of your actions remain the same
 
 export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST });
 export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });

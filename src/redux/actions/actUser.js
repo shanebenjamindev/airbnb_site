@@ -59,45 +59,28 @@ export const actGetUserInfo = (id) => {
     };
 };
 
-
 export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
 export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
 export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
 
-
-// User Edit:
-
+// User Edit: 
 export const actEditUserInfo = (id, newProfile) => {
     return (dispatch) => {
-        if (newProfile.avatar) {
-            // Upload the avatar first
-            api.post(`/users/upload-avatar`, newProfile.avatar)
-                .then((result) => {
-                    console.log(result);
-                })
-                .catch((error) => {
-                
-                    // dispatch(actEditUserInfoFail(content));
-                    console.log(error);
-                });
-        } else {
-            dispatch(actEditUserInfoRequest);
-            api.put(`/users/${id}`, newProfile)
-                .then((result) => {
-                    if (result.data.statusCode === 200) {
-                        dispatch(actEditUserInfoSuccess(result.data.content));
-                        alert("done");
-                    }
-                })
-                .catch((error) => {
-                    const { content } = error.response.data;
-                    dispatch(actEditUserInfoFail(content));
-                });
-        }
+        console.log(newProfile);
+        dispatch(actEditUserInfoRequest);
+        api.put(`/users/${id}`, newProfile)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actEditUserInfoSuccess(result.data.content))
+                    alert("done")
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                dispatch(actEditUserInfoFail(content));
+            });
     };
 };
-
-// Rest of your actions remain the same
 
 export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST });
 export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });
@@ -122,3 +105,24 @@ export const actDeleteUserRoom = (id) => {
 
 const actDeleteUserRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
 const actDeleteUserRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })
+
+// User Upload Avatar:
+export const actUploadAvatar = (avatar) => {
+    return (dispatch) => {
+        dispatch(actUploadAvatarInfoRequest);
+        api.put(`/users/upload-avatar`, avatar)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    dispatch(actUploadAvatarInfoSuccess(result.data.content))
+                    alert("done")
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                dispatch(actUploadAvatarInfoFail(content));
+            });
+    };
+}
+export const actUploadAvatarInfoRequest = () => ({ type: actions.USER_UPLOAD_AVATAR_REQUEST });
+export const actUploadAvatarInfoSuccess = (data) => ({ type: actions.USER_UPLOAD_AVATAR_SUCCESS, payload: data });
+export const actUploadAvatarInfoFail = (error) => ({ type: actions.USER_UPLOAD_AVATAR_FAIL, payload: error });

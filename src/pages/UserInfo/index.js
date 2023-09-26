@@ -4,10 +4,12 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { actDeleteUserRoom, actEditUserInfo, actGetUserInfo } from '../../redux/actions/actUser';
 import './user-info.css'
 import { useCheckRole } from '../../hooks/useCheckRole'
+import { Upload, Form, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 export default function UserInfo() {
     const dispatch = useDispatch()
@@ -16,9 +18,21 @@ export default function UserInfo() {
     const { loading, error } = useSelector(state => state.userReducer)
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
     const [isEditMode, setIsEditMode] = useState(false);
+    const [userAvatar, setUserAvatar] = useState("");
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
 
     const [editedUser, setEditedUser] = useState({
-        avatar: user.avatar,
         name: user.name,
         email: user.email,
         phone: user.phone,
@@ -27,7 +41,6 @@ export default function UserInfo() {
         role: user.role,
     });
     const [errors, setErrors] = useState({
-        avatar: '',
         name: '',
         phone: '',
         gender: true,
@@ -35,6 +48,7 @@ export default function UserInfo() {
         password: '',
         birthday: '',
         role: '',
+        avatar: user.avatar,
     });
 
     const showError = () => {
@@ -127,22 +141,33 @@ export default function UserInfo() {
         setValue(newValue);
     };
 
-    const handleAvatarChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setEditedUser({
-                    ...editedUser,
-                    avatar: e.target.result,
-                });
-            console.log(editedUser);
+    // const handleAvatarChange = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+    //         reader.onload = (e) => {
+    //             setEditedUser({
+    //                 ...editedUser,
+    //                 avatar: e.target.result,
+    //             });
+    //         console.log(editedUser);
 
-            };
-            reader.readAsDataURL(file);
-        
+    //         };
+    //         reader.readAsDataURL(file);
+
+    //     }
+
+    // };
+    const handleAvatarChange = (info) => {
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully`);
+            setEditedUser({
+                ...editedUser,
+                avatar: info.file.response.url, // Update the edited avatar with the uploaded image URL
+            });
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
         }
-
     };
 
     const handleDelete = (e) => {
@@ -170,6 +195,16 @@ export default function UserInfo() {
                                     <div className="avatar-overlay">
                                         <div className="avatar-overlay-text">Change Avatar</div>
                                     </div>
+
+                                    <button onClick={showModal} className="btn btn-primary">
+                                        Open Avatar Upload Form
+                                    </button>
+
+                                    {isModalVisible && (
+                                        <AvatarUploadModal open={isModalVisible} onCancel={handleCancel} />
+                                    )}
+
+
                                     <input
                                         name='avatar'
                                         type="file"
@@ -386,5 +421,55 @@ export default function UserInfo() {
             </div >
 
         </>
+    );
+};
+
+
+const AvatarUploadModal = ({ open, onCancel }) => {
+    const onFinish = (values) => {
+        // Handle the form submission (e.g., upload the avatar)
+        console.log('Form values:', values);
+        // You can add your API call to upload the avatar here
+        // Remember to handle success and error cases
+        message.success('Avatar uploaded successfully');
+    };
+
+    return (
+        <Modal
+            title="Avatar Upload"
+            open={open} // Use 'visible' instead of 'open'
+            onCancel={onCancel}
+            footer={null}
+        >
+            <Form onFinish={onFinish}>
+                {/* Avatar Upload */}
+                <Form.Item
+                    label="Avatar"
+                    name="avatar"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please upload your avatar!',
+                        },
+                    ]}
+                >
+                    <Upload
+                        name="avatar"
+                        action="/your-upload-api-endpoint" // Replace with your actual API endpoint
+                        listType="picture-card"
+                        showUploadList={false}
+                    >
+                        <Button icon={<UploadOutlined />}>Upload Avatar</Button>
+                    </Upload>
+                </Form.Item>
+
+                {/* Submit Button */}
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        Save
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Modal>
     );
 };

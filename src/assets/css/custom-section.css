@@ -111,8 +111,15 @@
 
 /* handle overflow */
 .overflow-content {
-    width: 100vw;
     overflow-x: hidden;
+}
+
+.overflow-content {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+.overflow-content::-webkit-scrollbar {
+ display: none;
 }
 
 .overflow-container {

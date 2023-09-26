@@ -5,20 +5,36 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { actDeleteUserRoom, actGetUserInfo } from '../../redux/actions/actUser';
+import { actDeleteUserRoom, actEditUserInfo, actGetUserInfo } from '../../redux/actions/actUser';
 import './user-info.css'
+import { useCheckRole } from '../../hooks/useCheckRole'
+
 
 export default function UserInfo() {
     const dispatch = useDispatch();
 
-    const { user } = JSON?.parse(localStorage?.getItem("USER_LOGIN"));
+    const user = useCheckRole()
+
     const [isEditMode, setIsEditMode] = useState(false);
     const [newProfile, setNewProfile] = useState({
         avatar: '',
         name: '',
         email: '',
+        phone: '',
+        birthday: '',
+        gender: true,
         role: '',
     })
+
+    const [errors, setErrors] = useState({
+        name: '',
+        phone: '',
+        gender: true,
+        email: '',
+        password: '',
+        birthday: '',
+        role: '',
+    });
 
 
     useEffect(() => {
@@ -28,12 +44,16 @@ export default function UserInfo() {
             avatar: user.avatar,
             name: user.name,
             email: user.email,
+            phone: user.phone,
+            birthday: user.birthday,
+            gender: user.gender,
             role: user.role,
         })
 
     }, [dispatch, user.avatar, user.birthday, user.email, user.gender, user.id, user.name, user.phone, user.role])
 
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
+    const error = useSelector((state) => state.userReducer.error)
 
     // Tab:
     const [value, setValue] = React.useState(0);
@@ -50,9 +70,6 @@ export default function UserInfo() {
         })
     };
 
-    const handleSave = (e) => {
-        setIsEditMode(false);
-    };
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -60,13 +77,53 @@ export default function UserInfo() {
             ...newProfile,
             [name]: value,
         })
+        if (name === 'name') {
+            setErrors({
+                ...errors,
+                name: value.trim() === '' ? 'Tên không được để trống' : value.trim().length < 4 ? 'Phải từ 4 kí tự' : '',
+            });
+        } else if (name === 'phone') {
+            setErrors({
+                ...errors,
+                phone: value.trim() === '' ? 'Số điện thoại không được để trống' : !/^\d{10,11}$/.test(value) ? 'Số điện thoại không hợp lệ' : '',
+            });
+        } else if (name === 'email') {
+            setErrors({
+                ...errors,
+                email: value.trim() === '' ? 'Email không được để trống' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Email không hợp lệ' : '',
+            });
+        } else if (name === 'birthday') {
+            setErrors({
+                ...error,
+                birthday: !/^\d{4}-\d{2}-\d{2}$/.test(value) ? "Ngày sinh không hợp lệ" : ""
+            })
+        }
+        else {
+            setErrors({
+                ...errors,
+                [name]: '',
+            });
+        }
+
     };
+
+    const handleSave = (e) => {
+        setIsEditMode(false);
+        dispatch(actEditUserInfo(user.id, newProfile));
+    };
+
 
     const handleDelete = (e) => {
         e.preventDefault();
         if (window.confirm(`Bạn có muốn xóa phòng ${e.target.value} ?`)) {
             dispatch(actDeleteUserRoom(e.target.value))
             dispatch(actGetUserInfo(user.id))
+        }
+    }
+
+    const showError = () => {
+        if (error) {
+            return <div className='alert alert-danger'>Vui lòng kiểm tra lại {error}</div>
         }
     }
 
@@ -113,7 +170,7 @@ export default function UserInfo() {
         }
     };
     return (
-        <div className='container section__Content-primary-center'>
+        <div className='container section__UserInfo align-items-center d-md-flex'>
             <div className='section__Background'>
                 <div className='section__BackgroundTitle'>
                     <h2 className='thanks-message'>Profile Page</h2>
@@ -182,6 +239,9 @@ export default function UserInfo() {
                                 <form className=''>
                                     <div className='form-header d-flex justify-content-end'>
                                         <div className='d-flex align-items-center'>
+                                            <div className='mx-2'>
+                                                {error && <div className="">{showError()}</div>}
+                                            </div>
                                             <Button
                                                 variant="contained"
                                                 color="warning"
@@ -207,11 +267,14 @@ export default function UserInfo() {
                                         <label className='main__p'>Email:</label>
                                         <input
                                             name='email'
-                                            className='form-control custom-formControl'
-                                            placeholder={user.email}
+                                            className={`form-control custom-formControl ${errors.email ? 'is-invalid' : ''}`}
+                                            defaultValue={user.email}
+
                                             readOnly={!isEditMode} // Make the input editable only in edit mode
                                             onChange={handleOnChange}
                                         />
+                                        {errors.email && <div className="alert alert-danger error-message">{errors.email}</div>}
+
                                     </div>
 
                                     <div className='d-md-flex'>
@@ -221,25 +284,41 @@ export default function UserInfo() {
                                                 <input
                                                     type='text'
                                                     name='name'
-                                                    className='form-control custom-formControl'
+                                                    className={`form-control custom-formControl ${errors.name ? 'is-invalid' : ''}`}
                                                     defaultValue={user.name}
                                                     onChange={handleOnChange}
                                                     readOnly={!isEditMode} // Make the input editable only in edit mode
                                                 />
+                                                {errors.name && <div className="alert alert-danger error-message">{errors.name}</div>}
                                             </div>
                                             <div className=''>
                                                 <label className='main__p'>Giới tính:</label>
                                                 <select
                                                     name='gender'
                                                     className='form-control custom-formControl'
-                                                    defaultValue={user.role}
                                                     disabled={!isEditMode} // Make the input editable only in edit mode
                                                     onChange={handleOnChange}
+                                                    defaultValue={user.gender}
                                                 >
                                                     <option className='' value={true}>Nam</option>
                                                     <option className='' value={false}>Nữ</option>
                                                 </select>
                                             </div>
+
+                                            <div className=''>
+                                                <label htmlFor="birthday">Ngày sinh</label>
+                                                <input
+                                                    type="date"
+                                                    name="birthday"
+                                                    id="birthday"
+                                                    className={`form-control custom-formControl ${errors.birthday ? 'is-invalid' : ''}`}
+                                                    required
+                                                    onChange={handleOnChange}
+                                                />
+                                                {errors.birthday && <div className="alert alert-danger error-message">{errors.birthday}</div>}
+
+                                            </div>
+
                                         </div>
 
                                         <div className='col-lg-6 col-md-6'>
@@ -247,11 +326,12 @@ export default function UserInfo() {
                                                 <label className='main__p'>Số điện thoại:</label>
                                                 <input
                                                     name='phone'
-                                                    className='form-control custom-formControl'
+                                                    className={`form-control custom-formControl ${errors.phone ? 'is-invalid' : ''}`}
                                                     defaultValue={user.phone}
                                                     readOnly={!isEditMode} // Make the input editable only in edit mode
                                                     onChange={handleOnChange}
                                                 />
+                                                {errors.phone && <div className="alert alert-danger error-message">{errors.phone}</div>}
                                             </div>
                                             <div className=''>
                                                 <label className='main__p'>Quyền:</label>
@@ -281,11 +361,10 @@ export default function UserInfo() {
                         {/* Content for Tab 2 (Room) */}
                         {value === 1 && (
                             <div>
-                                <div className='user__ListRoom '>
+                                <div className='user__ListRoom'>
                                     {(listRoomByUser) && listRoomByUser.length >= 1 ? (
-                                        <>
-
-                                            <div className='text-right py-2'>
+                                        <div className='my-3'>
+                                            <div className='text-right my-2'>
                                                 <Link to="/" className='btn__Primary' >
                                                     Thêm phòng
                                                 </Link>
@@ -296,8 +375,7 @@ export default function UserInfo() {
                                                     {renderListRoomByUser()}
                                                 </>
                                             </div>
-
-                                        </>
+                                        </div>
                                     ) : (
                                         <div className='text-center noti__NotFound'>
                                             <div>

@@ -1,9 +1,11 @@
 /* CARD CUSTOM---------------------------------------------------- */
-.card {
+
+.custom__RoomCard {
     height: 100%;
     transition: all 0.25s ease;
     text-align: center;
     align-items: center;
+    border: 1px solid black !important ;
 }
 
 .custom__Card {

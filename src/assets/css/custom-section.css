@@ -36,12 +36,6 @@
 }
 
 /* Section primary */
-.section__Content-primary {
-    /* padding: 15rem 0; */
-    /* background-color: transparent; */
-    /* background-color: red; */
-}
-
 .section__Item-primary {
     margin: auto;
     background-color: #fff;
@@ -56,14 +50,6 @@
 
 /* ----------------------------------- */
 /* Section secondary */
-.section__Content-secondary {
-    /* padding: 15rem  0; */
-}
-
-.section__Content-primary-center {
-    /* padding: 15rem 0; */
-}
-
 .section__Item-secondary {
     padding: 7rem 2rem;
     background-color: var(--bg-secondary);

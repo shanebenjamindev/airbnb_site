@@ -14,7 +14,7 @@ export default function Room(props) {
     };
 
     return (
-        <div className="card">
+        <div className="custom__RoomCard">
             <div className="card-img-top">
                 <img src={room.hinhAnh} alt="img" />
             </div>

@@ -112,6 +112,7 @@ function UserModal({ open, mode, onCancel, onOk }) {
   const [form] = Form.useForm();
   // const [fileList, setFileList] = useState([]); // Define fileList in the state
   const [imagePreview, setImagePreview] = useState(null);
+  const [formData, setFormData] = useState(null);
 
 
   const normFile = (e) => {
@@ -166,7 +167,7 @@ function UserModal({ open, mode, onCancel, onOk }) {
       </Button>,
       <Button key="submit" type="primary" onClick={handleOk}>
         Save
-      </Button>,
+      </Button>
     ]}
   >
     <Form form={form} >

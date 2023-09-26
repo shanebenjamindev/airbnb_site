@@ -1,3 +1,7 @@
+.section__UserInfo {
+    padding: 5rem 0;
+}
+
 .custom-formControl {
     margin-bottom: 20px;
 }
@@ -10,7 +14,17 @@
 }
 
 .user-Info__Container {
-    height: 30rem;
+    height: 25rem;
+    overflow-y: scroll;
+}
+
+.user-Info__Container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.user-Info__Container::-webkit-scrollbar {
+    display: none;
 }
 
 .noti__NotFound {

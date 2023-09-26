@@ -7,9 +7,7 @@ export const actCheckout = (roomData) => {
         dispatch(actCheckoutRequest)
         api.post(`/dat-phong/`, roomData)
             .then((result) => {
-                console.log(result.data.content);
-                dispatch(actCheckoutSuccess(result.data.content))
-                alert("Đã thêm vào hồ sơ")
+                alert(result.data.message)
             })
             .catch((error) => {
                 dispatch(actCheckoutFail(error.response.data))
@@ -18,7 +16,6 @@ export const actCheckout = (roomData) => {
 }
 
 const actCheckoutRequest = () => ({ type: actions.CHECKOUT_REQUEST })
-const actCheckoutSuccess = (data) => ({ type: actions.CHECKOUT_SUCCESS, payload: data })
 const actCheckoutFail = (error) => ({ type: actions.CHECKOUT_SUCCESS, payload: error })
 
 // Get list user
@@ -29,10 +26,7 @@ export const actGetListUser = () => {
         api.get(`/users/`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    console.log(result.data.content);
                     dispatch(actGetListUserSuccess(result.data.content));
-                    // After fetching user info, you can dispatch an action to get user's rooms here
-                    // dispatch(actGetRoomByUser(id));
                 }
             })
             .catch((error) => {
@@ -55,9 +49,7 @@ export const actGetUserInfo = (id) => {
         api.get(`/users/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    console.log(result.data.content);
                     dispatch(actGetUserInfoSuccess(result.data.content));
-                    // After fetching user info, you can dispatch an action to get user's rooms here
                     dispatch(actGetRoomByUser(id));
                 }
             })
@@ -72,6 +64,30 @@ export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
 export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
 export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
 
+// User Edit: 
+export const actEditUserInfo = (id, newProfile) => {
+    return (dispatch) => {
+        console.log(newProfile);
+        dispatch(actEditUserInfoRequest);
+        api.put(`/users/${id}`, newProfile)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    console.log(result.data);
+                    alert("done")
+                }
+            })
+            .catch((error) => {
+                // console.log(error.response.data);
+                const { content } = error.response.data;
+                dispatch(actEditUserInfoFail(content));
+            });
+    };
+};
+
+export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST });
+export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });
+export const actEditUserInfoFail = (error) => ({ type: actions.USER_EDIT_FAIL, payload: error });
+
 
 // User Delete Room:
 export const actDeleteUserRoom = (id) => {
@@ -80,16 +96,14 @@ export const actDeleteUserRoom = (id) => {
         api.delete(`/dat-phong/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch(actDeleteUserRoomSucess(result.data.content))
+                    alert(result.data.message);
                 }
             })
             .catch((error) => {
-                // console.log(error);
                 dispatch(actDeleteUserRoomFail(error.response.data))
             })
     }
 }
 
 const actDeleteUserRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
-const actDeleteUserRoomSucess = (data) => ({ type: actions.DELETE_ROOM_USER_SUCCESS, payload: data })
 const actDeleteUserRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })

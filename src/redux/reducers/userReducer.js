@@ -27,6 +27,27 @@ const userReducer = (state = initialState, action) => {
             state.error = action.payload;
             return { ...state }
 
+        // Edit user 
+
+        case actions.USER_EDIT_REQUEST:
+            state.loading = true;
+            state.data = null;
+            state.error = null;
+            return { ...state }
+
+        case actions.USER_EDIT_SUCCESS:
+            state.loading = false;
+            state.data = action.payload;
+            // window.location.reload();
+            state.error = null;
+            return { ...state }
+
+        case actions.USER_EDIT_FAIL:
+            state.loading = false;
+            state.data = null;
+            state.error = action.payload;
+            return { ...state }
+
         default:
             return { ...state }
     }

@@ -1,0 +1,42 @@
+.section__UserInfo {
+    padding: 5rem 0;
+}
+
+.custom-formControl {
+    margin-bottom: 20px;
+}
+
+.userAvatar::after {
+    background-color: red;
+    width: 10px;
+    position: relative;
+    content: "";
+}
+
+.user-Info__Container {
+    height: 25rem;
+    overflow-y: scroll;
+}
+
+.user-Info__Container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.user-Info__Container::-webkit-scrollbar {
+    display: none;
+}
+
+.noti__NotFound {
+    padding: 9rem 0;
+}
+
+/* tablet: 740<= width < 1024 */
+@media screen and (min-width: 740px) and (max-width: 1024px) {}
+
+/* moblie: width < 740px */
+@media screen and (max-width: 739px) {
+    .user-Info__Container {
+        height: auto;
+    }
+}

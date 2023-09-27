@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actHomeListRoom } from '../../../redux/actions/actRoom'
+import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
 import { Table } from 'antd'
 import { actDeleteCity } from '../../../redux/actions/actCity'
 import { Link } from 'react-router-dom'
@@ -60,10 +60,10 @@ export default function RoomManagement() {
                 render: (room, index) => {
                   return <div className='d-flex justify-content-around' key={index}>
                     <button className='btn btn-info' value={room.id} > <Link to={`/roomdetail/${room.id}`}>View</Link> </button>
-                    <button disabled className='btn btn-danger' value={room.id} onClick={(e) => {
+                    <button className='btn btn-danger' value={room.id} onClick={(e) => {
                       e.preventDefault();
-                      if (window.confirm("Bạn có muốn xóa " + room.tenPhong)) {
-                        dispatch(actDeleteCity(room.id))
+                      if (window.confirm("Bạn có muốn xóa " + room.id)) {
+                        dispatch(actDeleteRoom(room.id))
                       }
                     }}
                     > Delete </button>

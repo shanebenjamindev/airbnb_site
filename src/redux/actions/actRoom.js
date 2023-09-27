@@ -86,12 +86,13 @@ export const actAddRoom = (roomData) => {
         dispatch(actAddRoomRequest)
         api.post(`/phong-thue/`, roomData)
             .then((result) => {
-                console.log(result.data.content);
+                // console.log(result.data.content);
                 dispatch(actAddRoomSuccess(result.data.content))
                 // alert("Đã thêm vào hồ sơ")
             })
             .catch((error) => {
-                dispatch(actAddRoomFail(error.response.data))
+                const { content } = error.response.data
+                alert(content)
             })
     }
 }
@@ -107,11 +108,13 @@ export const actDeleteRoom = (id) => {
         api.delete(`/phong-thue/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch(actDeleteRoomSuccess(result.data.content))
+                    alert(result.data.message)
+                    // dispatch(actDeleteRoomSuccess(result.data.content))
                 }
             })
             .catch((error) => {
-                dispatch(actDeleteRoomFail(error.response.data))
+                const { content } = error.response.data
+                alert(content)
             })
     }
 }

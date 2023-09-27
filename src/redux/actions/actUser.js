@@ -107,19 +107,20 @@ const actDeleteUserRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST
 const actDeleteUserRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })
 
 // User Upload Avatar:
-export const actUploadAvatar = (avatar) => {
+export const actUploadAvatar = (avatarData) => {
     return (dispatch) => {
+
+        const {avatar } = avatarData
+
         dispatch(actUploadAvatarInfoRequest);
-        api.put(`/users/upload-avatar`, avatar)
+        api.post(`/users/upload-avatar/`, avatar)
             .then((result) => {
-                if (result.data.statusCode === 200) {
-                    dispatch(actUploadAvatarInfoSuccess(result.data.content))
-                    alert("done")
-                }
+                console.log(result);
             })
             .catch((error) => {
-                const { content } = error.response.data;
-                dispatch(actUploadAvatarInfoFail(content));
+                console.log(error);
+                // const { content } = error.response.data;
+                // dispatch(actUploadAvatarInfoFail(content));
             });
     };
 }

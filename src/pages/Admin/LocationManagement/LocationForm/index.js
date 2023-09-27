@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Modal, Button, Form,  Upload, Select } from "antd";
+import { Input, Modal, Button, Form, Upload, Select } from "antd";
 import axios from "axios";
 import { UploadOutlined } from "@ant-design/icons";
 const { Option } = Select;
@@ -92,7 +92,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
   const renderEditModal = () => {
     return (
       <Modal
-        labelCol={{ span: 8}}
+        labelCol={{ span: 8 }}
         wrapperCol={{ span: 13 }}
         open={open}
         title={mode === "edit" ? "Cập nhật vị trí" : "Thêm vị trí"}
@@ -111,7 +111,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Quốc gia"
             name="quocGia"
-            labelCol={{ span: 8}}
+            labelCol={{ span: 8 }}
             wrapperCol={{ span: 13 }}
             initialValue="Việt Nam"
           >
@@ -121,7 +121,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Tỉnh thành"
             name="tinhThanh"
-            labelCol={{ span: 8}}
+            labelCol={{ span: 8 }}
             wrapperCol={{ span: 13 }}
             rules={[
               {
@@ -151,7 +151,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Vị trí"
             name="viTri"
-            labelCol={{ span: 8}}
+            labelCol={{ span: 8 }}
             wrapperCol={{ span: 13 }}
             rules={[
               {
@@ -185,7 +185,7 @@ export default function LocationForm({ open, onCancel, onOk, formData, mode }) {
           <Form.Item
             label="Upload Image"
             name="hinhAnh"
-            labelCol={{ span: 8}}
+            labelCol={{ span: 8 }}
             wrapperCol={{ span: 13 }}
             valuePropName="hinhAnh"
             getValueFromEvent={normFile}

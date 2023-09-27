@@ -66,3 +66,25 @@ export const actRoomComment = (newComment, navigate) => {
 const actCommentPostRequest = () => ({ type: actions.COMMENTS_POST_REQUEST })
 const actCommentPostSuccess = (data) => ({ type: actions.COMMENTS_POST_SUCCESS, payload: data })
 const actCommentPostFail = (error) => ({ type: actions.COMMENTS_POST_FAIL, payload: error })
+
+// Delete comment:
+export const actDeleteComment = (id, navigate) => {
+    return (dispatch) => {
+        dispatch(actCommentDeleteRequest)
+
+        api.delete(`/binh-luan/${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    alert(result.data.message)
+                    dispatch(actListComment())
+                }
+            })
+            .catch((error) => {
+                dispatch(actCommentDeleteFail(error));
+            });
+    }
+}
+
+const actCommentDeleteRequest = () => ({ type: actions.COMMENTS_POST_REQUEST })
+const actCommentDeleteSuccess = (data) => ({ type: actions.COMMENTS_POST_SUCCESS, payload: data })
+const actCommentDeleteFail = (error) => ({ type: actions.COMMENTS_POST_FAIL, payload: error })

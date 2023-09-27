@@ -1,10 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCheckRole } from '../../../../hooks/useCheckRole';
 export default function AdminHeader() {
-
   const user = useCheckRole()
-  // console.log(user);
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      localStorage.removeItem("USER_LOGIN");
+      navigate(`/`, { replace: true });
+    }
+  };
 
   return (
     <div className='px-5 d-flex justify-content-between AdminHeader'>
@@ -25,15 +31,19 @@ export default function AdminHeader() {
       <div className='text-center main__Title'>
         AirBnb Management
       </div>
-      <Link to={`/admin/admin-info/${user.id}`}>
-        <div className='d-flex align-items-center'>
-          <div className='main__p mr-2'>
-            {user.name}
+
+      <div className='d-flex'>
+        <Link to={`/admin/admin-info/${user.id}`}>
+          <div className='d-flex align-items-center'>
+            <div className='main__p mr-2'>
+              {user.name}
+            </div>
+            <img width="40" height="40" alt="" src={(user.avatar.length !== 0) ? (user.avatar) :
+              ("https://cdn-icons-png.flaticon.com/512/149/149071.png")} />
           </div>
-          <img width="40" height="40" alt="" src={(user.avatar.length !== 0) ? (user.avatar) :
-            ("https://cdn-icons-png.flaticon.com/512/149/149071.png")} />
-        </div>
-      </Link>
+        </Link>
+        <button onClick={handleLogout} className='btn btn-danger ml-2'>Đăng xuất </button>
+      </div>
     </div>
   )
 }

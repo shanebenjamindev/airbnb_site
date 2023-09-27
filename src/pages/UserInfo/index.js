@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal } from 'antd';
-import { actDeleteUserRoom, actEditUserInfo, actGetUserInfo } from '../../redux/actions/actUser';
+import { actDeleteUserRoom, actEditUserInfo, actGetUserInfo, actUploadAvatar } from '../../redux/actions/actUser';
 import './user-info.css'
 import { useCheckRole } from '../../hooks/useCheckRole'
 import { Upload, Form, message } from 'antd';
@@ -19,18 +19,24 @@ export default function UserInfo() {
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
     const [isEditMode, setIsEditMode] = useState(false);
     const [userAvatar, setUserAvatar] = useState("");
-
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    const [formData, setFormData] = useState(user ? user : null);
 
     const showModal = () => {
         setIsModalVisible(true);
+        setFormData(user);
     };
 
-    const handleCancel = () => {
+    const handleModalOk = (newAvatar) => {
+        // console.log(newAvatar);
+        dispatch(actUploadAvatar(newAvatar))
+        setIsModalVisible(false);
+
+    };
+
+    const handleModalCancel = () => {
         setIsModalVisible(false);
     };
-
 
     const [editedUser, setEditedUser] = useState({
         name: user.name,
@@ -178,6 +184,12 @@ export default function UserInfo() {
         }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+        // You can add your form submission logic here
+    };
+
+
     return (
         <>
             <div className='container section__UserInfo align-items-center d-md-flex'>
@@ -192,36 +204,25 @@ export default function UserInfo() {
                             <div className='d-flex justify-content-center py-2'>
                                 {/* Add a button or icon to trigger the file input */}
                                 <label htmlFor="avatar-input" className="avatar-trigger">
-                                    <div className="avatar-overlay">
-                                        <div className="avatar-overlay-text">Change Avatar</div>
-                                    </div>
-
                                     <button onClick={showModal} className="btn btn-primary">
-                                        Open Avatar Upload Form
+                                        <img
+                                            className=''
+                                            width="200"
+                                            height="200"
+                                            alt=""
+                                            src={editedUser.avatar || user.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                        />
                                     </button>
 
                                     {isModalVisible && (
-                                        <AvatarUploadModal open={isModalVisible} onCancel={handleCancel} />
+                                        <AvatarUploadModal open={isModalVisible} onCancel={handleModalCancel} onOk={handleModalOk} formData={formData} />
                                     )}
 
 
-                                    <input
-                                        name='avatar'
-                                        type="file"
-                                        id="avatar-input"
-                                        accept="image/*"
-                                        style={{ display: 'none' }}
-                                        onChange={handleAvatarChange}
-                                    />
+
                                 </label>
                                 {/* Display the selected or default avatar */}
-                                <img
-                                    className=''
-                                    width="200"
-                                    height="200"
-                                    alt=""
-                                    src={editedUser.avatar || user.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-                                />
+
                             </div>
                             <div className='main__p'>{user.name}</div>
                         </div>
@@ -263,7 +264,7 @@ export default function UserInfo() {
                             {/* Content for Tab 0 (User Information) */}
                             {value === 0 && (
                                 <div className='section__Item-secondary p-4'>
-                                    <form className=''>
+                                    <form className='' onSubmit={handleSubmit}>
                                         <div className='form-header d-flex justify-content-end'>
                                             <div className='d-flex align-items-center'>
                                                 <div className='mx-2'>
@@ -425,51 +426,105 @@ export default function UserInfo() {
 };
 
 
-const AvatarUploadModal = ({ open, onCancel }) => {
-    const onFinish = (values) => {
-        // Handle the form submission (e.g., upload the avatar)
-        console.log('Form values:', values);
-        // You can add your API call to upload the avatar here
-        // Remember to handle success and error cases
-        message.success('Avatar uploaded successfully');
+const AvatarUploadModal = ({ open, onCancel, onOk, formData }) => {
+    // const onFinish = (values) => {
+    //     // Handle the form submission (e.g., upload the avatar)
+    //     console.log('Form values:', values);
+    //     // You can add your API call to upload the avatar here
+    //     // Remember to handle success and error cases
+    //     message.success('Avatar uploaded successfully');
+    // };
+
+    const [form] = Form.useForm();
+    const [imagePreview, setImagePreview] = useState(formData.avatar ? formData.avatar : "");
+    const [fileList, setFileList] = useState([]); // Define fileList in the state
+
+    const normFile = (e) => {
+        if (Array.isArray(e)) {
+            return e;
+        }
+
+        if (e && e.fileList) {
+            e.fileList = e.fileList.slice(-1); // Keep only the last uploaded file
+        }
+
+        return e && e.fileList;
     };
 
+    const beforeUpload = (file) => {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            setImagePreview(e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+
+        return false;
+    };
+
+
+    const handleOk = () => {
+        form.validateFields()
+            .then(() => {
+                form.resetFields();
+                const state = {
+                    avatar: imagePreview,
+                };
+                onOk(state);
+            })
+            .catch((errorInfo) => {
+                console.error('Validation error:', errorInfo);
+            });
+    };
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("avatar", file);
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            setImagePreview(e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+
+        
+        
+        return false;
+        // Now, `formData` contains the file data ready for upload.
+        // You can send this data to the API endpoint.
+    };
+
+    
     return (
         <Modal
             title="Avatar Upload"
-            open={open} // Use 'visible' instead of 'open'
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 13 }}
+            open={open}
             onCancel={onCancel}
-            footer={null}
+            onOk={handleOk}
+            footer={[
+                <Button key="back" onClick={onCancel}>
+                    Cancel
+                </Button>,
+                <Button key="submit" type="primary" onClick={handleOk}>
+                    Save
+                </Button>,
+            ]}
         >
-            <Form onFinish={onFinish}>
+            <Form form={form} initialValues={formData}>
                 {/* Avatar Upload */}
-                <Form.Item
-                    label="Avatar"
+                <input
+                    type="file"
                     name="avatar"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please upload your avatar!',
-                        },
-                    ]}
-                >
-                    <Upload
-                        name="avatar"
-                        action="/your-upload-api-endpoint" // Replace with your actual API endpoint
-                        listType="picture-card"
-                        showUploadList={false}
-                    >
-                        <Button icon={<UploadOutlined />}>Upload Avatar</Button>
-                    </Upload>
-                </Form.Item>
+                    onChange={handleFileUpload}
+                />
 
-                {/* Submit Button */}
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Save
-                    </Button>
-                </Form.Item>
             </Form>
-        </Modal>
+        </Modal >
     );
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
 import { actDeleteCity } from '../../../redux/actions/actCity'
 import { Link } from 'react-router-dom'
-import { actGetListUser } from '../../../redux/actions/actUser'
+import { actDeleteUser, actGetListUser } from '../../../redux/actions/actUser'
 import { UploadFileOutlined } from '@mui/icons-material'
 import { Input, Modal, Button, Form, Table, Upload } from "antd";
 
@@ -91,7 +91,7 @@ export default function UserManagement() {
                   <button className='btn btn-danger' value={user.id} onClick={(e) => {
                     e.preventDefault();
                     if (window.confirm("Bạn có muốn xóa " + user.name)) {
-                      dispatch(actDeleteCity(user.id))
+                      dispatch(actDeleteUser(user.id))
                     }
                   }}
                   > Delete </button>

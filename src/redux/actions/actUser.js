@@ -86,7 +86,6 @@ export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST }
 export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });
 export const actEditUserInfoFail = (error) => ({ type: actions.USER_EDIT_FAIL, payload: error });
 
-
 // User Delete Room:
 export const actDeleteUserRoom = (id) => {
     return (dispatch) => {
@@ -106,11 +105,32 @@ export const actDeleteUserRoom = (id) => {
 const actDeleteUserRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
 const actDeleteUserRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })
 
+// Delete User:
+export const actDeleteUser = (id) => {
+    return (dispatch) => {
+        dispatch(actDeleteUserRequest)
+        api.delete(`/users?id=${id}`)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    alert(result.data.message);
+                    dispatch(actGetListUser())
+                }
+            })
+            .catch((error) => {
+                dispatch(actDeleteUserFail(error.response.data))
+            })
+    }
+}
+
+const actDeleteUserRequest = () => ({ type: actions.USER_DELETE_REQUEST })
+const actDeleteUserFail = (error) => ({ type: actions.USER_DELETE_FAIL, payload: error })
+
+
 // User Upload Avatar:
 export const actUploadAvatar = (avatarData) => {
     return (dispatch) => {
 
-        const {avatar } = avatarData
+        const { avatar } = avatarData
 
         dispatch(actUploadAvatarInfoRequest);
         api.post(`/users/upload-avatar/`, avatar)

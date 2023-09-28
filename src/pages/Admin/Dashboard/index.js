@@ -77,6 +77,7 @@ function RecentRoom() {
         className="table"
         dataSource={listCity?.splice(0, 3)}
         pagination={false}
+        rowKey={"id"}
         columns={[
           {
             title: "ID",

@@ -122,3 +122,24 @@ export const actDeleteRoom = (id) => {
 const actDeleteRoomRequest = () => ({ type: actions.DELETE_ROOM_USER_REQUEST })
 const actDeleteRoomSuccess = (data) => ({ type: actions.DELETE_ROOM_USER_SUCCESS, payload: data })
 const actDeleteRoomFail = (error) => ({ type: actions.DELETE_ROOM_USER_FAIL, payload: error })
+
+
+export const actListRoom = () => {
+    return (dispatch) => {
+        dispatch(actListRoomRequest)
+        api.get(`/phong-thue/`)
+            .then((result) => {
+                console.log(result.data.content);
+                if (result.data.statusCode === 200) {
+                    dispatch(actListRoomSuccess(result.data.content))
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data
+                dispatch(actListRoomFail(content))
+            })
+    }
+}
+const actListRoomRequest = () => ({ type: actions.HOMELIST_ROOM_REQUEST })
+const actListRoomSuccess = (data) => ({ type: actions.HOMELIST_ROOM_SUCCESS, payload: data })
+const actListRoomFail = (error) => ({ type: actions.HOMELIST_ROOM_FAIL, payload: error })

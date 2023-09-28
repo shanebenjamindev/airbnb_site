@@ -4,39 +4,29 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Modal } from 'antd';
+import { Button } from 'antd';
 import { actDeleteUserRoom, actEditUserInfo, actGetUserInfo, actUploadAvatar } from '../../redux/actions/actUser';
 import './user-info.css'
 import { useCheckRole } from '../../hooks/useCheckRole'
-import { Upload, Form, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { actGetRoomByUser } from '../../redux/actions/actRoom';
 
 export default function UserInfo() {
     const dispatch = useDispatch()
     const user = useCheckRole()
 
-    const { loading, error } = useSelector(state => state.userReducer)
+    useEffect(() => {
+        dispatch(actGetUserInfo(user.id))
+        dispatch(actGetRoomByUser(user.id))
+    }, [user.id, dispatch]);
+
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
     const [isEditMode, setIsEditMode] = useState(false);
-    const [userAvatar, setUserAvatar] = useState("");
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [formData, setFormData] = useState(user ? user : null);
+    const { loading, error } = useSelector(state => state.userReducer)
 
-    const showModal = () => {
-        setIsModalVisible(true);
-        setFormData(user);
-    };
-
-    const handleModalOk = (newAvatar) => {
-        // console.log(newAvatar);
-        dispatch(actUploadAvatar(newAvatar))
-        setIsModalVisible(false);
-
-    };
-
-    const handleModalCancel = () => {
-        setIsModalVisible(false);
-    };
+    const [userAvatar, setUserAvatar] = useState({
+        avatar: user.avatar,
+        avatarPreview: "",
+    })
 
     const [editedUser, setEditedUser] = useState({
         name: user.name,
@@ -49,12 +39,10 @@ export default function UserInfo() {
     const [errors, setErrors] = useState({
         name: '',
         phone: '',
-        gender: true,
+        gender: '',
         email: '',
         password: '',
         birthday: '',
-        role: '',
-        avatar: user.avatar,
     });
 
     const showError = () => {
@@ -96,10 +84,6 @@ export default function UserInfo() {
         );
     }
 
-    useEffect(() => {
-        dispatch(actGetUserInfo(user.id))
-    }, [user.id, dispatch]);
-
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setEditedUser({
@@ -136,7 +120,8 @@ export default function UserInfo() {
 
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
+        console.log(errors);
         dispatch(actEditUserInfo(user.id, editedUser))
         setIsEditMode(false)
     }
@@ -147,33 +132,11 @@ export default function UserInfo() {
         setValue(newValue);
     };
 
-    // const handleAvatarChange = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) {
-    //         const reader = new FileReader();
-    //         reader.onload = (e) => {
-    //             setEditedUser({
-    //                 ...editedUser,
-    //                 avatar: e.target.result,
-    //             });
-    //         console.log(editedUser);
-
-    //         };
-    //         reader.readAsDataURL(file);
-
-    //     }
-
-    // };
-    const handleAvatarChange = (info) => {
-        if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-            setEditedUser({
-                ...editedUser,
-                avatar: info.file.response.url, // Update the edited avatar with the uploaded image URL
-            });
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
+    const handleAvatarChange = (e) => {
+        setUserAvatar({
+            avatarPreview: URL.createObjectURL(e.target.files[0]),
+            avatar: e.target.files[0]
+        });
     };
 
     const handleDelete = (e) => {
@@ -194,34 +157,19 @@ export default function UserInfo() {
         <>
             <div className='container section__UserInfo align-items-center d-md-flex'>
                 <div className='section__Background'>
-                    <div className='section__BackgroundTitle'>
-                        <h2 className='thanks-message'>Profile Page</h2>
-                    </div>
                 </div>
                 <div className='section__Item-primary d-flex'>
                     <div className='userAvatar__Container section__Item-primary  col-6 col-md-3 col-lg-3 p-3 d-none d-md-block'>
                         <div className='text-center flex-column align-items-center h-100 justify-content-center'>
                             <div className='d-flex justify-content-center py-2'>
-                                {/* Add a button or icon to trigger the file input */}
-                                <label htmlFor="avatar-input" className="avatar-trigger">
-                                    <button onClick={showModal} className="btn btn-primary">
-                                        <img
-                                            className=''
-                                            width="200"
-                                            height="200"
-                                            alt=""
-                                            src={editedUser.avatar || user.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-                                        />
-                                    </button>
 
-                                    {isModalVisible && (
-                                        <AvatarUploadModal open={isModalVisible} onCancel={handleModalCancel} onOk={handleModalOk} formData={formData} />
-                                    )}
-
-
-
-                                </label>
-                                {/* Display the selected or default avatar */}
+                                <img
+                                    className=''
+                                    width="200"
+                                    height="200"
+                                    alt=""
+                                    src={userAvatar.avatarPreview || user.avatar || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                />
 
                             </div>
                             <div className='main__p'>{user.name}</div>
@@ -261,7 +209,7 @@ export default function UserInfo() {
                                 <Tab label="Room Contract" value={1} />
                             </Tabs>
 
-                            {/* Content for Tab 0 (User Information) */}
+                            {/* Content for Tab 1 (User Information) */}
                             {value === 0 && (
                                 <div className='section__Item-secondary p-4'>
                                     <form className='' onSubmit={handleSubmit}>
@@ -283,17 +231,17 @@ export default function UserInfo() {
                                                     variant="contained"
                                                     color="warning"
                                                     onClick={handleSave}
-                                                    disabled={!isEditMode} // Disable the save button when not in edit mode
+                                                    disabled={!isEditMode || Object.values(errors).some(error => error !== '')}
                                                 >
                                                     Save
                                                 </Button>
-
                                             </div>
                                         </div>
 
                                         <div className='col-12'>
                                             <label className='main__p'>Email:</label>
                                             <input
+                                                type='email'
                                                 name='email'
                                                 className={`form-control custom-formControl ${errors.email ? 'is-invalid' : ''}`}
                                                 defaultValue={editedUser.email}
@@ -306,9 +254,9 @@ export default function UserInfo() {
                                         </div>
 
                                         <div className='d-md-flex'>
-                                            <div className='col-lg-6 col-md-6'>
+                                            <div className='col-lg-6 col-md-6 main__p'>
                                                 <div>
-                                                    <label className='main__p'>Tên:</label>
+                                                    <label className=''>Tên:</label>
                                                     <input
                                                         type='text'
                                                         name='name'
@@ -320,7 +268,7 @@ export default function UserInfo() {
                                                     {errors.name && <div className="alert alert-danger error-message">{errors.name}</div>}
                                                 </div>
                                                 <div className=''>
-                                                    <label className='main__p'>Giới tính:</label>
+                                                    <label className=''>Giới tính:</label>
                                                     <select
                                                         name='gender'
                                                         className='form-control custom-formControl'
@@ -333,26 +281,18 @@ export default function UserInfo() {
                                                     </select>
                                                 </div>
 
-                                                <div className=''>
-                                                    <label htmlFor="birthday">Ngày sinh</label>
-                                                    <input
-                                                        type="date"
-                                                        name="birthday"
-                                                        id="birthday"
-                                                        className={`form-control custom-formControl ${errors.birthday ? 'is-invalid' : ''}`}
-                                                        required
-                                                        onChange={handleOnChange}
-                                                    />
-                                                    {errors.birthday && <div className="alert alert-danger error-message">{errors.birthday}</div>}
-
+                                                <div>
+                                                    <label htmlFor="avatar">Avatar:</label>
+                                                    <input type='file' name="avatar" onChange={handleAvatarChange} />
                                                 </div>
 
                                             </div>
 
-                                            <div className='col-lg-6 col-md-6'>
+                                            <div className='col-lg-6 col-md-6 main__p'>
                                                 <div className=''>
                                                     <label className='main__p'>Số điện thoại:</label>
                                                     <input
+                                                        type='tel'
                                                         name='phone'
                                                         className={`form-control custom-formControl ${errors.phone ? 'is-invalid' : ''}`}
                                                         defaultValue={editedUser.phone}
@@ -362,26 +302,45 @@ export default function UserInfo() {
                                                     {errors.phone && <div className="alert alert-danger error-message">{errors.phone}</div>}
                                                 </div>
                                                 <div className=''>
-                                                    <label className='main__p'>Quyền:</label>
-                                                    <select
-                                                        name='role'
-                                                        className='form-control custom-formControl'
-                                                        defaultValue={editedUser.role}
-                                                        disabled={!isEditMode} // Make the input editable only in edit mode
+                                                    <label className='main__p'>Ngày sinh</label>
+                                                    <input
+                                                        type="date"
+                                                        name="birthday"
+                                                        id="birthday"
+                                                        defaultValue={editedUser.birthday}
+                                                        readOnly={!isEditMode}
+                                                        className={`form-control custom-formControl ${errors.birthday ? 'is-invalid' : ''}`}
+                                                        required
                                                         onChange={handleOnChange}
-                                                    >
-                                                        <option className='' value="USER">USER</option>
-                                                        <option className='' value="ADMIN">ADMIN</option>
-                                                    </select>
+                                                    />
+                                                    {errors.birthday && <div className="alert alert-danger error-message">{errors.birthday}</div>}
                                                 </div>
-
+                                                <div className=''>
+                                                    <label className=''>Chức vụ:</label>
+                                                    {(user.role === "ADMIN") ?
+                                                        <select
+                                                            name='role'
+                                                            className='form-control custom-formControl'
+                                                            disabled={!isEditMode} // Make the input editable only in edit mode
+                                                            onChange={handleOnChange}
+                                                            defaultValue={editedUser.gender}
+                                                        >
+                                                            <option className='' value="ADMIN">ADMIN</option>
+                                                            <option className='' value="USER">USER</option>
+                                                        </select>
+                                                        :
+                                                        <input
+                                                            type="text"
+                                                            name="role"
+                                                            id="role"
+                                                            className='form-control custom-formControl'
+                                                            value={user.role}
+                                                            readOnly
+                                                        />
+                                                    }
+                                                </div>
                                             </div>
-
                                         </div>
-
-
-
-
                                     </form>
                                 </div>
                             )}
@@ -425,106 +384,3 @@ export default function UserInfo() {
     );
 };
 
-
-const AvatarUploadModal = ({ open, onCancel, onOk, formData }) => {
-    // const onFinish = (values) => {
-    //     // Handle the form submission (e.g., upload the avatar)
-    //     console.log('Form values:', values);
-    //     // You can add your API call to upload the avatar here
-    //     // Remember to handle success and error cases
-    //     message.success('Avatar uploaded successfully');
-    // };
-
-    const [form] = Form.useForm();
-    const [imagePreview, setImagePreview] = useState(formData.avatar ? formData.avatar : "");
-    const [fileList, setFileList] = useState([]); // Define fileList in the state
-
-    const normFile = (e) => {
-        if (Array.isArray(e)) {
-            return e;
-        }
-
-        if (e && e.fileList) {
-            e.fileList = e.fileList.slice(-1); // Keep only the last uploaded file
-        }
-
-        return e && e.fileList;
-    };
-
-    const beforeUpload = (file) => {
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-            setImagePreview(e.target.result);
-        };
-
-        reader.readAsDataURL(file);
-
-        return false;
-    };
-
-
-    const handleOk = () => {
-        form.validateFields()
-            .then(() => {
-                form.resetFields();
-                const state = {
-                    avatar: imagePreview,
-                };
-                onOk(state);
-            })
-            .catch((errorInfo) => {
-                console.error('Validation error:', errorInfo);
-            });
-    };
-
-    const handleFileUpload = (e) => {
-        const file = e.target.files[0];
-        const formData = new FormData();
-        formData.append("avatar", file);
-
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-            setImagePreview(e.target.result);
-        };
-
-        reader.readAsDataURL(file);
-
-        
-        
-        return false;
-        // Now, `formData` contains the file data ready for upload.
-        // You can send this data to the API endpoint.
-    };
-
-    
-    return (
-        <Modal
-            title="Avatar Upload"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 13 }}
-            open={open}
-            onCancel={onCancel}
-            onOk={handleOk}
-            footer={[
-                <Button key="back" onClick={onCancel}>
-                    Cancel
-                </Button>,
-                <Button key="submit" type="primary" onClick={handleOk}>
-                    Save
-                </Button>,
-            ]}
-        >
-            <Form form={form} initialValues={formData}>
-                {/* Avatar Upload */}
-                <input
-                    type="file"
-                    name="avatar"
-                    onChange={handleFileUpload}
-                />
-
-            </Form>
-        </Modal >
-    );
-};

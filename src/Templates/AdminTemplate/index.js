@@ -31,7 +31,7 @@ export default function AdminTemplate() {
         <AdminNavbar />
       </div>
 
-      <div className="SideMenuAndPageContent d-md-flex container-fluid">
+      <div className="SideMenuAndPageContent d-md-flex">
 
         <div className="d-none d-md-block col-md-2">
           <SideMenu />

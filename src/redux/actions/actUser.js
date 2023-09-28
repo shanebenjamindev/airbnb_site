@@ -21,7 +21,7 @@ const actCheckoutFail = (error) => ({ type: actions.CHECKOUT_SUCCESS, payload: e
 // Get list user
 export const actGetListUser = () => {
     return (dispatch) => {
-        dispatch(actGetListUserRequest());
+        dispatch(actGetListUserRequest);
 
         api.get(`/users/`)
             .then((result) => {
@@ -36,15 +36,15 @@ export const actGetListUser = () => {
     };
 };
 
-export const actGetListUserRequest = () => ({ type: actions.USER_GET_REQUEST });
-export const actGetListUserSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
-export const actGetListUserFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
+export const actGetListUserRequest = () => ({ type: actions.LIST_USER_GET_REQUEST });
+export const actGetListUserSuccess = (data) => ({ type: actions.LIST_USER_GET_SUCCESS, payload: data });
+export const actGetListUserFail = (error) => ({ type: actions.LIST_USER_GET_FAIL, payload: error });
 
 
 // Get user
 export const actGetUserInfo = (id) => {
     return (dispatch) => {
-        dispatch(actGetUserInfoRequest());
+        dispatch(actGetUserInfoRequest);
 
         api.get(`/users/${id}`)
             .then((result) => {
@@ -63,6 +63,26 @@ export const actGetUserInfoRequest = () => ({ type: actions.USER_GET_REQUEST });
 export const actGetUserInfoSuccess = (data) => ({ type: actions.USER_GET_SUCCESS, payload: data });
 export const actGetUserInfoFail = (error) => ({ type: actions.USER_GET_FAIL, payload: error });
 
+// Add user
+export const actAddUser = (newUser) => {
+    return (dispatch) => {
+        dispatch(actAddUserRequest);
+        api.post(`/users/`, newUser)
+            .then((result) => {
+                if (result.data.statusCode === 200) {
+                    alert("Thêm thành công")
+                }
+            })
+            .catch((error) => {
+                const { content } = error.response.data;
+                dispatch(actAddUserFail(content));
+            });
+    };
+};
+
+export const actAddUserRequest = () => ({ type: actions.USER_ADD_REQUEST });
+export const actAddUserFail = (error) => ({ type: actions.USER_ADD_FAIL, payload: error });
+
 // User Edit: 
 export const actEditUserInfo = (id, newProfile) => {
     return (dispatch) => {
@@ -71,19 +91,18 @@ export const actEditUserInfo = (id, newProfile) => {
         api.put(`/users/${id}`, newProfile)
             .then((result) => {
                 if (result.data.statusCode === 200) {
-                    dispatch(actEditUserInfoSuccess(result.data.content))
                     alert("done")
                 }
             })
             .catch((error) => {
                 const { content } = error.response.data;
+                console.log(content);
                 dispatch(actEditUserInfoFail(content));
             });
     };
 };
 
 export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST });
-export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });
 export const actEditUserInfoFail = (error) => ({ type: actions.USER_EDIT_FAIL, payload: error });
 
 // User Delete Room:
@@ -130,16 +149,13 @@ const actDeleteUserFail = (error) => ({ type: actions.USER_DELETE_FAIL, payload:
 export const actUploadAvatar = (avatarData) => {
     return (dispatch) => {
 
-        const { avatar } = avatarData
-
-        dispatch(actUploadAvatarInfoRequest);
-        api.post(`/users/upload-avatar/`, avatar)
+        api.post(`/users/upload-avatar/`, avatarData.avatar)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
             })
             .catch((error) => {
-                console.log(error);
-                // const { content } = error.response.data;
+                const { message } = error;
+                console.log(message);
                 // dispatch(actUploadAvatarInfoFail(content));
             });
     };

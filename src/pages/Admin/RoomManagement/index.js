@@ -1,33 +1,60 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actDeleteRoom, actHomeListRoom } from '../../../redux/actions/actRoom'
+import { actDeleteRoom, actHomeListRoom, actListRoom } from '../../../redux/actions/actRoom'
 import { Table } from 'antd'
 import { actDeleteCity } from '../../../redux/actions/actCity'
 import { Link } from 'react-router-dom'
+import { useCheckRole } from '../../../hooks/useCheckRole'
 
 export default function RoomManagement() {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(actHomeListRoom())
+    dispatch(actListRoom())
   }, [dispatch])
 
-  const listRoom = useSelector((state) => state.roomReducer.data)
+  const listRoomData = useSelector((state) => state.roomReducer.data)
+  const user = useCheckRole()
 
-  const userData = JSON?.parse(localStorage.getItem("USER_LOGIN"));
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [filteredRoom, setfilteredRoom] = useState(null);
 
-  console.log(userData);
-  const roomData = listRoom?.data
+  const handleSearch = () => {
+    const filteredData = listRoomData?.filter((room) => {
+      const { tenPhong, id } = room;
+      const keyword = searchKeyword.toLowerCase();
+      return (
+        tenPhong.toLowerCase().includes(keyword) ||
+        id.toString().includes(keyword)
+      );
+    });
+
+    setfilteredRoom(filteredData);
+  };
+
+
 
   return (
     <div className='container'>
       <div className="">
         <h3 className="main__Title  text-center">Quản lý phòng</h3>
+        <div className=" justify-content-center d-flex align-items-center mb-2">
+          <div className='text-center w-50 mx-2'>
+            <input
+              type="text"
+              className='form-control'
+              placeholder="Search by id, name or email"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
+          </div>
+          <button className="btn__Primary" onClick={() => handleSearch()}>Search</button>
+        </div>
         <div className='text-right mb-2'><button className='btn__Primary'>Thêm phòng</button></div>
         <div className='table-responsive'>
           <Table
             className="table"
-            dataSource={roomData}
+            dataSource={filteredRoom !== null ? filteredRoom : listRoomData}
             pagination={false}
             rowKey={"id"}
             columns={[
@@ -59,7 +86,7 @@ export default function RoomManagement() {
                 title: "Hành động",
                 render: (room, index) => {
                   return <div className='d-flex justify-content-around' key={index}>
-                    <button className='btn btn-info' value={room.id} > <Link to={`/roomdetail/${room.id}`}>View</Link> </button>
+                    <button className='btn btn-info' value={  room.id} > <Link to={`/roomdetail/${room.id}`}>View</Link> </button>
                     <button className='btn btn-danger' value={room.id} onClick={(e) => {
                       e.preventDefault();
                       if (window.confirm("Bạn có muốn xóa " + room.id)) {

@@ -20,7 +20,10 @@ export default function AdminLocation(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalMode, setModalMode] = useState("add");
   const [formData, setFormData] = useState(null);
-  // const [cityListData, setListCity] = useState(null)
+
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [filteredUserData, setFilteredUserData] = useState(null);
+
 
   const showModal = (mode, cityData) => {
     setModalMode(mode);
@@ -45,6 +48,21 @@ export default function AdminLocation(props) {
   const handleModalCancel = () => {
     setIsModalVisible(false);
   };
+
+  const handleSearch = () => {
+    const filteredData = data.filter((city) => {
+      const { tenViTri, tinhThanh, id } = city;
+      const keyword = searchKeyword.toLowerCase();
+      return (
+        tenViTri.toLowerCase().includes(keyword) ||
+        tinhThanh.toLowerCase().includes(keyword) ||
+        id.toString().includes(keyword)
+      );
+    });
+
+    setFilteredUserData(filteredData);
+  };
+
 
   const columns = [
     {
@@ -131,16 +149,28 @@ export default function AdminLocation(props) {
       <div>
         <h3 className="main__Title my-2 text-center">Quản Lý Vị Trí</h3>
         <LocationForm open={isModalVisible} formData={formData} onCancel={handleModalCancel} onOk={handleModalOk} mode={modalMode} />
-        <div className="text-right my-2">
+
+        <div className=" justify-content-center d-flex align-items-center mb-2">
           <button className="btn__Primary" onClick={() => showModal("add", null)}>Thêm Vị Trí</button>
+          <div className='text-center w-50 mx-2'>
+            <input
+              type="text"
+              className='form-control'
+              placeholder="Tìm theo tên tỉnh thành, id"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
+          </div>
+          <button className="btn__Primary" onClick={() => handleSearch()}>Tìm kiếm</button>
         </div>
+
 
         <div className="bg-white table-responsive" >
           {data && (
             <Table
               className="table"
+              dataSource={filteredUserData !== null ? filteredUserData : data}
               columns={columns}
-              dataSource={data}
               rowKey={"id"}
             />
           )}

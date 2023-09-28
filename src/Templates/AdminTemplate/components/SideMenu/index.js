@@ -11,9 +11,9 @@ export default function SideMenu() {
         <div className='SideMenu'>
             <Menu
                 className='main__p'
-                style={{  padding: '20px', backgroundColor: 'white' }}
+                style={{ padding: '20px', backgroundColor: 'white' }}
                 onClick={(item) => {
-                    navigate(item.key)
+                    navigate(item.key, { replace: true })
                 }}
                 items={[
                     {
@@ -21,7 +21,6 @@ export default function SideMenu() {
                         icon: <AppstoreOutlined />,
                         key: "dashboard"
                     },
-
                     {
                         label: "Location",
                         icon: <RoomOutlined />,

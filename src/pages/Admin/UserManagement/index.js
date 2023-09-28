@@ -10,7 +10,7 @@ export default function UserManagement() {
 
   useEffect(() => {
     dispatch(actGetListUser());
-  }, [dispatch]);
+  }, []);
 
   const listUserData = useSelector((state) => state.userReducer.data);
 

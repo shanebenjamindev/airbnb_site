@@ -15,8 +15,6 @@ export const actHomeListRoom = () => {
                 }
             })
             .catch((error) => {
-                const { content } = error.response.data
-                dispatch(actHomeListRoomFail(content))
             });
     };
 }
@@ -42,7 +40,6 @@ export const actGetRoomByCity = (id) => {
 
 export const actGetRoomByUser = (id) => {
     return (dispatch) => {
-        console.log(id);
         dispatch(actGetListRoomByIdRequest)
 
         api.get(`/dat-phong/lay-theo-nguoi-dung/${id}`)

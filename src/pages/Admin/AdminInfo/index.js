@@ -14,10 +14,6 @@ import { UploadOutlined } from '@ant-design/icons';
 export default function UserInfo() {
     const dispatch = useDispatch()
     const user = useCheckRole()
-    
-    useEffect(() => {
-        dispatch(actGetUserInfo(user.id))
-    }, [user.id]);
 
     const [isEditMode, setIsEditMode] = useState(false);
     const { error } = useSelector(state => state.userReducer)

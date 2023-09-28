@@ -86,12 +86,12 @@ export const actAddUserFail = (error) => ({ type: actions.USER_ADD_FAIL, payload
 // User Edit: 
 export const actEditUserInfo = (id, newProfile) => {
     return (dispatch) => {
-        console.log(newProfile);
         dispatch(actEditUserInfoRequest);
         api.put(`/users/${id}`, newProfile)
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     alert("done")
+                    dispatch(actEditUserInfoSuccess(newProfile))
                 }
             })
             .catch((error) => {
@@ -103,6 +103,7 @@ export const actEditUserInfo = (id, newProfile) => {
 };
 
 export const actEditUserInfoRequest = () => ({ type: actions.USER_EDIT_REQUEST });
+export const actEditUserInfoSuccess = (data) => ({ type: actions.USER_EDIT_SUCCESS, payload: data });
 export const actEditUserInfoFail = (error) => ({ type: actions.USER_EDIT_FAIL, payload: error });
 
 // User Delete Room:

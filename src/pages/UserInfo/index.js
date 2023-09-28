@@ -17,11 +17,13 @@ export default function UserInfo() {
     useEffect(() => {
         dispatch(actGetUserInfo(user.id))
         dispatch(actGetRoomByUser(user.id))
-    }, [user.id, dispatch]);
+    }, []);
 
     const listRoomByUser = useSelector((state) => state.roomReducer.data)
     const [isEditMode, setIsEditMode] = useState(false);
     const { loading, error } = useSelector(state => state.userReducer)
+
+    console.log(listRoomByUser);
 
     const [userAvatar, setUserAvatar] = useState({
         avatar: user.avatar,
@@ -48,6 +50,9 @@ export default function UserInfo() {
     const showError = () => {
         if (error) {
             return <div className='alert alert-danger'>Vui lòng kiểm tra lại {error}</div>
+        }
+        if (loading) {
+            return <div className='alert alert-danger'>Loading...</div>
         }
     }
 

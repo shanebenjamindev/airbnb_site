@@ -149,10 +149,13 @@ const actDeleteUserFail = (error) => ({ type: actions.USER_DELETE_FAIL, payload:
 // User Upload Avatar:
 export const actUploadAvatar = (avatarData) => {
     return (dispatch) => {
-
-        api.post(`/users/upload-avatar/`, avatarData.avatar)
+        dispatch(actUploadAvatarInfoRequest)
+        const formData = new FormData();
+        formData.append('image', avatarData.avatar)
+        
+        api.post(`/users/upload-avatar/`, formData)
             .then((result) => {
-                // console.log(result);
+                console.log(result);
             })
             .catch((error) => {
                 const { message } = error;

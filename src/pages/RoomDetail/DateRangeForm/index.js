@@ -47,7 +47,6 @@ const DateRangeForm = (props) => {
     const selectedRanges = [selectionRange];
 
     useEffect(() => {
-        dispatch(actRoomDetail(detail.id))
         if (user) {
             setState(
                 {

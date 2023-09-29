@@ -11,13 +11,16 @@ import { useCheckRole } from '../../hooks/useCheckRole'
 export default function RoomDetail() {
   const param = useParams();
   const dispatch = useDispatch();
-
   const user = useCheckRole()
+
+  console.log(user);
+
+  const { id } = param
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(actRoomDetail(param.id))
-  }, [dispatch, param.id])
+    dispatch(actRoomDetail(id))
+  }, [])
 
   const roomDetail = useSelector((state) => state.roomReducer.data);
 

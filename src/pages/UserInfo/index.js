@@ -13,17 +13,23 @@ import { actGetRoomByUser } from '../../redux/actions/actRoom';
 export default function UserInfo() {
     const dispatch = useDispatch()
     const user = useCheckRole()
+    console.log(user.id);
 
+    
     useEffect(() => {
-        dispatch(actGetUserInfo(user.id))
+        // dispatch(actGetUserInfo(user.id))
         dispatch(actGetRoomByUser(user.id))
-    }, []);
+    }, [dispatch, user.id]);
 
-    const listRoomByUser = useSelector((state) => state.roomReducer.data)
+
     const [isEditMode, setIsEditMode] = useState(false);
-    const { loading, error } = useSelector(state => state.userReducer)
 
-    console.log(listRoomByUser);
+    const { loading, error } = useSelector(state => state.userReducer)
+    const { data } = useSelector((state) => state.roomReducer)
+    
+    console.log(data);
+
+    const listRoomByUser = data;
 
     const [userAvatar, setUserAvatar] = useState({
         avatar: user.avatar,

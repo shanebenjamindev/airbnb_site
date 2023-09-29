@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { actCheckout } from '../../../redux/actions/actUser';
 import { actRoomDetail } from '../../../redux/actions/actRoom';
 import { useNavigate } from 'react-router-dom';
+import { useCheckRole } from '../../../hooks/useCheckRole';
 
 const DateRangeForm = (props) => {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const DateRangeForm = (props) => {
         soLuongKhach: guests,
         ngayDen: detail.ngayDen,
         ngayDi: detail.ngayDi,
-        maNguoiDung: user.id ? user.id : null
+        maNguoiDung: user?.id ? user.id : null
     })
 
     const [selectionRange, setSelectionRange] = useState({

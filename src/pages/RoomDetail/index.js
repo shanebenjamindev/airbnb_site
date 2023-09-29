@@ -13,8 +13,6 @@ export default function RoomDetail() {
   const dispatch = useDispatch();
   const user = useCheckRole()
 
-  console.log(user);
-
   const { id } = param
 
   useEffect(() => {

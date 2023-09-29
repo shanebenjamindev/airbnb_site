@@ -13,12 +13,10 @@ import { actGetRoomByUser } from '../../redux/actions/actRoom';
 export default function UserInfo() {
     const dispatch = useDispatch()
     const user = useCheckRole()
-    console.log(user.id);
-
     
     useEffect(() => {
         // dispatch(actGetUserInfo(user.id))
-        dispatch(actGetRoomByUser(user.id))
+        dispatch(actGetRoomByUser(user?.id))
     }, [dispatch, user.id]);
 
 

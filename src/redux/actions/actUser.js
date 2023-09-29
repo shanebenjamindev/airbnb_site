@@ -91,7 +91,8 @@ export const actEditUserInfo = (id, newProfile) => {
             .then((result) => {
                 if (result.data.statusCode === 200) {
                     alert("done")
-                    dispatch(actEditUserInfoSuccess(newProfile))
+                    dispatch(actEditUserInfoSuccess({id, newProfile}))
+                    window.location.reload()
                 }
             })
             .catch((error) => {
@@ -152,7 +153,7 @@ export const actUploadAvatar = (avatarData) => {
         dispatch(actUploadAvatarInfoRequest)
         const formData = new FormData();
         formData.append('image', avatarData.avatar)
-        
+
         api.post(`/users/upload-avatar/`, formData)
             .then((result) => {
                 console.log(result);

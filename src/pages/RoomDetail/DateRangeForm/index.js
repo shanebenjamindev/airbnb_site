@@ -4,7 +4,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useState } from 'react';
 import { DateRange, DefinedRange } from 'react-date-range';
 
-import './style.css'
+import './checkoutForm.css'
 import { useDispatch } from 'react-redux';
 import { actCheckout } from '../../../redux/actions/actUser';
 import { actRoomDetail } from '../../../redux/actions/actRoom';
@@ -55,8 +55,8 @@ const DateRangeForm = (props) => {
                 }
             )
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        setGuests(detail.khach);
+    }, [detail, user])
 
     const handleGuestChange = (increment) => {
         if (guests + increment >= 1) {

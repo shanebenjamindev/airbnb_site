@@ -75,9 +75,9 @@ const userReducer = (state = initialState, action) => {
 
         case actions.USER_EDIT_SUCCESS:
             state.loading = false;
-            const updatedUser = action.payload;
+            const { id, newProfile } = action.payload;
             const existingToken = JSON.parse(localStorage.getItem('USER_LOGIN')).token;
-            localStorage.setItem('USER_LOGIN', JSON.stringify({ user: updatedUser, token: existingToken }));
+            localStorage.setItem('USER_LOGIN', JSON.stringify({ user: { id, ...newProfile }, token: existingToken }));
             state.error = null;
             return { ...state }
 

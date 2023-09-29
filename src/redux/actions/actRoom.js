@@ -6,7 +6,7 @@ import api from '../../ApiUtils'
 // Home Get List Room:
 export const actHomeListRoom = () => {
     return (dispatch) => {
-        dispatch(actHomeListRoomRequest());
+        dispatch(actHomeListRoomRequest);
         api
             .get(`/phong-thue/phan-trang-tim-kiem?pageIndex=1&pageSize=16`)
             .then((result) => {
@@ -15,6 +15,8 @@ export const actHomeListRoom = () => {
                 }
             })
             .catch((error) => {
+                const { content } = error.response.data
+                dispatch(actHomeListRoomFail(content))
             });
     };
 }
@@ -33,7 +35,8 @@ export const actGetRoomByCity = (id) => {
                 }
             })
             .catch((error) => {
-                dispatch(actGetListRoomByIdFail(error.response.data))
+                const { content } = error.response.data
+                dispatch(actGetRoomByCity(content))
             })
     }
 }
@@ -41,7 +44,6 @@ export const actGetRoomByCity = (id) => {
 export const actGetRoomByUser = (id) => {
     return (dispatch) => {
         dispatch(actGetListRoomByIdRequest)
-
         api.get(`/dat-phong/lay-theo-nguoi-dung/${id}`)
             .then((result) => {
                 if (result.data.statusCode === 200) {
@@ -49,7 +51,8 @@ export const actGetRoomByUser = (id) => {
                 }
             })
             .catch((error) => {
-                dispatch(actGetListRoomByIdFail(error.response.data))
+                const { content } = error.response.data
+                dispatch(actGetListRoomByIdFail(content))
             })
     }
 }

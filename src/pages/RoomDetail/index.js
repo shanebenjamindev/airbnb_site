@@ -23,6 +23,7 @@ export default function RoomDetail() {
   }, [])
 
   const roomDetail = useSelector((state) => state.roomReducer.data);
+  const { loading } = useSelector((state) => state.roomReducer);
 
   const renderRoom = () => {
     return <>
@@ -33,6 +34,10 @@ export default function RoomDetail() {
           </div>
         </div>)}
     </>
+  }
+  
+  if (loading) {
+    return <>loading...</>
   }
 
   return (

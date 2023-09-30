@@ -14,13 +14,10 @@ export default function AdminTemplate() {
   const user = useCheckRole()
 
   const navigate = useNavigate()
-  useEffect(() => {
-    if (!user) {
-      navigate('/', { replace: true })
-      alert("Hãy đăng nhập trước")
-    }
-    else navigate('/admin/dashboard')
-  }, [])
+  if (!user) {
+    navigate('/', { replace: true })
+    alert("Hãy đăng nhập trước")
+  }
 
   const renderAdmin = () => {
     return <>

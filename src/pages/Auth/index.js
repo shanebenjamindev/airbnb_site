@@ -81,7 +81,7 @@ export default function Auth() {
 
         else if (user.role === "ADMIN") {
             setTimeout(() => {
-                navigate('/admin/', { replace: true })
+                navigate('/admin/dashboard/', { replace: true })
             }, 1500);
 
             return (

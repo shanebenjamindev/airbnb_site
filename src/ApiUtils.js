@@ -23,7 +23,7 @@ api.interceptors.request.use((config) => {
         ...config.headers,
         Authorization: `Bearer ${accessToken}`,
         TokenCybersoft: 
-        `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA1MCIsIkhldEhhblN0cmluZyI6IjE4LzAxLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcwNTUzNjAwMDAwMCIsIm5iZiI6MTY3NzQzMDgwMCwiZXhwIjoxNzA1NjgzNjAwfQ.s4X0R0Wi80X0f9MLJ2XYxRKJdQJBW27dwvkpfN03100`,
+        `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUXVhblRyaSIsIm5iZiI6MTcwODg2ODY1OSwiZXhwIjoxNzA4ODcyMjU5fQ.823iATnsqxJl6TUKTIGJG0Qc4nhQoQf1Sqq9hFMTQ1Q`,
         token: JSON?.parse(localStorage.getItem("USER_LOGIN"))?.token
     };
     return config;
